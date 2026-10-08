@@ -1,0 +1,16 @@
+{
+  "name": "Colony Expeditions",
+  "authors": [
+    "eileenthg",
+    "MineColonies (base: Netherworker)"
+  ],
+  "desc": "Shared expedition posts. They also appear in every other style under the Expeditions folder.",
+  "mods": [
+    "structurize",
+    "minecolonies",
+    "colony_expeditions"
+  ],
+  "icon": "",
+  "version": "1",
+  "pack-format": "1"
+}

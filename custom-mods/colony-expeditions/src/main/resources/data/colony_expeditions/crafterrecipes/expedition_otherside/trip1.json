@@ -1,0 +1,36 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_otherside_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "deeperdarker:gloomslate"
+    },
+    {
+      "id": "deeperdarker:sculk_stone"
+    },
+    {
+      "id": "deeperdarker:echo_log"
+    },
+    {
+      "id": "deeperdarker:bloom_berries"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_otherside/trip1",
+  "min-building-level": 1,
+  "max-building-level": 1
+}

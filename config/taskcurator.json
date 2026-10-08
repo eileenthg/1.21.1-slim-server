@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "layout": [
+    {
+      "task": "touhou_little_maid:idle"
+    },
+    {
+      "folder": "Combat",
+      "open": false,
+      "tasks": [
+        "touhou_little_maid:attack",
+        "touhou_little_maid:ranged_attack",
+        "touhou_little_maid:crossbow_attack",
+        "touhou_little_maid:danmaku_attack",
+        "touhou_little_maid:trident_attack",
+        "touhou_little_maid:gun_attack",
+        "youkaishomecoming:danmaku_attack",
+        "maidspell:spell_combat_melee",
+        "maidspell:spell_combat_far",
+        "maid_sword_soaring:sword_soaring",
+        "touhou_lost_maid:attack_player",
+        "touhou_lost_maid:bow_attack",
+        "touhou_lost_maid:gun_attack"
+      ]
+    },
+    {
+      "folder": "Farming",
+      "open": false,
+      "tasks": [
+        "touhou_little_maid:farm",
+        "maidsoulkitchen:sereneseasons_farm",
+        "maidsoulkitchen:eclipticseasons_farm",
+        "touhou_little_maid:sugar_cane",
+        "touhou_little_maid:melon",
+        "maidsoulkitchen:compat_melon",
+        "touhou_little_maid:cocoa",
+        "maidsoulkitchen:berries_farm",
+        "maidsoulkitchen:fruit_farm",
+        "touhou_little_maid:grass",
+        "maid_useful_task:maid_tree"
+      ]
+    },
+    {
+      "folder": "Animals",
+      "open": false,
+      "tasks": [
+        "touhou_little_maid:feed_animal",
+        "maidsoulkitchen:feed_animal_t",
+        "touhou_little_maid:shears",
+        "touhou_little_maid:milk",
+        "touhou_little_maid:honey",
+        "touhou_little_maid:fishing"
+      ]
+    },
+    {
+      "folder": "Cooking",
+      "open": false,
+      "tasks": [
+        "maidchef:chef",
+        "maidsoulkitchen:furnace",
+        "maidsoulkitchen:fd_cooking_pot",
+        "maidsoulkitchen:fd_cutting_board",
+        "maidsoulkitchen:fd_skillet",
+        "maidsoulkitchen:cd_cuisine_skillet",
+        "maidsoulkitchen:bd_grill",
+        "maidsoulkitchen:bd_basin",
+        "maidsoulkitchen:yhc_moka_pot",
+        "maidsoulkitchen:yhc_tea_kettle",
+        "maidsoulkitchen:yhc_drying_rack",
+        "maidsoulkitchen:yhc_fermentation_tank",
+        "maidsoulkitchen:drinkbeer_beerbarrel"
+      ]
+    },
+    {
+      "folder": "Utility",
+      "open": false,
+      "tasks": [
+        "touhou_little_maid:feed",
+        "touhou_little_maid:torch",
+        "touhou_little_maid:snow",
+        "touhou_little_maid:extinguishing",
+        "maid_useful_task:locate",
+        "maid_useful_task:revive_player",
+        "maid_storage_manager:storage_manage",
+        "muhc:hand_crank_task",
+        "callresponse:lazy",
+        "touhou_little_maid:board_games",
+        "createtreadmill:use_treadmill"
+      ]
+    }
+  ],
+  "hidden": [
+    "createtreadmill:use_treadmill",
+    "maidsoulkitchen:compat_melon"
+  ]
+}

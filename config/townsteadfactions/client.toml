@@ -1,0 +1,80 @@
+	[interface_settings.interfaceSettings]
+		# Default: 360
+		# Range: -10000 ~ 10000
+		mainBoxWidth = 360
+		# Default: 220
+		# Range: -10000 ~ 10000
+		mainBoxHeight = 220
+		# Default: 0
+		# Range: -10000 ~ 10000
+		mainBoxOffsetX = 0
+		# Default: 0
+		# Range: -10000 ~ 10000
+		mainBoxOffsetY = 0
+		allowWindowDragging = true
+		# Default: 12
+		# Range: -10000 ~ 10000
+		dashboardScrollSpeed = 12
+		# Default: 1
+		# Range: -10000 ~ 10000
+		savedLayoutVersion = 1
+		# Default: 0
+		# Range: -10000 ~ 10000
+		lastAppliedServerResetVersion = 0
+		# Default: -50
+		# Range: -10000 ~ 10000
+		treasuryWidgetX = -50
+		# Default: -30
+		# Range: -10000 ~ 10000
+		treasuryWidgetY = -30
+		treasuryWidgetTabId = "overview"
+		# Default: 40
+		# Range: -10000 ~ 10000
+		rosterWidgetX = 40
+		# Default: -10
+		# Range: -10000 ~ 10000
+		rosterWidgetY = -10
+		rosterWidgetTabId = "roster"
+		# Default: -100
+		# Range: -10000 ~ 10000
+		globalWidgetX = -100
+		# Default: 10
+		# Range: -10000 ~ 10000
+		globalWidgetY = 10
+		globalWidgetTabId = "global"
+		# Default: 26
+		# Range: -10000 ~ 10000
+		avatarWidgetX = 26
+		# Default: 40
+		# Range: -10000 ~ 10000
+		avatarWidgetY = 40
+		avatarWidgetTabId = "overview"
+		# Default: 26
+		# Range: -10000 ~ 10000
+		activityWidgetX = 26
+		# Default: 90
+		# Range: -10000 ~ 10000
+		activityWidgetY = 90
+		activityWidgetTabId = "overview"
+		# Default: 250
+		# Range: -10000 ~ 10000
+		votingWidgetX = 250
+		# Default: -30
+		# Range: -10000 ~ 10000
+		votingWidgetY = -30
+		votingWidgetTabId = "overview"
+		treasuryWidgetMinimized = false
+		rosterWidgetMinimized = false
+		globalWidgetMinimized = false
+		avatarWidgetMinimized = false
+		activityWidgetMinimized = false
+		votingWidgetMinimized = false
+		# Default: -100
+		# Range: -10000 ~ 10000
+		villageMapWidgetX = -100
+		# Default: 40
+		# Range: -10000 ~ 10000
+		villageMapWidgetY = 40
+		villageMapWidgetTabId = "global"
+		villageMapWidgetMinimized = false
+		customizedTabOrder = ["overview;Overview", "roster;Roster", "global;Global"]

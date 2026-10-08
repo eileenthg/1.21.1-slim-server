@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "artifacts:villager_hat",
+      "required": false
+    },
+    {
+      "id": "artifacts:cowboy_hat",
+      "required": false
+    },
+    {
+      "id": "artifacts:anglers_hat",
+      "required": false
+    },
+    {
+      "id": "eternal_tales:straw_hat_helmet",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:straw_hat",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:sombrero",
+      "required": false
+    }
+  ]
+}

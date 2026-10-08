@@ -1,0 +1,50 @@
+#Si true, ajuste automatiquement la taille du bloc NBT selon le nombre de lignes / la quantité.
+autoScale = true
+#Taille manuelle du bloc NBT (ignoree si autoScale=true). 1.0 = taille normale.
+# Default: 1.0
+# Range: 0.75 ~ 1.25
+nbtScale = 1.0
+#Affiche une popup en bas a droite quand le NBT est copie.
+copyPopup = true
+#Joue des sons quand le NBT est copie.
+copySfx = true
+
+[general]
+	#Si true, le NBT s'affiche uniquement quand SHIFT est maintenu.
+	shiftOnly = true
+	#Si true, regarder une entite affiche un panneau NBT avec ses donnees.
+	mobNbtOverlay = false
+	#Si true, tout le NBT est sur UNE seule ligne. Si false, multi-lignes (pretty).
+	singleLine = false
+	#Si shiftOnly=true, affiche une ligne d'aide quand SHIFT n'est pas maintenu.
+	showHintLine = true
+	#Limite globale pour eviter les tooltips enormes (troncature).
+	# Default: 4096
+	# Range: 256 ~ 200000
+	maxTotalChars = 4096
+	#Limite par ligne (securite) en mode multi-lignes.
+	# Default: 120
+	# Range: 40 ~ 500
+	maxLineLen = 120
+	#Indentation (espaces) du pretty-print.
+	# Default: 2
+	# Range: 0 ~ 8
+	indentSpaces = 2
+
+[colors]
+	#Couleur du label 'NBT:' (HEX: #RRGGBB)
+	label = "#AAAAAA"
+	#Couleur des cles (HEX)
+	key = "#55FFFF"
+	#Couleur des strings (HEX)
+	string = "#55FF55"
+	#Couleur des nombres (HEX)
+	number = "#FFAA00"
+	#Couleur des booleens (HEX)
+	boolean = "#FF55FF"
+	#Couleur de la ponctuation: {}[],: (HEX)
+	punctuation = "#FFFFFF"
+	#Couleur des identifiants non-quotes (HEX)
+	identifier = "#FFFFFF"
+	#Couleur des textes d'aide (ex: ligne SHIFT / copie) (HEX)
+	hint = "#DADADA"

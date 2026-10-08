@@ -1,0 +1,164 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3.0,
+        "max": 10.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.3,
+        "max": 0.3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "deeperdarker:gloomslate",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 16.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "deeperdarker:sculk_stone",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 16.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "deeperdarker:echo_log",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "deeperdarker:bloom_berries",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.1,
+        "max": 0.1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 3000,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "deeperdarker:sculk_snapper",
+                  "damage": 4.0,
+                  "xp": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "deeperdarker:sculk_leech",
+                  "damage": 2.0,
+                  "xp": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "deeperdarker:shattered",
+                  "damage": 6.0,
+                  "xp": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 600,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "deeperdarker:angler_fish",
+                  "damage": 2.0,
+                  "xp": 2
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

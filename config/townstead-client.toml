@@ -1,0 +1,27 @@
+[mood_audio]
+	#Mute villager mood vocalizations tied to laughter/celebration and crying.
+	muteMoodVocalizations = true
+
+[catalog]
+	#Use the Townstead extended catalog with kitchen building tiers. Disable to use MCA's original catalog.
+	useTownsteadCatalog = true
+
+[accessibility]
+	#Reduce non-essential motion across Townstead UI: dialogue text effects (wave, shake, bounce, scale), the calendar stamp drawer slide, and similar. Emotion colors still apply.
+	reduceMotion = false
+	#Disable screen-space and world-space particles during dialogue.
+	disableParticles = false
+	#Prevent the camera from rotating to face the villager during dialogue.
+	disableCameraMovement = false
+	#Add distinct hatching patterns to Spirit page bars so they can be told apart without color.
+	spiritColorblindPatterns = false
+	#Announce the hovered spirit row through the narrator (e.g., 'Nautical: 10 of 25 points, Dockside').
+	spiritNarration = false
+	#Grow Spirit page row heights and bar thickness for easier clicking on touch or low-precision setups.
+	spiritLargerHitTargets = false
+	#Use stronger borders and pure black/white text on the Spirit page.
+	spiritHighContrast = false
+	#Text scale multiplier for the Spirit page (1.0 = default, 1.5 = 50% larger). Respects MC's overall GUI scale.
+	# Default: 1.0
+	# Range: 1.0 ~ 2.0
+	spiritFontScale = 1.0

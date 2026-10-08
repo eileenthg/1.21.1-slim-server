@@ -1,0 +1,22 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "eteil.gensokyocompat.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MagicalForestRegionMixin",
+    "GensokyoRegionMixin",
+    "YungRegionMixin",
+    "CirnoCraftMixin",
+    "ThrownItemMixin",
+    "KoishiHatRewardMixin",
+    "FrogGodHatRewardMixin",
+    "StrangerNotEnemyMixin",
+    "LegacyHatEffectMixin",
+    "ArcadianGrazeMixin",
+    "SaveSafeBiomeListMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

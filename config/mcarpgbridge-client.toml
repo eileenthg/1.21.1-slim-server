@@ -1,0 +1,11 @@
+[questTracker]
+	#Moves Mebahel's quest tracker HUD (normally in the top-left corner, under Xaero's minimap).
+	#GUI pixels at the current GUI scale; positive moves right / down. Editable in game from the mod list.
+	#Horizontal offset.
+	# Default: 0
+	# Range: -4000 ~ 4000
+	offsetX = 0
+	#Vertical offset.
+	# Default: 0
+	# Range: -4000 ~ 4000
+	offsetY = 110

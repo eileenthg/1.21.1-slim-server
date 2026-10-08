@@ -1,0 +1,66 @@
+- [Dragonkind Evolved + YUNG's Better End Island verified compatible](verified-compat-dragonkind-yung-end-island.md) — user tested in-game 2026-09-04
+- [Test-instance copy resets configs](test-instance-copy-resets-configs.md) — 15 Sep reset cause, known-good sources, how to verify
+- [Item merge pipeline](item-merge-pipeline.md) — AU + zz-unified-items datapack; rebuild from baseline dump, never reuse broad tags
+- [Colony expeditions add-on](colony-expeditions-addon.md) — expedition-hut mod: rules, server-only test harness, MCA-compat citizen-deletion bug found
+- [MCA animation compat mod](mca-anim-compat-mod.md) — PAL on MCA bodies, lying camera; v1.4.0 Princess Carry fixes (both-sided, both players need jar) harness 8/8, in-game pending
+- [AnotherScape removed](anotherscape-removed.md) — 19 Sep; archive at modpack-audit/anotherscape mods; what was cut
+- [Guide Library mod](guide-library-mod.md) — unlock-on-pickup guide library (guide-tome rewrite); installed & tested 19 Sep
+- [Survival stack: TWT + Cold Sweat](survival-stack-twt-coldsweat.md) — TAN removed 19 Sep; drinkfix mod; TWT drinks config
+- [Townstead ↔ RPG Timeline calendar sync](townstead-timeline-calendar-sync.md) — timelinesync mod, 12 custom month names, config + resource pack
+- [Runic Gods + Battletowers port](runic-gods-port.md) — BABT ported & installed in pack 19 Sep (server-verified; client/golem fight untested); Runic Gods port paused
+- [MCA RPG Bridge mod](mca-rpg-bridge-mod.md) — Quests↔Reputation v2 fix + Mebahel button/deeds; server-tested 14/14, client button untested, not installed
+- [Seed Scout seed search](seedscout-seed-search.md) — worldgen dump + village-at-spawn seed scanner; BSS x-then-z order matters
+- [Disable-stub recipe shapes](disable-stub-recipe-shapes.md) — neoforge:false stubs must match the real type's field shapes; FC parses raw JSON and ignores conditions
+- [Test server harness](test-server-a-full-stale-mods.md) — X-expeditions + P-pregen hard-link the live pack via sync-mods.ps1; synced 3 Oct; tlmkeyboardmusic fixed + re-included 3 Oct
+- [Extra Delight REI plugin](extradelight-rei-plugin.md) — edrei mod ports 14 JEI-only categories to REI; Spectrum's REI is gated, not broken
+- [FD cutting-board hint patch](fd-cutting-board-hint-patch.md) — FD jar ASM patch + Youkai pods recipe restored; installed 25 Sep, untested in-game
+- [Main instance renamed](main-instance-renamed-slim.md) — Prism instance is now `1.21.1 slim`; old `1.21.1` path gone
+- [Love & Loathe trader pull](love-loathe-trader-pull.md) — traders get 2 random maid trades + Shrine always; -tradepull-shrine jar installed 1 Oct, server-tested 20/20
+- [Mebahel tracker offset](mebahel-tracker-offset-patch.md) — in mcarpgbridge 1.1.0 client TOML + config screen; jar patch reverted 25 Sep; in-game unverified
+- [DFR JEI fix](dfr-jei-fix.md) — JEI 19.40+ fix jar installed/tested 25 Sep; PR branch on fork unbuilt/unpushed; see dfr-jei-fix/HANDOFF.md
+- [Gentle Swings mod](gentle-swings-mod.md) — keybind H toggles swings passing through NPCs/animals/players; installed 25 Sep, in-game untested
+- [Load My Chunks tick fix](lmc-tick-fix.md) — lmctickfix mod: LMC 1.2.5.1 iterates live chunk map → world-tick crash; installed 25 Sep
+- [Headless pregen + RoadWeaver](pregen-headless-roadweaver.md) — P-pregen server + pregen-helper mod; GlobalGamerules re-applies gamerules on server load
+- [Friend update ZIPs](friend-update-zips.md) — baseline now = Downloads/LOAD ALRADY.zip (full mods) + 8 Oct top-up; compare CRCs too
+- [Back Slots sticky swap](backslots-sticky-swap.md) — quick-swap key now toggles like offhand; patched jar installed 25 Sep, in-game untested
+- [colony-autoteach datapack](colony-autoteach-datapack.md) — crafterrecipes autoteach pack; 3 generator bugs incl. one that bricks server boot
+- [MineColonies crafter modules](minecolonies-crafter-modules.md) — all modules accept custom teach; recipe families; Builder/Miner have no request resolver
+- [Datapack install location](modpack-datapack-install-location.md) — root datapacks/ not <world>/datapacks/; level.dat Disabled trap; /reload is broken
+- [Grave Tag Cleaner mod](grave-tag-cleaner-mod.md) — strips leaked gravestone slot tags (PlayerRevive cause); installed 26 Sep, in-game untested
+- [No test servers while hosting](no-test-servers-while-hosting.md) — never alongside another server/client (other Claude sessions too); watch it and auto-launch when it closes
+- [Cold Sweat furs & fibres](coldsweat-furs-fibres.md) — c:furs/thick datapack = goat fur; cotton/flax/canvas heat-only; 26 Sep, in-game untested
+- [Scrap meat sources](scrap-meat-sources.md) — datapack: merged heads grindable, anvil/cutting/Create routes; installed 26 Sep, untested
+- [Boss Enchant Cleaner mod](boss-enchant-cleaner-mod.md) — strips D&T boss marker enchants from books/offers; source NPC unidentified; installed 26 Sep, untested
+- [Legacy compostables restore](legacy-compostables-restore.md) — NeoForge ignores old COMPOSTABLES/GIFTS/parrot maps; weeds-as-grass + compostables-restore installed & server-verified 26 Sep
+- [Butchery AM Part 2](butchery-am-part2.md) — 80 carcass entries from AM models, AD/AMC Delight drops; installed 27 Sep; hook-eating fix in Part 1+2 reinstalled 8 Oct; friend needs both jars
+- [timm structure lag](timm-structure-lag.md) — structure music re-enabled 27 Sep; lag link weak; cheaper patch-mod idea not built
+- [Orphan configs archived](orphan-configs-archived.md) — 27 Sep: 52 configs of uninstalled mods moved to removed-configs/2026-09-27-orphans
+- [MineColonies perf config](minecolonies-perf-config.md) — 27 Sep: citizens 50, raiders 25, strictness 6, tree 150; pet-colony plan
+- [Village Waystone Names mod](village-waystone-names-mod.md) — village waystones forced to MCA village name; installed 27 Sep, untested
+- [Villager TPS tuning](villager-tps-tuning.md) — 27 Sep spark: villagers 21%; Liberty/Townstead configs cut; Thin Air + RoadWeaver per-tick hotspots from source
+- [Thin Air / RoadWeaver perf mods](thinair-roadweaver-perf-mods.md) — roadweavergate installed 27 Sep; Thin Air + throttle REMOVED 29 Sep, autoteach stripped of thinair/LMC
+- [Cold Sweat Extras + Convenient Decor](coldsweat-rainwear-umbrella-plan.md) — csextras 1.1.0 installed 27 Sep (selftest 48/48, client untested); 1.2.0 borscht→Warmth installed 28 Sep, untested; rainwear/umbrella/Origins, shiver, sweat, pitchfork, sandstorms
+- [Block desync / ghost lava](blockstate-desync-seamless-chunks.md) — 28 Sep; suspect Seamless Chunks beta.7 chunk-send mixins; unconfirmed
+- [Recipe progression rule](recipe-progression-rule.md) — harder must out-yield easier; scanner + zzz-recipe-progression datapack; AU log is the merge ground truth
+- [Recipe identity audit](recipe-identity-audit.md) — tools/recipe-audit; 29 Sep fixes for variant-erasing recipes and over-merges
+- [Maid Rest Beds mod](maid-rest-beds-mod.md) — maids sleep in beds/hammocks (occupied, half heal/favour); installed 1 Oct, selftest 28/28, in-game untested
+- [Feature usage triage](feature-usage-triage.md) — 30 Sep: no colony, Nether/End unvisited, zero-use deco mods; report 29
+- [Maid Chef mod](maid-chef-mod.md) — Chef task P1-P4 + Player2 chat, 21/21 self-test; release jar installed 1 Oct; in-game check pending
+- [Maid Task Curator mod](maid-task-curator-mod.md) — TLM task menu folders/hiding/editor; installed 1 Oct, harness 23/23; MaidTaskScroll removed
+- [Wait for other servers before boot](wait-for-other-servers-before-boot.md) — check + monitor before EVERY harness boot/restart; other sessions run servers too
+- [Exspectriments rejected](exspectriments-needs-port.md) — 1 Oct: Fabric Spectrum add-on breaks on moved ink API; user ditched it, do not re-suggest
+- [MCA chat AI + Player2](mca-chatai-player2.md) — config fine; Player2 wasn't running in any session; AI only via typed chat, not GUI
+- [Player2 Watch mod](player2-watch-mod.md) — p2watch: offline toast/join reminder, installed 1 Oct, client-tested 4/4; TLM/MCA/Townstead are the only Player2 users
+- [Maid Chef stations](maid-chef-stations-overnight.md) — all pack cooking stations covered, 45/45, installed 2 Oct; Spectrum needs in-game check
+- [Youkai split comparison](youkai-split-comparison.md) — installed YH = yinyuze port 4.2.14; Feasts ⊂ YH (can't coexist), Legacy = expanded characters/structures; what neither has
+- [AutoModpack installed](automodpack-installed.md) — 4.0.6 in live mods 4 Oct; user says NOT working (8 Oct), don't bother; friend updates stay manual
+- [Colorful Azaleas removed](colorful-azaleas-removed.md) — 5 Oct; autoteach stripped of 136 recipes (unregistered ids brick boot); world had none
+- [Gensokyo bridge](gensokyo-bridge.md) — 6 Oct: spacing 64 datapack + 52 structures thinned, BSS size-scaling facts; 1.1.1 5 Oct fixes level.dat WorldGenSettings loss (Biolith 3.01 + TB); installed 4 Oct; 5 Oct 1.1.0 (Biolith MF=forest, chest loot) harness 41/41, INSTALLED 5 Oct; Biolith bypasses TB vanilla-region mixins
+- [Tab Folders mod](tab-folders-mod.md) — Legendary Tabs folders/editor + zz-tabs datapack; 29/29 in scaffold 5 Oct, INSTALLED live 7 Oct; friend needs jar
+- [Client test scaffold](client-test-scaffold.md) — test-client/C-client; never test in the live instance; wait for no clients
+- [Lost Maid model whitelist](lost-maid-model-whitelist.md) — 212 models; GL characters + YH Remilia excluded 5 Oct; whitelist re-pick is client-path, untested
+- [Block-state memory cost](blockstate-memory-cost.md) — 7 Oct: 648,697 states ≈ 100-160 MB of 1.93 GB heap with ModernFix; trimming is not a memory win
+- [Organic compost interchange](organic-compost-interchange.md) — straw/corn-refuse tags in compost recipes; installed 8 Oct, untested
+- [Corn Delight raw tortilla off](corn-delight-raw-tortilla-off.md) — standalone datapack stubs the dead-end crafting recipe; 8 Oct, untested
+- [Duplicate recipes → plateable](duplicate-recipes-plateable.md) — zzz-duplicate-recipes datapack 8 Oct; grilled corn + smores; judgement list left
+- [Ground Berries mod](ground-berries-mod.md) — ET bushes ripen on ground via mixin; installed 8 Oct, server test queued, in-game untested

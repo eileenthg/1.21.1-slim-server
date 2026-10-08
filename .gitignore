@@ -1,0 +1,23 @@
+# This repo is a reference snapshot: never commit binaries, worlds or secrets.
+*.jar
+*.class
+*.log
+*.dat
+*.nbt
+*.bak
+*.bak-*
+*.BEFORE-*
+saves/
+logs/
+crash-reports/
+screenshots/
+essential/
+automodpack/
+.private/
+*.pem
+*.key
+*.crt
+.env
+build/
+.gradle/
+__pycache__/

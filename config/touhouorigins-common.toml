@@ -1,0 +1,27 @@
+#Reverse-gravity strength for amanojaku's self-flip (this_side_down).
+#Applied each tick as velocity.y *= (1.0 + this value) while flipped — see the class
+#comment on TouhouOriginsConfig for why that is not the same as a plain multiplier.
+#Upstream Touhou Origins default: -1.10  (effective multiplier -0.10, heavily damped).
+#Unchanged from upstream here; Eileen's feedback was specifically about turnabout below.
+# Default: -1.1
+# Range: -1.999 ~ 100.0
+this_side_down_gravity_multiplier = -1.1
+#Reverse-gravity strength for the target of amanojaku's turnabout.
+#Applied each tick as velocity.y *= (1.0 + this value) while the effect is active.
+#Upstream Touhou Origins default: -1.01  (effective multiplier -0.01 — almost total
+#damping, which is why the launch felt weak and the timing felt inconsistent).
+#
+#Guidance for retuning: effective multiplier = 1.0 + value.
+#  value in (-2, 0): a damped, sign-flipping bounce. Closer to -1.0 = less damping,
+#                    a punchier launch, still naturally bounded.
+#  value == -2.0:    velocity reflects with no energy loss — a strong, sustained
+#                    bounce that never dies down on its own.
+#  value <  -2.0:    the bounce GROWS every tick with no upper bound. Avoid — this
+#                    is how you send a mob into the stratosphere or out of the
+#                    loaded world.
+#Set to -1.70 in this build (effective multiplier -0.70) for a noticeably faster,
+#more satisfying launch than upstream's -1.01, while staying well clear of runaway
+#growth.
+# Default: -1.7
+# Range: -1.999 ~ 100.0
+turnabout_gravity_multiplier = -1.7

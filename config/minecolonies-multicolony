@@ -1,0 +1,10 @@
+[general]
+	#Maximum number of colonies a single player can own at the same time.
+	#Set to -1 for unlimited colonies.
+	#Default: -1
+	# Default: -1
+	# Range: > -1
+	maxColoniesPerPlayer = -1
+	#Allow players to delete any of their owned colonies individually.
+	#Default: true
+	allowIndividualColonyDeletion = true

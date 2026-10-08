@@ -1,0 +1,3376 @@
+{
+  "version": 16,
+  "enabled": true,
+  "renderSelfInFirstPerson": false,
+  "renderOtherPlayers": true,
+  "fadeWithPlayer": true,
+  "hideSelfWhenCameraCloserThan": 0.0,
+  "showHiddenOffhand": true,
+  "shieldOnBack": true,
+  "activeProfile": "",
+  "blacklist": [],
+  "groups": [
+    {
+      "id": "weapon",
+      "name": "",
+      "icon": "",
+      "source": "BUILTIN",
+      "enabled": true,
+      "kind": "WEAPON",
+      "match": "",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 3,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 10.0,
+            "posZ": -1.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": -4.0,
+            "posY": 10.0,
+            "posZ": -1.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 90.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "3": {
+            "visible": true,
+            "alignment": "HIP_LEFT",
+            "posX": 4.0,
+            "posY": -8.0,
+            "posZ": 0.0,
+            "rotX": -25.0,
+            "rotY": 93.0,
+            "rotZ": -23.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "4": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "5": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "6": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "7": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "8": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "9": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": 8.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tool",
+      "name": "",
+      "icon": "",
+      "source": "BUILTIN",
+      "enabled": true,
+      "kind": "TOOL",
+      "match": "",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 3,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 4.0,
+            "posY": -16.0,
+            "posZ": -4.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": -47.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "HIP_RIGHT",
+            "posX": -5.0,
+            "posY": -13.0,
+            "posZ": -6.0,
+            "rotX": -45.0,
+            "rotY": -82.0,
+            "rotZ": 45.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "3": {
+            "visible": true,
+            "alignment": "HIP_LEFT",
+            "posX": 5.0,
+            "posY": -11.0,
+            "posZ": 4.0,
+            "rotX": -37.0,
+            "rotY": -84.0,
+            "rotZ": 37.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "shield",
+      "name": "",
+      "icon": "",
+      "source": "BUILTIN",
+      "enabled": true,
+      "kind": "SHIELD",
+      "match": "",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 4.0,
+            "posZ": -4.0,
+            "rotX": 180.0,
+            "rotY": 0.0,
+            "rotZ": 8.0,
+            "scale": 100.0,
+            "thickness": 90.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "ranged",
+      "name": "",
+      "icon": "",
+      "source": "BUILTIN",
+      "enabled": true,
+      "kind": "RANGED",
+      "match": "",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 8.0,
+            "posZ": 4.0,
+            "rotX": 15.0,
+            "rotY": 2.0,
+            "rotZ": -170.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_anchor",
+      "name": "Anchor",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "anchor",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_axe",
+      "name": "Axe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "axe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_battlestaff",
+      "name": "Battlestaff",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "battlestaff",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_chakram",
+      "name": "Chakram",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "chakram",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_claw",
+      "name": "Claw",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "claw",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_claymore",
+      "name": "Claymore",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "claymore",
+      "mergesInto": "weapon",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": -4.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_club",
+      "name": "Club",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "club",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_cutlass",
+      "name": "Cutlass",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "cutlass",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_dagger",
+      "name": "Dagger",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "dagger",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_double_axe",
+      "name": "Double axe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "double_axe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_dragonslayer",
+      "name": "Dragonslayer",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "dragonslayer",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_fist",
+      "name": "Fist",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "fist",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 0,
+        "entries": {
+          "1": {
+            "visible": false,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_flail",
+      "name": "Flail",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "flail",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_glaive",
+      "name": "Glaive",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "glaive",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_greataxe",
+      "name": "Greataxe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "greataxe",
+      "mergesInto": "weapon",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": -4.0,
+            "posY": -4.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_greathammer",
+      "name": "Greathammer",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "greathammer",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_halberd",
+      "name": "Halberd",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "halberd",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_hammer",
+      "name": "Hammer",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "hammer",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_hatchet",
+      "name": "Hatchet",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "hatchet",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_heavy_axe",
+      "name": "Heavy axe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "heavy_axe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_hook_sword",
+      "name": "Hook sword",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "hook_sword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_katana",
+      "name": "Katana",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "katana",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "HIP_RIGHT",
+            "posX": 0.0,
+            "posY": -8.0,
+            "posZ": 12.0,
+            "rotX": -5.0,
+            "rotY": 100.0,
+            "rotZ": -8.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "HIP_RIGHT",
+            "posX": 0.0,
+            "posY": -20.0,
+            "posZ": 12.0,
+            "rotX": 128.0,
+            "rotY": 16.0,
+            "rotZ": 107.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_lance",
+      "name": "Lance",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "lance",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_mace",
+      "name": "Mace",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "mace",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_morningstar",
+      "name": "Morningstar",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "morningstar",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_pickaxe",
+      "name": "Pickaxe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "pickaxe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_rapier",
+      "name": "Rapier",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "rapier",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_sai",
+      "name": "Sai",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "sai",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_scythe",
+      "name": "Scythe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "scythe",
+      "mergesInto": "weapon",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": -12.0,
+            "posY": 0.0,
+            "posZ": -2.0,
+            "rotX": -19.0,
+            "rotY": -19.0,
+            "rotZ": -5.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_sickle",
+      "name": "Sickle",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "sickle",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_soul_knife",
+      "name": "Soul knife",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "soul_knife",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_spear",
+      "name": "Spear",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "spear",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_staff",
+      "name": "Staff",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "staff",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_sword",
+      "name": "Sword",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "sword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_trident",
+      "name": "Trident",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "trident",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_warglaive",
+      "name": "Warglaive",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "warglaive",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_whip",
+      "name": "Whip",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "whip",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 85.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_smg",
+      "name": "Smg",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "tacz:smg",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "HIP_LEFT",
+            "posX": 34.0,
+            "posY": 17.0,
+            "posZ": -15.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": -66.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_sniper",
+      "name": "Sniper",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "tacz:sniper",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 15.0,
+            "posY": 10.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": -62.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_rifle",
+      "name": "Rifle",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "tacz:rifle",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 16.0,
+            "posY": 3.0,
+            "posZ": 0.0,
+            "rotX": 66.0,
+            "rotY": 9.0,
+            "rotZ": 137.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_mg",
+      "name": "Mg",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "tacz:mg",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_pistol",
+      "name": "Pistol",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "tacz:pistol",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "LEG_RIGHT",
+            "posX": 0.0,
+            "posY": 22.0,
+            "posZ": 0.0,
+            "rotX": 34.0,
+            "rotY": -85.0,
+            "rotZ": -34.0,
+            "scale": 100.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "LEG_LEFT",
+            "posX": 0.0,
+            "posY": 22.0,
+            "posZ": 0.0,
+            "rotX": 7.0,
+            "rotY": -90.0,
+            "rotZ": -7.0,
+            "scale": 100.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_rpg",
+      "name": "Rpg",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "tacz:rpg",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 1,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "3": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "4": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "5": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "6": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "7": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "8": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "9": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 7.0,
+            "posY": 14.0,
+            "posZ": 0.0,
+            "rotX": -5.0,
+            "rotY": -4.0,
+            "rotZ": 104.0,
+            "scale": 80.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_shotgun",
+      "name": "Shotgun",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "tacz:shotgun",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "tacz_guns",
+      "name": "Guns (all)",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": true,
+      "kind": "NONE",
+      "match": "tacz:*",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 18.0,
+            "posY": -2.0,
+            "posZ": 3.0,
+            "rotX": 108.0,
+            "rotY": 35.0,
+            "rotZ": 106.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": -18.0,
+            "posY": -2.0,
+            "posZ": 0.0,
+            "rotX": -97.0,
+            "rotY": -30.0,
+            "rotZ": 115.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_fist",
+      "name": "Fist",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:fist",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_sword",
+      "name": "Sword",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:sword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_hoe",
+      "name": "Hoe",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:hoe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_shield",
+      "name": "Shield",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:shield",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_trident",
+      "name": "Trident",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:trident",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_uchigatana",
+      "name": "Uchigatana",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:uchigatana",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_greatsword",
+      "name": "Greatsword",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:greatsword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_spear",
+      "name": "Spear",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:spear",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_tachi",
+      "name": "Tachi",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:tachi",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_longsword",
+      "name": "Longsword",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:longsword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_dagger",
+      "name": "Dagger",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:dagger",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "epicfight_efn_yamato",
+      "name": "weapon_category.epicfight.efn_yamato",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "epicfight:efn_yamato",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_bow",
+      "name": "Bows",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:bow",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_sword",
+      "name": "Swords",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:sword",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_shovel",
+      "name": "Shovels",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:shovel",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_pickaxe",
+      "name": "Pickaxes",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:pickaxe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_axe",
+      "name": "Axes",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:axe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_hoe",
+      "name": "Hoes",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:hoe",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_mace",
+      "name": "Maces",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:mace",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_shield",
+      "name": "Shields",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:shield",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_trident",
+      "name": "Tridents",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:trident",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "kind_crossbow",
+      "name": "Crossbows",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "kind:crossbow",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_twin_blade",
+      "name": "Twin blade",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "twin_blade",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    },
+    {
+      "id": "bettercombat_wand",
+      "name": "Wand",
+      "icon": "",
+      "source": "INTEGRATION",
+      "enabled": false,
+      "kind": "NONE",
+      "match": "wand",
+      "mergesInto": "",
+      "alwaysInOffHand": false,
+      "items": [],
+      "entries": {
+        "count": 2,
+        "entries": {
+          "1": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          },
+          "2": {
+            "visible": true,
+            "alignment": "TORSO",
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 0.0,
+            "rotX": 0.0,
+            "rotY": 0.0,
+            "rotZ": 0.0,
+            "scale": 90.0,
+            "thickness": 100.0,
+            "mergesInto": ""
+          }
+        }
+      }
+    }
+  ],
+  "customItems": {
+    "tacz:modern_kinetic_gun#tacz:minigun": {
+      "visible": true,
+      "alignment": "TORSO",
+      "posX": -41.0,
+      "posY": -12.0,
+      "posZ": 0.0,
+      "rotX": -58.0,
+      "rotY": 170.0,
+      "rotZ": 3.0,
+      "scale": 90.0,
+      "thickness": 100.0,
+      "mergesInto": ""
+    },
+    "tacz:modern_kinetic_gun#tacz:m320": {
+      "visible": true,
+      "alignment": "TORSO",
+      "posX": -17.0,
+      "posY": 5.0,
+      "posZ": -22.0,
+      "rotX": 105.0,
+      "rotY": -147.0,
+      "rotZ": 0.0,
+      "scale": 80.0,
+      "thickness": 100.0,
+      "mergesInto": ""
+    }
+  }
+}

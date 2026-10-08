@@ -1,0 +1,38 @@
+#Ender Canteen configuration
+[general]
+	#Amount of fluid (in mB) consumed from the linked tank per drink. Default: 500
+	# Default: 500
+	# Range: 1 ~ 100000
+	drinkAmountMb = 500
+	#Thirst points restored per 250 mB of water consumed. Default: 2
+	# Default: 2
+	# Range: 0 ~ 20
+	thirstPer250mb = 2
+	#Quench (saturation) points restored per 250 mB of water consumed. Default: 2
+	# Default: 2
+	# Range: 0 ~ 20
+	quenchedPer250mb = 2
+
+#Effect durations when drinking dirty water (in seconds)
+[effects]
+	#Duration of the Nausea effect when drinking dirty (purity 0) or slightly dirty (purity 1) water, in seconds. Default: 8
+	# Default: 8
+	# Range: 0 ~ 300
+	nauseaDurationSeconds = 8
+	#Duration of the Hunger effect when drinking dirty (purity 0) water, in seconds. Default: 13
+	# Default: 13
+	# Range: 0 ~ 300
+	hungerDurationSeconds = 13
+
+#RF/FE energy settings for the Canteen
+[energy]
+	#If true, drinking requires RF/FE energy stored in the Canteen. Default: true
+	rfEnabled = true
+	#Maximum RF/FE the Canteen can store. Default: 100000
+	# Default: 100000
+	# Range: 1 ~ 10000000
+	rfCapacity = 100000
+	#RF/FE consumed per restored thirst+quench point combined. Default: 1000
+	# Default: 1000
+	# Range: 0 ~ 1000000
+	rfCostPerThirstPoint = 1000

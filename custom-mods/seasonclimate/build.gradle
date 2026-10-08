@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+version = "${mod_version}"
+group = 'eteil.seasonclimate'
+base { archivesName = 'seasonclimate' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+    mods {
+        seasonclimate { sourceSet(sourceSets.main) }
+    }
+}
+
+dependencies {
+    // Cold Sweat is provided by the pack at runtime; only its event API is needed to compile.
+    compileOnly files('libs/ColdSweat-2.4.3.1.jar')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

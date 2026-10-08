@@ -1,0 +1,22 @@
+{
+  "guidelibrary.title": "Guide Library",
+  "guidelibrary.button": "Guide Library",
+  "guidelibrary.search": "Search books...",
+  "guidelibrary.found": "%s / %s found",
+  "guidelibrary.featured": "Pack guide",
+  "guidelibrary.empty": "No guide books found in this pack",
+  "guidelibrary.none_found": "No books yet. Guide books you pick up are added here, so you can read them any time without carrying them.",
+  "guidelibrary.no_match": "No books match your search",
+  "guidelibrary.unlocked": "Added to your Guide Library: %s",
+  "guidelibrary.tip.favorite": "Right-click to favorite",
+  "guidelibrary.tip.unfavorite": "Right-click to unfavorite",
+  "guidelibrary.open_failed": "Could not open %s (see the log)",
+  "guidelibrary.needs_server": "%s can only be opened when the server has Guide Library installed",
+  "guidelibrary.cmd.no_book": "No book matches '%s'. /guidelibrary books lists them all.",
+  "guidelibrary.cmd.unlocked": "Unlocked %s book(s)",
+  "guidelibrary.cmd.locked": "Locked %s book(s)",
+  "guidelibrary.cmd.list": "%s has unlocked %s book(s): %s",
+  "guidelibrary.cmd.books": "%s book(s) in this pack: %s",
+  "key.categories.guidelibrary": "Guide Library",
+  "key.guidelibrary.open": "Open Guide Library"
+}

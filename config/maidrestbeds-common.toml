@@ -1,0 +1,27 @@
+#Maids may sleep in ordinary beds when no maid bed is free.
+allowBeds = true
+#Maids may sleep in Comforts hammocks when no maid bed is free.
+allowHammocks = true
+#Share of a maid bed's sleep favorability that an ordinary bed gives, rounded, at least 1.
+#It uses the same once-a-day cooldown as the maid bed, so a maid cannot collect both.
+#0 gives nothing and leaves the cooldown untouched.
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+bedFavorabilityShare = 0.5
+#Share of a maid bed's sleep favorability that a hammock gives. Same rules as bedFavorabilityShare.
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+hammockFavorabilityShare = 0.5
+#Share of max health an ordinary bed restores (a maid bed restores all of it).
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+bedHealFraction = 0.5
+#Share of max health a hammock restores.
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+hammockHealFraction = 0.5
+#Leave alone beds that a villager has claimed as its home.
+skipVillagerClaimedBeds = true
+#A player who clicks a bed or hammock with a sleeping maid in it wakes her and gets in,
+#the same way villagers are woken. Maid beds are never affected.
+wakeMaidsOnBedClick = true

@@ -1,0 +1,48 @@
+#Place deepslate instead of stone for seams, walls and supports below Y 0, so they blend into the
+#deepslate layer rather than leaving grey streaks. Obsidian is unaffected.
+useDeepslateBelowZero = true
+
+#Water/lava contact.
+#Any lava block touching water is replaced. The LAVA side is converted, so water lakes keep their volume.
+#It becomes OBSIDIAN only when a lava source touches a water source; every other contact becomes stone.
+[fluidSeam]
+	enabled = true
+	#Only process lava at or below this Y.
+	# Default: 64
+	# Range: -64 ~ 320
+	maxY = 64
+
+#Water breaches.
+#An 'opening' is a water block with air beside it or directly below it - somewhere it can pour out.
+#Connected openings are grouped. Groups LARGER than maxOpening are walled off with stone;
+#groups at or under it are left alone, so small wall pockets still trickle down cave walls.
+[apertureSeal]
+	enabled = true
+	#Largest opening (in connected water blocks) left unsealed. Trickles and narrow waterfalls live under this.
+	# Default: 5
+	# Range: 1 ~ 4096
+	maxOpening = 5
+	#Only process water at or below this Y. Kept under sea level by default so surface
+	#rivers, cliff waterfalls and lake shorelines are never touched.
+	# Default: 50
+	# Range: -64 ~ 320
+	maxY = 50
+
+#Falling-block footprint.
+#Any block extending FallingBlock (gravel, sand, red sand, concrete powder, modded gravels) with air
+#directly below it is 'exposed'. Horizontally connected exposed blocks on the same layer form a footprint.
+#Footprints larger than maxFootprint are split by turning blocks on a grid into stone, so a cave-in
+#still happens but stays small instead of unzipping a whole ceiling.
+#Pointed dripstone is NOT affected - it implements Fallable but not FallingBlock.
+[gravelCap]
+	enabled = true
+	#Target maximum size of a single cave-in, in blocks.
+	#The grid quantises this: the real cap is floor(sqrt(value))^2.
+	#So 4-8 give 2x2 (4), 9-15 give 3x3 (9), 16-24 give 4x4 (16).
+	# Default: 9
+	# Range: 1 ~ 4096
+	maxFootprint = 9
+	#Only process falling blocks at or below this Y.
+	# Default: 320
+	# Range: -64 ~ 320
+	maxY = 320

@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "Private"
+
+[[mods]]
+modId = "csextras"
+version = "1.1.0"
+displayName = "Cold Sweat Extras"
+description = "Rainwear, umbrellas and sun hats for Cold Sweat and Origins; shivering, sweating, campfire stoking, overheating heartbeat; a working pitchfork."
+
+[[mixins]]
+config = "csextras.mixins.json"
+
+[[dependencies.csextras]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.csextras]]
+modId = "cold_sweat"
+type = "required"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+# Loaded after these so this mod's data (recipe stubs) overrides theirs.
+[[dependencies.csextras]]
+modId = "convenientdecor"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.csextras]]
+modId = "thirst"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"

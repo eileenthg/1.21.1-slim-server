@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "GPL-3.0-or-later"
+
+[[mods]]
+modId = "colony_expeditions"
+version = "0.1.0"
+displayName = "Colony Expeditions"
+authors = "eileenthg"
+description = '''
+MineColonies expedition huts for the End, the Otherside, the Deeper Down, the Bumblezone and the Eternal Tales dimensions.
+Also makes the Netherworker open portals with Dimensional Tears.
+'''
+
+[[mixins]]
+config = "colony_expeditions.mixins.json"
+
+[[dependencies.colony_expeditions]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.249,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.colony_expeditions]]
+modId = "minecolonies"
+type = "required"
+versionRange = "[1.1.1375,)"
+ordering = "AFTER"
+side = "BOTH"

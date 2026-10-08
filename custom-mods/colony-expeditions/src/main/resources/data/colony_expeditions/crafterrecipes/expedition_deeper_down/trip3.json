@@ -1,0 +1,63 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_deeper_down_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "spectrum:blackslag"
+    },
+    {
+      "id": "spectrum:chestnut_noxcap_stem"
+    },
+    {
+      "id": "spectrum:blackslag_azurite_ore"
+    },
+    {
+      "id": "spectrum:blackslag_coal_ore"
+    },
+    {
+      "id": "spectrum:slate_noxcap_stem"
+    },
+    {
+      "id": "spectrum:blackslag_malachite_ore"
+    },
+    {
+      "id": "spectrum:glistering_melon"
+    },
+    {
+      "id": "spectrum:weeping_gala_log"
+    },
+    {
+      "id": "spectrum:ebony_noxcap_stem"
+    },
+    {
+      "id": "spectrum:blackslag_moonstone_ore"
+    },
+    {
+      "id": "spectrum:raw_bloodstone"
+    },
+    {
+      "id": "spectrum:resonant_lily"
+    },
+    {
+      "id": "spectrum:bedrock_dust"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_deeper_down/trip3",
+  "min-building-level": 3,
+  "max-building-level": 3
+}

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.maidchef.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SchedulePosMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

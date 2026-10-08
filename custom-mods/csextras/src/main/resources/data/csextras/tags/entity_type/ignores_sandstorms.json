@@ -1,0 +1,19 @@
+{
+  "values": [
+    "minecraft:husk",
+    "minecraft:camel",
+    "minecraft:breeze",
+    {
+      "id": "alexsmobs:roadrunner",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:rattlesnake",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:jerboa",
+      "required": false
+    }
+  ]
+}

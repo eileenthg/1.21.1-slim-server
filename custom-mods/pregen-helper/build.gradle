@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+version = "${mod_version}"
+group = 'eteil.pregenhelper'
+base { archivesName = 'pregenhelper' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Compiled against the jars in the live pack; none of them are bundled.
+def liveMods = 'C:/Users/eteil.000/AppData/Roaming/PrismLauncher/instances/1.21.1 slim/minecraft/mods'
+dependencies {
+    compileOnly files("$liveMods/roadweaver-neoforge-2.3.1-1.21.1-hotfix.jar",
+                      "$liveMods/immersive_gateways-neoforge-0.0.6.jar",
+                      "$liveMods/Chunky-NeoForge-1.4.23.jar")
+}
+
+neoForge {
+    version = project.neo_version
+    mods {
+        pregenhelper { sourceSet(sourceSets.main) }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

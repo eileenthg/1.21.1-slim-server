@@ -1,0 +1,54 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_volcanech_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:volcanech_rock"
+    },
+    {
+      "id": "eternal_tales:hot_volcanech_rock"
+    },
+    {
+      "id": "eternal_tales:basalt_palm_log"
+    },
+    {
+      "id": "eternal_tales:sulfur"
+    },
+    {
+      "id": "eternal_tales:melting_rock"
+    },
+    {
+      "id": "eternal_tales:ancient_volcanite"
+    },
+    {
+      "id": "eternal_tales:melting_sulfur"
+    },
+    {
+      "id": "eternal_tales:ancienzyte_ore"
+    },
+    {
+      "id": "eternal_tales:pyro_volcanite_shard"
+    },
+    {
+      "id": "eternal_tales:uranium_ore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_volcanech/trip4",
+  "min-building-level": 4,
+  "max-building-level": 4
+}

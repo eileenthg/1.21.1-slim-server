@@ -1,0 +1,23 @@
+{
+  "taskcurator.gear": "Organise tasks",
+  "taskcurator.folder.open": "Open folder (%s tasks)",
+  "taskcurator.folder.close": "Close folder (%s tasks)",
+  "taskcurator.screen.title": "Maid Task Curator",
+  "taskcurator.screen.hint": "Hidden tasks leave the maid menu only. A maid already on one keeps working.",
+  "taskcurator.screen.new_folder": "New folder",
+  "taskcurator.screen.new_folder_name": "New folder",
+  "taskcurator.screen.folder_name": "Folder name",
+  "taskcurator.screen.reset": "Reset to default",
+  "taskcurator.screen.reset.confirm": "Replace your folders and hidden tasks with the default layout?",
+  "taskcurator.screen.delete_folder": "Delete",
+  "taskcurator.screen.delete_folder.tip": "Delete this folder. Its tasks move to the top level; nothing is hidden or lost.",
+  "taskcurator.screen.task_count": "%s tasks",
+  "taskcurator.screen.up": "Move up",
+  "taskcurator.screen.down": "Move down",
+  "taskcurator.screen.shown": "Shown",
+  "taskcurator.screen.hidden": "Hidden",
+  "taskcurator.screen.idle_locked": "Idle can't be hidden, so a maid can always be stopped.",
+  "taskcurator.screen.no_folder": "none",
+  "taskcurator.screen.folder": "Folder: %s",
+  "taskcurator.screen.folder.tip": "Click: move to the next folder. Shift-click: previous folder."
+}

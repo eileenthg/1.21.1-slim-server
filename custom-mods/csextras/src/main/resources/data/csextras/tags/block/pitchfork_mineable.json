@@ -1,0 +1,84 @@
+{
+  "values": [
+    {
+      "id": "minecraft:hay_block",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:unbundled_hay_block",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:straw_bale",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:straw_bale",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:straw_slab",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:straw_stairs",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:straw_vertical_slab",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:hay_slab",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:hay_stairs",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:hay_vertical_slab",
+      "required": false
+    },
+    {
+      "id": "eternal_tales:hay_plate",
+      "required": false
+    },
+    {
+      "id": "eternal_tales:hay_stairs",
+      "required": false
+    },
+    {
+      "id": "quark:thatch",
+      "required": false
+    },
+    {
+      "id": "quark:thatch_slab",
+      "required": false
+    },
+    {
+      "id": "quark:thatch_stairs",
+      "required": false
+    },
+    {
+      "id": "quark:thatch_vertical_slab",
+      "required": false
+    },
+    {
+      "id": "mctradepost:thatch",
+      "required": false
+    },
+    {
+      "id": "mctradepost:thatch_slab",
+      "required": false
+    },
+    {
+      "id": "mctradepost:thatch_stairs",
+      "required": false
+    },
+    {
+      "id": "mctradepost:thatch_wall",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+#First-person camera while lying down with Take a Seat (on a bed).
+[lyingCamera]
+	#Treat the lying head like a real head on a pillow. Your aim stays a real direction; the model's
+	#head is posed relative to the lying body (looking at the ceiling = resting head, looking ahead = at your feet);
+	#in first person the view is that head's view, and lying down pivots your aim to the ceiling (sideways for
+	#side poses), standing up puts your pitch back. Off = Take a Seat's original behaviour.
+	enabled = true
+	#Also move the camera down and back to where the lying model's head is,
+	#instead of Take a Seat's fixed sit height.
+	moveToHead = true
+	#Hide the first-person hands and held item while lying.
+	hideHands = true
+	#Take a Seat animation names that lie on the back.
+	backPoses = ["bedlyingdown", "bedlyingdown2"]
+	#Take a Seat animation names that lie on the side.
+	sidePoses = ["bedlyingdown3"]
+	#How far a side pose turns the head (and your aim) on lying down, in degrees. -90 matches bedlyingdown3, which rolls onto its right side; flip the sign to turn the other way.
+	# Default: -90.0
+	# Range: -180.0 ~ 180.0
+	sideTwistDegrees = -90.0
+	#How far the lying head can swing away from resting on the pillow, in degrees. Past this the
+	#head stops and only the view keeps turning.
+	# Default: 90.0
+	# Range: 0.0 ~ 180.0
+	neckLimitDegrees = 90.0
+	#In a side pose, how far the head may turn from the body before the body turns with it, in degrees.
+	#Vanilla (and every other pose) is 50; a side pose faces 90 to the side, so 90 keeps the body still.
+	# Default: 90.0
+	# Range: 0.0 ~ 180.0
+	sideHeadTurnDegrees = 90.0
+
+#How the carried player is drawn in a Princess Carry (MCA Romantic Expansion). Read every frame.
+[princessCarry]
+	#Lay the carried player across the carrier's arms, placed from the carrier and ignoring the carried
+	#player's own facing, so looking around no longer rolls the body. Off = Romantic Expansion's original pose.
+	enabled = true
+	#How far the head end of the torso is raised above level, in degrees.
+	# Default: 15.0
+	# Range: -45.0 ~ 90.0
+	torsoLiftDegrees = 15.0
+	#How far the legs bend up at the hips, in degrees. 0 = a straight plank.
+	# Default: 30.0
+	# Range: 0.0 ~ 120.0
+	hipBendDegrees = 30.0
+	#How far the body rolls from face-up toward the carrier, in degrees.
+	# Default: 25.0
+	# Range: -90.0 ~ 90.0
+	faceTurnDegrees = 25.0
+	#Hip position in front of the carrier's feet, in blocks.
+	# Default: 0.33
+	# Range: -2.0 ~ 2.0
+	hipForward = 0.33
+	#Hip height above the carrier's feet, in blocks.
+	# Default: 0.92
+	# Range: -2.0 ~ 3.0
+	hipHeight = 0.92
+	#Hip position toward the carrier's left (negative = right), in blocks.
+	# Default: 0.15
+	# Range: -2.0 ~ 2.0
+	hipSide = 0.15

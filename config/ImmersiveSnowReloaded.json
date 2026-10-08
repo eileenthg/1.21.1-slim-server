@@ -1,0 +1,10 @@
+{
+  "minChunksToProcessPerTick": 1,
+  "maxChunksToProcessPerTick": 10,
+  "memoryDuration": 600,
+  "strictReplacement": false,
+  "isBiomeBlacklist": true,
+  "biomeBlacklist": [],
+  "isBlockBlacklist": true,
+  "blockBlacklist": []
+}

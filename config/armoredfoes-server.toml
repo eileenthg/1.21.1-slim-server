@@ -1,0 +1,4 @@
+#Equipment slots to clear built-in equipment from before applying equipment from loot table.
+#Default Value: ARMOR
+#Allowed Values: ANY, MAINHAND, OFFHAND, HAND, FEET, LEGS, CHEST, HEAD, ARMOR, BODY
+cleared_equipment_slots = "ARMOR"

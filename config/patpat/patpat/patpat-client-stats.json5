@@ -1,0 +1,22 @@
+{
+  "totalPatsCounter": {
+    "pats": 212
+  },
+  "entities": {
+    "alexsmobs:terrapin": {
+      "pats": 19
+    },
+    "anotherscape:exchange_clerk": {
+      "pats": 0
+    },
+    "minecraft:player": {
+      "pats": 140
+    },
+    "anotherscape:baron": {
+      "pats": 26
+    },
+    "minecraft:chicken": {
+      "pats": 22
+    }
+  }
+}

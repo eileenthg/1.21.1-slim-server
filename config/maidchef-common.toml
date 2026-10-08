@@ -1,0 +1,104 @@
+[kitchen]
+	#Kitchen radius a new Chef maid starts with (blocks around her home/work point). Each maid can change hers in the Chef config screen.
+	# Default: 8
+	# Range: 3 ~ 64
+	defaultRadius = 8
+	#Largest kitchen radius the config screen allows.
+	# Default: 32
+	# Range: 3 ~ 64
+	maxRadius = 32
+	#How many of a dish a new Chef maid makes per round. Each maid can change hers in the Chef config screen.
+	# Default: 8
+	# Range: 1 ~ 64
+	defaultBatch = 8
+	#How many recent dishes a new Chef maid remembers and skips, so she rotates through different food. Each maid can change hers in the Chef config screen.
+	#When only remembered dishes are possible she makes the oldest one she can; ones she can no longer make are forgotten.
+	# Default: 3
+	# Range: 0 ~ 32
+	recentMemory = 3
+	#How many steps deep she plans: 0 = only dishes made straight from what's in the chest; 3 = she may make an
+	#ingredient of an ingredient of an ingredient first (e.g. cook rice, then make the feast, then serve it).
+	# Default: 3
+	# Range: 0 ~ 6
+	chainDepth = 3
+	#When she can't cook anything, how many ticks she waits before checking the ingredients and stations again.
+	# Default: 200
+	# Range: 20 ~ 6000
+	idleReplanTicks = 200
+	#If a player picks up something that popped out of her station, she pauses and asks for it back.
+	#After this many seconds without getting it back she gives up on that dish (it counts as recently made) and plans a different one.
+	# Default: 60
+	# Range: 5 ~ 600
+	returnWaitSeconds = 60
+	#Log every fetch/load/collect/delivery step to the server log (for troubleshooting).
+	debugLog = false
+	#Show a chat bubble when she starts a dish or can't cook anything.
+	announce = true
+	#Slow stations (kegs, fermentation tanks, titration barrels, long drying): when a load will take longer than this many
+	#ticks she starts it, goes on with other cooking, and comes back for it once it's done. 0 = always wait at the station.
+	# Default: 2400
+	# Range: 0 ~ 1000000
+	leaveAfterTicks = 2400
+
+[requests]
+	#She asks her owner for ingredients that would let her make a much better dish, if no more than this many
+	#kinds of items are missing. 0 turns requests off.
+	# Default: 1
+	# Range: 0 ~ 3
+	maxMissingKinds = 1
+	#The dish has to be worth at least this much more than what she can make now (percent).
+	# Default: 50
+	# Range: 0 ~ 1000
+	minGainPercent = 50
+	#How often she thinks about what to ask for (ticks; 6000 = 5 minutes).
+	# Default: 6000
+	# Range: 200 ~ 240000
+	intervalTicks = 6000
+	#She won't repeat the same request sooner than this (ticks; 24000 = one Minecraft day).
+	# Default: 24000
+	# Range: 200 ~ 2400000
+	repeatTicks = 24000
+	#Items no maid ever asks for (boss loot and the like). Item ids or #tags. Rare/epic items and prepared food
+	#(anything cooked from other food) are never asked for anyway; she asks for its ingredients instead.
+	neverRequest = ["ends_delight:liquid_dragon_egg", "ends_delight:raw_dragon_meat", "ends_delight:dragon_leg", "minecraft:dragon_egg", "minecraft:dragon_breath", "minecraft:nether_star"]
+	#Only ask for items her owner has picked up or crafted at least once (from the owner's statistics),
+	#so she doesn't ask for meat from mobs you've never met. Requests then only happen while the owner is online.
+	onlyAskForKnownItems = true
+	#In "Prepare X" mode she asks for whatever X still needs, up to this many kinds of items.
+	# Default: 3
+	# Range: 0 ~ 6
+	targetMaxMissingKinds = 3
+	#Also send the request to her owner's chat, with a [Never ask for ...] button per item.
+	chatMessage = true
+
+[value]
+	#Dish value = nutrition * nutritionWeight + saturation * saturationWeight + effect bonus.
+	#Effect bonus = effectWeight * (amplifier + 1) * minutes (capped at 5) * chance, for each beneficial effect.
+	#Farmer's Delight feast blocks are worth servings * (value of one serving) * feastWeight.
+	#A recipe is only considered if its output is worth more than the food it consumes.
+	# Default: 1.0
+	# Range: 0.0 ~ 100.0
+	nutritionWeight = 1.0
+	# Default: 1.0
+	# Range: 0.0 ~ 100.0
+	saturationWeight = 1.0
+	# Default: 1.0
+	# Range: 0.0 ~ 100.0
+	effectWeight = 1.0
+	# Default: 1.0
+	# Range: 0.0 ~ 100.0
+	feastWeight = 1.0
+
+[stations]
+	#Allow food recipes made at a crafting table in the kitchen (pies, feasts, sandwiches...). Single-ingredient recipes (unpacking crates etc.) are always ignored.
+	useCraftingTable = true
+	#Allow Farmer's Delight cutting board recipes as dishes. Needs a matching tool (knife etc.) in her inventory or the ingredient chest.
+	useCuttingBoard = true
+	#Items she may use as furnace/smoker fuel. Item ids, or tags as #namespace:path.
+	fuels = ["#minecraft:coals", "minecraft:coal_block", "minecraft:blaze_rod"]
+
+[filters]
+	#Items she never makes as a dish. Item ids, or tags as #namespace:path.
+	excludedResults = ["minecraft:rotten_flesh", "minecraft:spider_eye", "minecraft:poisonous_potato", "minecraft:suspicious_stew"]
+	#Recipe ids she never uses.
+	excludedRecipes = []

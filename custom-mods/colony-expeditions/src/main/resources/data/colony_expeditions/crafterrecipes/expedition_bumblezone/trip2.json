@@ -1,0 +1,51 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_bumblezone_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "the_bumblezone:porous_honeycomb_block"
+    },
+    {
+      "id": "the_bumblezone:filled_porous_honeycomb_block"
+    },
+    {
+      "id": "minecraft:honeycomb"
+    },
+    {
+      "id": "minecraft:honey_bottle"
+    },
+    {
+      "id": "the_bumblezone:pollen_puff"
+    },
+    {
+      "id": "the_bumblezone:sugar_infused_stone"
+    },
+    {
+      "id": "the_bumblezone:beehive_beeswax"
+    },
+    {
+      "id": "the_bumblezone:honey_crystal_shards"
+    },
+    {
+      "id": "the_bumblezone:bee_stinger"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_bumblezone/trip2",
+  "min-building-level": 2,
+  "max-building-level": 2
+}

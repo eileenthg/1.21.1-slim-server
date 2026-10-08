@@ -1,0 +1,79 @@
+#Multiplier for Apotheosis values (gems, affixes, effects, etc.)
+#Examples:
+#  1.0 = default values (no change)
+#  0.5 = reduce all values by 50%
+#  2.0 = double all values
+#Affects:
+#  - Gem attribute bonuses (attack speed, damage, armor, etc.)
+#  - Affix attribute values
+#  - Durability bonuses
+#  - Potion effect durations and amplifiers
+#  - All other numerical bonuses from Apotheosis
+#Changes require game restart to take effect.
+# Default: 1.0
+# Range: 0.0 ~ 100.0
+apotheosisMultiplier = 1.0
+#Probability each AffixLootRule succeeds when applying affixes to an item.
+#Lower values produce items with fewer affixes on average.
+#Examples:
+#  1.0 = unchanged (every affix slot rolls)
+#  0.5 = each affix slot has a 50% chance to be skipped
+#  0.0 = no affixes ever roll
+#Replaces the 1.20.1 'qualityMultiplier' field, since Apotheosis 1.21
+#moved affix count out of AffixLootEntry into per-rarity LootRule lists.
+#Changes require game restart to take effect.
+# Default: 1.0
+# Range: 0.0 ~ 1.0
+affixRollChance = 1.0
+#Number of lowest-sortIndex rarities to remove from every AffixLootEntry's
+#allowed set. Use to prevent low-rarity affix items from generating.
+#Examples:
+#  0 = unchanged
+#  1 = drop the lowest rarity (e.g. common)
+#  2 = drop two lowest
+#If an entry would end up empty, the median rarity is kept.
+#Replaces the 1.20.1 'minRarityOffset' field with set-filter semantics,
+#since AffixLootEntry in 1.21 uses Set<LootRarity> instead of a range.
+#Changes require game restart to take effect.
+# Default: 0
+# Range: 0 ~ 10
+dropLowestRarities = 0
+#Number of highest-sortIndex rarities to remove from every AffixLootEntry's
+#allowed set. Use to cap the maximum rarity that can drop.
+#Examples:
+#  0 = unchanged
+#  1 = drop the top rarity (e.g. mythic)
+#  2 = drop two top rarities
+#Replaces the 1.20.1 'maxRarityOffset' field with set-filter semantics.
+#Changes require game restart to take effect.
+# Default: 0
+# Range: 0 ~ 10
+dropHighestRarities = 0
+#Enable balancing for attribute bonuses (attack speed, damage, armor, etc.)
+enableAttributeBalance = true
+#Enable balancing for enchantment level bonuses from gems
+enableEnchantmentBalance = true
+#Enable balancing for potion effect bonuses (duration, amplifier, cooldown)
+enablePotionBalance = true
+#Enable balancing for special bonuses (bloody_arrow, leech_block, etc.)
+enableSpecialBalance = true
+#Rounding mode for enchantment levels:
+#  STANDARD - Math.round() standard rounding
+#  CEIL_IF_ABOVE_ONE - If result > 1.0, round up to at least 2
+#  ALWAYS_CEIL - Always round up
+#  ALWAYS_FLOOR - Always round down
+#Allowed Values: STANDARD, CEIL_IF_ABOVE_ONE, ALWAYS_CEIL, ALWAYS_FLOOR
+enchantmentRounding = "ALWAYS_CEIL"
+#Rounding mode for potion effect amplifiers (levels):
+#  STANDARD - Math.round() standard rounding
+#  CEIL_IF_ABOVE_ONE - If result > 1.0, round up to at least 2
+#  ALWAYS_CEIL - Always round up
+#  ALWAYS_FLOOR - Always round down
+#Allowed Values: STANDARD, CEIL_IF_ABOVE_ONE, ALWAYS_CEIL, ALWAYS_FLOOR
+potionRounding = "ALWAYS_CEIL"
+#Enable debug logging to see when values are being multiplied.
+#WARNING: Creates a LOT of log messages!
+enableDebugLogging = false
+#Show detailed caller (stack trace) information in debug logs.
+#Only works if enableDebugLogging is true.
+showCallerInfo = false

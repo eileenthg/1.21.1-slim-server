@@ -1,0 +1,26 @@
+===== batch: rayana volcanech gardens_of_eden
+[00:30:13] [Server thread/INFO] [minecraft/DedicatedServer]: Done (103.132s)! For help, type "help"
+== waiting for 3 departure(s)
+[00:33:22] [Server thread/WARN] [colony_expeditions/]: [test] citizen Zakai D. Cobham left level: DISCARDED at 55, 79, 78
+[00:33:23] [Server thread/WARN] [colony_expeditions/]: [test] citizen Ace T. Miller left level: DISCARDED at 79, 84, 54
+== waiting for 3 completed log(s)
+[00:37:39] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Zakai D. Cobham
+[00:37:39] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Zakai D. Cobham
+[00:37:39] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Zakai D. Cobham
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 64xminecraft:cobblestone, 32xminecraft:torch, 16xminecraft:ladder, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden
+    mobs=
+    loot= colony=ACTIVE recipes=1 fulfillable=true built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:oak_log}
+  Vienna K. Gold status=WORKING state=START_WORKING hp=20.0 at=78, 89, 50
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 64xminecraft:cobblestone, 32xminecraft:torch, 16xminecraft:ladder, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden
+    mobs=2xeternal_tales:tarantula, 1xeternal_tales:crimson_tarko
+    loot=44xeternal_tales:limestone_rock, 11xeternal_tales:bronze_coin, 4xminecraft:string, 3xeternal_tales:tarantula_eye, 2xeternal_tales:terra_shard, 0xminecraft:air colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Ace T. Miller status=STUCK state=IDLE hp=20.0 at=87, 84, 55
+    inv=1xminecraft:stone_sword, 2xminecraft:bread, 1xeternal_tales:rayana, 1xeternal_tales:rayana, 1xeternal_tales:rayana, 1xeternal_tales:rayana
+    mobs=2xeternal_tales:volc
+    loot=52xeternal_tales:volcanech_rock, 23xeternal_tales:bronze_coin, 4xeternal_tales:basalt_palm_log, 4xeternal_tales:hot_volcanech_rock colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{colony_expeditions:portal_volcanech}
+    mobs=
+    loot= colony=ACTIVE recipes=1 fulfillable=true built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:oak_log}
+  Vienna K. Gold status=WORKING state=START_WORKING hp=20.0 at=78, 89, 50
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 64xminecraft:cobblestone, 32xminecraft:torch, 16xminecraft:ladder, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden
+stopped 28348
+28556

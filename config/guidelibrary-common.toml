@@ -1,0 +1,24 @@
+[books]
+	#Item ids of extra book items to list, for mods that are not Patchouli or Modonomicon.
+	#They are opened by replaying the item's right-click, so only list real books:
+	#a spell tome or recipe tool listed here would be 'used' when clicked.
+	#'*' works, e.g. "somemod:guide_*". The #guidelibrary:guide_books item tag does the same job.
+	extraBookItems = []
+	#Books to leave out of the library, as <source>/<id> keys, e.g. "patchouli/apotheosis:apoth_chronicle",
+	#"item/mca:book_supporters" or "*/somemod:*".
+	hiddenBooks = []
+	#Books pinned to the top of the library in this order, e.g. the pack's own guide.
+	featuredBooks = []
+	#If set to a book key, the inventory button opens that book directly instead of the
+	#library (shift-click still opens the library). Like PatchouliButton's pack-guide mode.
+	buttonOpensBook = ""
+
+[unlocks]
+	#OBTAINED: a book shows up in the library once the player has had a physical copy in
+	#their inventory. EVERYTHING: every book is listed from the start.
+	#Allowed Values: OBTAINED, EVERYTHING
+	unlockMode = "OBTAINED"
+	#Books listed for everyone without finding them first, e.g. the pack's own guide.
+	#The buttonOpensBook book always counts as unlocked.
+	#Ops can also use /guidelibrary unlock <players> <book> (e.g. as a quest reward).
+	alwaysUnlocked = []

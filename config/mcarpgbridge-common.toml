@@ -1,0 +1,24 @@
+[mebahel]
+	#Mebahel quests and rumors on MCA villagers open from a Request/Rumor button in MCA's villager menu,
+	#so a plain right-click always opens MCA's menu. When false, Mebahel takes the right-click as it does alone.
+	mcaMenuButton = true
+
+[standing]
+	#MCA: Reputation standing for Mebahel quest outcomes, applied to the quest giver's village. 0 turns a deed off.
+	#For scale: MCA: Quests gives 2 / 4 / 7 for easy / medium / hard quests.
+	#Claiming a Mebahel villager quest.
+	# Default: 4
+	# Range: 0 ~ 100
+	questCompleted = 4
+	#Completing a Mebahel quest board contract.
+	# Default: 2
+	# Range: 0 ~ 100
+	contractCompleted = 2
+	#Abandoning a Mebahel quest from its journal.
+	# Default: -2
+	# Range: -100 ~ 0
+	questAbandoned = -2
+	#How far from the giver or board to look for the MCA village the deed belongs to.
+	# Default: 96
+	# Range: 16 ~ 512
+	villageSearchRadius = 96

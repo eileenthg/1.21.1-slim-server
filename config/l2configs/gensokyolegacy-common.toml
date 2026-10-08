@@ -1,0 +1,4 @@
+[worldgen]
+	# Default: 2
+	# Range: 0 ~ 100
+	regionWeight = 2

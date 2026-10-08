@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.roadweavergate.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RoadGenerationServiceMixin",
+    "StructureFileStorageMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

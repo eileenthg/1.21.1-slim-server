@@ -1,0 +1,8 @@
+{
+  "comparator_output": 4,
+  "description": {
+    "translate": "item.ba_bt.core_resonance_stone.desc"
+  },
+  "length_in_seconds": 222.0,
+  "sound_event": "ba_bt:tower.ambient.music.core"
+}

@@ -1,0 +1,25 @@
+{
+  "anvil_cost": 4,
+  "description": { "translate": "enchantment.ba_bt.core_temperature" },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "attacker",
+        "enchanted": "victim",
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            { "type": "minecraft:damage_entity", "damage_type": "minecraft:thorns", "min_damage": 1.0, "max_damage": 1.0 },
+            { "type": "minecraft:damage_item", "amount": 1.0 }
+          ]
+        }
+      }
+    ]
+  },
+  "max_cost": { "base": 25, "per_level_above_first": 10 },
+  "max_level": 1,
+  "min_cost": { "base": 10, "per_level_above_first": 10 },
+  "slots": [ "any" ],
+  "supported_items": "#ba_bt:core_temperature_can_enchant",
+  "weight": 2
+}

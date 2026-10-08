@@ -1,0 +1,52 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="${mod_license}"
+issueTrackerURL="https://github.com/BrassAmber-Mods/Brass_Amber_BattleTowers/issues"
+[[mods]]
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="${mod_name}" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/brassamberbattletowers"
+logoFile="BrassAmberBattleTowers.png"
+credits='''Inspired by BattleTowers from YogBox
+           Translations by: SamleGamer, Kzeroko, RockYl, and BlackShadow77
+           Music by Rotch Gwylt:
+                Land Tower:
+                    Forced Protection (Ambient)
+                    Rage Of Bahryn'muul (Boss)
+                Ocean Tower:
+                    Void Aeration (Ambient)
+                    Void Of Moraizu'un (Boss)
+                Core Tower:
+                    Molten Tribulation (Ambient)
+                    Awakening Of Obthu'uryn (Boss)
+                Nether Tower:
+                    Blazen Damnation (Ambient)
+                    Throne Of Infuur'niir (Boss)
+                End Tower:
+                    Warped Revelation (Ambient)
+                    Mind Of Shul'losniir (Boss)
+                Sky Tower:
+                    Resonance Levitation (Ambient)
+                    Descent Of Veyhz'kriin (Boss)
+           '''
+
+authors="${mod_authors}" #optional
+description='''${mod_description}'''
+[[dependencies.ba_bt]]
+modId="neoforge"
+type="required"
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
+[[dependencies.ba_bt]]
+modId="minecraft"
+type="required"
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"

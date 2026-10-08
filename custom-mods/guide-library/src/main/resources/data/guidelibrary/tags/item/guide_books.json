@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "mca:book_death", "required": false },
+    { "id": "mca:book_romance", "required": false },
+    { "id": "mca:book_family", "required": false },
+    { "id": "mca:book_rose_gold", "required": false },
+    { "id": "mca:book_infection", "required": false },
+    { "id": "mca:book_blueprint", "required": false },
+    { "id": "mca:book_supporters", "required": false },
+    { "id": "mca:book_cult_0", "required": false },
+    { "id": "mca:book_cult_1", "required": false },
+    { "id": "mca:book_cult_2", "required": false },
+    { "id": "mca:book_cult_ancient", "required": false },
+    { "id": "alexsmobs:animal_dictionary", "required": false },
+    { "id": "betteranimalsplus:animal_dictionary", "required": false },
+    { "id": "tconstruct:materials_and_you", "required": false },
+    { "id": "tconstruct:puny_smelting", "required": false },
+    { "id": "tconstruct:mighty_smelting", "required": false },
+    { "id": "tconstruct:fantastic_foundry", "required": false },
+    { "id": "tconstruct:encyclopedia", "required": false },
+    { "id": "tconstruct:tinkers_gadgetry", "required": false },
+    { "id": "immersiveengineering:manual", "required": false },
+    { "id": "integrateddynamics:on_the_dynamics_of_integration", "required": false },
+    { "id": "evilcraft:origins_of_darkness", "required": false },
+    { "id": "ars_nouveau:worn_notebook", "required": false },
+    { "id": "occultism:dictionary_of_spirits", "required": false }
+  ]
+}

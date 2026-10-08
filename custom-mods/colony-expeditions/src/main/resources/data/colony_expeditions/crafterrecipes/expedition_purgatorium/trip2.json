@@ -1,0 +1,45 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_purgatorium_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:purgatorium_stone"
+    },
+    {
+      "id": "eternal_tales:purgatorium_log"
+    },
+    {
+      "id": "eternal_tales:purgatorium_grass"
+    },
+    {
+      "id": "eternal_tales:eyebloom"
+    },
+    {
+      "id": "eternal_tales:devils_tooth_fungus"
+    },
+    {
+      "id": "eternal_tales:soulbone"
+    },
+    {
+      "id": "minecraft:bone_block"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_purgatorium/trip2",
+  "min-building-level": 2,
+  "max-building-level": 2
+}

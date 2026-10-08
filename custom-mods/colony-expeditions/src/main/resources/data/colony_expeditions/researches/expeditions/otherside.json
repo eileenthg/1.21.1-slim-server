@@ -1,0 +1,33 @@
+{
+  "branch": "colony_expeditions:expeditions",
+  "costs": [
+    {
+      "item": "deeperdarker:resonarium",
+      "count": 8
+    },
+    {
+      "item": "deeperdarker:soul_dust",
+      "count": 16
+    },
+    {
+      "item": "minecraft:echo_shard",
+      "count": 4
+    }
+  ],
+  "effects": [
+    {
+      "id": "colony_expeditions:effects/blockhutexpedition_otherside",
+      "level": 1
+    }
+  ],
+  "icon": "colony_expeditions:blockhutexpedition_otherside",
+  "requirements": [
+    {
+      "type": "minecolonies:building",
+      "building": "minecolonies:netherworker",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 2
+}

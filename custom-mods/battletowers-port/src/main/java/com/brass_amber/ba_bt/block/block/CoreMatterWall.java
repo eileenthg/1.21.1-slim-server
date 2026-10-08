@@ -1,0 +1,73 @@
+package com.brass_amber.ba_bt.block.block;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.Optional;
+
+import static com.brass_amber.ba_bt.block.block.ActiveCorriteBlock.FALL_SPEED;
+import static com.brass_amber.ba_bt.block.block.ActiveCorriteBlock.LAVA_DAMAGE;
+import static com.brass_amber.ba_bt.block.block.CoreMatterBlock.MAX_PICKUP;
+import static com.brass_amber.ba_bt.block.block.CoreMatterBlock.PICKUP_LEVEL;
+
+public class CoreMatterWall extends WallBlock {
+    public CoreMatterWall(Properties p_57964_) {
+        super(p_57964_);
+        this.registerDefaultState(this.stateDefinition.any().setValue(PICKUP_LEVEL, MAX_PICKUP));
+    }
+
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
+        entity.makeStuckInBlock(blockState, new Vec3(1D, FALL_SPEED * 2, 1D));
+        entity.hurt(level.damageSources().lava(), LAVA_DAMAGE);
+    }
+
+    @Override
+    public ItemStack pickupBlock(@org.jetbrains.annotations.Nullable Player player, LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
+        state.trySetValue(PICKUP_LEVEL, state.getValue(PICKUP_LEVEL) - 1);
+        return state.getValue(PICKUP_LEVEL) > 0 ? new ItemStack(Items.LAVA_BUCKET) : ItemStack.EMPTY;
+    }
+
+    @Override
+    public Optional<SoundEvent> getPickupSound() {
+        return Optional.of(SoundEvents.BUCKET_FILL_LAVA);
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockStateBuilder) {
+        blockStateBuilder.add(PICKUP_LEVEL);
+        super.createBlockStateDefinition(blockStateBuilder);
+    }
+
+    @Override
+    public boolean hasDynamicShape() {
+        return true;
+    }
+
+    public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
+        return Shapes.empty();
+    }
+
+    public VoxelShape getInteractionShape(BlockState p_60547_, BlockGetter p_60548_, BlockPos p_60549_) {
+        return Shapes.empty();
+    }
+
+    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+        return Shapes.block();
+    }
+
+}

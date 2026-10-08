@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.tabfolders.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "TabsMenuMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

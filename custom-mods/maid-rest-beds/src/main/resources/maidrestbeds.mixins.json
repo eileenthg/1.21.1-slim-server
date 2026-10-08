@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.maidrestbeds.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityMaidMixin",
+    "MaidBedTaskMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

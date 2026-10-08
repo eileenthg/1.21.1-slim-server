@@ -1,0 +1,4 @@
+{
+  "task.maidchef.chef": "Chef",
+  "task.maidchef.chef.desc": "Cooks the most valuable dish she can from the ingredient chest at the stations around her kitchen, makes a set amount, delivers it to the output chest, then moves on to a different dish. Bind chests with a Culinary Hub in her 5th backpack slot (red = ingredients, green = output). Radius and amount are in the task settings tab."
+}

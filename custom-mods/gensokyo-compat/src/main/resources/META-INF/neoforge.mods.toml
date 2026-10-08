@@ -1,0 +1,25 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+# Gensokyo Legacy's access transformer makes every Brain method public, which breaks Lithium's
+# private @Overwrite of Brain.startEachNonRunningBehavior. Lithium reads this table from any mod.
+["lithium:options"]
+"mixin.ai.task.launch" = false
+
+[[mods]]
+    modId = "gensokyocompat"
+    version = "${file.jarVersion}"
+    displayName = "Gensokyo Compat"
+    authors = "eileen"
+    description = '''Lets Gensokyo Legacy run beside the Youkai's Homecoming 1.21.1 port: keeps the magical forest in forest climate and avoids the Lithium Brain crash.'''
+
+[[mixins]]
+    config = "gensokyocompat.mixins.json"
+
+[[dependencies.gensokyocompat]]
+    modId = "gensokyolegacy"
+    type = "optional"
+    versionRange = "[1.0,)"
+    ordering = "NONE"
+    side = "BOTH"

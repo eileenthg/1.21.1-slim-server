@@ -1,0 +1,3 @@
+[mochiMalletOptions]
+	#Disable blood on the Mochi Mallet texture.
+	lowViolence = false

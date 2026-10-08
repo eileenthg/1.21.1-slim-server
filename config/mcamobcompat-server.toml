@@ -1,0 +1,128 @@
+#Guard Villagers interaction.
+[guard_villagers]
+	#Block the crouch-and-right-click conversion of an MCA villager into a guard.
+	#
+	#SAFETY CRITICAL, and the main reason this mod exists. Guard Villagers gates
+	#its conversion on 'instanceof Villager', which MCA villagers pass, and its
+	#default convertible professions include 'none' -- so any jobless MCA villager
+	#is convertible out of the box. The conversion copies across only position,
+	#custom name and held item, then discards the villager: family tree, marriage,
+	#children, genetics, personality and inventory are gone, and cannot be restored
+	#because none of it is recoverable from the resulting guard.
+	#
+	#While this is on, crouch-right-clicking an MCA villager WHILE HOLDING a sword
+	#or crossbow does nothing at all -- MCA's own interaction screen will not open
+	#for that one gesture either. Every other way of interacting is untouched.
+	blockGuardConversion = true
+	#When a hostile mob attacks or targets an MCA villager, alert nearby guards.
+	#Guard Villagers matches the mobs it protects by entity id, and its default
+	#list names 'minecraft:villager' -- which MCA villagers are not -- so without
+	#this they simply do not defend them.
+	protectMcaVillagers = true
+	#Stop guards from targeting MCA villagers.
+	#The do-not-attack list in Guard Villagers is also matched by entity id and
+	#also names only 'minecraft:villager', so an MCA villager is not on it.
+	preventGuardFriendlyFire = true
+	#Also alert guards when a PLAYER attacks an MCA villager.
+	#Off by default: MCA has its own reputation and guard response for player
+	#misbehaviour, and turning a village hostile is a large consequence to add
+	#silently. Turn it on for a harsher server.
+	retaliateAgainstPlayers = false
+	#How far, in blocks, to look for guards to alert.
+	# Default: 32
+	# Range: 1 ~ 128
+	guardHelpRange = 32
+	#Cap on how many guards a single attack alerts, so a large village does not
+	#turn one zombie into a full-village pathfinding storm.
+	# Default: 8
+	# Range: 1 ~ 64
+	maxGuardsAlerted = 8
+	#Give guards an MCA-style identity: a name, a gender, a personality and
+	#per-player hearts, all persisted with the world and regenerated from the
+	#guard's UUID so the same guard always gets the same identity.
+	#This is what lets the other MCA addons treat a guard as an MCA NPC.
+	#Applies to every entity tagged 'mcamobcompat:guard', not only Guard
+	#Villagers' own guard -- but only while Guard Villagers is installed.
+	#Turning this off leaves existing identities on disk untouched; turning it
+	#back on resumes them.
+	treatGuardsAsMcaGuards = true
+	#Give bridged guards MCA's own right-click behaviour.
+	#On: a plain right-click opens MCA's real interaction screen, with every
+	#MCA option working, through a hidden MCA villager that stands in for the
+	#guard and carries its name, personality, hearts and family; crouch-right-
+	#click still opens Guard Villagers' own inventory GUI.
+	#Off: both gestures behave exactly as Guard Villagers ships them, and no
+	#hidden villager is created at all.
+	#Needs 'treatGuardsAsMcaGuards' on, because the stand-in is seeded from the
+	#bridged identity.
+	guardMcaInteraction = true
+	#Let crouch-and-right-click with a weapon RECRUIT an MCA villager as a guard
+	#instead of blocking the gesture.
+	#The villager keeps its name, family, genetics and personality and simply
+	#changes profession to 'mca:guard', taking the weapon from your hand -- so
+	#nothing is destroyed, which is the whole objection to the Guard Villagers
+	#conversion. Turning this off restores the plain block and its message.
+	#Needs 'blockGuardConversion' on: the recruit replaces the block, and with
+	#the block off the destructive conversion runs instead.
+	recruitMcaVillagersAsGuards = true
+	#Show a bridged guard's rolled name permanently above its head, the way
+	#MCA shows a villager's. A nameplate on every guard in the village is a loud
+	#change, so it is switchable; turning it off only stops NEW guards gaining
+	#one, because a nameplate already set is a player-visible fact we do not
+	#quietly take away.
+	guardShowNameTag = true
+
+#Which animals an MCA villager's hunting chore must leave alone.
+#
+#MCA's hunting task types its target as vanilla 'Animal' and excludes only
+#TamableAnimal. Genetic Animals entities extend Animal, and SWEM and DragN's
+#equines extend AbstractHorse, which in 1.20.1 extends Animal without being
+#TamableAnimal -- so a tamed, player-owned modded horse is already a legal
+#hunting target. These options take it back off the menu.
+[chores]
+	#Protect any animal that reports an owner through vanilla -- tamed equines,
+	#cats, wolves, parrots, and every modded animal built on those. Ownership is
+	#read, never written.
+	protectOwnedAnimals = true
+	#Roles that are never a valid hunting target, by MobRole name; the same names
+	#as the tag files under data/mcamobcompat/tags/entity_type/. Matched
+	#case-insensitively; a name that is not a role is logged once at startup and
+	#ignored.
+	#
+	#'livestock' is deliberately NOT here by default. The hunting chore exists to
+	#produce meat, and an untamed, unnamed cow in the wild -- vanilla or from an
+	#animal mod -- is exactly what it is meant to hunt. Protecting livestock by
+	#default would neuter the chore for every pack that replaces vanilla farm
+	#animals. A pack that keeps its herds elsewhere adds one entry here.
+	protectedRoles = ["mount", "pet"]
+	#Protect any animal with a custom name. A name tag is the vanilla signal that
+	#a player cares about this particular animal.
+	protectNamedAnimals = true
+	#Protect any animal on a lead. A leashed animal is being taken somewhere by
+	#somebody.
+	protectLeashedAnimals = true
+	#When a hunting villager is stopped from hitting a protected animal, also
+	#abandon the chore.
+	#Without this the hunting task keeps its own target field pointed at an animal
+	#it can never hurt, and the villager stands there swinging forever. Needs the
+	#reflective MCA binding; where that is unavailable the attack is still blocked,
+	#this part is simply skipped.
+	abandonHuntOnProtectedTarget = true
+
+#SWEM (Star Worm Equestrian Mod).
+[swem]
+	#Treat SWEM horses as mounts. Breeding, needs, skills and tack stay entirely
+	#with SWEM -- this mod only recognises them, and never writes to them.
+	recognizeAsMounts = true
+
+#Genetic Animals (mod id 'eanimod').
+[genetic_animals]
+	#Treat the animals from Genetic Animals as livestock. Genetics, gender,
+	#pregnancy and breeding all remain owned by Genetic Animals itself.
+	recognizeLivestock = true
+
+#DragN's Livestock Overhaul.
+[dragn_livestock]
+	#Treat the O-Animals as livestock. Genders, breeding and genetics all remain
+	#owned by DragN's Livestock Overhaul itself.
+	recognizeLivestock = true

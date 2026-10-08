@@ -1,0 +1,21 @@
+{
+  "placement": {
+    "type": "ba_bt:tower_structure_placement",
+    "salt": 123111514,
+    "separation": 24,
+    "spacing": 36,
+    "locate_offset": [
+      8,
+      -60,
+      8
+    ],
+    "avoid_structure_sets": "#ba_bt:core_tower_avoid_structures",
+    "min_distance_from_avoid_structures": 8
+  },
+  "structures": [
+    {
+      "structure": "ba_bt:core_tower",
+      "weight": 1
+    }
+  ]
+}

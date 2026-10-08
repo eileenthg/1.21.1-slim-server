@@ -1,0 +1,11 @@
+===== batch: gardens_of_eden
+[01:05:40] [Server thread/INFO] [minecraft/DedicatedServer]: Done (77.897s)! For help, type "help"
+== waiting for 1 departure(s)
+[01:08:08] [Server thread/WARN] [colony_expeditions/]: [test] citizen Felipe S. Johnson left level: DISCARDED at 79, 84, 54
+== waiting for 1 completed log(s)
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 29xeternal_tales:bronze_coin, 14xeternal_tales:eden_sand, 6xeternal_tales:sunhog_leather, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 10xeternal_tales:bacon_et, 6xminecraft:porkchop, 1xminecraft:bone
+    mobs=3xeternal_tales:sunhog, 1xeternal_tales:sundusa
+    loot=29xeternal_tales:bronze_coin, 14xeternal_tales:eden_sand, 10xeternal_tales:bacon_et, 6xminecraft:porkchop, 6xeternal_tales:sunhog_leather, 1xminecraft:bone, 0xminecraft:air colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{colony_expeditions:portal_gardens_of_eden}
+  Felipe S. Johnson status=IDLE state=NETHER_CLOSEPORTAL hp=20.0 at=80, 84, 53
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 29xeternal_tales:bronze_coin, 14xeternal_tales:eden_sand, 6xeternal_tales:sunhog_leather, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 1xeternal_tales:gardens_of_eden, 10xeternal_tales:bacon_et, 6xminecraft:porkchop, 1xminecraft:bone
+stopped 27776

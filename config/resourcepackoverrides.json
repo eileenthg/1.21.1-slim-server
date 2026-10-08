@@ -1,0 +1,96 @@
+{
+  "schema_version": "2",
+  "default_packs": [
+    "vanilla",
+    "fabric",
+    "mod_resources",
+    "moonlight:merged_pack",
+    "mod/towntalk:respack",
+    "file/AJKs_MCAR_v1.21.zip",
+    "file/Extra Xaero's Minimap Icons - 1.20.1 - 1.0.zip",
+    "file/Icon Xaero's 1.21.zip",
+    "file/Minecolonies Refreshed 4.0.0-1.21.1.zip",
+    "file/Nether Depths - Re-Fleshed.zip",
+    "file/PaleOakLeafColor.zip",
+    "file/REVIVED_Farmer's Delight_crops_3D_R1.5.1-1.20.x.zip",
+    "file/Stellar_Beacons_v12111.zip",
+    "file/Stellar Tweaks-2.5.3.zip",
+    "file/Stellar 3D-2.2.0.zip",
+    "file/The Alchemist Mca faces.zip",
+    "file/Vanilla Menu Restore.zip",
+    "file/Villager Clothing Addition REBORN.zip",
+    "file/crops-3d(2).zip",
+    "file/mwahmwah.zip",
+    "file/pastel_style_amethyst.zip",
+    "file/wood-and-gem-renames.zip",
+    "file/townstead-timeline-months.zip",
+    "supplementaries:darker_ropes",
+    "mod/subtle_effects:resourcepacks/biome_color_water_particles",
+    "touhou_little_maid_spell_legacy_textures",
+    "immersive_weathering:visual_waxed_iron_items",
+    "mod/delightful:builtin/overhauls"
+  ],
+  "pack_overrides": {
+    "file/AJKs_MCAR_v1.21.zip": {
+      "required": true
+    },
+    "file/Extra Xaero's Minimap Icons - 1.20.1 - 1.0.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/Icon Xaero's 1.21.zip": {
+      "required": true
+    },
+    "file/Minecolonies Refreshed 4.0.0-1.21.1.zip": {
+      "required": true
+    },
+    "file/Nether Depths - Re-Fleshed.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/PaleOakLeafColor.zip": {
+      "required": true
+    },
+    "file/REVIVED_Farmer's Delight_crops_3D_R1.5.1-1.20.x.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/Stellar_Beacons_v12111.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/Stellar Tweaks-2.5.3.zip": {
+      "required": true
+    },
+    "file/Stellar 3D-2.2.0.zip": {
+      "required": true
+    },
+    "file/The Alchemist Mca faces.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/Vanilla Menu Restore.zip": {
+      "required": true
+    },
+    "file/Villager Clothing Addition REBORN.zip": {
+      "required": true
+    },
+    "file/crops-3d(2).zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/mwahmwah.zip": {
+      "required": true,
+      "force_compatible": true
+    },
+    "file/pastel_style_amethyst.zip": {
+      "required": true
+    },
+    "file/wood-and-gem-renames.zip": {
+      "required": true
+    },
+    "file/townstead-timeline-months.zip": {
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3.0,
+        "max": 10.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.3,
+        "max": 0.3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:volcanech_rock",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 16.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:hot_volcanech_rock",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 8.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:basalt_palm_log",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:sulfur",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 8.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:melting_rock",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:ancient_volcanite",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:melting_sulfur",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:ancienzyte_ore",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:pyro_volcanite_shard",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:uranium_ore",
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.1,
+        "max": 0.1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 3000,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:volc",
+                  "damage": 5.0,
+                  "xp": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "minecraft:magma_cube",
+                  "damage": 3.0,
+                  "xp": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:executioner",
+                  "damage": 8.0,
+                  "xp": 9
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2154 @@
+{
+  "custom_tags": {
+    "c:green_coffee": [
+      "extradelight:green_coffee",
+      "rusticdelight:coffee_beans",
+      "youkaishomecoming:green_coffee_bean"
+    ],
+    "c:roasted_coffee": [
+      "extradelight:coffee_beans",
+      "rusticdelight:roasted_coffee_beans",
+      "youkaishomecoming:coffee_beans",
+      "farmersrespite:coffee_beans"
+    ],
+    "c:coffee_powder": [
+      "youkaishomecoming:coffee_powder",
+      "extradelight:ground_coffee"
+    ],
+    "c:coffee_berry": [
+      "extradelight:coffee_cherries",
+      "youkaishomecoming:coffee_berries",
+      "farmersrespite:coffee_berries"
+    ],
+    "c:roasted_coffee_bag": [
+      "extradelight:coffee_bean_sack",
+      "rusticdelight:roasted_coffee_beans_bag",
+      "youkaishomecoming:coffee_bean_bag"
+    ],
+    "minersdelight:insect_meat": [
+      "butchery:raw_bee_back_meat",
+      "butchery:raw_silverfish_chunks",
+      "minersdelight:arthropod",
+      "ends_delight:raw_ender_mite_meat",
+      "butchery:raw_endermite_chunks"
+    ],
+    "minecraft:skulls": [
+      "butchery:spider_head",
+      "spectrum:enderman_head",
+      "butchery:enderman_head",
+      "supplementaries:spider_head",
+      "spectrum:spider_head",
+      "supplementaries:enderman_head"
+    ],
+    "c:wild_soybean": [
+      "youkaishomecoming:wild_soybean",
+      "extradelight:wild_soybean_item"
+    ],
+    "c:foods/raw_meat/ender_dragon": [
+      "compatdelight:ender_dragon_steak",
+      "butchery:raw_dragon_meat",
+      "ends_delight:raw_dragon_meat"
+    ],
+    "c:horse_head": [
+      "butchery:chestnut_horse_head",
+      "spectrum:horse_head"
+    ],
+    "c:camel_head": [
+      "butchery:camel_head",
+      "spectrum:camel_head"
+    ],
+    "c:cat_head": [
+      "butchery:tabby_cat_head",
+      "spectrum:cat_head"
+    ],
+    "c:marshmallow": [
+      "extradelight:marshmallow",
+      "compatdelight:marshmallow"
+    ],
+    "c:wild_cucumber": [
+      "extradelight:wild_cucumber_item",
+      "culturaldelights:wild_cucumbers"
+    ],
+    "c:axolotl_blue_head": [
+      "spectrum:axolotl_blue_head",
+      "butchery:blue_axolotl_head"
+    ],
+    "c:butter": [
+      "youkaishomecoming:butter",
+      "compatdelight:butter_bottle"
+    ],
+    "c:skeleton_horse_head": [
+      "spectrum:skeleton_horse_head",
+      "butchery:skeleton_horse_head"
+    ],
+    "c:zombie_villager_head": [
+      "butchery:zombie_villager_head",
+      "spectrum:zombie_villager_head"
+    ],
+    "c:foods/raw_meat/guardian": [
+      "oceansdelight:guardian_tail",
+      "butchery:raw_guardian_meat"
+    ],
+    "c:sheep_head": [
+      "spectrum:sheep_head",
+      "butchery:sheep_head"
+    ],
+    "c:foods/cooked_meat/ham": [
+      "farmersdelight:smoked_ham",
+      "butchery:cooked_ham"
+    ],
+    "c:fox_arctic_head": [
+      "butchery:snow_fox_head",
+      "spectrum:fox_arctic_head"
+    ],
+    "c:goat_head": [
+      "butchery:goat_head",
+      "spectrum:goat_head"
+    ],
+    "c:foods/raw_meat/shulker/chunk": [
+      "endersdelight:shulker_mollusk",
+      "butchery:raw_shulker_meat",
+      "ends_delight:shulker_meat"
+    ],
+    "c:foods/pepper": [
+      "mynethersdelight:pepper_powder",
+      "rusticdelight:bell_pepper_red",
+      "rusticdelight:bell_pepper_slice_green",
+      "mynethersdelight:bullet_pepper",
+      "minecolonies:nether_pepper",
+      "rusticdelight:bell_pepper_green",
+      "rusticdelight:bell_pepper_slice_red",
+      "rusticdelight:bell_pepper_yellow",
+      "rusticdelight:bell_pepper_slice_yellow"
+    ],
+    "c:foods/rice": [
+      "minecolonies:rice",
+      "farmersdelight:rice",
+      "mynethersdelight:ghasmati"
+    ],
+    "c:foods/cooked_meat/dragon_meat": [
+      "butchery:cooked_dragon_meat",
+      "ends_delight:roasted_dragon_meat"
+    ],
+    "c:glow_squid_corpse": [
+      "culturaldelights:glow_squid",
+      "butchery:glow_squid_carcass",
+      "minersdelight:glow_squid"
+    ],
+    "c:chicken_head": [
+      "spectrum:chicken_head",
+      "butchery:chicken_head"
+    ],
+    "c:enderman_head": [
+      "spectrum:enderman_head",
+      "butchery:enderman_head",
+      "supplementaries:enderman_head"
+    ],
+    "c:foods/raw_meat/cod/whole": [
+      "aquaculture:atlantic_cod",
+      "minecraft:cod",
+      "butchery:cod_carcass"
+    ],
+    "c:silverfish_head": [
+      "butchery:silverfish_head",
+      "spectrum:silverfish_head"
+    ],
+    "c:wild_ginger": [
+      "extradelight:ginger",
+      "snowyspirit:wild_ginger"
+    ],
+    "c:donkey_head": [
+      "spectrum:donkey_head",
+      "butchery:donkey_head"
+    ],
+    "c:hoglin_skin": [
+      "mynethersdelight:hoglin_hide",
+      "butchery:hoglin_skin"
+    ],
+    "c:cow_head": [
+      "butchery:cow_head",
+      "spectrum:cow_head"
+    ],
+    "c:zoglin_head": [
+      "spectrum:zoglin_head",
+      "butchery:zoglin_head"
+    ],
+    "c:foods/cooked_meat/spider_leg": [
+      "minersdelight:baked_spider_leg",
+      "butchery:cooked_cave_spider_leg",
+      "butchery:cooked_spider_leg"
+    ],
+    "c:foods/sliced/vegetables/eggplant": [
+      "culturaldelights:cut_eggplant",
+      "compatdelight:cut_eggplant"
+    ],
+    "c:llama_head": [
+      "spectrum:llama_head",
+      "butchery:gray_llama_head"
+    ],
+    "c:foods/raw_meat/endermite": [
+      "ends_delight:raw_ender_mite_meat",
+      "butchery:raw_endermite_chunks"
+    ],
+    "c:foods/raw_meat/shulker/slice": [
+      "ends_delight:shulker_meat_slice",
+      "endersdelight:shulker_filet"
+    ],
+    "c:husk_head": [
+      "spectrum:husk_head",
+      "butchery:husk_head"
+    ],
+    "c:panda_head": [
+      "spectrum:panda_head",
+      "butchery:panda_head"
+    ],
+    "butchery:scrappable_heads": [
+      "spectrum:chicken_head",
+      "spectrum:ocelot_head",
+      "spectrum:turtle_head",
+      "spectrum:axolotl_leucistic_head",
+      "spectrum:axolotl_wild_head",
+      "spectrum:mule_head",
+      "spectrum:spider_head",
+      "supplementaries:enderman_head",
+      "spectrum:glow_squid_head",
+      "spectrum:bat_head",
+      "spectrum:zombified_piglin_head",
+      "spectrum:fox_red_head",
+      "spectrum:zoglin_head",
+      "spectrum:pig_head",
+      "spectrum:silverfish_head",
+      "spectrum:camel_head",
+      "spectrum:illusioner_head",
+      "spectrum:wolf_head",
+      "spectrum:mooshroom_brown_head",
+      "spectrum:dolphin_head",
+      "spectrum:witch_head",
+      "spectrum:husk_head",
+      "spectrum:squid_head",
+      "spectrum:donkey_head",
+      "spectrum:hoglin_head",
+      "spectrum:cow_head",
+      "spectrum:axolotl_blue_head",
+      "spectrum:phantom_head",
+      "spectrum:iron_golem_head",
+      "spectrum:pillager_head",
+      "spectrum:piglin_brute_head",
+      "spectrum:evoker_head",
+      "spectrum:zombie_horse_head",
+      "spectrum:llama_head",
+      "spectrum:vindicator_head",
+      "spectrum:fox_arctic_head",
+      "spectrum:sheep_head",
+      "spectrum:cat_head",
+      "spectrum:sniffer_head",
+      "spectrum:rabbit_head",
+      "spectrum:zombie_villager_head",
+      "spectrum:polar_bear_head",
+      "spectrum:mooshroom_red_head",
+      "spectrum:panda_head",
+      "spectrum:skeleton_horse_head",
+      "spectrum:cave_spider_head",
+      "spectrum:warden_head",
+      "spectrum:endermite_head",
+      "spectrum:villager_head",
+      "spectrum:axolotl_gold_head",
+      "spectrum:drowned_head",
+      "spectrum:goat_head",
+      "spectrum:bee_head",
+      "spectrum:axolotl_cyan_head"
+    ],
+    "c:storage_blocks_cucumber": [
+      "culturaldelights:cucumber_crate",
+      "compatdelight:cucumber_box"
+    ],
+    "c:foods/raw_meat/arthropod": [
+      "butchery:raw_bee_back_meat",
+      "butchery:raw_silverfish_chunks",
+      "minersdelight:arthropod",
+      "ends_delight:raw_ender_mite_meat",
+      "butchery:raw_endermite_chunks"
+    ],
+    "c:cornbread": [
+      "extradelight:cornbread",
+      "hauntedharvest:cornbread",
+      "brewinandchewin:corn_bread",
+      "corn_delight:cornbread"
+    ],
+    "c:wolf_head": [
+      "spectrum:wolf_head",
+      "butchery:wolf_head"
+    ],
+    "c:caramel": [
+      "extradelight:caramel_sauce",
+      "compatdelight:caramel"
+    ],
+    "c:tofu": [
+      "minecolonies:tofu",
+      "youkaishomecoming:tofu"
+    ],
+    "c:foods/raw_meat/pufferfish": [
+      "butchery:raw_pufferfish",
+      "oceansdelight:fugu_slice",
+      "crabbersdelight:pufferfish_slice"
+    ],
+    "c:vindicator_head": [
+      "spectrum:vindicator_head",
+      "butchery:vindicator_head"
+    ],
+    "c:foods/cooked_meat/endermite": [
+      "butchery:cooked_endermite_chunks",
+      "ends_delight:dried_endermite_meat"
+    ],
+    "c:foods/cooked_meat": [
+      "butchery:cooked_camel_meat",
+      "butchery:cooked_elder_guardian_meat",
+      "butchery:cooked_horse_meat",
+      "butchery:cooked_evoker_meat",
+      "butchery:cooked_panda_steak",
+      "butchery:cooked_pillager_meat",
+      "butchery:cooked_cyan_axolotl_fillet",
+      "butchery:cooked_cave_spider_leg",
+      "compatdelight:cut_cooked_stalker_meat",
+      "butchery:cooked_lamb_shoulder",
+      "butchery:cooked_gray_frog_leg",
+      "rusticdelight:cooked_calamari",
+      "butchery:cooked_sausage",
+      "butchery:cooked_blue_axolotl_fillet",
+      "butchery:cooked_fox_meat",
+      "butchery:cooked_vindicator_meat",
+      "compatdelight:cooked_stalker_meat",
+      "butchery:cooked_llama_steak",
+      "compatdelight:cooked_warden_tendril",
+      "butchery:cooked_rump_steak",
+      "butchery:cooked_pork_loin",
+      "butchery:cooked_pork_leg",
+      "culturaldelights:cooked_calamari",
+      "butchery:cooked_enderman_intestines",
+      "butchery:cooked_enderman_stomach",
+      "butchery:cooked_chicken_wing",
+      "butchery:cooked_lamb_rib",
+      "butchery:cooked_guardian_meat",
+      "butchery:cooked_sniffer_steak",
+      "compatdelight:cut_cooked_sculk_leech",
+      "minersdelight:cooked_arthropod",
+      "butchery:cooked_enderman_kidney",
+      "butchery:cooked_pink_axolotl_fillet",
+      "compatdelight:cooked_sculk_meat",
+      "butchery:cooked_pork_belly",
+      "butchery:cooked_intestines",
+      "butchery:cooked_brown_axolotl_fillet",
+      "butchery:cooked_creeper_leg",
+      "butchery:cooked_warden_meat",
+      "butchery:cooked_strider_meat",
+      "butchery:cooked_tbone_steak",
+      "butchery:cooked_donkey_steak",
+      "butchery:cooked_enderman_steak",
+      "culturaldelights:cooked_squid",
+      "butchery:cooked_pork_shoulder",
+      "butchery:cooked_witch_meat",
+      "butchery:cooked_enderman_lungs",
+      "compatdelight:cooked_angler_fish",
+      "butchery:cooked_villager_steak",
+      "butchery:cooked_salmon",
+      "aquaculture:fish_fillet_cooked",
+      "butchery:cooked_wolf_meat",
+      "butchery:cooked_enderman_liver",
+      "compatdelight:cut_cooked_sculk_meat",
+      "rusticdelight:cooked_calamari_slice",
+      "butchery:cooked_gold_axolotl_fillet",
+      "butchery:cooked_chuck_steak",
+      "butchery:cooked_leg_of_lamb",
+      "butchery:cooked_dragon_meat",
+      "butchery:cooked_cod_fillet",
+      "butchery:cooked_lungs",
+      "butchery:cooked_bat_meat",
+      "butchery:cooked_blood_sausage",
+      "butchery:cooked_ocelot_meat",
+      "butchery:cooked_sirloin_steak",
+      "butchery:cooked_chicken_leg",
+      "butchery:cooked_orange_frog_leg",
+      "compatdelight:cooked_sculk_leech",
+      "butchery:cooked_mule_steak",
+      "butchery:cooked_heart",
+      "butchery:cooked_ham",
+      "compatdelight:cut_cooked_angler_fish",
+      "butchery:cooked_spider_leg",
+      "butchery:cooked_lamb_loin",
+      "butchery:cooked_turtle_meat",
+      "mynethersdelight:cooked_loin",
+      "compatdelight:cooked_heart_of_the_deep",
+      "butchery:cooked_creeper_steak",
+      "butchery:cooked_stomach",
+      "butchery:cooked_kidney",
+      "butchery:cooked_ribeye_steak",
+      "spectrum:cooked_lizard_meat",
+      "butchery:cooked_pufferfish",
+      "butchery:cooked_lamb_sirloin",
+      "butchery:cooked_liver",
+      "butchery:cooked_endermite_chunks",
+      "butchery:cooked_silverfish_chunks",
+      "butchery:cooked_dolphin_meat",
+      "butchery:cooked_cat_meat",
+      "butchery:cooked_green_frog_leg",
+      "butchery:cooked_shulker_meat"
+    ],
+    "c:foods/cooked_meat/guardian": [
+      "butchery:cooked_guardian_meat",
+      "oceansdelight:cooked_guardian_tail"
+    ],
+    "c:pillager_head": [
+      "butchery:pillager_head",
+      "spectrum:pillager_head"
+    ],
+    "c:graham_cracker": [
+      "extradelight:graham_cracker",
+      "compatdelight:graham_cracker"
+    ],
+    "c:drowned_head": [
+      "butchery:drowned_head",
+      "spectrum:drowned_head"
+    ],
+    "c:storage_blocks_corn_on_cob": [
+      "hauntedharvest:corn_crate",
+      "culturaldelights:corn_cob_crate"
+    ],
+    "c:polar_bear_head": [
+      "spectrum:polar_bear_head",
+      "butchery:polar_bear_head"
+    ],
+    "c:guardian_corpse": [
+      "butchery:guardian_carcass",
+      "oceansdelight:guardian"
+    ],
+    "c:ocelot_head": [
+      "butchery:ocelot_head",
+      "spectrum:ocelot_head"
+    ],
+    "pastel:mob_heads/iron_golem_heads": [
+      "butchery:iron_golem_head",
+      "spectrum:iron_golem_head",
+      "butchery:repaired_iron_golem_head"
+    ],
+    "pastel:mob_heads/horse_heads": [
+      "butchery:black_horse_head",
+      "butchery:chestnut_horse_head",
+      "butchery:creamy_horse_head",
+      "butchery:brown_horse_head",
+      "butchery:dark_brown_horse_head",
+      "butchery:white_horse_head",
+      "spectrum:horse_head",
+      "butchery:gray_horse_head"
+    ],
+    "c:mooshroom_brown_head": [
+      "spectrum:mooshroom_brown_head",
+      "butchery:brown_mooshroom_head"
+    ],
+    "c:evoker_head": [
+      "butchery:evoker_head",
+      "spectrum:evoker_head"
+    ],
+    "c:foods/cooked_meat/hoglin": [
+      "mynethersdelight:cooked_loin",
+      "butchery:cooked_hoglin_chunk"
+    ],
+    "c:phantom_head": [
+      "butchery:phantom_head",
+      "spectrum:phantom_head"
+    ],
+    "c:milk_chocolate": [
+      "compatdelight:milk_chocolate_bar",
+      "extradelight:milk_chocolate_bar"
+    ],
+    "c:fox_head": [
+      "spectrum:fox_red_head",
+      "butchery:fox_head"
+    ],
+    "c:foods/raw_meat/squid_tentacle": [
+      "rusticdelight:calamari",
+      "culturaldelights:raw_calamari"
+    ],
+    "c:glow_squid_head": [
+      "butchery:glow_squid_head",
+      "spectrum:glow_squid_head"
+    ],
+    "c:bat_head": [
+      "butchery:bat_head",
+      "spectrum:bat_head"
+    ],
+    "c:popcorn": [
+      "hauntedharvest:popcorn",
+      "culturaldelights:popcorn"
+    ],
+    "c:foods/raw_meat/ham": [
+      "farmersdelight:ham",
+      "butchery:raw_ham"
+    ],
+    "pastel:mob_heads/equidae_heads": [
+      "butchery:black_horse_head",
+      "butchery:chestnut_horse_head",
+      "butchery:creamy_horse_head",
+      "butchery:brown_horse_head",
+      "butchery:dark_brown_horse_head",
+      "butchery:white_horse_head",
+      "spectrum:horse_head",
+      "butchery:gray_horse_head"
+    ],
+    "c:foods/sliced/vegetables/cucumber": [
+      "compatdelight:cut_cucumber",
+      "extradelight:sliced_cucumber_item",
+      "culturaldelights:cut_cucumber"
+    ],
+    "hauntedharvest:sweets": [
+      "extradelight:candy_yellow",
+      "frightsdelight:cookie_cobweb",
+      "extradelight:sugar_cookie",
+      "extradelight:gingerbread_creeper",
+      "farmersdelight:sweet_berry_cookie",
+      "compatdelight:glow_berries_cookie",
+      "extradelight:candy_cyan",
+      "minersdelight:bat_cookie",
+      "extradelight:sugar_cookie_alex",
+      "frightsdelight:cobweb_lollipop",
+      "compatdelight:sweet_berries_lolipop",
+      "extradelight:glow_berry_cookie",
+      "extradelight:candy_apple",
+      "frightsdelight:rotten_flesh_ring_candy",
+      "extradelight:candy_brown",
+      "frightsdelight:cookie_wither_berry",
+      "compatdelight:lolipop",
+      "extradelight:gingerbread_alex",
+      "compatdelight:poppy_cookie",
+      "extradelight:sugar_cookie_emerald",
+      "extradelight:nut_butter_cookie",
+      "extradelight:candy_light_gray",
+      "rusticdelight:cherry_blossom_cookie",
+      "compatdelight:cursed_sapball_cookie",
+      "compatdelight:cherry_cookie",
+      "extradelight:gummies",
+      "frightsdelight:slimeapple_lollipop",
+      "frightsdelight:ghasttear_ring_candy",
+      "extradelight:sugar_cookie_villager",
+      "extradelight:mint_candy_red",
+      "extradelight:apple_cookie",
+      "extradelight:candy_cane_blue",
+      "extradelight:candy_gray",
+      "extradelight:candy_red",
+      "extradelight:sugar_cookie_creeper",
+      "frightsdelight:cookie_flesh",
+      "ends_delight:chorus_cookie",
+      "extradelight:candy_black",
+      "extradelight:mint_candy_blue",
+      "supplementaries:candy",
+      "frightsdelight:slimeapple_ring_candy",
+      "frightsdelight:apple_slime",
+      "extradelight:candy_blue",
+      "compatdelight:roots_cookie",
+      "compatdelight:cactus_cookie",
+      "extradelight:candy_cane_green",
+      "compatdelight:horn_coral_cookie",
+      "compatdelight:soap_cookie",
+      "extradelight:candy_orange",
+      "extradelight:gingerbread_diamond",
+      "frightsdelight:cookie_slimeapple",
+      "frightsdelight:cookie_spidereye",
+      "extradelight:gingerbread_villager",
+      "frightsdelight:wither_berry_ring_candy",
+      "compatdelight:candy_cookie",
+      "frightsdelight:spidereye_lollipop",
+      "compatdelight:bloom_berries_cookie",
+      "compatdelight:cornflower_cookie",
+      "extradelight:caramel_apple",
+      "extradelight:caramel_candy",
+      "extradelight:pumpkin_cookie",
+      "frightsdelight:cookie_ghast_tear",
+      "extradelight:sugar_cookie_sword",
+      "extradelight:gingerbread_sword",
+      "frightsdelight:rotten_flesh_lollipop",
+      "frightsdelight:cobweb_ring_candy",
+      "extradelight:candy_green",
+      "compatdelight:petal_cookie",
+      "frightsdelight:soul_berry_lollipop",
+      "frightsdelight:soul_berry_ring_candy",
+      "youkaishomecoming:candy_apple",
+      "extradelight:mint_candy_green",
+      "frightsdelight:wither_berry_lollipop",
+      "extradelight:sugar_cookie_pickaxe",
+      "extradelight:gingerbread_emerald",
+      "extradelight:candy_pink",
+      "extradelight:candy_purple",
+      "extradelight:candy_magenta",
+      "extradelight:candy_cane_red",
+      "extradelight:chocolate_cookie",
+      "compatdelight:brain_coral_cookie",
+      "extradelight:sugar_cookie_steve",
+      "extradelight:sugar_cookie_diamond",
+      "compatdelight:glow_berry_lolipop",
+      "extradelight:gingerbread_steve",
+      "snowyspirit:candy_cane",
+      "frightsdelight:cookie_slime",
+      "spectrum:myceylon_cookie",
+      "extradelight:gingerbread_cookie",
+      "extradelight:candy_light_blue",
+      "culturaldelights:popcorn",
+      "extradelight:candy_white",
+      "extradelight:candy_lime",
+      "compatdelight:tube_coral_cookie",
+      "compatdelight:bamboo_cookie",
+      "hauntedharvest:candy_corn",
+      "frightsdelight:ghasttear_lollipop",
+      "frightsdelight:spidereye_ring_candy",
+      "frightsdelight:cookie_soul_berry",
+      "farmersdelight:honey_cookie",
+      "snowyspirit:gingerbread_cookie",
+      "compatdelight:infused_breath_cookie",
+      "endersdelight:uncanny_cookies",
+      "rusticdelight:coffee_cookie",
+      "compatdelight:honey_cookie"
+    ],
+    "c:dolphin_head": [
+      "butchery:dolphin_head",
+      "spectrum:dolphin_head"
+    ],
+    "c:cherry_blossom_cookie": [
+      "rusticdelight:cherry_blossom_cookie",
+      "compatdelight:petal_cookie"
+    ],
+    "c:foods/cooked_meat/dragon_egg": [
+      "ends_delight:fried_dragon_egg",
+      "compatdelight:cooked_dragon_egg"
+    ],
+    "c:piglin_brute_head": [
+      "butchery:piglin_brute_head",
+      "spectrum:piglin_brute_head"
+    ],
+    "c:bat_wing": [
+      "butchery:bat_wing",
+      "minersdelight:bat_wing"
+    ],
+    "extradelight:chocolate_bar_filling": [
+      "frightsdelight:wither_berry_ring_candy",
+      "snowyspirit:gumdrop_orange",
+      "frightsdelight:ghasttear_ring_candy",
+      "snowyspirit:gumdrop_lime",
+      "snowyspirit:gumdrop_brown",
+      "supplementaries:candy",
+      "snowyspirit:gumdrop_pink",
+      "frightsdelight:slimeapple_ring_candy",
+      "spectrum:enchanted_star_candy",
+      "frightsdelight:cobweb_ring_candy",
+      "snowyspirit:gumdrop_light_blue",
+      "frightsdelight:rotten_flesh_ring_candy",
+      "snowyspirit:gumdrop_yellow",
+      "snowyspirit:gumdrop_purple",
+      "spectrum:mermaids_gem",
+      "snowyspirit:gumdrop_white",
+      "snowyspirit:gumdrop_magenta",
+      "frightsdelight:soul_berry_ring_candy",
+      "youkaishomecoming:candy_apple",
+      "frightsdelight:spidereye_ring_candy",
+      "compatdelight:gloomy_cactus_fruit",
+      "snowyspirit:gumdrop_green",
+      "snowyspirit:gumdrop_black",
+      "snowyspirit:gumdrop_blue",
+      "snowyspirit:gumdrop_red",
+      "snowyspirit:gumdrop_light_gray",
+      "snowyspirit:gumdrop_gray",
+      "snowyspirit:gumdrop_cyan",
+      "compatdelight:echo_fruit"
+    ],
+    "c:squid_corpse": [
+      "culturaldelights:squid",
+      "minersdelight:squid",
+      "butchery:squid_carcass"
+    ],
+    "c:warden_head": [
+      "spectrum:warden_head",
+      "butchery:warden_head"
+    ],
+    "c:axolotl_cyan_head": [
+      "butchery:cyan_axolotl_head",
+      "spectrum:axolotl_cyan_head"
+    ],
+    "c:sniffer_head": [
+      "butchery:sniffer_head",
+      "spectrum:sniffer_head"
+    ],
+    "c:grilled_corn_on_cob": [
+      "extradelight:grilled_corn_on_cob",
+      "hauntedharvest:corn_on_the_cob"
+    ],
+    "pastel:mob_heads/llama_heads": [
+      "butchery:creamy_llama_head",
+      "spectrum:llama_head",
+      "butchery:brown_llama_head",
+      "butchery:gray_llama_head",
+      "butchery:white_llama_head"
+    ],
+    "c:rabbit_head": [
+      "spectrum:rabbit_head",
+      "butchery:rabbit_head"
+    ],
+    "c:villager_head": [
+      "butchery:villager_head",
+      "spectrum:villager_head"
+    ],
+    "c:zombified_piglin_head": [
+      "spectrum:zombified_piglin_head",
+      "butchery:zombified_piglin_head"
+    ],
+    "c:foods/raw_meat/spider_leg": [
+      "minersdelight:spider_leg",
+      "butchery:raw_cave_spider_leg",
+      "butchery:raw_spider_leg"
+    ],
+    "c:tools": [
+      "minecolonies:assistanthammer_iron",
+      "minecolonies:assistanthammer_gold",
+      "minecolonies:assistanthammer_diamond"
+    ],
+    "c:squid_head": [
+      "spectrum:squid_head",
+      "butchery:squid_head"
+    ],
+    "c:cave_spider_head": [
+      "spectrum:cave_spider_head",
+      "butchery:cave_spider_head"
+    ],
+    "c:spider_head": [
+      "butchery:spider_head",
+      "supplementaries:spider_head",
+      "spectrum:spider_head"
+    ],
+    "c:glow_berry_cookie": [
+      "extradelight:glow_berry_cookie",
+      "compatdelight:glow_berries_cookie",
+      "eternal_tales:glowberry_cookie"
+    ],
+    "c:stray_head": [
+      "butchery:stray_head",
+      "spectrum:stray_head"
+    ],
+    "pastel:enchantable/treasure_hunter": [
+      "minecraft:wooden_sword",
+      "spectrum:draconic_twinsword",
+      "spectrum:razor_falchion",
+      "spectrum:dreamflayer",
+      "minecraft:diamond_sword",
+      "minecraft:copper_sword",
+      "butchery:netherite_skinning_knife",
+      "minecraft:stone_sword",
+      "minecraft:netherite_sword",
+      "spectrum:dragon_talon",
+      "butchery:bone_skinning_knife",
+      "minecraft:iron_sword",
+      "spectrum:nightfalls_blade",
+      "butchery:diamond_skinning_knife",
+      "minecraft:golden_sword",
+      "spectrum:glass_crest_ultra_greatsword",
+      "spectrum:malachite_ultra_greatsword",
+      "butchery:copper_skinning_knife",
+      "spectrum:nectar_lance",
+      "butchery:gold_skinning_knife",
+      "spectrum:knotted_sword",
+      "aquaculture:neptunium_sword",
+      "butchery:iron_skinning_knife",
+      "spectrum:bedrock_sword"
+    ],
+    "c:foods/sliced/vegetables/garlic_clove": [
+      "compatdelight:cut_garlic",
+      "extradelight:garlic_clove"
+    ],
+    "extradelight:candy_bowl_valid": [
+      "frightsdelight:wither_berry_ring_candy",
+      "extradelight:candy_yellow",
+      "extradelight:candy_purple",
+      "frightsdelight:slimeapple_lollipop",
+      "frightsdelight:ghasttear_ring_candy",
+      "extradelight:candy_magenta",
+      "extradelight:candy_cane_red",
+      "extradelight:mint_candy_red",
+      "frightsdelight:spidereye_lollipop",
+      "extradelight:candy_cyan",
+      "extradelight:candy_cane_blue",
+      "extradelight:candy_gray",
+      "extradelight:candy_red",
+      "extradelight:caramel_candy",
+      "compatdelight:glow_berry_lolipop",
+      "extradelight:candy_black",
+      "snowyspirit:candy_cane",
+      "extradelight:mint_candy_blue",
+      "supplementaries:candy",
+      "frightsdelight:cobweb_lollipop",
+      "compatdelight:sweet_berries_lolipop",
+      "extradelight:candy_light_blue",
+      "frightsdelight:slimeapple_ring_candy",
+      "frightsdelight:rotten_flesh_lollipop",
+      "spectrum:enchanted_star_candy",
+      "culturaldelights:popcorn",
+      "frightsdelight:cobweb_ring_candy",
+      "extradelight:candy_white",
+      "extradelight:candy_green",
+      "extradelight:candy_blue",
+      "extradelight:candy_lime",
+      "extradelight:candy_cane_green",
+      "frightsdelight:rotten_flesh_ring_candy",
+      "extradelight:candy_brown",
+      "compatdelight:lolipop",
+      "frightsdelight:soul_berry_lollipop",
+      "frightsdelight:soul_berry_ring_candy",
+      "extradelight:candy_orange",
+      "hauntedharvest:candy_corn",
+      "extradelight:mint_candy_green",
+      "frightsdelight:ghasttear_lollipop",
+      "frightsdelight:spidereye_ring_candy",
+      "frightsdelight:wither_berry_lollipop",
+      "extradelight:candy_light_gray",
+      "extradelight:candy_pink"
+    ],
+    "c:foods/cooked_meat/arthropod": [
+      "butchery:cooked_bee_back_meat",
+      "butchery:cooked_endermite_chunks",
+      "minersdelight:cooked_arthropod",
+      "butchery:cooked_silverfish_chunks"
+    ],
+    "c:foods/cooked_meat/squid": [
+      "culturaldelights:cooked_squid",
+      "minersdelight:baked_squid"
+    ],
+    "c:witch_head": [
+      "butchery:witch_head",
+      "spectrum:witch_head"
+    ],
+    "c:foods/cooked_meat/shulker/chunk": [
+      "ends_delight:roasted_shulker_meat",
+      "butchery:cooked_shulker_meat"
+    ],
+    "c:zombie_horse_head": [
+      "spectrum:zombie_horse_head",
+      "butchery:zombie_horse_head"
+    ],
+    "c:dark_chocolate": [
+      "extradelight:dark_chocolate_bar",
+      "compatdelight:dark_chocolate_bar"
+    ],
+    "c:calamari_roll": [
+      "culturaldelights:calamari_roll",
+      "rusticdelight:calamari_roll"
+    ],
+    "c:turtle_head": [
+      "butchery:turtle_head",
+      "spectrum:turtle_head"
+    ],
+    "c:fugu_roll": [
+      "culturaldelights:pufferfish_roll",
+      "oceansdelight:fugu_roll"
+    ],
+    "c:foods/raw_meat/strider": [
+      "butchery:raw_strider_meat",
+      "mynethersdelight:strider_slice"
+    ],
+    "c:foods/cooked_meat/squid_tentacle": [
+      "butchery:calamari",
+      "culturaldelights:cooked_calamari",
+      "rusticdelight:cooked_calamari",
+      "minersdelight:baked_tentacles"
+    ],
+    "c:axolotl_wild_head": [
+      "spectrum:axolotl_wild_head",
+      "butchery:brown_axolotl_head"
+    ],
+    "extradelight:chocolate_box_valid": [
+      "spectrum:fresh_chocolate",
+      "supplementaries:candy",
+      "compatdelight:chocolate_crunch_bar",
+      "compatdelight:chocolate_wafer_bar",
+      "spectrum:enchanted_star_candy"
+    ],
+    "c:foods/cooked_meat/warden": [
+      "butchery:cooked_warden_meat",
+      "compatdelight:warden_meat"
+    ],
+    "c:axolotl_leucistic_head": [
+      "butchery:pink_axolotl_head",
+      "spectrum:axolotl_leucistic_head"
+    ],
+    "c:cut_squid_tentacle": [
+      "rusticdelight:calamari_slice",
+      "oceansdelight:cut_tentacles"
+    ],
+    "c:axolotl_gold_head": [
+      "spectrum:axolotl_gold_head",
+      "butchery:gold_axolotl_head"
+    ],
+    "c:endermite_head": [
+      "spectrum:endermite_head",
+      "butchery:endermite_head"
+    ],
+    "c:mortar_and_pestle": [
+      "butchery:pestle_and_mortar",
+      "extradelight:mortar_stone"
+    ],
+    "c:bee_head": [
+      "butchery:bee_head",
+      "spectrum:bee_head"
+    ],
+    "c:foods/raw_meat/hoglin": [
+      "butchery:raw_hoglin_chunk",
+      "mynethersdelight:hoglin_loin"
+    ],
+    "c:mooshroom_red_head": [
+      "spectrum:mooshroom_red_head",
+      "butchery:red_mooshroom_head"
+    ],
+    "c:mule_head": [
+      "butchery:mule_head",
+      "spectrum:mule_head"
+    ],
+    "c:pig_head": [
+      "spectrum:pig_head",
+      "butchery:pig_head"
+    ],
+    "pastel:mob_heads/cat_heads": [
+      "butchery:calico_cat_head",
+      "butchery:red_cat_head",
+      "butchery:persian_cat_head",
+      "butchery:shorthair_cat_head",
+      "butchery:tabby_cat_head",
+      "butchery:all_black_cat_head",
+      "butchery:ragdoll_cat_head",
+      "spectrum:cat_head",
+      "butchery:siamese_cat_head",
+      "butchery:jellie_cat_head",
+      "butchery:black_cat_head",
+      "butchery:white_cat_head"
+    ],
+    "c:foods/raw_meat/salmon/whole": [
+      "aquaculture:pink_salmon",
+      "minecraft:salmon",
+      "butchery:salmon_carcass"
+    ],
+    "c:cooked_rice": [
+      "minecolonies:cooked_rice",
+      "farmersdelight:cooked_rice"
+    ],
+    "c:iron_golem_head": [
+      "spectrum:iron_golem_head",
+      "butchery:repaired_iron_golem_head",
+      "butchery:iron_golem_head"
+    ],
+    "c:hoglin_head": [
+      "spectrum:hoglin_head",
+      "butchery:hoglin_head"
+    ],
+    "c:honey_cookie": [
+      "compatdelight:honey_cookie",
+      "farmersdelight:honey_cookie"
+    ],
+    "c:foods/cookie": [
+      "frightsdelight:cookie_cobweb",
+      "extradelight:sugar_cookie",
+      "compatdelight:candy_cookie",
+      "extradelight:gingerbread_creeper",
+      "farmersdelight:sweet_berry_cookie",
+      "compatdelight:glow_berries_cookie",
+      "compatdelight:bloom_berries_cookie",
+      "compatdelight:cornflower_cookie",
+      "minersdelight:bat_cookie",
+      "extradelight:pumpkin_cookie",
+      "extradelight:sugar_cookie_alex",
+      "frightsdelight:cookie_ghast_tear",
+      "extradelight:sugar_cookie_sword",
+      "extradelight:glow_berry_cookie",
+      "extradelight:gingerbread_sword",
+      "compatdelight:petal_cookie",
+      "frightsdelight:cookie_wither_berry",
+      "extradelight:gingerbread_alex",
+      "compatdelight:poppy_cookie",
+      "extradelight:sugar_cookie_emerald",
+      "extradelight:nut_butter_cookie",
+      "extradelight:sugar_cookie_pickaxe",
+      "rusticdelight:cherry_blossom_cookie",
+      "compatdelight:cursed_sapball_cookie",
+      "extradelight:gingerbread_emerald",
+      "compatdelight:cherry_cookie",
+      "extradelight:sugar_cookie_villager",
+      "extradelight:apple_cookie",
+      "extradelight:sugar_cookie_creeper",
+      "extradelight:chocolate_cookie",
+      "compatdelight:brain_coral_cookie",
+      "extradelight:sugar_cookie_steve",
+      "frightsdelight:cookie_flesh",
+      "ends_delight:chorus_cookie",
+      "extradelight:sugar_cookie_diamond",
+      "extradelight:gingerbread_steve",
+      "frightsdelight:cookie_slime",
+      "spectrum:myceylon_cookie",
+      "extradelight:gingerbread_cookie",
+      "compatdelight:roots_cookie",
+      "compatdelight:cactus_cookie",
+      "compatdelight:horn_coral_cookie",
+      "compatdelight:tube_coral_cookie",
+      "compatdelight:bamboo_cookie",
+      "compatdelight:soap_cookie",
+      "frightsdelight:cookie_soul_berry",
+      "farmersdelight:honey_cookie",
+      "snowyspirit:gingerbread_cookie",
+      "compatdelight:infused_breath_cookie",
+      "endersdelight:uncanny_cookies",
+      "extradelight:gingerbread_diamond",
+      "rusticdelight:coffee_cookie",
+      "frightsdelight:cookie_slimeapple",
+      "frightsdelight:cookie_spidereye",
+      "extradelight:gingerbread_villager",
+      "compatdelight:honey_cookie"
+    ],
+    "c:guardian_eye": [
+      "endrem:guardian_eye",
+      "butchery:elder_guardian_eye"
+    ],
+    "extradelight:sweetener": [
+      "compatdelight:cherry_jem",
+      "compatdelight:honey_yougurt",
+      "compatdelight:resonarium_jem",
+      "compatdelight:cursed_sapball_jam",
+      "spectrum:peach_jam",
+      "spectrum:cheong",
+      "frightsdelight:cobweb_syrup_bottle",
+      "frightsdelight:wither_berry_syrup_bottle",
+      "rusticdelight:syrup",
+      "frightsdelight:ghasttear_syrup_bottle",
+      "compatdelight:roots_jem",
+      "compatdelight:runic_sapball_jam",
+      "compatdelight:bubble_jem",
+      "compatdelight:fire_jem",
+      "compatdelight:sweetener",
+      "compatdelight:tube_jem",
+      "frightsdelight:rotten_flesh_syrup_bottle",
+      "spectrum:mermaids_jam",
+      "compatdelight:void_jem",
+      "compatdelight:brain_jem",
+      "extradelight:dynamic_jam",
+      "frightsdelight:soul_berry_syrup_bottle",
+      "compatdelight:sculk_jem",
+      "compatdelight:flower_honey",
+      "spectrum:moonstruck_nectar",
+      "compatdelight:glow_berries_jem",
+      "frightsdelight:slimeapple_syrup_bottle",
+      "frightsdelight:spidereye_syrup_bottle",
+      "compatdelight:candy_jem",
+      "compatdelight:glow_lichen_jem",
+      "compatdelight:horn_jem",
+      "compatdelight:sea_pickle_jem"
+    ],
+    "c:foods/raw_meat/turtle": [
+      "butchery:raw_turtle_meat",
+      "aquaculturedelight:small_turtle_meat"
+    ],
+    "c:crops/cucumber": [
+      "youkaishomecoming:cucumber",
+      "culturaldelights:cucumber"
+    ],
+    "c:seeds/cucumber": [
+      "extradelight:cucumber_seed",
+      "culturaldelights:cucumber_seeds",
+      "youkaishomecoming:cucumber_seeds"
+    ],
+    "c:seeds/chili_pepper": [
+      "extradelight:chili_seeds",
+      "expandeddelight:chili_pepper_seeds",
+      "eternal_tales:chili_pepper_seeds"
+    ],
+    "c:crops/mint": [
+      "extradelight:mint",
+      "minecolonies:mint"
+    ],
+    "c:fruits/lemon": [
+      "extradelight:lemon",
+      "expandeddelight:lemon"
+    ],
+    "c:cheese": [
+      "expandeddelight:cheese_slice",
+      "compatdelight:cheese_slice"
+    ],
+    "c:coffee_beans": [
+      "extradelight:coffee_beans",
+      "youkaishomecoming:coffee_beans"
+    ],
+    "c:tea_leaves": [
+      "youkaishomecoming:tea_leaves",
+      "eternal_tales:tea_leaves"
+    ],
+    "c:seeds/tea": [
+      "youkaishomecoming:tea_seeds",
+      "eternal_tales:tea_seeds"
+    ],
+    "c:dusts/ash": [
+      "supplementaries:ash",
+      "spectrum:ash",
+      "eternal_tales:ash"
+    ],
+    "c:dusts/soul": [
+      "blazinghot:soul_dust",
+      "deeperdarker:soul_dust"
+    ],
+    "c:dusts/sulfur": [
+      "butchery:sulfur",
+      "eternal_tales:sulfur"
+    ],
+    "c:plates/iron": [
+      "eternal_tales:iron_plate"
+    ],
+    "c:nuggets/copper": [
+      "mctradepost:copper_nugget",
+      "mythicmetals:copper_nugget"
+    ],
+    "c:animal_fat": [
+      "butchery:animal_fat",
+      "amcdelight:animal_fat",
+      "delightful:animal_fat"
+    ],
+    "c:jerky": [
+      "brewinandchewin:jerky",
+      "extradelight:jerky"
+    ],
+    "c:kimchi": [
+      "brewinandchewin:kimchi",
+      "extradelight:kimchi_item",
+      "minecolonies:kimchi",
+      "spectrum:kimchi"
+    ],
+    "c:fish_bones": [
+      "aquaculture:fish_bones",
+      "alexsmobs:fish_bones",
+      "crabbersdelight:fish_bones"
+    ],
+    "c:fish_oil": [
+      "alexsmobs:fish_oil",
+      "eternal_tales:fish_oil"
+    ],
+    "c:worms": [
+      "aquaculture:worm",
+      "crabbersdelight:worm"
+    ],
+    "c:fishing_line": [
+      "aquaculture:fishing_line",
+      "crabbersdelight:fishing_line"
+    ],
+    "c:message_in_a_bottle": [
+      "aquaculture:message_in_a_bottle",
+      "crabbersdelight:message_bottle"
+    ],
+    "c:calamari": [
+      "butchery:calamari",
+      "amcdelight:calamari"
+    ],
+    "c:tentacles": [
+      "minersdelight:tentacles",
+      "butchery:tentacles",
+      "oceansdelight:tentacles"
+    ],
+    "c:squid": [
+      "culturaldelights:squid",
+      "minersdelight:squid"
+    ],
+    "c:glow_squid": [
+      "culturaldelights:glow_squid",
+      "minersdelight:glow_squid"
+    ],
+    "c:crab": [
+      "crabbersdelight:crab",
+      "youkaishomecoming:crab"
+    ],
+    "c:crab_claw": [
+      "crabbersdelight:crab_claw",
+      "friendsandfoes:crab_claw"
+    ],
+    "c:shrimp": [
+      "crabbersdelight:shrimp",
+      "eternal_tales:shrimp"
+    ],
+    "c:catfish": [
+      "aquaculture:catfish",
+      "eternal_tales:catfish"
+    ],
+    "c:goldfish": [
+      "aquaculture:goldfish",
+      "eternal_tales:goldfish"
+    ],
+    "c:cooked_fish_fillet": [
+      "aquaculture:fish_fillet_cooked",
+      "amcdelight:cooked_fish_fillet"
+    ],
+    "c:raw_dragon_meat": [
+      "butchery:raw_dragon_meat",
+      "ends_delight:raw_dragon_meat"
+    ],
+    "c:bone_shards": [
+      "frightsdelight:bone_shard",
+      "eternal_tales:bone_shard"
+    ],
+    "c:rock_crystal": [
+      "spectrum:rock_crystal",
+      "touhou_little_maid_spell:rock_crystal"
+    ],
+    "c:blood": [
+      "butchery:blood",
+      "eternal_tales:blood"
+    ],
+    "c:bottle_of_blood": [
+      "butchery:bottle_of_blood",
+      "eternal_tales:bottle_of_blood"
+    ],
+    "c:copper_carrot": [
+      "blazinghot:copper_carrot",
+      "minersdelight:copper_carrot"
+    ],
+    "c:straw_bale": [
+      "farmersdelight:straw_bale",
+      "youkaishomecoming:straw_bale"
+    ],
+    "c:storage_blocks/apple": [
+      "quark:apple_crate",
+      "extradelight:apple_crate"
+    ],
+    "c:storage_blocks/golden_apple": [
+      "quark:golden_apple_crate",
+      "extradelight:golden_apple_crate"
+    ],
+    "c:storage_blocks/golden_carrot": [
+      "quark:golden_carrot_crate",
+      "extradelight:golden_carrot_crate"
+    ],
+    "c:storage_blocks/cocoa_beans": [
+      "quark:cocoa_beans_sack",
+      "extradelight:cocoa_beans_sack"
+    ],
+    "c:storage_blocks/corn": [
+      "corn_delight:corn_crate",
+      "extradelight:corn_crate",
+      "hauntedharvest:corn_crate"
+    ],
+    "c:storage_blocks/cucumber": [
+      "culturaldelights:cucumber_crate",
+      "extradelight:cucumber_crate"
+    ],
+    "c:storage_blocks/ginger": [
+      "extradelight:ginger_crate",
+      "snowyspirit:ginger_crate"
+    ],
+    "c:storage_blocks/chili_pepper": [
+      "expandeddelight:chili_pepper_crate",
+      "eternal_tales:chili_pepper_crate"
+    ],
+    "c:salt": [
+      "butchery:salt",
+      "compatdelight:salt",
+      "eternal_tales:salt",
+      "extradelight:salt",
+      "expandeddelight:salt"
+    ],
+    "c:gems/ruby": [
+      "eternal_tales:rubygem"
+    ],
+    "c:dusts/cinnamon": [
+      "extradelight:ground_cinnamon",
+      "expandeddelight:cinnamon"
+    ],
+    "c:cinnamon/stick": [
+      "extradelight:cinnamon_stick",
+      "expandeddelight:cinnamon_stick"
+    ],
+    "c:cinnamon/planks": [
+      "extradelight:cinnamon_planks",
+      "expandeddelight:cinnamon_planks"
+    ],
+    "c:cinnamon/log": [
+      "extradelight:cinnamon_log",
+      "expandeddelight:cinnamon_log"
+    ],
+    "c:cinnamon/wood": [
+      "extradelight:cinnamon_wood",
+      "expandeddelight:cinnamon_wood"
+    ],
+    "c:cinnamon/stripped_log": [
+      "extradelight:stripped_cinnamon_log",
+      "expandeddelight:stripped_cinnamon_log"
+    ],
+    "c:cinnamon/stripped_wood": [
+      "extradelight:strippedcinnamon_wood",
+      "expandeddelight:stripped_cinnamon_wood"
+    ],
+    "c:cinnamon/slab": [
+      "extradelight:cinnamon_slab",
+      "expandeddelight:cinnamon_slab"
+    ],
+    "c:cinnamon/stairs": [
+      "extradelight:cinnamon_stairs",
+      "expandeddelight:cinnamon_stairs"
+    ],
+    "c:cinnamon/fence": [
+      "extradelight:cinnamon_fence",
+      "expandeddelight:cinnamon_fence"
+    ],
+    "c:cinnamon/fence_gate": [
+      "extradelight:cinnamon_fence_gate",
+      "expandeddelight:cinnamon_fence_gate"
+    ],
+    "c:cinnamon/door": [
+      "extradelight:cinnamon_door",
+      "expandeddelight:cinnamon_door"
+    ],
+    "c:cinnamon/trapdoor": [
+      "extradelight:cinnamon_trapdoor",
+      "expandeddelight:cinnamon_trapdoor"
+    ],
+    "c:cinnamon/button": [
+      "extradelight:cinnamon_button",
+      "expandeddelight:cinnamon_button"
+    ],
+    "c:cinnamon/pressure_plate": [
+      "extradelight:cinnamon_pressure_plate",
+      "expandeddelight:cinnamon_pressure_plate"
+    ],
+    "c:cinnamon/sapling": [
+      "extradelight:cinnamon_sapling",
+      "expandeddelight:cinnamon_sapling"
+    ],
+    "c:cinnamon/leaves": [
+      "extradelight:cinnamon_leaves",
+      "expandeddelight:cinnamon_leaves"
+    ],
+    "c:cinnamon/cabinet": [
+      "extradelight:cinnamon_cabinet",
+      "expandeddelight:cinnamon_cabinet"
+    ],
+    "c:crops/soybean": [
+      "extradelight:soybeans",
+      "minecolonies:soybean",
+      "youkaishomecoming:soybean"
+    ],
+    "c:unified/chickpea": [
+      "ramadandelight:chickpea",
+      "minecolonies:chickpea"
+    ],
+    "c:seeds/corn": [
+      "extradelight:corn_seeds",
+      "brewinandchewin:corn_kernels",
+      "culturaldelights:corn_kernels",
+      "corn_delight:corn_seeds",
+      "hauntedharvest:kernels"
+    ],
+    "c:crops/corn": [
+      "extradelight:corn_on_cob",
+      "brewinandchewin:corn",
+      "hauntedharvest:corn",
+      "minecolonies:corn",
+      "corn_delight:corn",
+      "culturaldelights:corn_cob"
+    ],
+    "c:unified/corn_cob": [
+      "extradelight:corn_cob",
+      "corn_delight:corncob"
+    ],
+    "c:corn/meal": [
+      "extradelight:corn_meal",
+      "brewinandchewin:cornmeal",
+      "minecolonies:cornmeal"
+    ],
+    "c:unified/cooked_corn": [
+      "extradelight:cooked_corn",
+      "brewinandchewin:cooked_corn"
+    ],
+    "c:crops/ginger": [
+      "extradelight:ginger",
+      "culturaldelights:ginger",
+      "snowyspirit:ginger"
+    ],
+    "c:storage_blocks_ginger": [
+      "extradelight:ginger_crate",
+      "snowyspirit:ginger_crate"
+    ],
+    "c:crops/chili": [
+      "extradelight:chili",
+      "expandeddelight:chili_pepper",
+      "eternal_tales:chili_pepper"
+    ],
+    "c:unified/chili_seeds": [
+      "extradelight:chili_seeds",
+      "expandeddelight:chili_pepper_seeds",
+      "eternal_tales:chili_pepper_seeds"
+    ],
+    "c:unified/chili_crate": [
+      "extradelight:chili_crate",
+      "expandeddelight:chili_pepper_crate",
+      "eternal_tales:chili_pepper_crate"
+    ],
+    "c:unified/peanuts": [
+      "extradelight:peanuts",
+      "expandeddelight:peanut"
+    ],
+    "c:unified/peanut_butter_bottle": [
+      "extradelight:peanut_butter_bottle",
+      "delightful:nut_butter_bottle"
+    ],
+    "c:unified/tea_leaves": [
+      "youkaishomecoming:tea_leaves",
+      "eternal_tales:tea_leaves"
+    ],
+    "c:unified/tea_seeds": [
+      "youkaishomecoming:tea_seeds",
+      "eternal_tales:tea_seeds",
+      "farmersrespite:tea_seeds"
+    ],
+    "c:unified/green_tea_leaves": [
+      "youkaishomecoming:green_tea_leaves",
+      "delightful:green_tea_leaf",
+      "farmersrespite:green_tea_leaves"
+    ],
+    "c:unified/matcha": [
+      "youkaishomecoming:matcha",
+      "delightful:matcha"
+    ],
+    "c:unified/cooking_oil": [
+      "extradelight:cooking_oil",
+      "rusticdelight:cooking_oil"
+    ],
+    "c:mint": [
+      "extradelight:mint",
+      "minecolonies:mint"
+    ],
+    "c:unified/ice_cubes": [
+      "extradelight:ice_cubes",
+      "youkaishomecoming:ice_cube"
+    ],
+    "c:unified/wheat_dough": [
+      "farmersdelight:wheat_dough",
+      "create:dough",
+      "minecolonies:bread_dough"
+    ],
+    "c:unified/corn_dough": [
+      "culturaldelights:corn_dough",
+      "brewinandchewin:corn_dough"
+    ],
+    "c:unified/raw_pasta": [
+      "farmersdelight:raw_pasta",
+      "minecolonies:raw_noodle"
+    ],
+    "c:unified/cooked_pasta": [
+      "extradelight:cooked_pasta",
+      "minecolonies:pasta_plain"
+    ],
+    "c:unified/cheese": [
+      "extradelight:cheese",
+      "minecolonies:cheddar_cheese"
+    ],
+    "c:unified/soy_sauce_item": [
+      "extradelight:soy_sauce_item",
+      "minecolonies:soysauce",
+      "youkaishomecoming:soy_sauce_bottle"
+    ],
+    "c:unified/fish_bones": [
+      "aquaculture:fish_bones",
+      "alexsmobs:fish_bones",
+      "crabbersdelight:fish_bones"
+    ],
+    "c:unified/fish_oil": [
+      "alexsmobs:fish_oil",
+      "eternal_tales:fish_oil"
+    ],
+    "c:unified/caviar": [
+      "eternal_tales:caviar",
+      "delightful:caviar"
+    ],
+    "c:unified/cooked_catfish": [
+      "alexsmobs:cooked_catfish",
+      "eternal_tales:cooked_catfish"
+    ],
+    "c:unified/cooked_catfish_slice": [
+      "amcdelight:cooked_catfish_slice",
+      "alexsdelight:cooked_catfish_slice"
+    ],
+    "c:unified/fish_fillet_cooked": [
+      "aquaculture:fish_fillet_cooked",
+      "amcdelight:cooked_fish_fillet"
+    ],
+    "c:unified/raw_sausage": [
+      "butchery:raw_sausage",
+      "brewinandchewin:raw_sausage"
+    ],
+    "c:unified/cooked_sausage": [
+      "butchery:cooked_sausage",
+      "brewinandchewin:cooked_sausage"
+    ],
+    "c:unified/bottle_of_blood": [
+      "butchery:bottle_of_blood",
+      "eternal_tales:bottle_of_blood",
+      "youkaishomecoming:blood_bottle"
+    ],
+    "c:unified/bone_shard": [
+      "frightsdelight:bone_shard",
+      "eternal_tales:bone_shard"
+    ],
+    "c:raw_materials/silver": [
+      "mythicmetals:raw_silver",
+      "eternal_tales:raw_silver"
+    ],
+    "c:storage_blocks/raw_silver": [
+      "mythicmetals:raw_silver_block",
+      "eternal_tales:raw_silver_block"
+    ],
+    "c:nuggets/silver": [
+      "mythicmetals:silver_nugget",
+      "eternal_tales:silver_nugget"
+    ],
+    "c:storage_blocks/silver": [
+      "mythicmetals:silver_block",
+      "eternal_tales:silver_block"
+    ],
+    "c:ingots/silver": [
+      "mythicmetals:silver_ingot",
+      "eternal_tales:silver_ingot"
+    ],
+    "c:raw_materials/tin": [
+      "mythicmetals:raw_tin",
+      "eternal_tales:raw_tin"
+    ],
+    "c:storage_blocks/raw_tin": [
+      "mythicmetals:raw_tin_block",
+      "eternal_tales:raw_tin_block"
+    ],
+    "c:nuggets/tin": [
+      "mythicmetals:tin_nugget",
+      "eternal_tales:tin_nugget"
+    ],
+    "c:storage_blocks/tin": [
+      "mythicmetals:tin_block",
+      "eternal_tales:tin_block"
+    ],
+    "c:ingots/tin": [
+      "mythicmetals:tin_ingot",
+      "eternal_tales:tin_ingot"
+    ],
+    "c:ingots/adamantite": [
+      "mythicmetals:adamantite_ingot",
+      "eternal_tales:adamantite_ingot"
+    ],
+    "c:nuggets/adamantite": [
+      "mythicmetals:adamantite_nugget",
+      "eternal_tales:adamantite_nugget"
+    ],
+    "c:storage_blocks/adamantite": [
+      "mythicmetals:adamantite_block",
+      "eternal_tales:adamantite_block"
+    ],
+    "c:unified/candy_cane": [
+      "snowyspirit:candy_cane",
+      "eternal_tales:candy_cane"
+    ],
+    "c:unified/eggnog": [
+      "extradelight:eggnog",
+      "snowyspirit:eggnog"
+    ],
+    "c:unified/gingerbread_cookie": [
+      "extradelight:gingerbread_cookie",
+      "snowyspirit:gingerbread_cookie"
+    ],
+    "c:unified/hot_chocolate": [
+      "spectrum:hot_chocolate"
+    ],
+    "c:unified/cactus_juice": [
+      "extradelight:cactus_juice"
+    ],
+    "c:unified/apple_juice": [
+      "expandeddelight:apple_juice"
+    ],
+    "c:unified/glow_berry_juice": [
+      "extradelight:glow_berry_juice",
+      "expandeddelight:glow_berry_juice"
+    ],
+    "c:unified/melon_juice": [
+      "farmersdelight:melon_juice"
+    ],
+    "c:unified/sweet_berry_juice": [
+      "extradelight:sweet_berry_juice",
+      "expandeddelight:sweet_berry_juice"
+    ],
+    "c:unified/ice_cream": [
+      "extradelight:ice_cream",
+      "mctradepost:icecream"
+    ],
+    "c:unified/coffee": [
+      "extradelight:coffee",
+      "rusticdelight:coffee",
+      "farmersrespite:coffee"
+    ],
+    "c:unified/tea": [
+      "extradelight:tea",
+      "eternal_tales:tea_cup"
+    ],
+    "c:unified/azalea_tea": [
+      "spectrum:azalea_tea",
+      "delightful:azalea_tea"
+    ],
+    "c:unified/mead": [
+      "brewinandchewin:mead",
+      "youkaishomecoming:mead"
+    ],
+    "c:unified/red_wine": [
+      "brewinandchewin:red_wine",
+      "youkaishomecoming:red_wine"
+    ],
+    "c:unified/white_wine": [
+      "brewinandchewin:white_wine",
+      "youkaishomecoming:white_wine"
+    ],
+    "c:unified/red_grape_seeds": [
+      "cocktailsdelight:red_grape_seeds",
+      "brewinandchewin:red_grape_seeds",
+      "youkaishomecoming:red_grape_seeds"
+    ],
+    "c:unified/white_grape_seeds": [
+      "cocktailsdelight:white_grape_seeds",
+      "brewinandchewin:white_grape_seeds",
+      "youkaishomecoming:white_grape_seeds"
+    ],
+    "c:unified/affogato": [
+      "youkaishomecoming:affogato",
+      "extradelight:affogato"
+    ],
+    "c:unified/candy_apple": [
+      "extradelight:candy_apple",
+      "youkaishomecoming:candy_apple"
+    ],
+    "c:unified/caramel_popcorn": [
+      "extradelight:caramel_popcorn",
+      "corn_delight:caramel_popcorn"
+    ],
+    "c:unified/cheeseburger": [
+      "extradelight:cheeseburger",
+      "delightful:cheeseburger"
+    ],
+    "c:unified/cheese_sandwich": [
+      "extradelight:cheese_sandwich",
+      "expandeddelight:cheese_sandwich"
+    ],
+    "c:unified/grilled_cheese": [
+      "extradelight:grilled_cheese",
+      "expandeddelight:grilled_cheese"
+    ],
+    "c:unified/macaroni_cheese": [
+      "extradelight:macaroni_cheese",
+      "expandeddelight:mac_and_cheese"
+    ],
+    "c:unified/chocolate_cookie": [
+      "extradelight:chocolate_cookie",
+      "expandeddelight:chocolate_cookie"
+    ],
+    "c:unified/sugar_cookie": [
+      "extradelight:sugar_cookie",
+      "expandeddelight:sugar_cookie"
+    ],
+    "c:unified/smore": [
+      "extradelight:smore",
+      "delightful:smore"
+    ],
+    "c:unified/fried_chicken": [
+      "extradelight:fried_chicken",
+      "rusticdelight:fried_chicken"
+    ],
+    "c:unified/fried_fish": [
+      "extradelight:fried_fish",
+      "crabbersdelight:fried_fish",
+      "rusticdelight:fried_fish"
+    ],
+    "c:unified/fried_mushrooms": [
+      "extradelight:fried_mushrooms",
+      "rusticdelight:fried_mushrooms"
+    ],
+    "c:unified/fried_calamari": [
+      "rusticdelight:fried_calamari",
+      "amcdelight:fried_calamari"
+    ],
+    "c:unified/potato_salad": [
+      "extradelight:potato_salad",
+      "rusticdelight:potato_salad"
+    ],
+    "c:unified/spring_rolls": [
+      "rusticdelight:spring_rolls",
+      "festive_delight:spring_rolls"
+    ],
+    "c:unified/toast": [
+      "extradelight:toast",
+      "mynethersdelight:toasts"
+    ],
+    "c:unified/bread_slice": [
+      "extradelight:bread_slice",
+      "mynethersdelight:slices_of_bread"
+    ],
+    "c:unified/pumpkin_pie_slice": [
+      "farmersdelight:pumpkin_pie_slice",
+      "extradelight:pumpkin_pie_slice"
+    ],
+    "c:unified/pumpkin_roll": [
+      "extradelight:pumpkin_roll",
+      "brewinandchewin:slice_of_pumpkin_roll"
+    ],
+    "c:unified/quiche": [
+      "extradelight:quiche",
+      "brewinandchewin:quiche",
+      "ramadandelight:quiche"
+    ],
+    "c:unified/quiche_slice": [
+      "extradelight:quiche_slice",
+      "brewinandchewin:quiche_slice",
+      "ramadandelight:quiche_slice"
+    ],
+    "c:unified/rice_pudding": [
+      "extradelight:rice_pudding",
+      "brewinandchewin:rice_pudding",
+      "large_meals:rice_pudding"
+    ],
+    "c:unified/riceball": [
+      "extradelight:riceball",
+      "culturaldelights:rice_ball",
+      "minecolonies:rice_ball"
+    ],
+    "c:unified/miso_soup": [
+      "extradelight:miso_soup",
+      "youkaishomecoming:miso_soup"
+    ],
+    "c:unified/longevity_noodles": [
+      "youkaishomecoming:longevity_noodles",
+      "festive_delight:longevity_noodle"
+    ],
+    "c:unified/meatloaf": [
+      "artifactdelight:meatloaf",
+      "spectrum:meatloaf",
+      "extradelight:meatloaf",
+      "artifactdelight:meatloaf_plate"
+    ],
+    "c:unified/meatloaf_sandwich": [
+      "extradelight:meatloaf_sandwich",
+      "spectrum:meatloaf_sandwich"
+    ],
+    "c:unified/fish_cakes": [
+      "extradelight:fish_cakes",
+      "spectrum:fishcake"
+    ],
+    "c:unified/fish_chips": [
+      "extradelight:fish_chips",
+      "minecolonies:fish_n_chips"
+    ],
+    "c:unified/fish_sandwich": [
+      "crabbersdelight:fish_sandwich",
+      "eternal_tales:fish_sandwich"
+    ],
+    "c:unified/congee": [
+      "extradelight:congee",
+      "minecolonies:congee"
+    ],
+    "c:unified/corn_chowder": [
+      "extradelight:corn_chowder",
+      "minecolonies:corn_chowder"
+    ],
+    "c:unified/potato_soup": [
+      "extradelight:potato_soup",
+      "large_meals:potato_soup",
+      "minecolonies:potato_soup",
+      "youkaishomecoming:potato_soup"
+    ],
+    "c:unified/borscht": [
+      "extradelight:borscht",
+      "minecolonies:borscht",
+      "youkaishomecoming:borscht"
+    ],
+    "c:unified/apple_pie": [
+      "farmersdelight:apple_pie",
+      "minecolonies:apple_pie"
+    ],
+    "c:unified/fried_rice": [
+      "farmersdelight:fried_rice",
+      "minecolonies:fried_rice"
+    ],
+    "c:unified/vegetable_soup": [
+      "farmersdelight:vegetable_soup",
+      "minecolonies:veggie_soup"
+    ],
+    "c:unified/kebab": [
+      "ramadandelight:kebab",
+      "minecolonies:kebab"
+    ],
+    "c:unified/flat_bread": [
+      "ramadandelight:flat_bread",
+      "minecolonies:flatbread"
+    ],
+    "c:unified/taco": [
+      "corn_delight:taco",
+      "minecolonies:tacos"
+    ],
+    "c:tortilla": [
+      "culturaldelights:tortilla",
+      "brewinandchewin:tortilla",
+      "corn_delight:tortilla",
+      "minecolonies:tortillas"
+    ],
+    "c:unified/tortilla_chips": [
+      "culturaldelights:tortilla_chips",
+      "corn_delight:tortilla_chip"
+    ],
+    "c:unified/cream_corn": [
+      "extradelight:cream_corn",
+      "corn_delight:creamed_corn",
+      "culturaldelights:creamed_corn"
+    ],
+    "c:unified/stuffed_pepper": [
+      "mynethersdelight:stuffed_pepper",
+      "minecolonies:stuffed_pepper"
+    ],
+    "c:unified/pasta_tomato": [
+      "extradelight:pasta_tomato",
+      "minecolonies:pasta_tomato"
+    ],
+    "c:unified/sweet_berry_custard": [
+      "extradelight:sweet_berry_custard",
+      "large_meals:sweet_berry_custard"
+    ],
+    "c:unified/chicken_curry": [
+      "endersdelight:chicken_curry",
+      "large_meals:chicken_curry"
+    ],
+    "c:unified/spicy_curry": [
+      "mynethersdelight:spicy_curry",
+      "culturaldelights:spicy_curry"
+    ],
+    "c:unified/hot_wings": [
+      "extradelight:hot_wings",
+      "mynethersdelight:hot_wings"
+    ],
+    "c:unified/kangaroo_stew": [
+      "amcdelight:kangaroo_stew",
+      "alexsdelight:kangaroo_stew"
+    ],
+    "c:unified/stuffed_squid": [
+      "minersdelight:stuffed_squid",
+      "oceansdelight:stuffed_squid"
+    ],
+    "c:unified/tentacles_on_a_stick": [
+      "minersdelight:tentacles_on_a_stick",
+      "oceansdelight:tentacle_on_a_stick"
+    ],
+    "c:unified/croissant": [
+      "brewinandchewin:croissant",
+      "cluttered:croissant"
+    ],
+    "c:unified/sweet_roll": [
+      "expandeddelight:sweet_roll",
+      "create:sweet_roll"
+    ],
+    "c:unified/cactus_soup": [
+      "extradelight:cactus_soup",
+      "delightful:cactus_soup"
+    ],
+    "c:unified/black_tea": [
+      "youkaishomecoming:black_tea",
+      "farmersrespite:black_tea"
+    ],
+    "c:unified/green_tea": [
+      "youkaishomecoming:green_tea",
+      "farmersrespite:green_tea"
+    ],
+    "c:unified/yellow_tea": [
+      "youkaishomecoming:yellow_tea",
+      "farmersrespite:yellow_tea"
+    ],
+    "c:unified/black_tea_leaves": [
+      "youkaishomecoming:black_tea_leaves",
+      "farmersrespite:black_tea_leaves"
+    ],
+    "c:unified/apple_cider": [
+      "farmersdelight:apple_cider",
+      "farmersrespite:apple_cider"
+    ],
+    "c:unified/hot_cocoa": [
+      "farmersdelight:hot_cocoa",
+      "farmersrespite:hot_cocoa"
+    ],
+    "c:unified/coffee_cake": [
+      "extradelight:coffee_cake",
+      "farmersrespite:coffee_cake"
+    ],
+    "c:unified/coffee_cake_slice": [
+      "extradelight:coffee_cake_slice",
+      "farmersrespite:coffee_cake_slice"
+    ],
+    "c:unified/ender_pearl_grain": [
+      "ends_delight:ender_pearl_grain",
+      "endersdelight:ender_shard"
+    ],
+    "c:unified/coconut_milk": [
+      "crabbersdelight:coconut_milk",
+      "compatdelight:coconut_milk"
+    ],
+    "c:unified/lemon_juice": [
+      "extradelight:lemon_juice",
+      "compatdelight:lemon_juice"
+    ],
+    "c:unified/lime_juice": [
+      "extradelight:lime_juice",
+      "compatdelight:lime_juice"
+    ],
+    "c:unified/grapefruit_juice": [
+      "extradelight:grapefruit_juice",
+      "compatdelight:grapefruit_juice"
+    ],
+    "c:unified/pineapple_juice": [
+      "pineapple_delight:pineapple_juice",
+      "compatdelight:pineapple_juice"
+    ],
+    "c:unified/cheese_slice": [
+      "expandeddelight:cheese_slice",
+      "compatdelight:cheese_slice"
+    ],
+    "c:heads/bat": [
+      "butchery:bat_head",
+      "spectrum:bat_head"
+    ],
+    "c:heads/bee": [
+      "butchery:bee_head",
+      "spectrum:bee_head"
+    ],
+    "c:heads/blue_axolotl": [
+      "butchery:blue_axolotl_head",
+      "spectrum:axolotl_blue_head"
+    ],
+    "c:heads/brown_mooshroom": [
+      "butchery:brown_mooshroom_head",
+      "spectrum:mooshroom_brown_head"
+    ],
+    "c:heads/camel": [
+      "butchery:camel_head",
+      "spectrum:camel_head"
+    ],
+    "c:heads/cave_spider": [
+      "butchery:cave_spider_head",
+      "spectrum:cave_spider_head"
+    ],
+    "c:heads/chicken": [
+      "butchery:chicken_head",
+      "spectrum:chicken_head"
+    ],
+    "c:heads/cow": [
+      "butchery:cow_head",
+      "spectrum:cow_head"
+    ],
+    "c:heads/cyan_axolotl": [
+      "butchery:cyan_axolotl_head",
+      "spectrum:axolotl_cyan_head"
+    ],
+    "c:heads/dolphin": [
+      "butchery:dolphin_head",
+      "spectrum:dolphin_head"
+    ],
+    "c:heads/donkey": [
+      "butchery:donkey_head",
+      "spectrum:donkey_head"
+    ],
+    "c:heads/drowned": [
+      "butchery:drowned_head",
+      "spectrum:drowned_head"
+    ],
+    "c:heads/enderman": [
+      "butchery:enderman_head",
+      "spectrum:enderman_head",
+      "supplementaries:enderman_head"
+    ],
+    "c:heads/endermite": [
+      "butchery:endermite_head",
+      "spectrum:endermite_head"
+    ],
+    "c:heads/evoker": [
+      "butchery:evoker_head",
+      "spectrum:evoker_head"
+    ],
+    "c:heads/glow_squid": [
+      "butchery:glow_squid_head",
+      "spectrum:glow_squid_head"
+    ],
+    "c:heads/goat": [
+      "butchery:goat_head",
+      "spectrum:goat_head"
+    ],
+    "c:heads/gold_axolotl": [
+      "butchery:gold_axolotl_head",
+      "spectrum:axolotl_gold_head"
+    ],
+    "c:heads/hoglin": [
+      "butchery:hoglin_head",
+      "spectrum:hoglin_head"
+    ],
+    "c:heads/husk": [
+      "butchery:husk_head",
+      "spectrum:husk_head"
+    ],
+    "c:heads/iron_golem": [
+      "butchery:iron_golem_head",
+      "spectrum:iron_golem_head"
+    ],
+    "c:heads/mule": [
+      "butchery:mule_head",
+      "spectrum:mule_head"
+    ],
+    "c:heads/ocelot": [
+      "butchery:ocelot_head",
+      "spectrum:ocelot_head"
+    ],
+    "c:heads/panda": [
+      "butchery:panda_head",
+      "spectrum:panda_head"
+    ],
+    "c:heads/phantom": [
+      "butchery:phantom_head",
+      "spectrum:phantom_head"
+    ],
+    "c:heads/pig": [
+      "butchery:pig_head",
+      "spectrum:pig_head"
+    ],
+    "c:heads/piglin_brute": [
+      "butchery:piglin_brute_head",
+      "spectrum:piglin_brute_head"
+    ],
+    "c:heads/pillager": [
+      "butchery:pillager_head",
+      "spectrum:pillager_head"
+    ],
+    "c:heads/polar_bear": [
+      "butchery:polar_bear_head",
+      "spectrum:polar_bear_head"
+    ],
+    "c:heads/rabbit": [
+      "butchery:rabbit_head",
+      "spectrum:rabbit_head"
+    ],
+    "c:heads/ravager": [
+      "butchery:ravager_head",
+      "spectrum:ravager_head"
+    ],
+    "c:heads/red_mooshroom": [
+      "butchery:red_mooshroom_head",
+      "spectrum:mooshroom_red_head"
+    ],
+    "c:heads/sheep": [
+      "butchery:sheep_head",
+      "spectrum:sheep_head"
+    ],
+    "c:heads/silverfish": [
+      "butchery:silverfish_head",
+      "spectrum:silverfish_head"
+    ],
+    "c:heads/skeleton_horse": [
+      "butchery:skeleton_horse_head",
+      "spectrum:skeleton_horse_head"
+    ],
+    "c:heads/sniffer": [
+      "butchery:sniffer_head",
+      "spectrum:sniffer_head"
+    ],
+    "c:heads/spider": [
+      "butchery:spider_head",
+      "spectrum:spider_head",
+      "supplementaries:spider_head"
+    ],
+    "c:heads/squid": [
+      "butchery:squid_head",
+      "spectrum:squid_head"
+    ],
+    "c:heads/stray": [
+      "butchery:stray_head",
+      "spectrum:stray_head"
+    ],
+    "c:heads/turtle": [
+      "butchery:turtle_head",
+      "spectrum:turtle_head"
+    ],
+    "c:heads/villager": [
+      "butchery:villager_head",
+      "spectrum:villager_head"
+    ],
+    "c:heads/vindicator": [
+      "butchery:vindicator_head",
+      "spectrum:vindicator_head"
+    ],
+    "c:heads/warden": [
+      "butchery:warden_head",
+      "spectrum:warden_head"
+    ],
+    "c:heads/witch": [
+      "butchery:witch_head",
+      "spectrum:witch_head"
+    ],
+    "c:heads/wolf": [
+      "butchery:wolf_head",
+      "spectrum:wolf_head"
+    ],
+    "c:heads/zoglin": [
+      "butchery:zoglin_head",
+      "spectrum:zoglin_head"
+    ],
+    "c:heads/zombie_horse": [
+      "butchery:zombie_horse_head",
+      "spectrum:zombie_horse_head"
+    ],
+    "c:heads/zombie_villager": [
+      "butchery:zombie_villager_head",
+      "spectrum:zombie_villager_head"
+    ],
+    "c:heads/zombified_piglin": [
+      "butchery:zombified_piglin_head",
+      "spectrum:zombified_piglin_head"
+    ],
+    "c:unified/tentacles": [
+      "minersdelight:tentacles",
+      "butchery:tentacles",
+      "oceansdelight:tentacles"
+    ],
+    "c:unified/beetroot_crate": [
+      "farmersdelight:beetroot_crate",
+      "quark:beetroot_crate"
+    ],
+    "c:unified/carrot_crate": [
+      "farmersdelight:carrot_crate",
+      "quark:carrot_crate"
+    ],
+    "c:unified/potato_crate": [
+      "farmersdelight:potato_crate",
+      "quark:potato_crate"
+    ],
+    "c:unified/corn_crate": [
+      "extradelight:corn_crate",
+      "corn_delight:corn_crate"
+    ],
+    "c:unified/chorus_crate": [
+      "endersdelight:chorus_crate",
+      "ends_delight:chorus_fruit_crate"
+    ],
+    "c:unified/flesh_crate": [
+      "frightsdelight:flesh_crate",
+      "eternal_tales:flesh_block"
+    ],
+    "c:unified/pile_of_pollen": [
+      "the_bumblezone:pile_of_pollen",
+      "compatdelight:pollen_puff_crate"
+    ],
+    "c:unified/coffee_bean_sack": [
+      "extradelight:coffee_bean_sack",
+      "farmersrespite:coffee_beans_sack"
+    ]
+  },
+  "tag_substitutions": {},
+  "item_tag_inheritance_mode": "DENY",
+  "item_tag_inheritance": {},
+  "block_tag_inheritance_mode": "DENY",
+  "block_tag_inheritance": {}
+}

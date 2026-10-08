@@ -1,0 +1,36 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_rayana_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:rayana_grass_block"
+    },
+    {
+      "id": "eternal_tales:limestone"
+    },
+    {
+      "id": "eternal_tales:ratauan"
+    },
+    {
+      "id": "eternal_tales:fireweed"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_rayana/trip1",
+  "min-building-level": 1,
+  "max-building-level": 1
+}

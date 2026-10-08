@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "layout": [
+    {
+      "tab": "inventory"
+    },
+    {
+      "tab": "sophisticatedtab_back_to_inventory"
+    },
+    {
+      "tab": "xaeros_map"
+    },
+    {
+      "tab": "colony_clipboard"
+    },
+    {
+      "tab": "maid_tablet"
+    },
+    {
+      "folder": "Backpack",
+      "icon": "sophisticatedbackpacks:backpack",
+      "tabs": [
+        "sophisticatedtab_backpack_*",
+        "sophisticated_backpacks",
+        "bag_of_holding",
+        "ender_pocket"
+      ]
+    },
+    {
+      "folder": "Quests",
+      "icon": "minecraft:writable_book",
+      "tabs": [
+        "gensokyolegacy_quests",
+        "mca_quests",
+        "mebahel_journal",
+        "mebahel_map",
+        "mca_reputation",
+        "townstead_factions"
+      ]
+    },
+    {
+      "folder": "Info",
+      "icon": "jei:textures/gui/sprites/icons/info.png",
+      "tabs": [
+        "world_tier",
+        "origin",
+        "chronicle",
+        "advancements",
+        "statistics"
+      ]
+    },
+    {
+      "tab": "guide_library"
+    },
+    {
+      "tab": "curios"
+    },
+    {
+      "tab": "keybind_atlas"
+    },
+    {
+      "tab": "roadweaver_map"
+    },
+    {
+      "tab": "apoli_skill_tree"
+    },
+    {
+      "tab": "sophisticatedtab_settings"
+    }
+  ],
+  "hidden": [
+    "guide_library",
+    "curios",
+    "keybind_atlas",
+    "roadweaver_map",
+    "apoli_skill_tree",
+    "sophisticatedtab_settings"
+  ]
+}

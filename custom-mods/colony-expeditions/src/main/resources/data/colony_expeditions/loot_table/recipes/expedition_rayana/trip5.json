@@ -1,0 +1,343 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3.0,
+        "max": 10.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.3,
+        "max": 0.3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:rayana_grass_block",
+          "weight": 14,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 10.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:limestone",
+          "weight": 16,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 12.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:ratauan",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:fireweed",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:fynbos_hakea",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:tarantula_eye",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:malachite",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 6.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:rayana_emerald_ore",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:rayana_gold_ore",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:daredian_ore",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:topaz_ore",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:turquoise_ore",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:vampyre_jewel",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.1,
+        "max": 0.1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 2500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:green_tarko",
+                  "damage": 3.0,
+                  "xp": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1200,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:crimson_tarko",
+                  "damage": 3.0,
+                  "xp": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:tarantula",
+                  "damage": 4.0,
+                  "xp": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 800,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:fly_trap",
+                  "damage": 4.0,
+                  "xp": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 800,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:tropic_gorilla",
+                  "damage": 6.0,
+                  "xp": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:tropic_gorilla_swordsman",
+                  "damage": 7.0,
+                  "xp": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 600,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:falpyre",
+                  "damage": 5.0,
+                  "xp": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 300,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:vampyre",
+                  "damage": 7.0,
+                  "xp": 8
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

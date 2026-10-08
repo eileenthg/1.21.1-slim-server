@@ -1,0 +1,33 @@
+{
+  "branch": "colony_expeditions:expeditions",
+  "costs": [
+    {
+      "item": "eternal_tales:topaz",
+      "count": 8
+    },
+    {
+      "item": "eternal_tales:turquoise",
+      "count": 8
+    },
+    {
+      "item": "eternal_tales:raw_daredian_ore",
+      "count": 8
+    }
+  ],
+  "effects": [
+    {
+      "id": "colony_expeditions:effects/blockhutexpedition_rayana",
+      "level": 1
+    }
+  ],
+  "icon": "colony_expeditions:blockhutexpedition_rayana",
+  "requirements": [
+    {
+      "type": "minecolonies:building",
+      "building": "minecolonies:netherworker",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 10
+}

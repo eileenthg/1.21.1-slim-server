@@ -1,0 +1,10 @@
+#Re-select the last used recipe in a stonecutter when putting in more of the previous material.
+#Default Value: true
+remember_last_recipe = true
+#Press the space bar to refill the stonecutter input slot with items from your inventory.
+#Default Value: true
+quick_move_last_recipe_input = true
+#Refill the stonecutter input slot with full stacks, otherwise only single items are moved each time.
+#Default Value: HOLDING_SHIFT
+#Allowed Values: NEVER, HOLDING_SHIFT, ALWAYS
+quick_move_all_items = "HOLDING_SHIFT"

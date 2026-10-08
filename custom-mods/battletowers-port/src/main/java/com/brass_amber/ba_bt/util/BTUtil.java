@@ -1,0 +1,378 @@
+package com.brass_amber.ba_bt.util;
+
+import com.brass_amber.ba_bt.item.ItemPool;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.mojang.logging.LogUtils;
+import net.minecraft.commands.Commands;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.phys.Vec3;
+import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+import static com.brass_amber.ba_bt.util.BTStatics.*;
+import static com.brass_amber.ba_bt.util.SaveTowers.itemPools;
+
+public class BTUtil {
+    static final Logger LOGGER = LogUtils.getLogger();
+
+
+    public static ListTag newIntList(int... ints) {
+        ListTag listtag = new ListTag();
+
+        for (int d0 : ints) {
+            listtag.add(IntTag.valueOf(d0));
+        }
+
+        return listtag;
+    }
+
+
+    public static CompoundTag newStringList(ArrayList<String> strings) {
+        CompoundTag listtag = new CompoundTag();
+        for (int i = 0; i < strings.size(); i++) {
+            listtag.putString(String.valueOf(i), strings.get(i) != null ? strings.get(i) : "");
+        }
+
+        return listtag;
+    }
+
+    public static ArrayList<String> listFromTag(CompoundTag tag, List<String> checkFrom) {
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < tag.getAllKeys().size(); i++) {
+            String value = tag.getString(String.valueOf(i));
+            // BABTMain.LOGGER.debug("get compound value: " + value + " | is in list? " + checkFrom.get().contains(value));
+            list.add(checkFrom.contains(value) ? value : "Invalid");
+        }
+
+        return list;
+    }
+
+
+    public static int median(ArrayList<Integer> nums) {
+        Collections.sort(nums);
+        if (nums.size() % 2 == 1)
+            return nums.get((nums.size() + 1) / 2 - 1);
+        else {
+            double lower = nums.get(nums.size() / 2 - 1);
+            double upper = nums.get(nums.size() / 2);
+
+            return (int) ((lower + upper) / 2.0);
+        }
+    }
+
+    /**
+     * Returns the squared horizontal distance as a positive double.
+     */
+    public static double sqrDistanceTo2D(Entity self, double targetX, double targetZ) {
+        double dX = self.getX() - targetX;
+        double dZ = self.getZ() - targetZ;
+        return Math.abs(dX * dX + dZ * dZ);
+    }
+
+    public static double sqrDistanceTo2D(Entity self, Entity target) {
+        double dX = self.getX() - target.getX();
+        double dZ = self.getZ() - target.getZ();
+        return Math.abs(dX * dX + dZ * dZ);
+    }
+
+    public static int chunkDistanceTo(ChunkPos start, ChunkPos end) {
+        return Mth.floor(distanceTo2D(start.x - end.x, start.z - end.z));
+    }
+
+    /**
+     * Returns the horizontal distance as a positive double.
+     */
+    public static double distanceTo2D(Entity self, double targetX, double targetZ) {
+        double dX = self.getX() - targetX;
+        double dZ = self.getZ() - targetZ;
+        return Math.sqrt(Math.abs(dX * dX + dZ * dZ));
+    }
+
+    public static double distanceTo2D(Entity self, Entity entity) {
+        double dX = Math.abs(self.getX() - entity.getX());
+        double dZ = Math.abs(self.getZ() - entity.getZ());
+        return Math.sqrt(dX * dX + dZ * dZ);
+    }
+
+    public static double distanceTo2D(Entity self, BlockPos end) {
+        double dX = Math.abs(self.getX() - end.getX());
+        double dZ = Math.abs(self.getZ() - end.getZ());
+        return Math.sqrt(dX * dX + dZ * dZ);
+    }
+
+    public static double distanceTo2D(BlockPos origin, BlockPos end) {
+        double dX = Math.abs(origin.getX() - end.getX());
+        double dZ = Math.abs(origin.getZ() - end.getZ());
+        return Math.sqrt(dX * dX + dZ * dZ);
+    }
+
+    public static int distanceTo2DInt(BlockPos origin, BlockPos end) {
+        double dX = Math.abs(origin.getX() - end.getX());
+        double dZ = Math.abs(origin.getZ() - end.getZ());
+        return (int) Math.sqrt(dX * dX + dZ * dZ);
+    }
+
+    public static double distanceTo2D(double side, double side2) {
+        return  Math.sqrt(side * side + side2 * side2);
+    }
+
+
+    public static double distanceTo3D(Entity self, double targetX, double targetY, double targetZ) {
+        double dXZ = distanceTo2D(self, targetX, targetZ);
+        double dY = Math.abs(self.getY() - targetY);
+        return Math.sqrt(dXZ * dXZ + dY * dY);
+    }
+
+    public static double distanceTo3D(Entity self, Entity entity) {
+        double dXZ = distanceTo2D(self, entity);
+        double dY = Math.abs(self.getY() - entity.getY());
+        return Math.sqrt(dXZ * dXZ + dY * dY);
+    }
+
+    public static double distanceTo3D(Entity self, BlockPos end) {
+        double dXZ = distanceTo2D(self, end);
+        double dY = Math.abs(self.getY() - end.getY());
+        return Math.sqrt(dXZ * dXZ + dY * dY);
+    }
+
+    public static double distanceTo3D(BlockPos origin, BlockPos end) {
+        double dXZ = distanceTo2D(origin, end);
+        double dY = Math.abs(origin.getY() - end.getY());
+        return Math.sqrt(dXZ * dXZ + dY * dY);
+    }
+
+    public static List<ItemPool> getPools(ArrayList<String> poolStrings) {
+        return itemPools.stream().filter(itemPool -> poolStrings.contains(itemPool.getName())).toList();
+    }
+
+    public static LootPool.Builder createItems(int rarity, List<ItemPool> pools, RandomSource randomSource, boolean isExtra) {
+        // BABattleTowers.LOGGER.debug("Pools {}", pools);
+
+        rarity = isExtra ? rarity - 1: rarity;
+
+        LootPool.Builder itemPool = new LootPool.Builder();
+
+        for (ItemPool pool: pools) {
+            itemPool = pool.getLootTableForRarity(itemPool, BTRarity.getByNum(rarity), randomSource);
+        }
+
+        // BABattleTowers.LOGGER.debug("Finished Item Pool: {}", itemPool);
+
+        int itemAmount = isExtra ? 4 : 10;
+        itemPool = itemPool.setRolls(ConstantValue.exactly(itemAmount)).setBonusRolls(UniformGenerator.between(0, 4));
+
+
+        return itemPool;
+    }
+
+    public static void btListFill(List<Item> loot, List<Integer> amounts, Container container, LootContext lootContext) {
+        Random random = new Random();
+
+        // Get possible slots to put items in (empty slots) should be all for tower chests.
+        List<Integer> possibleSlots = btGetAvailableSlots(container, random);
+
+        List<ItemStack> chestLoot = new ArrayList<>();
+        for (int i = 0; i < loot.size(); i++) {
+            Item item = loot.get(i);
+            ItemStack itemStack;
+            if (item instanceof PotionItem) {
+                itemStack = getRandomPotion(lootContext.getRandom());
+            } else if (item instanceof DyeItem) {
+                itemStack = getRandomDye(lootContext.getRandom());
+            } else {
+                itemStack = new ItemStack(item);
+            }
+
+            // Allow item count to work for non-stackable items
+            if (item.getMaxStackSize(itemStack) == 1) {
+                for (int j = 0; j < amounts.get(i); j++) {
+                    chestLoot.add(itemStack);
+                }
+            } else {
+                itemStack.setCount(amounts.get(i));
+                chestLoot.add(itemStack);
+            }
+
+        }
+
+        btSplitItems(chestLoot, possibleSlots.size(), lootContext.getRandom());
+
+        // BABTMain.LOGGER.debug("Container gets Items {}", chestLoot);
+
+        for (ItemStack itemStack : chestLoot) {
+            container.setItem(possibleSlots.remove(random.nextInt(possibleSlots.size())), itemStack);
+            if (possibleSlots.isEmpty()) {
+                break;
+            }
+        }
+
+    }
+
+    /** All below are recreations of @LootTable methods.
+     * Needed Due to bukkit servers overwriting the fill method and breaking it.
+     */
+    public static void btFill(LootTable loot, Container container, LootContext lootContext, LootParams lootparams) {
+        List<ItemStack> list = loot.getRandomItems(lootparams);
+        RandomSource random = lootContext.getRandom();
+        List<Integer> list1 = btGetAvailableSlots(container,  new Random());
+        btShuffleAndSplitItems(list, list1.size(), random);
+
+        for(ItemStack itemstack : list) {
+            if (list1.isEmpty()) {
+                LOGGER.warn("Tried to over-fill a container");
+                return;
+            }
+
+            if (itemstack.isEmpty()) {
+                container.setItem(list1.remove(list1.size() - 1), ItemStack.EMPTY);
+            } else {
+                container.setItem(list1.remove(list1.size() - 1), itemstack);
+            }
+        }
+
+    }
+
+    private static List<Integer> btGetAvailableSlots(Container container, Random random) {
+        List<Integer> list = Lists.newArrayList();
+
+        for(int i = 0; i < container.getContainerSize(); ++i) {
+            if (container.getItem(i).isEmpty()) {
+                list.add(i);
+            }
+        }
+
+        Collections.shuffle(list, random);
+        return list;
+    }
+
+
+    private static void btShuffleAndSplitItems(List<ItemStack> itemStackList, int listSize, RandomSource random) {
+        List<ItemStack> list = Lists.newArrayList();
+        Iterator<ItemStack> iterator = itemStackList.iterator();
+
+        while (iterator.hasNext()) {
+            ItemStack itemstack = iterator.next();
+            if (itemstack.isEmpty()) {
+                iterator.remove();
+            } else if (itemstack.getCount() > 1) {
+                list.add(itemstack);
+                iterator.remove();
+            }
+        }
+
+        while (listSize - itemStackList.size() - list.size() > 0 && !list.isEmpty()) {
+            ItemStack itemstack2 = list.remove(Mth.nextInt(random, 0, list.size() - 1));
+            int i = Mth.nextInt(random, 1, itemstack2.getCount() / 2);
+            ItemStack itemstack1 = itemstack2.split(i);
+            if (itemstack2.getCount() > 1 && random.nextBoolean()) {
+                list.add(itemstack2);
+            } else {
+                itemStackList.add(itemstack2);
+            }
+
+            if (itemstack1.getCount() > 1 && random.nextBoolean()) {
+                list.add(itemstack1);
+            } else {
+                itemStackList.add(itemstack1);
+            }
+        }
+
+        itemStackList.addAll(list);
+        Collections.shuffle(itemStackList, new Random());
+    }
+
+    private static void btSplitItems(List<ItemStack> itemStackList, int listSize, RandomSource random) {
+        List<ItemStack> list = Lists.newArrayList();
+        Iterator<ItemStack> iterator = itemStackList.iterator();
+
+        while (iterator.hasNext()) {
+            ItemStack itemstack = iterator.next();
+            if (itemstack.isEmpty()) {
+                iterator.remove();
+            } else if (itemstack.getCount() > 2) {
+                list.add(itemstack);
+                iterator.remove();
+            }
+        }
+
+        while (!list.isEmpty() && list.size() + itemStackList.size() < listSize - 1) {
+            ItemStack itemstack2 = list.remove(Mth.nextInt(random, 0, list.size() - 1));
+            int i = Mth.nextInt(random, 1, itemstack2.getCount() / 2);
+            ItemStack itemstack1 = itemstack2.split(i);
+            if (itemstack2.getCount() > 3) {
+                list.add(itemstack2);
+            } else {
+                itemStackList.add(itemstack2);
+            }
+
+            if (itemstack1.getCount() > 3) {
+                list.add(itemstack1);
+            } else {
+                itemStackList.add(itemstack1);
+            }
+        }
+
+        itemStackList.addAll(list);
+    }
+
+    public static ItemStack getRandomPotion(RandomSource randomSource) {
+        return PotionContents.createItemStack(Items.POTION, potions.get(randomSource.nextInt(potions.size())));
+    }
+
+    public static ItemStack getRandomDye(RandomSource randomSource) {
+        return new ItemStack(dyes.get(randomSource.nextInt(dyes.size())));
+    }
+
+    public static Map<EquipmentSlot, ItemStack> getEquipment(LivingEntity livingEntity) {
+        Map<EquipmentSlot, ItemStack> map = Maps.newEnumMap(EquipmentSlot.class);
+
+        for (EquipmentSlot equipmentslot : EquipmentSlot.values()) {
+            ItemStack itemstack = livingEntity.getItemBySlot(equipmentslot);
+            if (!itemstack.isEmpty()) {
+                map.put(equipmentslot, itemstack);
+            }
+        }
+
+        return map;
+    }
+
+    public static void doCommand(Entity self, String command) {
+        Commands commands = self.level().getServer().getCommands();
+        commands.performPrefixedCommand(self.createCommandSourceStack().withPermission(4).withSuppressedOutput(), command);
+    }
+
+    public static void doNoOutputCommand(Entity self, String command) {
+        Commands commands = self.level().getServer().getCommands();
+        commands.performPrefixedCommand(self.createCommandSourceStack().withPermission(4).withSuppressedOutput(), command);
+    }
+
+    public static void doNoOutputPostionedCommand(Entity self, String command, Vec3 vec) {
+        Commands commands = self.level().getServer().getCommands();
+        commands.performPrefixedCommand(self.createCommandSourceStack().withPermission(4).withSuppressedOutput().withPosition(vec), command);
+    }
+
+}

@@ -1,0 +1,179 @@
+[General]
+	#Only cleavers drop carcasses
+	"Only Cleavers Drop Carcasses" = true
+	#Enable organ drops
+	Organs = true
+	#Enable looting when butchering carcasses
+	"Looting Enchant" = true
+	#Instantly bleed carcasses.
+	"Instant Bleed" = false
+	#Enable blood puddles dropping when no blood grate is below a carcass.
+	"Blood Puddle" = true
+	#Enable blood spread
+	"Blood Spread" = true
+	#Show overlay hints
+	"Show Overlay Hints" = true
+
+[Mobs]
+	#Enable Bison Carcass
+	Bison = true
+	#Enable Moose Carcass
+	Moose = true
+	#Enable Kangaroo Carcass
+	Kangaroo = true
+	#Enable Gazelle Carcass
+	Gazelle = true
+	#Enable Tusklin Carcass
+	Tusklin = true
+	#Enable Grizzly Bear Carcass
+	"Grizzly Bear" = true
+	#Enable Bunfungus Carcass
+	Bunfungus = true
+	#Enable Small Catfish Carcass
+	"Small Catfish" = true
+	#Enable Catfish Carcass
+	Catfish = true
+	#Enable Large Catfish Carcass
+	"Large Catfish" = true
+	#Enable Lobster Carcass
+	Lobster = true
+	#Enable Elephant Carcass
+	Elephant = true
+	#Enable Rhinoceros Carcass
+	Rhinoceros = true
+	#Enable Gorilla Carcass
+	Gorilla = true
+	#Enable Endergrade Carcass
+	Endergrade = true
+	#Enable Mungus Carcass
+	Mungus = true
+	#Enable Tiger Carcass
+	Tiger = true
+	#Enable Snow Leopard Carcass
+	"Snow Leopard" = true
+	#Enable Sea Bear Carcass
+	"Sea Bear" = true
+	#Enable Maned Wolf Carcass
+	"Maned Wolf" = true
+	#Enable Dropbear Carcass
+	Dropbear = true
+	#Enable Tasmanian Devil Carcass
+	"Tasmanian Devil" = true
+	#Enable Skunk Carcass
+	Skunk = true
+	#Enable Orca Carcass
+	Orca = true
+	#Enable Cachalot Whale Carcass
+	"Cachalot Whale" = true
+	#Enable Hammerhead Shark Carcass
+	"Hammerhead Shark" = true
+	#Enable Frilled Shark Carcass
+	"Frilled Shark" = true
+	#Enable Giant Squid Carcass
+	"Giant Squid" = true
+	#Enable Mimic Octopus Carcass
+	"Mimic Octopus" = true
+	#Enable Crocodile Carcass
+	Crocodile = true
+	#Enable Komodo Dragon Carcass
+	"Komodo Dragon" = true
+	#Enable Rattlesnake Carcass
+	Rattlesnake = true
+	#Enable Terrapin Carcass
+	Terrapin = true
+	#Enable Alligator Snapping Turtle Carcass
+	"Alligator Snapping Turtle" = true
+	#Enable Raccoon Carcass
+	Raccoon = true
+	#Enable Anteater Carcass
+	Anteater = true
+	#Enable Platypus Carcass
+	Platypus = true
+	#Enable Seal Carcass
+	Seal = true
+	#Enable Gelada Monkey Carcass
+	"Gelada Monkey" = true
+	#Enable Sugar Glider Carcass
+	"Sugar Glider" = true
+	#Enable Jerboa Carcass
+	Jerboa = true
+	#Enable Devil's Hole Pupfish Carcass
+	"Devil's Hole Pupfish" = true
+	#Enable Triops Carcass
+	Triops = true
+	#Enable Blue Jay Carcass
+	"Blue Jay" = true
+	#Enable Roadrunner Carcass
+	Roadrunner = true
+	#Enable Shoebill Carcass
+	Shoebill = true
+	#Enable Seagull Carcass
+	Seagull = true
+	#Enable Toucan Carcass
+	Toucan = true
+	#Enable Potoo Carcass
+	Potoo = true
+	#Enable Hummingbird Carcass
+	Hummingbird = true
+	#Enable Sunbird Carcass
+	Sunbird = true
+	#Enable Banana Slug Carcass
+	"Banana Slug" = true
+	#Enable Cockroach Carcass
+	Cockroach = true
+	#Enable Comb Jelly Carcass
+	"Comb Jelly" = true
+	#Enable Cosmaw Carcass
+	Cosmaw = true
+	#Enable Fed Crimson Mosquito Carcass
+	"Fed Crimson Mosquito" = true
+	#Enable Crimson Mosquito Carcass
+	"Crimson Mosquito" = true
+	#Enable Farseer Carcass
+	Farseer = true
+	#Enable Flutter Carcass
+	Flutter = true
+	#Enable Fly Carcass
+	Fly = true
+	#Enable Froststalker Carcass
+	Froststalker = true
+	#Enable Spiked Froststalker Carcass
+	"Spiked Froststalker" = true
+	#Enable Laviathan Carcass
+	Laviathan = true
+	#Enable Obsidian Laviathan Carcass
+	"Obsidian Laviathan" = true
+	#Enable Leafcutter Ant Queen Carcass
+	"Leafcutter Ant Queen" = true
+	#Enable Mimicube Carcass
+	Mimicube = true
+	#Enable Murmur Carcass
+	Murmur = true
+	#Enable Rocky Roller Carcass
+	"Rocky Roller" = true
+	#Enable Skelewag Carcass
+	Skelewag = true
+	#Enable Soul Vulture (Soul Heart) Carcass
+	"Soul Vulture (Soul Heart)" = true
+	#Enable Soul Vulture Carcass
+	"Soul Vulture" = true
+	#Enable Straddler Carcass
+	Straddler = true
+	#Enable Tarantula Hawk Carcass
+	"Tarantula Hawk" = true
+	#Enable Rain Frog Carcass
+	"Rain Frog" = true
+	#Enable Warped Toad Carcass
+	"Warped Toad" = true
+	#Enable Warped Mosco Carcass
+	"Warped Mosco" = true
+	#Enable Cave Centipede Carcass
+	"Cave Centipede" = true
+	#Enable Anaconda Carcass
+	Anaconda = true
+	#Enable Bone Serpent Carcass
+	"Bone Serpent" = true
+	#Enable Void Worm Carcass
+	"Void Worm" = true
+	#Enable Void Worm Splitter Carcass
+	"Void Worm Splitter" = true

@@ -1,0 +1,33 @@
+{
+  "branch": "colony_expeditions:expeditions",
+  "costs": [
+    {
+      "item": "the_bumblezone:honey_crystal_shards",
+      "count": 32
+    },
+    {
+      "item": "the_bumblezone:royal_jelly_bottle",
+      "count": 2
+    },
+    {
+      "item": "the_bumblezone:bee_stinger",
+      "count": 16
+    }
+  ],
+  "effects": [
+    {
+      "id": "colony_expeditions:effects/blockhutexpedition_bumblezone",
+      "level": 1
+    }
+  ],
+  "icon": "colony_expeditions:blockhutexpedition_bumblezone",
+  "requirements": [
+    {
+      "type": "minecolonies:building",
+      "building": "minecolonies:netherworker",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 4
+}

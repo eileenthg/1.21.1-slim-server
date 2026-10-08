@@ -1,0 +1,33 @@
+{
+  "branch": "colony_expeditions:expeditions",
+  "costs": [
+    {
+      "item": "spectrum:raw_azurite",
+      "count": 16
+    },
+    {
+      "item": "spectrum:raw_malachite",
+      "count": 16
+    },
+    {
+      "item": "spectrum:raw_bloodstone",
+      "count": 8
+    }
+  ],
+  "effects": [
+    {
+      "id": "colony_expeditions:effects/blockhutexpedition_deeper_down",
+      "level": 1
+    }
+  ],
+  "icon": "colony_expeditions:blockhutexpedition_deeper_down",
+  "requirements": [
+    {
+      "type": "minecolonies:building",
+      "building": "minecolonies:netherworker",
+      "level": 1
+    }
+  ],
+  "researchLevel": 1,
+  "sortOrder": 3
+}

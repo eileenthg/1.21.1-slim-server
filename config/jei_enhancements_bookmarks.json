@@ -1,0 +1,43 @@
+{
+  "nextGroupId": 1,
+  "nextPageId": 5,
+  "currentPageIndex": 2,
+  "pageIds": [
+    0,
+    3,
+    4
+  ],
+  "groups": {
+    "0": {
+      "expanded": true,
+      "craftingChain": false,
+      "linkedGroupId": -1
+    }
+  },
+  "items": [
+    {
+      "groupId": 0,
+      "pageId": 4,
+      "itemKey": "youkaishomecoming:poor_god_soup",
+      "factor": 1,
+      "amount": 1,
+      "type": 0
+    },
+    {
+      "groupId": 0,
+      "pageId": 4,
+      "itemKey": "eternal_tales:tropical_sugar",
+      "factor": 1,
+      "amount": 1,
+      "type": 0
+    },
+    {
+      "groupId": 0,
+      "pageId": 4,
+      "itemKey": "farmersdelight:organic_compost",
+      "factor": 1,
+      "amount": 1,
+      "type": 0
+    }
+  ]
+}

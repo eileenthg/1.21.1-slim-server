@@ -1,0 +1,7 @@
+{
+  "key.categories.gentleswings": "Gentle Swings",
+  "key.gentleswings.toggle": "Toggle gentle swings",
+  "gentleswings.state.on": "Gentle swings ON: swings pass through NPCs, animals and players",
+  "gentleswings.state.off": "Gentle swings OFF: swings hit everything",
+  "gentleswings.hud.passing": "passing through"
+}

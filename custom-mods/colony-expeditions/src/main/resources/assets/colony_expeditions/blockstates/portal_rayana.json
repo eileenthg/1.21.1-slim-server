@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "colony_expeditions:block/portal_rayana_ns"
+    },
+    "axis=z": {
+      "model": "colony_expeditions:block/portal_rayana_ew"
+    }
+  }
+}

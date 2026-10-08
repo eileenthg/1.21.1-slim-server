@@ -1,0 +1,212 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3.0,
+        "max": 10.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.3,
+        "max": 0.3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:purgatorium_stone",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 16.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:purgatorium_log",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:purgatorium_grass",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 8.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:eyebloom",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:devils_tooth_fungus",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "eternal_tales:soulbone",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone_block",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2.0,
+        "max": 6.0
+      },
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.1,
+        "max": 0.1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 3000,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:purg_thin",
+                  "damage": 4.0,
+                  "xp": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1500,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:purg_phantom",
+                  "damage": 5.0,
+                  "xp": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 1000,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:purg_fat",
+                  "damage": 6.0,
+                  "xp": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecolonies:adventure_token",
+          "weight": 800,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecolonies:adventure": {
+                  "entity": "eternal_tales:purg_beast",
+                  "damage": 7.0,
+                  "xp": 7
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

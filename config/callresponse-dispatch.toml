@@ -1,0 +1,20 @@
+#女仆派遣外出系统配置
+[dispatch]
+	#每名玩家最多同时派遣多少只女仆（范围 1~10）
+	# Default: 3
+	# Range: 1 ~ 10
+	maxActiveDispatches = 3
+	#派遣事件列表每隔多少现实分钟刷新（范围 1~60）
+	# Default: 10
+	# Range: 1 ~ 60
+	eventRefreshMinutes = 10
+	#每类事件刷新时最少显示数量（范围 1~10）
+	# Default: 3
+	# Range: 1 ~ 10
+	eventCountMin = 3
+	#每类事件刷新时最多显示数量（范围 1~10，不低于最少数量时生效）
+	# Default: 5
+	# Range: 1 ~ 10
+	eventCountMax = 5
+	#是否允许从其他存档回收已派遣女仆。开启后会使用 config/callresponse/dispatch_global.json
+	crossWorldRecovery = false

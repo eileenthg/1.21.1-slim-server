@@ -1,0 +1,21 @@
+{
+  "Mages": [
+    "townstead_classic:blood_orc",
+    "townstead_classic:wild_orc",
+    "townstead_classic:celestial",
+    "townstead_classic:tiefling",
+    "townstead_classic:halfling"
+  ],
+  "Arcanists": [
+    "townstead_classic:high_elf",
+    "townstead_classic:dark_elf",
+    "townstead_classic:wood_elf"
+  ],
+  "Machinists": [
+    "townstead_classic:mountain_dwarf",
+    "townstead_classic:hill_dwarf",
+    "townstead_classic:tinker_gnome",
+    "townstead_classic:deepwood_gnome",
+    "townstead_classic:goblin"
+  ]
+}

@@ -1,0 +1,15 @@
+#Slower hunger and thirst while sitting (Take a Seat).
+[sitting]
+	#Master switch. False leaves both drains at their normal rate.
+	enabled = true
+	#Hunger exhaustion gained while sitting, as a fraction of normal.
+	#Covers everything vanilla charges exhaustion for: movement, mining, healing, taking damage.
+	# Default: 0.2
+	# Range: 0.0 ~ 1.0
+	hungerMultiplier = 0.2
+	#Thirst exhaustion gained while sitting, as a fraction of normal.
+	#Thirst Was Taken derives its drain from the hunger exhaustion the player accrues, so
+	#hungerMultiplier = 0.0 freezes thirst too no matter what this is set to.
+	# Default: 0.2
+	# Range: 0.0 ~ 1.0
+	thirstMultiplier = 0.2

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ba_bt:sky_golem_eye"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "ba_bt:entities/sky_golem"
+}

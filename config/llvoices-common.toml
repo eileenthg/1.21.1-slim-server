@@ -1,0 +1,64 @@
+[general]
+	#Master switch. When off, maids never speak up on their own because of this mod.
+	enabled = true
+	#A maid only speaks up while her owner is within this many blocks.
+	# Default: 16
+	# Range: 4 ~ 64
+	hearingRadius = 16
+	#Minimum gap between two lines from the same maid, in seconds.
+	#She also waits while any chat bubble (including Love & Loathe's own) is still showing.
+	# Default: 25
+	# Range: 5 ~ 600
+	minSecondsBetweenLines = 25
+	#Tell the owner in chat what each maid is about to say and why.
+	debug = false
+
+[llm]
+	#Generate every line with the maid's LLM (her TLM character setting), so it
+	#sounds like her. When off, or when no LLM is available, the canned fallback lines are used.
+	useLlm = true
+	#TLM LLM site to send the lines to, e.g. "player2" for the Player2 app.
+	#Must be enabled in TLM's AI settings; if it is not, the maid's own site is used.
+	#Leave empty to always use each maid's own site.
+	llmSite = "player2"
+	#Also send every other maid LLM chat (normal TLM chat and Love & Loathe's
+	#own dialogue) to llmSite, not just this mod's lines.
+	routeAllMaidChat = true
+	#Show a short canned line when the LLM cannot be used
+	#(LLM disabled, site off, no character setting, or the owner's token limit).
+	#Lines over Love & Loathe's apiCallsPerMinute cap are skipped, not replaced.
+	fallbackLines = true
+
+[needs]
+	#Voice hunger (early signs, no food to eat, fed again, stuffed) and injuries.
+	enabled = true
+	#Roughly every this many minutes a maid near her owner checks in about
+	#how she is doing (needs, wants, mood). 0 turns check-ins off.
+	# Default: 12
+	# Range: 0 ~ 120
+	statusIntervalMinutes = 12
+
+[emotion]
+	#Speak up when Love & Loathe's mood tendency changes (friendly, fearful, bonded...).
+	moodShifts = true
+	#Show signs of drifting toward betrayal, forgetting, doting, devotion or panic
+	#before Love & Loathe's thresholds are reached, and relief when backing away from them.
+	driftWarnings = true
+	#While a maid stays near a threshold, remind about it this often. 0 = never.
+	# Default: 8
+	# Range: 0 ~ 120
+	driftLingerMinutes = 8
+
+[passive]
+	#Comment on Love & Loathe's passive trust/fear changes (being hit, fed, ignored,
+	#working, sleeping...). Changes Love & Loathe already voices itself are skipped.
+	enabled = true
+	#Chance to comment on a notable change (hurt, fed, a maid dying, armour...).
+	# Default: 0.6
+	# Range: 0.0 ~ 1.0
+	reactionChance = 0.6
+	#Chance to comment on a routine change (working, resting, sleeping,
+	#time passing, being ignored). These happen every few minutes per maid.
+	# Default: 0.2
+	# Range: 0.0 ~ 1.0
+	routineReactionChance = 0.2

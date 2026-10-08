@@ -1,0 +1,183 @@
+#MCA: Reputation — server-authoritative settings.
+#Disabling a subsystem changes behaviour only; no saved record is ever deleted.
+[general]
+	#Master switch. When false no incident is recorded and no score changes;
+	#existing standing, titles, and history remain in the save untouched.
+	enableReputation = true
+	#Verbose DEBUG logging for MCA access failures, witness selection, dedupe
+	#refusals, and score arithmetic. Never one line per tick.
+	debugLogging = false
+
+#Score bounds and community resolution.
+[scoring]
+	#Lower clamp on a player's standing with one community.
+	# Default: -1000
+	# Range: -1000000 ~ 0
+	minimumScore = -1000
+	#Upper clamp on a player's standing with one community.
+	#Must be greater than minimumScore; the two are swapped if inverted.
+	# Default: 1000
+	# Range: 0 ~ 1000000
+	maximumScore = 1000
+	#Blocks searched for a nearby village when an action has no obvious home
+	#community. Never used to invent an anchor community (spec 12.2).
+	# Default: 128
+	# Range: 16 ~ 512
+	defaultVillageSearchRadius = 128
+	#Whether incident contributions fade according to their datapack decay policy.
+	#Turning this off freezes contributions where they are; it does not restore
+	#decay that has already happened.
+	enableScoreDecay = true
+	#Whether crossing a tier threshold grants that tier's title.
+	enableTierTitles = true
+
+#Automatic detection of core MCA actions (spec 20).
+[core_events]
+	#Record an incident when a player harms an MCA villager.
+	enableCoreAssaultIncidents = true
+	#Record an incident when a player kills an MCA villager.
+	enableCoreKillingIncidents = true
+	#Record an incident when a player kills the mob attacking an MCA villager.
+	enableCoreRescueIncidents = true
+	#Record an incident when a player cures a zombie MCA villager.
+	enableCoreCureIncidents = true
+	#Record an incident when a player is credited with a village surviving a raid.
+	enableCoreRaidIncidents = true
+	#Record an incident when a player kills another player where a village can see.
+	#Off by default: on most servers duelling is not the village's business.
+	enableCorePvpIncidents = false
+	#How recently a mob must have struck a villager for killing it to still count
+	#as a rescue, when the mob is no longer targeting them.
+	# Default: 100
+	# Range: 1 ~ 1200
+	rescueThreatWindowTicks = 100
+	#Rescues of the same villager by the same player within one bucket of this
+	#length count once, so a kited mob farm earns nothing. 0 disables bucketing.
+	# Default: 6000
+	# Range: 0 ~ 72000
+	rescueCoalesceTicks = 6000
+	#Damage below this is ignored, so chip damage and thorns do not create incidents.
+	# Default: 1.0
+	# Range: 0.0 ~ 1024.0
+	minimumIncidentDamage = 1.0
+	#Attribute damage from a player's tamed animal to that player.
+	attributeTamedDamage = true
+	#If the villager damaged the player within this many ticks beforehand, the
+	#retaliation is treated as self-defence.
+	# Default: 100
+	# Range: 0 ~ 6000
+	selfDefenseWindowTicks = 100
+	#Penalty multiplier applied to a self-defence assault, rounded toward zero.
+	# Default: 0.25
+	# Range: 0.0 ~ 1.0
+	selfDefenseMultiplier = 0.25
+	#Repeated hits on the same villager within this window are one incident, so a
+	#sustained beating is not charged once per damage tick.
+	# Default: 200
+	# Range: 1 ~ 24000
+	assaultCoalesceTicks = 200
+
+#Who sees a deed, and how word gets around (spec 19).
+[witnesses]
+	#Block radius searched for villagers who saw an incident happen.
+	# Default: 24
+	# Range: 1 ~ 128
+	witnessRadius = 24
+	#Maximum witnesses stored per incident.
+	# Default: 32
+	# Range: 1 ~ 32
+	maxWitnesses = 32
+	#Require unobstructed line of sight before a villager counts as a witness.
+	requireWitnessLineOfSight = true
+	#Shortest deterministic delay before a non-witness resident hears a rumour.
+	# Default: 6000
+	# Range: 0 ~ 1000000
+	minRumorDelayTicks = 6000
+	#Longest such delay. Clamped up to minRumorDelayTicks if set lower.
+	# Default: 48000
+	# Range: 0 ~ 10000000
+	maxRumorDelayTicks = 48000
+	#Derive what one villager personally makes of a player from the deeds that
+	#villager knows about. Nothing extra is saved; turning this off only stops
+	#the question being answered.
+	enableVillagerOpinion = true
+	#Weight, in percent, of a deed a villager only heard about — and of the
+	#community baseline, which reaches them the same way.
+	# Default: 50
+	# Range: 0 ~ 100
+	opinionHearsayPercent = 50
+	#Weight, in percent, of a deed the villager was a subject of. Above 100
+	#because what was done to you counts for more than what you watched.
+	# Default: 150
+	# Range: 100 ~ 300
+	opinionInvolvedPercent = 150
+
+#Storage bounds. These may only tighten the hard caps in the source.
+[limits]
+	#Incidents retained for one player in one community.
+	# Default: 64
+	# Range: 1 ~ 64
+	maxIncidentsPerCommunity = 64
+	#Incidents retained across all of one player's communities.
+	# Default: 512
+	# Range: 1 ~ 512
+	maxIncidentsPerPlayer = 512
+	#How long a delivery receipt stays answerable, in ticks. A companion that
+	#replays an operation older than this gets no memory of it and has to
+	#recover explicitly. The default is two real-world weeks.
+	# Default: 336000
+	# Range: 0 ~ 100000000
+	receiptRetentionTicks = 336000
+	#How often decay is reconciled for online players. This is a bounded sweep over
+	#online players only — never a scan of the save or of the world.
+	# Default: 1200
+	# Range: 20 ~ 72000
+	reconcileOnlineIntervalTicks = 1200
+	#Treat any datapack validation error as a failed reload. The previously loaded
+	#registries stay live either way; strict mode simply refuses to swap them.
+	strictJsonValidation = false
+
+#Showing standing outside the standing screen. Both displays are off by
+#default: they are always-on surfaces, and a server that wants one will say so.
+[visibility]
+	#Keep a dummy scoreboard objective holding each online player's standing with
+	#the village the standing screen would open on. The objective is created and
+	#written; which slot it is displayed in, if any, is left to the server.
+	enableScoreboardObjective = false
+	#Name of that objective. An existing objective with this name is used as it is,
+	#never recreated.
+	scoreboardObjectiveName = "mcareputation"
+	#Append the tier name to each player's tab-list entry. Appended to whatever
+	#name other mods produced, so it stacks rather than overwrites.
+	enableTabListTier = false
+	#How often the displays are swept for online players. Standing changes and
+	#dimension changes update immediately; this sweep exists because walking into
+	#another village raises no event.
+	# Default: 100
+	# Range: 20 ~ 1200
+	displayRefreshIntervalTicks = 100
+
+#Optional companion mods. Each is a no-op when that mod is absent.
+[integration]
+	#Accept reputation outcomes from MCA: Quests and serve its bridge.
+	enableQuestsIntegration = true
+	#Serve dialogue context, check bias, and gossip candidates to MCA: Conversations.
+	enableConversationsIntegration = true
+	#How much to trust a companion that claims core incidents without saying which
+	#kinds it detects. TRUST_LEGACY honours every kind it claims; ASSAULT_KILL_ONLY
+	#honours only villager assault and killing, the two kinds that existed before
+	#declaration was possible; IGNORE honours none. A companion that declares its
+	#kinds is unaffected by this setting.
+	#Allowed Values: TRUST_LEGACY, ASSAULT_KILL_ONLY, IGNORE
+	coreAuthorityUndeclaredKinds = "ASSAULT_KILL_ONLY"
+	#Accept incidents and resolutions from MCA: Crime, and let it claim ownership of
+	#villager assault/death detection so one attack is not counted by both mods.
+	#Turning this off makes Crime's authority claim fail, and native detection resumes
+	#for the next event -- there is never a window where neither mod is watching.
+	enableCrimeIntegration = true
+	#After each canonical commit, mirror score/tier/title into Quests' own fallback
+	#store so removing this mod leaves Quests with sensible standing.
+	mirrorQuestsFallbackState = true
+	#Import a pre-Reputation world's shared Quests village scores into per-player
+	#baselines exactly once per player (spec 32.2).
+	migrateLegacyQuestsData = true

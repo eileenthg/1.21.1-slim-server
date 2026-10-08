@@ -1,0 +1,8 @@
+#Settings for the Warden Sense vibration listener.
+[vibration]
+	#How far away, in blocks, a player with Warden Sense detects vibrations.
+	#For scale: a sculk sensor is 8, a warden is 16. The default of 12 sits between them.
+	#Lower this if the effect feels overwhelming in crowded areas.
+	# Default: 12
+	# Range: 1 ~ 64
+	listenerRadius = 12

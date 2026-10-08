@@ -1,0 +1,36 @@
+milestones = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+enable_whitelist = true
+whitelist = []
+enable_blacklist = true
+blacklist = ["minecraft:rotten_flesh"]
+request_only_select_eaten_food = true
+# Default: 10
+# Range: 0 ~ 100
+request_generation_threshold = 10
+# Default: 4
+# Range: 0 ~ 20
+minimal_hunger_value = 4
+# Default: 6.0
+# Range: 0.0 ~ 20.0
+minimal_saturation = 6.0
+# Default: 20
+# Range: 3 ~ 1000
+minimal_types_to_generate_wishes = 20
+# Default: 4
+# Range: 0 ~ 1000
+hp_per_mileStone = 4
+# Default: 1
+# Range: 0 ~ 1000
+armor_per_milestone = 1
+# Default: 1
+# Range: 0 ~ 1000
+armor_toughness_per_milestone = 1
+# Default: 1
+# Range: 0 ~ 1000
+attack_damage_per_milestone = 1
+# Default: 24
+# Range: 0 ~ 1000
+favorability_per_milestone = 24
+# Default: 4
+# Range: 0 ~ 1000
+favorability_wish_achieved = 4

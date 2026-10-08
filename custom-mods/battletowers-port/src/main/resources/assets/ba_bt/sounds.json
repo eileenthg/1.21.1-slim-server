@@ -1,0 +1,262 @@
+{
+	"entity.golem.hurt": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.hurt",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golemhurt1",
+				"volume": 1.0
+			},
+			{
+				"name": "ba_bt:entity/golem/golemhurt2",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.death": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.death",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golemdeath",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.charge": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.charge",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golemcharge1",
+				"volume": 1.0
+			},
+			{
+				"name": "ba_bt:entity/golem/golemcharge2",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.awaken": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.awaken",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golemawaken",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.ambient": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.ambient",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golem",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.special": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.special",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/golemspecial1",
+				"volume": 1.0
+			},
+			{
+				"name": "ba_bt:entity/golem/golemspecial2",
+				"volume": 1.0
+			}
+		]
+	},
+	"entity.golem.land.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.land.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/rage_of_bahrynmuul",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"entity.golem.ocean.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.ocean.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/void_of_moraizuun",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"entity.golem.core.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.core.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/awakening_of_obthuuryn",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"entity.golem.nether.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.nether.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/throne_of_infuurniir",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"entity.golem.end.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.end.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/mind_of_shullosniir",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"entity.golem.sky.fight": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.golem.sky.fight",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/golem/descent_of_veyhzkriin",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"tower.break.collapse": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.break.collapse",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/tower_collapse",
+				"volume": 1.0,
+				"stream": true
+			}
+		]
+	},
+	"tower.break.start": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.break.start",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/tower_breaking",
+				"volume": 0.6,
+				"stream": true
+			}
+		]
+	},
+	"tower.break.crumble": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.break.crumble",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/tower_crumbling",
+				"volume": 0.6,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.land": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.land",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/forced_protection",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.ocean": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.ocean",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/void_aeration",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.core": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.core",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/molten_tribulation",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.nether": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.nether",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/blazen_damnation",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.end": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.end",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/warped_revelation",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.sky": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.sky",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/resonance_levitation",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+	"tower.ambient.music.city": {
+		"category": "ambient",
+		"subtitle": "ba_bt.subtitle.tower.ambient.music.city",
+		"sounds": [
+			{
+				"name": "ba_bt:tower/labyrinthine",
+				"volume": 0.7,
+				"stream": true
+			}
+		]
+	},
+
+	"monolith.spawn.golem": {
+		"category": "hostile",
+		"subtitle": "ba_bt.subtitle.monolith.spawn.golem",
+		"sounds": [
+			{
+				"name": "ba_bt:entity/monolithimplode",
+				"volume": 0.6,
+				"stream": true
+			}
+		]
+	}
+}

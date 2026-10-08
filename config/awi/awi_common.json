@@ -1,0 +1,12 @@
+{
+  "showInGameNames": true,
+  "showConfigConditionalBlocks": false,
+  "tooltipColors": {
+    "text": "gold",
+    "value": "aqua",
+    "error": "red",
+    "branch": "dark_gray"
+  },
+  "configVersion": 1,
+  "logMoreStatistics": false
+}

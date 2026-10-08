@@ -1,0 +1,84 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_end_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "minecraft:end_stone"
+    },
+    {
+      "id": "minecraft:chorus_fruit"
+    },
+    {
+      "id": "minecraft:chorus_flower"
+    },
+    {
+      "id": "enderscape:veiled_log"
+    },
+    {
+      "id": "enderscape:flanger_berry"
+    },
+    {
+      "id": "enderscape:blinklight"
+    },
+    {
+      "id": "enderscape:mirestone"
+    },
+    {
+      "id": "enderscape:celestial_stem"
+    },
+    {
+      "id": "enderscape:murublight_stem"
+    },
+    {
+      "id": "enderscape:wisp_flower"
+    },
+    {
+      "id": "enderscape:shadoline_ore"
+    },
+    {
+      "id": "enderscape:kurodite"
+    },
+    {
+      "id": "enderscape:veradite"
+    },
+    {
+      "id": "minecraft:purpur_block"
+    },
+    {
+      "id": "minecraft:end_rod"
+    },
+    {
+      "id": "enderscape:void_shale"
+    },
+    {
+      "id": "enderscape:nebulite_ore"
+    },
+    {
+      "id": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "id": "enderscape:alluring_magnia"
+    },
+    {
+      "id": "enderscape:repulsive_magnia"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_end/trip4",
+  "min-building-level": 4,
+  "max-building-level": 4
+}

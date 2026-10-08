@@ -1,0 +1,15 @@
+#Override biome water fog distance.
+#Default Value: true
+water_fog_distance = true
+#Render water blocks with a varying transparency depending on the current biome.
+#Not compatible with the Sodium mod.
+#Default Value: false
+#Requires Restart: World
+water_surface_transparency = true
+#Override biome water surface colors.
+#Default Value: true
+#Requires Restart: World
+water_surface_color = true
+#Override biome water fog colors.
+#Default Value: true
+water_fog_color = true

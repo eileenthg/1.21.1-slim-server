@@ -1,0 +1,221 @@
+	[needs.hunger]
+		#Enable villager hunger simulation. When disabled, villagers skip all hunger decay, eating behaviors, and hunger-driven mood drift.
+		enableVillagerHunger = true
+		#Allow villagers to eat from their own inventory.
+		enableSelfInventoryEating = true
+		#Allow villagers to collect food from ground items.
+		enableGroundItemSourcing = false
+		#Allow villagers to pull food from containers / item handlers.
+		enableContainerSourcing = true
+		#Allow villagers to harvest mature crops for food as an emergency fallback. Disabled by default to avoid broad crop scans.
+		enableCropSourcing = false
+		#Let villagers teleport when they eat chorus fruit, just like players do.
+		enableChorusFruitTeleport = true
+		#Let villagers drop empty containers left from eating/drinking (bowls, bottles, buckets) into nearby storage, preferring kitchen storage. Skipped while actively working so tools aren't taken mid-task.
+		enableEmptyContainerDropoff = true
+
+	[needs.fatigue]
+		#Enable villager fatigue simulation. Villagers accumulate fatigue during activity and recover through rest.
+		enableVillagerFatigue = true
+		#Show local chat alerts when villagers collapse from exhaustion or recover.
+		enableFatigueAlerts = true
+		#Fatigue accumulation multiplier when working during aligned cycle hours.
+		fatigueNocturnalMultiplier = 0.75
+		#Fatigue accumulation multiplier when working during misaligned cycle hours.
+		fatigueMisalignedMultiplier = 1.25
+
+	[needs.thirst]
+		#Allow villagers to drink thirst-restoring items from their own inventory.
+		enableSelfInventoryDrinking = true
+		#Allow villagers to collect thirst-restoring items from ground items when Thirst Was Taken is installed.
+		enableGroundItemThirstSourcing = false
+		#Allow villagers to pull thirst-restoring items from containers / item handlers.
+		enableContainerThirstSourcing = true
+		#Allow villagers to harvest mature crops for thirst-restoring food/drink items as an emergency fallback. Disabled by default to avoid broad crop scans.
+		enableCropThirstSourcing = false
+		#Enable villager thirst simulation when Thirst Was Taken is installed.
+		enableVillagerThirst = true
+		#Allow dehydration to kill villagers when hardcore status cannot be detected.
+		thirstLethalFallback = false
+		#Allow cook villagers to opportunistically purify impure water bottles in available kitchen skillets.
+		enableCookWaterPurification = true
+		#When villagers drink from bottles, prefer depositing empty bottles into kitchen storage.
+		preferKitchenStorageForEmptyBottles = true
+		#Which thirst mod drives villager thirst when more than one is installed.
+		#"auto" prefers Legendary Survival Overhaul, then Thirst Was Reclaimed / Thirst Was Taken.
+		#"legendary_survival_overhaul" or "thirst" pins that backend, falling back to the other if it is not installed.
+		preferredBackend = "auto"
+
+[farming]
+	#Enable lightweight farming assist: anti-trample and idle unstuck nudges for harvest chore.
+	enableFarmAssist = true
+	#Maximum horizontal farm radius around anchor used by farmer AI.
+	# Default: 12
+	# Range: 4 ~ 32
+	farmerFarmRadius = 12
+	#Minimum ticks before reworking the same soil cell.
+	# Default: 120
+	# Range: 0 ~ 2400
+	farmerCellCooldownTicks = 120
+	#How many times a target can fail pathing before temporary blacklist.
+	# Default: 3
+	# Range: 1 ~ 20
+	farmerPathfailMaxRetries = 3
+	#Ticks to wait before reacquiring work after no valid target.
+	# Default: 60
+	# Range: 0 ~ 1200
+	farmerIdleBackoffTicks = 60
+	#Allow farmers to place water sources in cells painted Water in the plot planner.
+	enableFarmerWaterPlacement = true
+	#Maximum horizontal distance farmers may travel to find water for bucket refills.
+	# Default: 72
+	# Range: 8 ~ 192
+	farmerWaterSourceSearchRadius = 72
+	#Vertical search radius for nearby water sources when refilling buckets.
+	# Default: 8
+	# Range: 2 ~ 32
+	farmerWaterSourceVerticalRadius = 8
+	#Radius around planned farm cells where farmers may clear removable weeds.
+	# Default: 1
+	# Range: 0 ~ 4
+	farmerGroomRadius = 1
+	#Ticks between farmer grooming target scans.
+	# Default: 60
+	# Range: 20 ~ 1200
+	farmerGroomScanIntervalTicks = 60
+	#Allow farmers to periodically announce missing supplies (seeds/tools/etc.) in local chat.
+	enableFarmerRequestChat = true
+	#Minimum ticks between farmer shortage request messages.
+	# Default: 3600
+	# Range: 200 ~ 24000
+	farmerRequestIntervalTicks = 3600
+
+[fishing]
+	#Allow fishermen to periodically announce missing rods or water in local chat.
+	enableFishermanRequestChat = true
+	#Minimum ticks between fisherman shortage request messages.
+	# Default: 3600
+	# Range: 200 ~ 24000
+	fishermanRequestIntervalTicks = 3600
+	#How many blocks away from the barrel to look for water when fishing.
+	# Default: 16
+	# Range: 4 ~ 48
+	fishermanWaterSearchRadius = 16
+	#Number of items the fisherman carries before returning to deposit.
+	# Default: 16
+	# Range: 1 ~ 64
+	fishermanInventoryFullThreshold = 16
+
+[cooking]
+	#Allow cooks to periodically announce missing kitchen supplies in local chat.
+	enableCookRequestChat = true
+	#Minimum ticks between cook shortage request messages.
+	# Default: 3600
+	# Range: 200 ~ 24000
+	cookRequestIntervalTicks = 3600
+
+	[cooking.barista]
+		#Allow baristas to periodically announce missing cafe supplies in local chat.
+		enableBaristaRequestChat = true
+		#Minimum ticks between barista shortage request messages.
+		# Default: 3600
+		# Range: 200 ~ 24000
+		baristaRequestIntervalTicks = 3600
+
+[butchery]
+	#Allow butchers to slaughter whitelisted livestock inside their shop bounds.
+	enableVillagerSlaughter = true
+	#Permit villager-driven slaughter of humanoid carcasses (villagers, pillagers, witches).
+	#Off by default; the integration does not lean into this even when enabled.
+	allowHumanoidSlaughter = false
+	#Minimum ticks between kills for a single butcher villager.
+	# Default: 2400
+	# Range: 200 ~ 24000
+	villagerSlaughterThrottleTicks = 2400
+	#Add a second Master-tier trade pool with exotic cuts (brain, tongue, kidney, sweetbread).
+	includeExoticTrades = false
+	#When true, the butcher auto-hammers rare / display-worthy heads (evoker, vindicator, pillager, warden, dragon, player, wither skull, ice skull) into their breakdown drops. Off by default so those heads stay whole for trophies and armor.
+	hammerTrophyHeads = false
+
+[caregiving]
+	#Allow adults to feed hungry babies/toddlers/children.
+	enableFeedingYoung = true
+	#Allow non-parent villagers to help feed children when parents are absent.
+	enableNonParentCaregivers = true
+	#Allow adults to bring drinks to thirsty babies/toddlers/children.
+	enableHydratingYoung = true
+
+[storage]
+	#Allow chore supply restocking and output storage automation from nearby containers.
+	enableWorkSupplyAutomation = false
+	#Allow harvesting villagers to store gathered output in nearby containers.
+	enableHarvestOutputStorage = true
+	#If true, villagers will not take food from protected storage blocks/tags.
+	respectProtectedStorage = true
+	#Block IDs that villagers must not take food from.
+	protectedStorageBlocks = []
+	#Block tags (e.g. modid:tag_name) treated as protected storage.
+	protectedStorageTags = ["townstead:protected_food_storage"]
+
+[chefsdelight_compat]
+	#When enabled, Townstead handles cook AI and profession assignment.
+	#When disabled, Chef's Delight handles cooking instead.
+	enableTownsteadCook = true
+
+[roots]
+	#Root ids to disable on this server (e.g. townstead_roots:moon_elf; entries without a namespace assume townstead_roots).
+	#Blocked roots are hidden from the picker and never rolled for naturally spawned villagers.
+	#Not retroactive: villagers and players that already have a blocked root keep it.
+	blockedRoots = []
+	#Species ids to disable. Blocks every root that resolves to a listed species.
+	blockedSpecies = []
+	#Ancestry ids to disable. Blocks every root whose ancestry (declared directly or through its lineage) is listed.
+	blockedAncestries = []
+	#Lineage ids to disable. Blocks every root that selects a listed lineage.
+	blockedLineages = []
+
+[calendar]
+	#Active calendar profile. Use "auto" to detect seasonal mods (TFC > Serene Seasons > Ecliptic Seasons > Gregorian).
+	#Or pin a specific profile by id, e.g., townstead_calendar:default, townstead_calendar:serene, townstead_calendar:tfc, townstead_calendar:ecliptic, or any data-pack-supplied profile.
+	#Profiles are defined in data packs at data/<ns>/calendar_profile/<name>.json so any pack can add a new one in its own namespace.
+	#In-game: run /townstead calendar set-profile <id> for tab-completed picking.
+	#Admin override via /townstead calendar set-profile takes precedence over this value at runtime.
+	profile = "auto"
+	#When true, the calendar also advances by the real-world days that elapsed while
+	#the game was off (added on world load). When false, it tracks Minecraft's day
+	#counter only. Compatible with day-cycle mods either way.
+	realClockCalendar = false
+	#Game-days per narrative ("dog-years") year — the single, species-neutral aging
+	#rate. Every villager ages 1 narrative year per this many game-days; longer-lived
+	#races simply author more narrative years in their life-cycle gene and so take
+	#proportionally more game-days to live. Calendar-independent.
+	#Default 8.0: a 90-narrative-year human life takes ~720 game-days (~2 years on the
+	#default 365-day calendar). Raise it to slow all aging, lower it to speed all aging.
+	# Default: 8.0
+	# Range: 0.01 ~ 100000.0
+	agingScale = 8.0
+	#When true, villagers hold their current life stage and apparent age, and the
+	#away-time age catch-up is skipped. Animals still grow normally while loaded.
+	disableVillagerAging = false
+	#APPLIES ONLY TO NEW WORLDS. Editing this on an existing save has no effect.
+	#When true and the world is freshly created (no admin/datapack set dayTime forward),
+	#roll a random starting year and day-of-year. Disable to always start at
+	#(start year minimum) day 1. Seasonal mods will still drive their own season.
+	randomizeStart = true
+	#APPLIES ONLY TO NEW WORLDS. Lower bound (inclusive) for the rolled starting display year.
+	# Default: 1500
+	# Range: 0 ~ 100000
+	startYearMin = 1500
+	#APPLIES ONLY TO NEW WORLDS. Upper bound (inclusive) for the rolled starting display year.
+	#If <= min, only min is used.
+	# Default: 2200
+	# Range: 0 ~ 100000
+	startYearMax = 2200
+
+[debug]
+	#Enable debug chat messages for villager AI (farmer, cook, etc.).
+	debugVillagerAI = false
+	#Enable sleep/rest debug logs and villager debug state updates.
+	debugVillagerSleep = false
+	#Enable verbose Townstead diagnostic logging across subsystems (animation bridge, etc.).
+	debugLogging = false

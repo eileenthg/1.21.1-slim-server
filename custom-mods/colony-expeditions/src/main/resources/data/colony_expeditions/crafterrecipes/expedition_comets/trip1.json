@@ -1,0 +1,36 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_comets_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:asteroid_stone"
+    },
+    {
+      "id": "eternal_tales:comets_log"
+    },
+    {
+      "id": "eternal_tales:comets_moss"
+    },
+    {
+      "id": "eternal_tales:comets_cabbage_item"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_comets/trip1",
+  "min-building-level": 1,
+  "max-building-level": 1
+}

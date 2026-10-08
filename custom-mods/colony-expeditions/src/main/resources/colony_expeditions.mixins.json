@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.colonyexpeditions.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AbstractAISkeletonAccessor",
+    "AbstractBuildingContainerAccessor",
+    "AbstractEntityAIBasicInvoker",
+    "BuildingNetherWorkerMixin",
+    "EntityAIWorkNetherMixin",
+    "EntityCitizenMixin",
+    "McaColonyCompatGuardMixin",
+    "StructurePackMetaMixin",
+    "StructurePacksMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

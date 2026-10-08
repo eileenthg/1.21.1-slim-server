@@ -1,0 +1,33 @@
+===== batch: gardens_of_eden kingdom_of_amber lands_of_karvat purgatorium
+[23:30:17] [Server thread/INFO] [minecraft/DedicatedServer]: Done (111.326s)! For help, type "help"
+== waiting for 4 departure(s)
+[23:32:52] [Server thread/WARN] [colony_expeditions/]: [test] citizen Aaliyah F. Gomershall left level: DISCARDED at 55, 79, 78
+[23:32:52] [Server thread/WARN] [colony_expeditions/]: [test] citizen Ariana D. Garnis left level: DISCARDED at 79, 84, 54
+[23:32:54] [Server thread/WARN] [colony_expeditions/]: [test] citizen Camille X. Compton left level: DISCARDED at 79, 86, 78
+[23:32:55] [Server thread/WARN] [colony_expeditions/]: [test] citizen Kinsley T. Corbett left level: DISCARDED at 55, 77, 54
+== waiting for 4 completed log(s)
+[23:33:37] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Ariana D. Garnis
+[23:33:37] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Ariana D. Garnis
+[23:33:37] [Server thread/WARN] [colony_expeditions/]: [test] removeCivilian Ariana D. Garnis
+    mobs=4xeternal_tales:gultrav, 2xeternal_tales:khoirin
+    loot=117xeternal_tales:bronze_coin, 28xeternal_tales:amber_stone, 20xeternal_tales:amber_sand, 4xeternal_tales:fotium_nugget, 3xeternal_tales:amberwood_log, 2xeternal_tales:amberian_arrow, 0xminecraft:air colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Aaliyah F. Gomershall status=STUCK state=INVENTORY_FULL hp=20.0 at=64, 79, 79
+    inv=1xminecraft:stone_sword, 2xminecraft:bread, 1xeternal_tales:kingdom_of_amber, 1xeternal_tales:kingdom_of_amber, 1xeternal_tales:kingdom_of_amber, 1xeternal_tales:kingdom_of_amber, 3xminecraft:wheat_seeds, 53xeternal_tales:bronze_coin, 2xeternal_tales:amberian_arrow, 20xeternal_tales:amber_sand, 3xeternal_tales:amberwood_log
+    mobs=2xeternal_tales:deer, 2xeternal_tales:hawk, 1xeternal_tales:raccoon
+    loot=33xeternal_tales:bronze_coin, 13xeternal_tales:karvat_dirt, 5xeternal_tales:venison, 2xeternal_tales:deer_skin colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Camille X. Compton status=STUCK state=IDLE hp=20.0 at=88, 86, 79
+    inv=1xminecraft:stone_sword, 2xminecraft:bread, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat
+    mobs=2xeternal_tales:deer, 2xeternal_tales:hawk, 1xeternal_tales:raccoon
+    loot=33xeternal_tales:bronze_coin, 13xeternal_tales:karvat_dirt, 5xeternal_tales:venison, 2xeternal_tales:deer_skin colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Camille X. Compton status=STUCK state=IDLE hp=20.0 at=88, 86, 79
+    inv=1xminecraft:stone_sword, 2xminecraft:bread, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat, 1xeternal_tales:lands_of_karvat
+    mobs=2xeternal_tales:purg_thin
+    loot=23xeternal_tales:purgatorium_stone, 10xeternal_tales:bronze_coin, 5xeternal_tales:purgatorium_log, 3xeternal_tales:agate, 0xminecraft:air colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Kinsley T. Corbett status=STUCK state=INVENTORY_FULL hp=20.0 at=64, 77, 55
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 23xeternal_tales:purgatorium_stone, 3xeternal_tales:agate, 10xeternal_tales:bronze_coin, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 2xminecraft:wheat_seeds, 5xeternal_tales:purgatorium_log
+    mobs=2xeternal_tales:purg_thin
+    loot=23xeternal_tales:purgatorium_stone, 10xeternal_tales:bronze_coin, 5xeternal_tales:purgatorium_log, 3xeternal_tales:agate, 0xminecraft:air colony=ACTIVE recipes=1 fulfillable=false built=true  BlockPos{x=-10, y=-1, z=-2}=[portal], BlockPos{x=0, y=-1, z=-1}=[groundlevel]} portalBlock=Block{minecraft:air}
+  Kinsley T. Corbett status=STUCK state=INVENTORY_FULL hp=20.0 at=64, 77, 55
+    inv=1xminecraft:stone_sword, 32xminecraft:bread, 23xeternal_tales:purgatorium_stone, 3xeternal_tales:agate, 10xeternal_tales:bronze_coin, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 1xeternal_tales:purgatorium, 2xminecraft:wheat_seeds, 5xeternal_tales:purgatorium_log
+stopped 24180
+8384

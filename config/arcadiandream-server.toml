@@ -1,0 +1,80 @@
+	[items.chiselOptions]
+		canUse = true
+		#How many blocks the player can travel through using the Wall-Passing Chisel.
+		# Default: 16
+		# Range: 1 ~ 64
+		maxDistance = 16
+
+	[items.nueTridentOptions]
+		#Whether the Nue Trident is compatible with the Impaling enchantment.
+		canHaveImpaling = true
+
+	[items.hisouSwordOptions]
+		#The minimum Y value where leaves have a chance to drop Heavenly Peaches when broken with the Sword of Hisou.
+		# Default: 196
+		# Range: 64 ~ 256
+		minHeightForPeaches = 196
+		canDisableShields = true
+
+	[items.houraiElixirOptions]
+		canDrink = true
+		#Taking fatal damage gives the Elixir Fatigue status effect. Further deaths increase the intensity of it.
+		nerfElixir = true
+		#Death becomes possible under the effects of Elixir Fatigue.
+		allowDying = true
+		#The minimum level of Elixir Fatigue required to allow dying.
+		# Default: 1
+		# Range: 1 ~ 5
+		elixirFatigueThreshold = 5
+
+	[items.foldingChairOptions]
+		# Default: 1.5
+		# Range: 0.0 ~ 10.0
+		knockbackStrength = 1.5
+
+	[items.icicleSwordOptions]
+		#Melts instantly in the Nether.
+		meltsInstantly = true
+		#Freezing added per hit, on top of ten per point of damage.
+		#The game removes two every tick, so anything below about 30 never builds up. Set to 0 for the old behavior.
+		# Default: 60
+		# Range: 0 ~ 200
+		freezeTicksPerHit = 60
+		#Fully frozen targets are slowed until they thaw.
+		slowsTargets = true
+
+	[items.fairyCharmOptions]
+		#When equipped and mode is set to "Prevent Spawning" or "Both", fairies are prevented from spawning in a certain distance.
+		canPreventSpawning = true
+		#How many blocks away fairies are prevented from spawning.
+		# Default: 128.0
+		# Range: 25.0 ~ 128.0
+		distance = 128.0
+
+[danmaku]
+	# Default: 1
+	# Range: 1 ~ 4
+	danmakuCooldownMultiplier = 1
+	# Default: 1.0
+	# Range: 1.0 ~ 4.0
+	danmakuDamageMultiplier = 1.0
+	#Turning this off will make all bullet types share their cooldown.
+	cooldownPerBulletType = true
+
+	[mobs.fairyOptions]
+		spawnFairies = true
+		spawnSunflowerFairies = true
+		spawnIceFairies = true
+
+[touhouLittleMaid]
+	#Multiplies the power cost of Touhou Little Maid altar recipes performed at a Ritual Shrine.
+	#Left at 1 the shrine charges exactly what the altar does, which is the point: the prices
+	#themselves are restated by a datapack this mod ships, so both benches agree.
+	# Default: 1.0
+	# Range: 0.0 ~ 1000.0
+	altarPowerMultiplier = 1.0
+	#Flat power cost for the Ultramarine Orb Elixir at a Ritual Shrine, overriding its recipe.
+	#Set to 0 to charge whatever the recipe says, which is the default now that it is priced there.
+	# Default: 0.0
+	# Range: 0.0 ~ 1000.0
+	orbElixirPower = 0.0

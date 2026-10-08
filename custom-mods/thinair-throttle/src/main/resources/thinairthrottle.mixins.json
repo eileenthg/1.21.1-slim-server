@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.eileenthg.thinairthrottle.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityMixin",
+    "TickAirHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

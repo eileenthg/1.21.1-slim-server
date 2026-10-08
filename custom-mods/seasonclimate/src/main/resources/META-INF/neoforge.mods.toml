@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "Private"
+
+[[mods]]
+modId = "seasonclimate"
+version = "1.0.0"
+displayName = "Season Climate"
+description = "Scales Cold Sweat's seasonal temperature swing by biome, so tropical places stay stable year-round and cold ones swing harder."
+
+[[dependencies.seasonclimate]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.seasonclimate]]
+modId = "cold_sweat"
+type = "required"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.seasonclimate]]
+modId = "sereneseasons"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"

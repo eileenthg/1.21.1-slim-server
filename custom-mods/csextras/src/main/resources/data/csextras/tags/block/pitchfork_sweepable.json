@@ -1,0 +1,188 @@
+{
+  "values": [
+    {
+      "id": "projectvibrantjourneys:oak_fallen_leaves",
+      "required": false
+    },
+    {
+      "id": "projectvibrantjourneys:dead_fallen_leaves",
+      "required": false
+    },
+    {
+      "id": "minecraft:leaf_litter",
+      "required": false
+    },
+    {
+      "id": "enderscape:veiled_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:avocado_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:oak_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:spruce_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:birch_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:jungle_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:acacia_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:dark_oak_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:mangrove_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:azalea_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:flowering_azalea_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:cherry_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:yellow_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:orange_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:red_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:brown_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:spruce_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:birch_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:jungle_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:acacia_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:dark_oak_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:mangrove_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:azalea_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:flowering_azalea_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:cherry_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "convenientdecor:haystack_block",
+      "required": false
+    },
+    {
+      "id": "quark:oak_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:spruce_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:birch_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:jungle_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:acacia_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:dark_oak_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:mangrove_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:azalea_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:flowering_azalea_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:cherry_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:ancient_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:blue_blossom_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:lavender_blossom_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:orange_blossom_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:red_blossom_leaf_carpet",
+      "required": false
+    },
+    {
+      "id": "quark:yellow_blossom_leaf_carpet",
+      "required": false
+    }
+  ]
+}

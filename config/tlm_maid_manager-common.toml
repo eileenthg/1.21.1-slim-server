@@ -1,0 +1,47 @@
+#Allow cross-dimension summoning
+crossDimension = false
+#Scan all dimensions for loaded online maids
+crossDimensionScan = true
+#Also include unloaded-chunk maids and tombstones from world data
+allDimensionScan = true
+#Right-clicking an already-registered maid with the tablet unregisters it
+removeRecordOnRightClick = false
+#Show teleport particle effects
+teleportParticles = true
+#Max registered maids per tablet (only limits registered records; stored/film/unloaded entries are unaffected)
+# Default: 16
+# Range: 1 ~ 256
+maxRegisteredMaids = 16
+#Play the tablet boot animation when opening the GUI
+bootAnimation = true
+#Show the low-health warning mark
+showHealthWarning = true
+#Health warning threshold (percentage)
+# Default: 30
+# Range: 1 ~ 100
+healthWarningThreshold = 30
+#Show the backpack-full warning mark
+showBackpackWarning = true
+#Inventory warning threshold (percentage)
+# Default: 90
+# Range: 1 ~ 100
+inventoryWarningThreshold = 90
+#Show the health bar
+listShowHealth = true
+#Show the armor value
+listShowArmor = false
+#Show the experience
+listShowExp = false
+#Show the favorability
+listShowFavorability = false
+#Show the task name
+listShowTask = true
+#Show the dimension
+listShowDimension = false
+#Show the sit/stand state
+listShowSitStand = false
+#Show the distance
+listShowDistance = true
+#Status suffix mode: DEFAULT (colored), FOLLOW_NAME (uses name color, dead uses offline color), OFF (hide)
+#Allowed Values: DEFAULT, FOLLOW_NAME, OFF
+listStatusMode = "DEFAULT"

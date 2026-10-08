@@ -1,0 +1,37 @@
+#Controls which crop categories receive catch-up growth.
+[crops]
+	#Enable catch-up growth for standard crops: wheat, carrots, potatoes, beetroot, pitcher plant, torchflower, and modded subclasses.
+	cropsEnabled = true
+	#Enable catch-up growth for stem crops: melon and pumpkin stems (including fruit spread), and modded subclasses.
+	stemCropsEnabled = true
+	#Enable catch-up growth for bush/special crops: sweet berry bushes, nether wart, cocoa pods, and modded subclasses.
+	bushCropsEnabled = true
+	#Enable catch-up growth for column crops: sugar cane, cactus, kelp, and modded subclasses.
+	columnCropsEnabled = true
+	#Enable catch-up growth for saplings (oak, birch, spruce, jungle, acacia, dark oak, cherry, mangrove) and modded subclasses. When enabled, saplings will advance their STAGE and attempt to grow a tree based on elapsed time.
+	saplingCropsEnabled = true
+	#Enable catch-up growth for bamboo. When enabled, bamboo stalks will grow additional blocks above based on elapsed time. Requires sky light (not torch light) at the block above. Separate from columnCropsEnabled because bamboo uses STAGE gating and has a max height of 16.
+	bambooEnabled = true
+	#Enable catch-up growth for twisting vines (Crimson Forest, Nether). Grows upward, no light requirement. Modded subclasses of TwistingVinesBlock are also covered.
+	twistingVinesEnabled = true
+	#Enable catch-up growth for weeping vines (Nether). Grows downward, no light requirement. Modded subclasses of WeepingVinesBlock are also covered.
+	weepingVinesEnabled = true
+	#Enable catch-up growth for cave vines (glow berry vines). Grows downward, no light requirement. Modded subclasses of CaveVinesBlock are also covered.
+	caveVinesEnabled = true
+	#Enable catch-up growth for chorus flowers (End dimension). Due to branching growth mechanics, at most one growth step is applied per catch-up event to prevent excessive structure expansion.
+	chorusFlowerEnabled = true
+	#Enable catch-up growth for modded growables that pass capability detection (a random-ticking block with an 'age'/'stage'/'colony_age' growth property) but do not match any of the known vanilla categories above. Default true. Note: such a block still only grows if a mixin reaches its class; this toggle mainly governs tracking and forward compatibility.
+	moddedCropsEnabled = true
+	#Block ids to exclude from capability detection — structural false-positives whose growth property is not actually a growth axis (e.g. fire spread, ice melt). Use full ids like "minecraft:fire".
+	denylist = ["minecraft:fire", "minecraft:soul_fire", "minecraft:frosted_ice"]
+	#Track naturally-generated (wild) kelp, twisting/weeping/cave vines, and chorus flowers for catch-up growth. When false (default), only placed plants of these types are tracked (by a player, villager, or automation), which keeps the saved registry small near oceans and the Nether. When true, wild ones are tracked too — kelp and vines relocate their tracking entry as they grow so they never leave stale entries behind. (Bamboo is unaffected by this setting — it always registers on first tick regardless.)
+	trackWildVines = false
+
+#Registry cleanup settings.
+[cleanup]
+	#Periodically scan the crop registry and remove entries whose block is no longer a tracked crop (e.g. crops destroyed by pistons, explosions, fluids, or other mods that bypass the player BreakEvent). Only loaded chunks are checked; unloaded entries are left untouched. Prevents the evercrops.dat registry from slowly accumulating stale entries over time.
+	autoCleanupEnabled = true
+	#How often (in game ticks) the automatic cleanup scan runs per dimension. 1200 = 1 minute, 36000 = 30 minutes, 72000 = 60 minutes. The scan only touches loaded chunks, so it is cheap at typical values.
+	# Default: 36000
+	# Range: 1200 ~ 288000
+	autoCleanupIntervalTicks = 36000

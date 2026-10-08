@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "csextras:red_sand_pile"
+    }
+  },
+  "result": {
+    "id": "minecraft:red_sand",
+    "count": 1
+  }
+}

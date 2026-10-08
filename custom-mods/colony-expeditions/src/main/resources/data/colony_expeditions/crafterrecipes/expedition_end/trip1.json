@@ -1,0 +1,42 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_end_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "minecraft:end_stone"
+    },
+    {
+      "id": "minecraft:chorus_fruit"
+    },
+    {
+      "id": "minecraft:chorus_flower"
+    },
+    {
+      "id": "enderscape:veiled_log"
+    },
+    {
+      "id": "enderscape:flanger_berry"
+    },
+    {
+      "id": "enderscape:blinklight"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_end/trip1",
+  "min-building-level": 1,
+  "max-building-level": 1
+}

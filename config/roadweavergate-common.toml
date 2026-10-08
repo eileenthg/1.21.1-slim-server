@@ -1,0 +1,15 @@
+#Gate RoadWeaver's road-queue refresh. Without this mod RoadWeaver re-reads and parses
+#data/roadweaver/persistence/structures/<dim>/state.json from disk every server tick.
+#The queue is always refreshed right after RoadWeaver saves new or changed road connections,
+#which is what happens when a player reaches an area that hasn't been planned yet.
+#false = RoadWeaver's original every-tick behaviour.
+enabled = true
+#Also refresh when a player teleports, changes dimension, respawns or logs in.
+refreshOnTeleport = true
+#Safety net: refresh at least this often, in ticks, even if nothing changed. 0 = never.
+#600 = every 30 seconds.
+# Default: 600
+# Range: 0 ~ 72000
+fallbackRefreshTicks = 600
+#Log each refresh and its reason to the game log, for checking the gate works.
+logRefreshes = false

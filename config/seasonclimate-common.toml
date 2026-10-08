@@ -1,0 +1,39 @@
+#Season Climate: scales Cold Sweat's seasonal temperature offset by biome.
+#Cold Sweat's own seasonal swing (config/coldsweat/world.toml, [Compatibility.Seasons]) is applied
+#everywhere in the dimension. These factors multiply that offset based on where the player is,
+#so equatorial biomes stay stable and cold ones swing harder. Nothing else about temperature changes.
+#A factor of 1.0 keeps Cold Sweat's value; 0.0 removes seasons for that biome.
+[general]
+	#Master switch. False makes seasons global again, exactly as Cold Sweat does by default.
+	enabled = true
+
+#Factors by biome class. The first matching rule wins: overrides, then tropical, then base temperature.
+[factors]
+	#Biomes tagged #sereneseasons:tropical_biomes (jungles, savanna, badlands, desert, mangrove swamp,
+	#mushroom fields, warm ocean). Serene Seasons already exempts these from its own seasonal effects.
+	# Default: 0.15
+	# Range: 0.0 ~ 4.0
+	tropical = 0.15
+	#Non-tropical biomes with a base temperature of 0.9 or above.
+	# Default: 0.3
+	# Range: 0.0 ~ 4.0
+	warm = 0.3
+	#Base temperature 0.5 to 0.89: plains, forest, birch, swamp, most starting biomes.
+	# Default: 0.5
+	# Range: 0.0 ~ 4.0
+	temperate = 0.5
+	#Base temperature 0.15 to 0.49: taiga, meadow, old growth spruce.
+	# Default: 1.0
+	# Range: 0.0 ~ 4.0
+	cool = 1.0
+	#Base temperature below 0.15: snowy biomes, frozen peaks, ice spikes.
+	# Default: 1.25
+	# Range: 0.0 ~ 4.0
+	cold = 1.25
+	#Extra multiplier for ocean and beach biomes, for the way large water moderates a climate.
+	# Default: 0.7
+	# Range: 0.0 ~ 4.0
+	coastalMultiplier = 0.7
+	#Per-biome overrides, highest priority. One entry per line, "id=factor" or "#tag=factor".
+	#Examples: "minecraft:jungle=0.1", "#minecraft:is_badlands=0.2", "terralith:yellowstone=1.4"
+	overrides = []

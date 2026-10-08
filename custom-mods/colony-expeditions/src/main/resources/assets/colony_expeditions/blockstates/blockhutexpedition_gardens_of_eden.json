@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "colony_expeditions:block/blockhutexpedition_gardens_of_eden",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "colony_expeditions:block/blockhutexpedition_gardens_of_eden",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "colony_expeditions:block/blockhutexpedition_gardens_of_eden",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "colony_expeditions:block/blockhutexpedition_gardens_of_eden",
+      "y": 0
+    }
+  }
+}

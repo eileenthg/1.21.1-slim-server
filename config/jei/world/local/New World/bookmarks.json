@@ -1,0 +1,7 @@
+[
+  {"version":2},
+  {"recipe":"corn_delight:organic_compost_from_corncob","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"recipe":"youkaishomecoming:cooking/poor_god_soup","recipeType":"farmersdelight:cooking","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"eternal_tales:tropical_sugar"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"farmersdelight:organic_compost_from_rotten_flesh","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"}
+]

@@ -1,0 +1,51 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_kingdom_of_amber_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:amber_stone"
+    },
+    {
+      "id": "eternal_tales:amber_sand"
+    },
+    {
+      "id": "eternal_tales:amberwood_log"
+    },
+    {
+      "id": "eternal_tales:amber_aloe"
+    },
+    {
+      "id": "eternal_tales:golden_cosmos"
+    },
+    {
+      "id": "eternal_tales:amber_ore"
+    },
+    {
+      "id": "eternal_tales:rough_amber"
+    },
+    {
+      "id": "eternal_tales:marble"
+    },
+    {
+      "id": "eternal_tales:fotium_ore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_kingdom_of_amber/trip3",
+  "min-building-level": 3,
+  "max-building-level": 3
+}

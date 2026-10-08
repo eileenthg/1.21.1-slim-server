@@ -1,0 +1,21 @@
+#MCA: Reputation — client presentation.
+#Hiding a number changes only what you see; the server's arithmetic is unaffected.
+[display]
+	#Add a Standing button to MCA's villager interaction screen.
+	showReputationButton = true
+	#Show routine standing changes as a single merged action-bar line.
+	showChangeActionBar = true
+	#Show a toast the first time you reach a new best tier with a village.
+	showTierToasts = true
+	#Show a subdued message when your standing falls to a lower tier.
+	showNegativeTierMessages = true
+	#Combine several changes that land at once into one message.
+	mergeChangeNotifications = true
+	#Show the numeric score. When false, standing is described by tier name and
+	#qualitative progress only.
+	showExactScore = true
+	#Show each deed's numeric contribution in the standing screen.
+	showIncidentDeltas = true
+	#When the screen was opened from a villager, show what that villager
+	#personally makes of you beneath the village's own view.
+	showVillagerOpinion = true

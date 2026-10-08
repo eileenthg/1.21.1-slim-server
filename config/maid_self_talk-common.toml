@@ -1,0 +1,124 @@
+[general]
+	#总开关，默认关闭。开启后女仆才会自言自语/欢迎/对话
+	enabled = false
+	#是否允许玩家独立设置女仆是否触发自言自语。关闭后玩家设置项置灰，且视为启用
+	playerOptionEnabled = true
+
+[state_owner_online]
+	#态 1：主人在线时女仆是否触发自言自语
+	enabled = true
+	#态 1 最小触发间隔（秒）
+	# Default: 60
+	# Range: 10 ~ 86400
+	minIntervalSeconds = 60
+	#态 1 最大触发间隔（秒）
+	# Default: 300
+	# Range: 10 ~ 86400
+	maxIntervalSeconds = 300
+	#态 1：半径多少格内有玩家时才触发
+	# Default: 16.0
+	# Range: 1.0 ~ 512.0
+	playerRange = 16.0
+	#态 1：自言自语保留上下文条数。达到或超过该条数时触发一次遗忘，仅保留最近一次自言自语
+	# Default: 5
+	# Range: 1 ~ 50
+	keepSelfTalkCount = 5
+
+[state_owner_offline]
+	#态 2：主人离线但附近有玩家时女仆是否触发自言自语
+	enabled = true
+	#态 2 最小触发间隔（秒）
+	# Default: 120
+	# Range: 10 ~ 86400
+	minIntervalSeconds = 120
+	#态 2 最大触发间隔（秒）
+	# Default: 600
+	# Range: 10 ~ 86400
+	maxIntervalSeconds = 600
+	#态 2：半径多少格内有玩家时才触发
+	# Default: 32.0
+	# Range: 1.0 ~ 512.0
+	playerRange = 32.0
+	#态 2：自言自语保留上下文条数。达到或超过该条数时触发一次遗忘，仅保留最近一次自言自语
+	# Default: 3
+	# Range: 1 ~ 50
+	keepSelfTalkCount = 3
+
+[welcome]
+	#主人登录后女仆是否打招呼。欢迎语不受半径限制，加载区块内的女仆均可触发
+	enabled = true
+	#玩家登录后的欢迎触发窗口（tick，20 tick = 1 秒）
+	# Default: 600
+	# Range: 20 ~ 72000
+	welcomeWindowTicks = 600
+
+[rate_limit]
+	#欢迎语限流：整个服务器每秒最多放行的欢迎触发次数（所有女仆共享）。
+	#防止主人登录时大量女仆同一瞬间并发建立 LLM 连接，导致端点 connect 超时。
+	#被限流的欢迎语不发请求、窗口期内每 tick 重试，玩家不会看到报错。
+	# Default: 1
+	# Range: 1 ~ 20
+	maxTriggerPerSecond = 1
+	#自话限流：放行随机间隔区间下限（秒，全局共享）。
+	#两次自话派发之间至少间隔该时长，防启动/冷却同相时大量女仆并发建立 LLM 连接。
+	#被限流的自话不发请求、随机退避后重试，玩家不会看到报错。
+	# Default: 5
+	# Range: 1 ~ 3600
+	selfTalkMinIntervalSeconds = 5
+	#自话限流：放行随机间隔区间上限（秒），在区间内随机
+	# Default: 8
+	# Range: 1 ~ 3600
+	selfTalkMaxIntervalSeconds = 8
+	#顺延限流：每只女仆忙时积压的自话/互聊请求数上限（默认顺延）。
+	#顺延请求会在女仆空闲后按序派发（派发时才构建消息，保证上下文稳定）；
+	#积压超出该上限时才吞掉新请求（队列过多才吞，避免挤压自然触发队列）。
+	# Default: 2
+	# Range: 1 ~ 10
+	deferQueueMax = 2
+
+[prompt]
+	#自话输出语言（语言标签，如 zh_cn / en_us / ja_jp，支持任意合法语言标签，非法值回退 zh_cn）。
+	#注意：TLM 官方模型的人设设定多为英文，若不显式声明语言，女仆自话可能输出英文。
+	#此配置会：1) 作为设定占位符的替换语言；2) 向自话提示词注入对应语言的输出指令。
+	#自话/欢迎提示词本身已硬编码在 SelfTalkPrompts 中（1.0.1 起不再从本配置读取），
+	#旧配置文件中的 selfTalkPrompt / selfTalkPromptOwnerNearby / welcomePrompt 键被忽略，不影响运行。
+	selfTalkLanguage = "zh_cn"
+
+[inter_maid_chat]
+	#女仆互聊总开关，默认关闭。开启后满足玩家距离与女仆间距离的女仆才会发起互聊
+	enabled = false
+	#互聊最小触发间隔（秒）
+	# Default: 300
+	# Range: 10 ~ 86400
+	minIntervalSeconds = 300
+	#互聊最大触发间隔（秒）
+	# Default: 600
+	# Range: 10 ~ 86400
+	maxIntervalSeconds = 600
+	#互聊：半径多少格内有玩家时才触发（玩家距离）
+	# Default: 16.0
+	# Range: 1.0 ~ 512.0
+	playerRange = 16.0
+	#互聊：自身多少格内有另一只女仆时才触发（女仆间距离）
+	# Default: 8.0
+	# Range: 1.0 ~ 512.0
+	maidRange = 8.0
+	#互聊保留轮数。问/答算一轮，单问无答也算一轮；达到该轮数时触发遗忘，仅保留最近一条消息
+	# Default: 5
+	# Range: 1 ~ 50
+	keepRounds = 5
+	#互聊连续触发概率（0~1），每轮回答后按此概率决定是否让对方继续回应
+	# Default: 0.3
+	# Range: 0.0 ~ 1.0
+	chainProbability = 0.3
+	#一次互聊会话的最大消息条数（含发起者消息），达到后强制结束本次互聊。为连续概率配到 1.0 等极端配置兜底，防止无限链式往返消耗 token
+	# Default: 10
+	# Range: 1 ~ 50
+	maxChainRounds = 10
+	#互聊对锁：A 对 C 发起互聊后，二者在「连续互聊结束」前互相对锁——
+	#不能发起、也不能被发起互聊（其它女仆的随机候选池不再包含这对）。
+	#链自然结束/请求失败/女仆死亡卸载时均会提前解锁；该时长仅为
+	#回调永不返回等无法感知的异常中断时的超时兜底。
+	# Default: 120
+	# Range: 10 ~ 600
+	pairLockSeconds = 120

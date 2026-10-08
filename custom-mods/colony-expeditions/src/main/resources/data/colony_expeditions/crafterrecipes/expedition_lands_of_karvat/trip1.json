@@ -1,0 +1,33 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_lands_of_karvat_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:karvat_dirt"
+    },
+    {
+      "id": "eternal_tales:honey_fungus"
+    },
+    {
+      "id": "eternal_tales:ledum"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_lands_of_karvat/trip1",
+  "min-building-level": 1,
+  "max-building-level": 1
+}

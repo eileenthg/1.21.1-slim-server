@@ -1,0 +1,56 @@
+{
+  // -----------------------------------------------------------
+  //  Item Obliterator - Expanded Delight cheesemaking cutoff
+  // -----------------------------------------------------------
+  //
+  //  Cheesemaking has been migrated to Brewin & Chewin. This config makes
+  //  Expanded Delight's parallel cheesemaking chain inaccessible in normal
+  //  play without removing anything from ED's code.
+  //
+  //  Blacklisting the plain `cask` is what actually severs the chain: the
+  //  milk/cheese cask blocks can only ever come into existence by right-clicking
+  //  a placed cask with a milk bucket, so with no obtainable cask the entire
+  //  ED cheese pipeline is unreachable. The remaining entries make sure the
+  //  end products cannot be obtained by any other route either.
+  //
+  //  Deliberately NOT blacklisted:
+  //    - expandeddelight:goat_milk_bucket / goat_milk_bottle
+  //        Goat milk is the INPUT to B&C's goat cheese - it must stay usable.
+  //    - ED's cheese-consuming foods (cheese_sandwich, grilled_cheese,
+  //        mac_and_cheese, honeyed_goat_cheese_tart, ...)
+  //        These stay in ED and now resolve to B&C cheese via the
+  //        c:foods/cheese and c:foods/goat_cheese tags.
+  //
+  // -----------------------------------------------------------
+
+  // Do not touch this
+  configVersion: 2,
+
+  // Items here will be unusable completely
+  blacklisted_items: [
+    // --- cheesemaking apparatus ---
+    "expandeddelight:cask",
+    "expandeddelight:milk_cask",
+    "expandeddelight:goat_milk_cask",
+    "expandeddelight:cheese_cask",
+    "expandeddelight:goat_cheese_cask",
+
+    // --- ED cheese products (superseded by B&C wedges/wheels) ---
+    "expandeddelight:cheese_wheel",
+    "expandeddelight:goat_cheese_wheel",
+    "expandeddelight:cheese_slice",
+    "expandeddelight:goat_cheese_slice"
+  ],
+
+  blacklisted_nbt: [],
+
+  only_disable_interactions: [],
+
+  only_disable_attacks: [],
+
+  // Blacklisted items already have their recipes disabled, so nothing extra here.
+  only_disable_recipes: [],
+
+  // Only worth enabling at 20+ blacklisted items; also disables regex support.
+  use_hashmap_optimizations: false
+}

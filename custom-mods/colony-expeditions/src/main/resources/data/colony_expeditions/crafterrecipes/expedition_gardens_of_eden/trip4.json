@@ -1,0 +1,54 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_gardens_of_eden_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:sungrass"
+    },
+    {
+      "id": "eternal_tales:eden_sand"
+    },
+    {
+      "id": "eternal_tales:eden_flower_1"
+    },
+    {
+      "id": "eternal_tales:paradise_sedge"
+    },
+    {
+      "id": "eternal_tales:sunhog_leather"
+    },
+    {
+      "id": "eternal_tales:burncups"
+    },
+    {
+      "id": "eternal_tales:sun_stone_nugget"
+    },
+    {
+      "id": "eternal_tales:spore_edennus"
+    },
+    {
+      "id": "eternal_tales:keybekium_ore"
+    },
+    {
+      "id": "eternal_tales:edenuda"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_gardens_of_eden/trip4",
+  "min-building-level": 4,
+  "max-building-level": 4
+}

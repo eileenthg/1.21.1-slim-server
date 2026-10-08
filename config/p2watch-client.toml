@@ -1,0 +1,18 @@
+#Player2 app address. Empty = use MCA's player2Url, else http://127.0.0.1:4315/
+url = ""
+#While Player2 is offline: check this often (seconds)
+# Default: 5
+# Range: 1 ~ 600
+offlineCheckSeconds = 5
+#While Player2 is online: check this often (seconds), to notice it closing
+# Default: 30
+# Range: 5 ~ 3600
+onlineCheckSeconds = 30
+#player2.exe for the [Start Player2] button. Empty = %LOCALAPPDATA%\Player2\player2.exe
+appPath = ""
+#Show a toast on the title screen when Player2 is offline
+titleToast = true
+#Remind you in chat when you join a world while Player2 is offline
+joinMessage = true
+#Say so in chat when Player2 connects or disconnects while you're in a world
+connectMessage = true

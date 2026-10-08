@@ -1,0 +1,34 @@
+#Whether maids can automatically form a relationship with a nearby compatible maid.
+AutoBond = true
+#Maximum distance in blocks for passive affection growth and partner protection.
+# Default: 16
+# Range: 4 ~ 64
+MaxRelationshipDistance = 16
+#Whether high-affection maids can randomly start romantic actions while idle.
+AutoActions = true
+#Chance for a Crush-stage pair to start an idle action after cooldown.
+# Default: 0.35
+# Range: 0.0 ~ 1.0
+ActionCrushChance = 0.35
+#Chance for a Lovers-stage pair to start an idle action after cooldown.
+# Default: 0.55
+# Range: 0.0 ~ 1.0
+ActionLoversChance = 0.55
+#Chance for a Soulmates-stage pair to start an idle action after cooldown.
+# Default: 0.8
+# Range: 0.0 ~ 1.0
+ActionSoulmatesChance = 0.8
+#Whether a high-affection partner may walk over and sit next to a sitting maid.
+CompanionSit = true
+#Companion-sit chance for Lovers.
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+CompanionSitLoversChance = 0.5
+#Companion-sit chance for Soulmates.
+# Default: 0.85
+# Range: 0.0 ~ 1.0
+CompanionSitSoulmatesChance = 0.85
+#Whether Lovers/Soulmates receive passive intimacy buffs while near each other.
+IntimacyBuffs = true
+#Whether high-affection maids feed food to an injured partner.
+FoodSharing = true

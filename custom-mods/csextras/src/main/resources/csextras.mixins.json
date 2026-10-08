@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eteil.csextras.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ApoliFlagConditionsMixin",
+    "ServerLevelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

@@ -1,0 +1,24 @@
+	[technical_settings.technicalSettings]
+		enableDebugLogging = false
+		# Default: 20
+		# Range: -10000 ~ 10000
+		maxDataSyncInterval = 20
+		# Default: 10
+		# Range: -10000 ~ 10000
+		villageCensusIntervalSeconds = 10
+		# Default: 2000
+		# Range: -10000 ~ 10000
+		factionActivityLogCap = 2000
+		villagerVotingEnabled = true
+		# Default: 0
+		# Range: -10000 ~ 10000
+		villagerDislikeThreshold = 0
+		# Default: 48
+		# Range: -10000 ~ 10000
+		voteDurationHours = 48
+		# Default: 300
+		# Range: -10000 ~ 10000
+		leadershipVoteCheckIntervalSeconds = 300
+		# Default: 60
+		# Range: -10000 ~ 10000
+		monarchElevationCheckIntervalSeconds = 60

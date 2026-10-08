@@ -1,0 +1,28 @@
+{
+  "villagerQuestChance": 0.15,
+  "villagerRumorChance": 0.15,
+  "disableQuestCoordinateClick": false,
+  "disableQuestMap": false,
+  "shareQuestsBetweenPlayers": false,
+  "inventoryJournalButtonPosition": "left",
+  "hideInventoryJournalButton": false,
+  "questTrackerPosition": "top_left",
+  "questTrackerScale": 1.0,
+  "questBoardVillageChance": 1.0,
+  "individualBoardOffers": true,
+  "questBoardStructures": [
+    "minecraft:village_plains",
+    "minecraft:village_desert",
+    "minecraft:village_savanna",
+    "minecraft:village_snowy",
+    "minecraft:village_taiga"
+  ],
+  "questBoardPreferMeetingPoint": true,
+  "questBoardPlacementSearchRadius": 24,
+  "questBoardDropsOnBreak": true,
+  "questBoardMinimumPlacementDistance": 48,
+  "ambientDialoguesEnabled": true,
+  "ambientDialogueCheckIntervalTicks": 100,
+  "ambientDialogueChance": 0.08,
+  "ambientDialogueActivityRadius": 24.0
+}

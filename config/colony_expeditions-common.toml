@@ -1,0 +1,408 @@
+#The stock MineColonies Netherworker.
+[netherworker]
+	#Item the Netherworker uses up to light the nether portal (replaces flint and steel).
+	portal_opener = "dimensional_tears:dimensional_tears_bottle"
+	#Opener items used per portal opening. Durability items lose this much durability instead.
+	# Default: 1
+	# Range: 0 ~ 64
+	opener_per_trip = 1
+	#Trips allowed per period.
+	# Default: 1
+	# Range: 0 ~ 100
+	trips_per_period = 1
+	#Length of the trip period in days.
+	# Default: 3
+	# Range: 1 ~ 100
+	period_days = 3
+	#Multiplier on how long the worker stays away.
+	# Default: 1.0
+	# Range: 0.05 ~ 20.0
+	trip_time_multiplier = 1.0
+	#Multiplier on damage taken from each encounter.
+	# Default: 1.0
+	# Range: 0.0 ~ 20.0
+	damage_multiplier = 1.0
+	#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+	#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+	# Default: 1
+	# Range: 0 ~ 5
+	min_tool_level = 1
+	#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+	#-1 requires no armour at all.
+	# Default: 0
+	# Range: -1 ~ 5
+	min_armor_level = 0
+
+	[expeditions.end]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "minecraft:ender_eye"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 4
+		# Range: 0 ~ 5
+		min_tool_level = 4
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 4
+		# Range: -1 ~ 5
+		min_armor_level = 4
+
+	[expeditions.otherside]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "deeperdarker:heart_of_the_deep"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 3
+		# Range: 0 ~ 5
+		min_tool_level = 3
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 3
+		# Range: -1 ~ 5
+		min_armor_level = 3
+
+	[expeditions.deeper_down]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "spectrum:bottle_of_ruin"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 3
+		# Range: 0 ~ 5
+		min_tool_level = 3
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 3
+		# Range: -1 ~ 5
+		min_armor_level = 3
+
+	[expeditions.bumblezone]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "minecraft:ender_pearl"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 0
+		# Range: 0 ~ 5
+		min_tool_level = 0
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 0
+		# Range: -1 ~ 5
+		min_armor_level = 0
+
+	[expeditions.comets]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:comets"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 2
+		# Range: 0 ~ 5
+		min_tool_level = 2
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 2
+		# Range: -1 ~ 5
+		min_armor_level = 2
+
+	[expeditions.gardens_of_eden]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:gardens_of_eden"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 2
+		# Range: 0 ~ 5
+		min_tool_level = 2
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 2
+		# Range: -1 ~ 5
+		min_armor_level = 2
+
+	[expeditions.kingdom_of_amber]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:kingdom_of_amber"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 3
+		# Range: 0 ~ 5
+		min_tool_level = 3
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 3
+		# Range: -1 ~ 5
+		min_armor_level = 3
+
+	[expeditions.lands_of_karvat]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:lands_of_karvat"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 0
+		# Range: 0 ~ 5
+		min_tool_level = 0
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 0
+		# Range: -1 ~ 5
+		min_armor_level = 0
+
+	[expeditions.purgatorium]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:purgatorium"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 3
+		# Range: 0 ~ 5
+		min_tool_level = 3
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 3
+		# Range: -1 ~ 5
+		min_armor_level = 3
+
+	[expeditions.rayana]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:rayana"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 1
+		# Range: 0 ~ 5
+		min_tool_level = 1
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 1
+		# Range: -1 ~ 5
+		min_armor_level = 1
+
+	[expeditions.volcanech]
+		#Item that opens this portal. Set it to dimensional_tears:dimensional_tears_bottle to use tears instead.
+		portal_key = "eternal_tales:volcanech"
+		#Keys used per portal opening. Durability items (the Eternal Tales crystals) lose this much durability instead.
+		# Default: 1
+		# Range: 0 ~ 64
+		keys_per_trip = 1
+		#Trips allowed per period.
+		# Default: 1
+		# Range: 0 ~ 100
+		trips_per_period = 1
+		#Length of the trip period in days.
+		# Default: 3
+		# Range: 1 ~ 100
+		period_days = 3
+		#Multiplier on how long the worker stays away.
+		# Default: 1.0
+		# Range: 0.05 ~ 20.0
+		trip_time_multiplier = 1.0
+		#Multiplier on damage taken from each encounter.
+		# Default: 1.0
+		# Range: 0.0 ~ 20.0
+		damage_multiplier = 1.0
+		#Tool tier the worker must hold before leaving: 0 wood or gold, 1 stone, 2 iron, 3 diamond, 4 netherite.
+		#The worker waits and asks the colony for that tier instead of setting off under-equipped.
+		# Default: 4
+		# Range: 0 ~ 5
+		min_tool_level = 4
+		#Armour tier the worker must wear before leaving: 0 leather, 1 gold, 2 chain, 3 iron, 4 diamond.
+		#-1 requires no armour at all.
+		# Default: 4
+		# Range: -1 ~ 5
+		min_armor_level = 4

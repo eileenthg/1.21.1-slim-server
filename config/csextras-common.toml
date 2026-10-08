@@ -1,0 +1,168 @@
+#Items removed from creative tabs (recipes are disabled by data, JEI hides c:hidden_from_recipe_viewers)
+hiddenItems = ["convenientdecor:white_plastic_shovel", "convenientdecor:orange_plastic_shovel", "convenientdecor:magenta_plastic_shovel", "convenientdecor:light_blue_plastic_shovel", "convenientdecor:yellow_plastic_shovel", "convenientdecor:lime_plastic_shovel", "convenientdecor:pink_plastic_shovel", "convenientdecor:gray_plastic_shovel", "convenientdecor:light_gray_plastic_shovel", "convenientdecor:cyan_plastic_shovel", "convenientdecor:purple_plastic_shovel", "convenientdecor:blue_plastic_shovel", "convenientdecor:brown_plastic_shovel", "convenientdecor:green_plastic_shovel", "convenientdecor:red_plastic_shovel", "convenientdecor:black_plastic_shovel"]
+
+#Rain gear. Values are how much of Cold Sweat's rain soaking is kept off (0-1).
+#Tags: csextras:raincoats, csextras:rain_hats, csextras:umbrellas
+[rainwear]
+	#Raincoat with the hood down
+	# Default: 0.4
+	# Range: 0.0 ~ 1.0
+	raincoat = 0.4
+	#Rain hat without a raincoat
+	# Default: 0.4
+	# Range: 0.0 ~ 1.0
+	rainHat = 0.4
+	#Raincoat with the hood up, or raincoat + rain hat
+	# Default: 0.8
+	# Range: 0.0 ~ 1.0
+	fullCover = 0.8
+	#Open umbrella (stacks with clothing)
+	# Default: 0.4
+	# Range: 0.0 ~ 1.0
+	umbrella = 0.4
+	#Full rain cover stops Origins' in_rain check (Enderian, Blazeborn) in normal rain
+	originsRainProtection = true
+	#An open umbrella also counts as full rain cover for Origins
+	umbrellaCountsForOriginsRain = false
+	#During thunderstorms full cover no longer blocks rain; it multiplies origins:hurt_by_water damage by this
+	# Default: 0.5
+	# Range: 0.0 ~ 1.0
+	originsThunderDamageMultiplier = 0.5
+
+#Portable shade. 1 = same as standing in full shade. Tag: csextras:sun_hats
+[shade]
+	# Default: 1.0
+	# Range: 0.0 ~ 1.0
+	umbrella = 1.0
+	# Default: 0.6
+	# Range: 0.0 ~ 1.0
+	sunHat = 0.6
+	#An open umbrella stops Origins' exposed_to_sun check (Phantom, Vampire)
+	umbrellaBlocksOriginsSun = true
+
+#Shivering: when cold, the body warms itself at the cost of hunger. Body temperature: -100 = freezing damage.
+[shivering]
+	enabled = true
+	# Default: -40.0
+	# Range: -150.0 ~ 0.0
+	startBodyTemp = -40.0
+	#Body warmth per second when shivering starts
+	# Default: 0.2
+	# Range: 0.0 ~ 10.0
+	minWarmthPerSecond = 0.2
+	#Body warmth per second at -100
+	# Default: 0.5
+	# Range: 0.0 ~ 10.0
+	maxWarmthPerSecond = 0.5
+	#No shivering at or below this food level
+	# Default: 6
+	# Range: 0 ~ 20
+	minFood = 6
+	#Food exhaustion per second at full intensity (4 = one food point)
+	# Default: 0.15
+	# Range: 0.0 ~ 10.0
+	exhaustionPerSecond = 0.15
+
+#Right-click a lit campfire with a log to give everything nearby Cold Sweat's Warmth effect.
+#Tags: csextras:campfire_fuel (items), csextras:stokable_campfires (blocks)
+[campfire]
+	enabled = true
+	# Default: 6.0
+	# Range: 1.0 ~ 32.0
+	radius = 6.0
+	#Warmth duration in ticks
+	# Default: 3600
+	# Range: 20 ~ 72000
+	duration = 3600
+
+#Sweating: when hot and hydrated, the body cools itself and uses a little extra thirst.
+[sweat]
+	enabled = true
+	# Default: 30.0
+	# Range: 0.0 ~ 150.0
+	startBodyTemp = 30.0
+	#Cooling at 100 body temp, in Cold Sweat units (0.2 = 9F)
+	# Default: 0.2
+	# Range: 0.0 ~ 2.0
+	maxCooling = 0.2
+	#No sweating at or below this thirst
+	# Default: 6
+	# Range: 0 ~ 20
+	minThirst = 6
+	#Full sweating at or above this thirst
+	# Default: 12
+	# Range: 0 ~ 20
+	fullThirst = 12
+	#Thirst exhaustion per second at full sweat (Thirst Was Taken)
+	# Default: 0.05
+	# Range: 0.0 ~ 10.0
+	thirstExhaustionPerSecond = 0.05
+
+#Heartbeat sound as you approach overheating (client side)
+[heartbeat]
+	enabled = true
+	# Default: 60.0
+	# Range: 0.0 ~ 150.0
+	startBodyTemp = 60.0
+	# Default: 0.8
+	# Range: 0.0 ~ 2.0
+	volume = 0.8
+	#Falls back to a low note block drum if this sound is missing
+	sound = "subtle_effects:entity.player.heartbeat"
+
+#Pitchfork (csextras:pitchforks) clears csextras:pitchfork_mineable fast and sweeps csextras:pitchfork_sweepable around the target. Sneak to break one block.
+[pitchfork]
+	enabled = true
+	# Default: 6.0
+	# Range: 1.0 ~ 100.0
+	speedMultiplier = 6.0
+	#Sweep radius (2 = 5x5, one block up and down)
+	# Default: 2
+	# Range: 0 ~ 4
+	sweepRadius = 2
+
+#Sandstorms: rain weather in a biome with no precipitation that is in csextras:has_sandstorms (or has_red_sandstorms).
+[sandstorms]
+	enabled = true
+	#Movement speed change for exposed mobs (-0.2 = 20% slower). Tag csextras:ignores_sandstorms is exempt
+	# Default: -0.2
+	# Range: -1.0 ~ 0.0
+	slowness = -0.2
+	#Follow range change for exposed mobs (they can't see as far)
+	# Default: -0.5
+	# Range: -1.0 ~ 0.0
+	followRange = -0.5
+	slowPlayers = true
+	#Breezes spawn naturally (day or night) on the surface during sandstorms
+	breezes = true
+	# Default: 20
+	# Range: 1 ~ 1000
+	breezeWeight = 20
+	#No new breeze spawns if this many are already within 48 blocks
+	# Default: 3
+	# Range: 1 ~ 64
+	breezeMaxNearby = 3
+	#Chance per weather tick on a column that a sand pile layer is added (vanilla snow uses the same tick)
+	# Default: 0.5
+	# Range: 0.0 ~ 1.0
+	pileChance = 0.5
+	#Sand piles stop growing at this many layers (0 = no accumulation)
+	# Default: 2
+	# Range: 0 ~ 8
+	pileMaxLayers = 2
+	#Chance per random tick that an exposed sand cauldron gains a level during a sandstorm
+	# Default: 0.3
+	# Range: 0.0 ~ 1.0
+	cauldronFillChance = 0.3
+
+#Eating a hot, hearty food gives Cold Sweat's Warmth effect. Tag: csextras:warming_foods
+[warmingFoods]
+	enabled = true
+	#Warmth duration in ticks
+	# Default: 3600
+	# Range: 20 ~ 72000
+	duration = 3600
+	#Warmth level minus one (0 = Warmth I)
+	# Default: 0
+	# Range: 0 ~ 9
+	amplifier = 0

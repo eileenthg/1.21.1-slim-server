@@ -1,0 +1,36 @@
+#Support locking any inventory slot, including armor and offhand.
+#Default Value: true
+allow_locking_all_slots = true
+#Show a tooltip hint on how to unlock a locked slot.
+#Default Value: true
+unlock_slot_hint = true
+#Maximum time in ticks it takes to switch the lock on a slot.
+#Default Value: 12
+# Default: 12
+# Range: 1 ~ 72000
+trigger_lock_ticks = 12
+#Disallow collecting items of a type (via double-clicking) and moving all items of a type (via shift+double-clicking) when any items that would be moved are in locked slots.
+#This is a workaround for the server picking items from locked slots when using these mechanics, but unfortunately partially breaks the vanilla behavior.
+#Default Value: false
+prevent_double_click_actions_for_locked_items = false
+#A slot can only be locked when the contained item cannot be stacked like tools and armor.
+#Default Value: false
+item_must_not_be_stackable = false
+#Transparency value for drawing the locked slot overlay on the gui hotbar.
+#Default Value: 0.6
+# Default: 0.6
+# Range: 0.0 ~ 1.0
+gui_hotbar_overlay_alpha = 0.6
+#Y-offset for trigger lock progress overlay from mouse cursor tip as center.
+#Default Value: -4
+# Default: -4
+# Range: > -2147483648
+trigger_lock_offset_y = -4
+#X-offset for trigger lock progress overlay from mouse cursor tip as center.
+#Default Value: -8
+# Default: -8
+# Range: > -2147483648
+trigger_lock_offset_x = -8
+#A slot can only be locked when it is not empty. When empty slots are locked, an item can still be put in.
+#Default Value: false
+slot_must_not_be_empty = false

@@ -1,0 +1,54 @@
+{
+  "type": "recipe",
+  "crafter": "expedition_lands_of_karvat_custom",
+  "inputs": [
+    {
+      "id": "minecraft:cobblestone",
+      "count": 64
+    },
+    {
+      "id": "minecraft:torch",
+      "count": 32
+    },
+    {
+      "id": "minecraft:ladder",
+      "count": 16
+    }
+  ],
+  "additional-output": [
+    {
+      "id": "eternal_tales:karvat_dirt"
+    },
+    {
+      "id": "eternal_tales:honey_fungus"
+    },
+    {
+      "id": "eternal_tales:ledum"
+    },
+    {
+      "id": "eternal_tales:bloody_socket_fungus"
+    },
+    {
+      "id": "eternal_tales:karvat_tin_ore"
+    },
+    {
+      "id": "eternal_tales:karvat_gold_ore"
+    },
+    {
+      "id": "eternal_tales:deer_horn"
+    },
+    {
+      "id": "eternal_tales:karvat_corundum_ore"
+    },
+    {
+      "id": "eternal_tales:karvat_garnet_ore"
+    },
+    {
+      "id": "eternal_tales:lilly_of_the_keiskei"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "loot-table": "colony_expeditions:recipes/expedition_lands_of_karvat/trip4",
+  "min-building-level": 4,
+  "max-building-level": 4
+}

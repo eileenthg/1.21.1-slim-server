@@ -1,0 +1,12 @@
+#General settings
+[general]
+	#Items that should not be auto-restored into equipment slots (format: 'modid:item')
+	blacklisted_items = []
+	#Whether items with Curse of Binding should be restored into equipment slots
+	transfer_cursed_items = false
+	#Restore Curios slots when Curios is present
+	restore_curios = true
+	#Restore Accessories slots when Accessories is present (Aether gloves, etc.)
+	restore_accessories = true
+	#Restore main inventory / armor / offhand into the same slots they came from
+	restore_vanilla_slots = true

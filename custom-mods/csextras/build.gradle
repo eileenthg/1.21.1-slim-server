@@ -1,0 +1,28 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+version = "${mod_version}"
+group = 'eteil.csextras'
+base { archivesName = 'csextras' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+    mods {
+        csextras { sourceSet(sourceSets.main) }
+    }
+}
+
+dependencies {
+    // All provided by the pack at runtime; compiled against only.
+    compileOnly files('libs/ColdSweat-2.4.3.1.jar')
+    compileOnly files('libs/ThirstWasTaken-1.21.1-2.1.5.jar')
+    compileOnly files('libs/curios-neoforge-9.5.1+1.21.1.jar')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

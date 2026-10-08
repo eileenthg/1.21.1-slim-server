@@ -1,0 +1,24 @@
+#Should the minced beef be endless?
+endlessMincedBeefEnabled = true
+#Should the beef patty be boundless?
+boundlessBeefPattyEnabled = true
+#Should the pasta bowl be Never Ending?
+neverEndingEnabled = true
+#Should the sauce be infinite
+infinitySauceEnabled = true
+#How long should the cooldown on the minced beef be?
+# Default: 8
+# Range: > 0
+endlessMincedBeefCooldown = 8
+#How long should the cooldown on the beef patty be?
+# Default: 8
+# Range: > 0
+boundlessBeefPattyCooldown = 8
+#How long should the cooldown on the Never Ending pasta be?
+# Default: 22
+# Range: > 0
+neverEndingCooldown = 22
+#How long should the cooldown on the sauce of infinity be?
+# Default: 4
+# Range: > 0
+infinitySauceCooldown = 4

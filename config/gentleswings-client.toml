@@ -1,0 +1,3 @@
+#Show a small "passing through" label under the crosshair while a gentle swing
+#would pass through the entity you are looking at.
+showCrosshairHint = true

@@ -1,0 +1,25 @@
+#Show a message above the hotbar when a new book is added to the library.
+showUnlockMessage = true
+
+[button]
+	#Show the library button in the survival inventory.
+	showInventoryButton = true
+	#Show it on the creative inventory's Inventory tab too.
+	showInCreative = true
+	#Button position, relative to the inventory window's top-left corner.
+	#The default sits just right of the recipe-book button.
+	# Default: 126
+	# Range: -500 ~ 500
+	buttonX = 126
+	# Default: 61
+	# Range: -500 ~ 500
+	buttonY = 61
+	#Same, for the creative inventory tab.
+	# Default: 130
+	# Range: -500 ~ 500
+	creativeButtonX = 130
+	# Default: 20
+	# Range: -500 ~ 500
+	creativeButtonY = 20
+	#Item shown on the button.
+	buttonIcon = "minecraft:book"

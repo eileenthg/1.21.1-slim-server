@@ -1,0 +1,10 @@
+#Client-side display settings for Warden Sense.
+[vibration]
+	#How many rings to draw around a detected entity, stacked downwards.
+	#3 is the original look. Set to 0 to disable the rings entirely and
+	#keep only the sound cue.
+	# Default: 3
+	# Range: 0 ~ 3
+	ringCount = 3
+	#Whether to replay the footstep sound of a detected entity back to you.
+	playVibrationSounds = true

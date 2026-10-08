@@ -1,0 +1,16 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "Private"
+
+[[mods]]
+modId = "seedscout"
+version = "0.1.0"
+displayName = "Seed Scout"
+description = "Server-side tool: dumps the resolved overworld worldgen as a datapack and scans seeds for a village at spawn."
+
+[[dependencies.seedscout]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"

@@ -1,0 +1,87 @@
+#MCA Villager Bridge.
+#
+#Every behaviour here is a reimplementation of one Liberty's Villagers advertises
+#but does not deliver: in its 1.0.2 NeoForge build the six classes in its tasks/
+#package declare Yarn method names (shouldRun/run/keepRunning) that were never
+#remapped, so they override nothing on Behavior and never execute. That affects
+#vanilla villagers exactly as much as MCA ones.
+#
+#Leaving Liberty's Villagers' own keys alone is fine - they do nothing either way.
+#
+#Professions are listed by registry id, so MCA's professions and vanilla's are
+#configured the same way.
+[behaviours]
+	#Professions whose villagers repair damaged iron golems.
+	#minecraft:armorer replaces the dead armorerHealsGolems.
+	healGolemProfessions = ["mca:guard", "mca:archer", "mca:mercenary", "minecraft:armorer"]
+	#How far away a damaged golem is noticed, in blocks.
+	# Default: 32
+	# Range: 1 ~ 128
+	healGolemRange = 32
+	#Health restored per repair. 25 matches a vanilla iron ingot repair;
+	#set to 0 to restore the golem fully, as Liberty's Villagers intended.
+	# Default: 25.0
+	# Range: 0.0 ~ 1024.0
+	healGolemAmount = 25.0
+	#Professions whose villagers throw splash Regeneration at the hurt.
+	#minecraft:cleric replaces the dead clericThrowsPotionsAtVillagers.
+	throwPotionProfessions = ["mca:guard", "minecraft:cleric"]
+	#How far away a hurt target is noticed, in blocks.
+	# Default: 32
+	# Range: 1 ~ 128
+	throwPotionRange = 32
+	#Throw potions at hurt villagers.
+	throwPotionsAtVillagers = true
+	#Throw potions at hurt players.
+	throwPotionsAtPlayers = true
+
+#Villagers breed nearby animals by feeding them, if carrying the right food.
+#Same profession/animal pairings and defaults as Liberty's Villagers.
+[feedAnimals]
+	butchersFeedChickens = true
+	butchersFeedCows = true
+	butchersFeedPigs = true
+	butchersFeedRabbits = true
+	butchersFeedSheep = false
+	fletchersFeedChickens = true
+	leatherworkersFeedCows = true
+	shepherdsFeedSheep = false
+	#How far away an animal is noticed, in blocks.
+	# Default: 20
+	# Range: 1 ~ 128
+	feedAnimalsRange = 20
+	#Stop feeding once this many of that animal are already nearby.
+	# Default: 30
+	# Range: 1 ~ 512
+	feedMaxAnimals = 30
+
+#Fishermen fish from a barrel job site and cook what they catch.
+#
+#IMPORTANT: casting a bobber needs a FishingHook that accepts a villager owner.
+#Liberty's Villagers already patches FishingHook for exactly this, and those
+#patches are mixins, so unlike its tasks they do work. Rather than adding a
+#second, conflicting set of FishingHook mixins, the casting behaviour here
+#reuses LV's and stays off unless Liberty's Villagers is installed.
+#Cooking the catch has no such dependency and works on its own.
+[fishing]
+	#Cast a line into nearby water. Requires Liberty's Villagers to be loaded.
+	fishermanFish = true
+	#How far a fisherman will walk to reach water, in blocks.
+	# Default: 10
+	# Range: 1 ~ 64
+	fishermanFindWaterRange = 10
+	#How far the bobber may land from the fisherman, in blocks.
+	#Keep this at or below Liberty's Villagers' key of the same name -
+	#its FishingHook patch despawns bobbers beyond its own value.
+	# Default: 5
+	# Range: 1 ~ 32
+	fishermanFishingWaterRange = 5
+	#Cook raw cod and salmon into their cooked forms at the barrel.
+	fishermanCooksCatch = true
+
+[general]
+	#Only attach these behaviours to MCA villager entities.
+	#Default false, because Liberty's Villagers' versions do not run for
+	#vanilla villagers either, so there is nothing to duplicate.
+	#Set true to restrict this mod to MCA villagers only.
+	onlyMcaVillagers = false

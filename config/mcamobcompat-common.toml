@@ -1,0 +1,23 @@
+#General settings.
+[general]
+	#Log every classification decision and integration detail.
+	#Verbose by design -- for diagnosing why a mob is not being recognised.
+	#The /mcamobcompat command gives the same information without the log spam.
+	debugLogging = false
+
+#Per-mod integration modules.
+#Turning one off makes this mod completely blind to that mod's entities:
+#they stop being classified, so nothing here treats them as livestock,
+#mounts or guards. Use it when another mod already handles the same
+#integration and the two are fighting.
+#A module for a mod that is not installed is skipped regardless.
+[modules]
+	#Guard Villagers. NOTE: turning this off also disables the block on the
+	#villager-to-guard conversion, which permanently destroys an MCA
+	#villager's family, marriage and genetics data. Leave it on.
+	guardVillagers = true
+	swem = true
+	#Genetic Animals (mod id 'eanimod').
+	geneticAnimals = true
+	#DragN's Livestock Overhaul.
+	dragnLivestock = true

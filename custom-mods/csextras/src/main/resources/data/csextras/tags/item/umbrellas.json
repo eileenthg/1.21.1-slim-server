@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#convenientdecor:functional_umbrellas",
+      "required": false
+    },
+    {
+      "id": "artifacts:umbrella",
+      "required": false
+    }
+  ]
+}

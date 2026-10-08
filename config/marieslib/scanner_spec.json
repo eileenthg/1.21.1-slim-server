@@ -1,0 +1,13 @@
+{
+  "multipliers": {
+    "community_tag": 5.0,
+    "namespace": 4.0,
+    "suffix": 3.0,
+    "keyword": 2.0,
+    "archetype": 2.0,
+    "recipe_inheritance": 1.0,
+    "namespace_peer": 0.5,
+    "secondary_suffix": 0.5,
+    "namespace_peer_average_weight": 0.5
+  }
+}

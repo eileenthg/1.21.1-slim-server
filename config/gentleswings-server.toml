@@ -1,0 +1,3 @@
+#If true, gentle swings also pass through hostile mobs (zombies, creepers, ...).
+#Off by default so you can still defend yourself without toggling first.
+spareHostileMobs = false

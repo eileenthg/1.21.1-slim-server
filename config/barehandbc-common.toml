@@ -1,0 +1,7 @@
+#Master toggle for bare-hand fist combat.
+enabled = true
+#Better Combat weapon-attribute preset applied to a hand with no weapon.
+presetId = "bettercombat:fist"
+#If true, holding a non-weapon item (torch, block, food) also punches.
+#If false, only a truly empty hand punches.
+includeNonWeaponItems = true

@@ -1,0 +1,11 @@
+{
+  "anvil_cost": 4,
+  "description": { "translate": "enchantment.ba_bt.depth_dropper" },
+  "effects": {},
+  "max_cost": { "base": 25, "per_level_above_first": 10 },
+  "max_level": 1,
+  "min_cost": { "base": 10, "per_level_above_first": 10 },
+  "slots": [ "any" ],
+  "supported_items": "#ba_bt:depth_dropper_can_enchant",
+  "weight": 2
+}

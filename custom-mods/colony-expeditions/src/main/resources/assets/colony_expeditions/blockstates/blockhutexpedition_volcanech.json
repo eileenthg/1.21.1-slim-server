@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "colony_expeditions:block/blockhutexpedition_volcanech",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "colony_expeditions:block/blockhutexpedition_volcanech",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "colony_expeditions:block/blockhutexpedition_volcanech",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "colony_expeditions:block/blockhutexpedition_volcanech",
+      "y": 0
+    }
+  }
+}
