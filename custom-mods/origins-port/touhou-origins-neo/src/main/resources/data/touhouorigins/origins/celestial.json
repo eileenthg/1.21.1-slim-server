@@ -1,0 +1,13 @@
+{
+  "powers": [
+    "touhouorigins:common/natural_luck",
+    "touhouorigins:celestial/state_of_enlightenment",
+    "touhouorigins:celestial/temper",
+    "touhouorigins:celestial/match_made_in_heaven",
+    "touhouorigins:common/heavenly_descendant",
+    "touhouorigins:celestial/lavish_lifestyle"
+  ],
+  "icon": "minecraft:enchanted_golden_apple",
+  "order": 1,
+  "impact": 2
+}

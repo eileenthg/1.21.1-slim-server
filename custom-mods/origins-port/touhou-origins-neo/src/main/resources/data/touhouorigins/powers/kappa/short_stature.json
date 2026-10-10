@@ -1,0 +1,9 @@
+{
+  "type": "apoli:attribute",
+  "modifier": {
+    "name": "Kappa size",
+    "attribute": "minecraft:generic.scale",
+    "operation": "multiply_base",
+    "value": -0.1
+  }
+}

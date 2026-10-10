@@ -17,7 +17,8 @@ It holds **no jars, no worlds, no logs, no keys**. Do not look for them, and do 
 | Resource packs, Maid model packs | `resourcepacks.json`, `maid-model-packs.json` (names, sizes, sha1 only) |
 | Why was something changed or removed? What was tested? | `notes/` (one file per topic; `notes/MEMORY.md` is the index) |
 | Custom mods and ports written for this pack | `custom-mods/<name>/` (44 projects, sources only; large upstream ports such as `tlm`, `origins-port`, `dfr-jei-fix` carry only their docs and handoff files). Status of each is in `WORKLOG.md` |
-| What happened when, in detail | `reports/` (the numbered session reports from 31 Aug to 30 Sep) |
+| What happened when, in detail | `reports/` (the numbered session reports from 31 Aug to 30 Sep) and `SESSIONS.md` (all 81 Claude Code sessions with topic, dates and transcript id) |
+| Projects outside modpack-audit | `notes-other/<project>/` (their own Claude notes) and `custom-mods/<fork>/patches/` (our commits against upstream forks: TLM, Delightful, Brewin' and Chewin', Expanded Delight, DFR, Maidsoul Kitchen, AntOS) |
 | Loader and Minecraft versions | `mmc-pack.json` |
 
 ## How to answer well
@@ -35,4 +36,4 @@ It holds **no jars, no worlds, no logs, no keys**. Do not look for them, and do 
 - Dates in notes are 2026. Pack changes after 10 Oct are not reflected here.
 - The owner plays and hosts from this instance. A friend joins the hosted world, so some mods must be installed on both sides (the notes say which).
 
-- `tools/` has the two scripts that regenerate `mods/` and copy the configs from the live instance (they only work on the owner's machine).
+- `tools/` has the scripts that regenerate this snapshot from the owner's PC: `build_manifest.py` (mods), `copy_content.py` (configs, datapacks, notes), `copy_projects.py` (sibling projects, reports), `export_forks.py` (fork patches, Origins source, other notes). Run them in that order; `copy_content.py` resets `custom-mods/`.

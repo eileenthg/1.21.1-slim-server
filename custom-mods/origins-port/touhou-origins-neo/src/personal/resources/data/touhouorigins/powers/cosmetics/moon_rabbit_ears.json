@@ -1,0 +1,12 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/moon_rabbit_ears",
+  "texture_location": "touhouorigins:textures/entity/tlm/reisen_udongein_inaba.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:moon_rabbit"
+  }
+}

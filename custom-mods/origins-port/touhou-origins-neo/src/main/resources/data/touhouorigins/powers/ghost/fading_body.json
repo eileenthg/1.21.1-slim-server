@@ -1,0 +1,70 @@
+{
+  "type": "apoli:multiple",
+  "regen": {
+    "type": "apoli:action_over_time",
+    "entity_action": {
+      "type": "apoli:heal",
+      "amount": 1
+    },
+    "interval": 6,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:or",
+          "conditions": [
+            {
+              "type": "apoli:status_effect",
+              "effect": "minecraft:wither",
+              "inverted": true
+            },
+            {
+              "type": "apoli:enchantment",
+              "enchantment": "minecraft:soul_speed",
+              "comparison": ">=",
+              "compare_to": 1
+            }
+          ]
+        },
+        {
+          "type": "apoli:relative_health",
+          "comparison": "<",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "health": {
+    "type": "apoli:attribute",
+    "modifier": {
+      "name": "Ghost health penalty",
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": -10
+    }
+  },
+  "hurt_sound": {
+    "type": "apoli:replace_sound_emission",
+    "sounds": {
+      "minecraft:entity\\.player\\.hurt.*": "touhouorigins:origin.ghost.hurt"
+    }
+  },
+  "death_sound": {
+    "type": "apoli:replace_sound_emission",
+    "sounds": {
+      "minecraft:entity.player.death": "touhouorigins:origin.ghost.death"
+    }
+  },
+  "hurt_sound_self": {
+    "type": "apoli:replace_sound_reception",
+    "sounds": {
+      "minecraft:entity\\.player\\.hurt.*": "touhouorigins:origin.ghost.hurt"
+    }
+  },
+  "death_sound_self": {
+    "type": "apoli:replace_sound_reception",
+    "sounds": {
+      "minecraft:entity.player.death": "touhouorigins:origin.ghost.death"
+    }
+  }
+}

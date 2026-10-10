@@ -1,0 +1,15 @@
+{
+	"name": "Tiny",
+	"description": "§oDid I step on something?§r",
+    "powers": [
+		"prscaleorigins:micro_scale",
+		"prscaleorigins:micro_balance"
+    ],
+    "icon": {
+        "item": "minecraft:red_mushroom"
+    },
+    "order": 35,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

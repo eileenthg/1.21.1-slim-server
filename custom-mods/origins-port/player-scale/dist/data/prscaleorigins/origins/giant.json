@@ -1,0 +1,15 @@
+{
+	"name": "Giant",
+	"description": "§oI hope it's friendly...§r",
+    "powers": [
+		"prscaleorigins:giant_scale",
+		"prscaleorigins:giant_balance"
+    ],
+    "icon": {
+        "item": "minecraft:melon"
+    },
+    "order": 55,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

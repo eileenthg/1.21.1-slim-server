@@ -1,0 +1,70 @@
+diff --git a/common-1.21.1/src/main/java/com/craisinlord/antos/api/client/game/ComputerGame.java b/common-1.21.1/src/main/java/com/craisinlord/antos/api/client/game/ComputerGame.java
+index 04f1623..69aac76 100644
+--- a/common-1.21.1/src/main/java/com/craisinlord/antos/api/client/game/ComputerGame.java
++++ b/common-1.21.1/src/main/java/com/craisinlord/antos/api/client/game/ComputerGame.java
+@@ -24,6 +24,12 @@ public interface ComputerGame {
+         void render(GuiGraphics graphics, Font font, int x, int y, int width, int height);
+         default boolean keyPressed(int keyCode) { return false; }
+         default boolean charTyped(char codePoint) { return false; }
++
++        /** Mouse position relative to the top-left corner of the game area, sent every frame before {@link #render}. */
++        default void hover(int mouseX, int mouseY) {}
++
++        /** Mouse press relative to the top-left corner of the game area. Return true if handled. */
++        default boolean mouseClicked(int mouseX, int mouseY, int button) { return false; }
+         default void close() {}
+     }
+ }
+diff --git a/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/game/AntOSComputerGames.java b/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/game/AntOSComputerGames.java
+index 7d7d387..f215002 100644
+--- a/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/game/AntOSComputerGames.java
++++ b/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/game/AntOSComputerGames.java
+@@ -8,6 +8,7 @@ public final class AntOSComputerGames {
+     private AntOSComputerGames() {}
+ 
+     public static void register() {
++        com.craisinlord.antos.content.client.game.mini.MiniGames.register();
+         ResourceLocation id = ResourceLocation.fromNamespaceAndPath("antos", "blockle");
+         if (ComputerGameRegistry.get(id) != null) return;
+         ComputerGameRegistry.register(new ComputerGame() {
+diff --git a/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/screen/ComputerScreen.java b/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/screen/ComputerScreen.java
+index c9f35ca..267f3f1 100644
+--- a/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/screen/ComputerScreen.java
++++ b/common-1.21.1/src/main/java/com/craisinlord/antos/content/client/screen/ComputerScreen.java
+@@ -2989,7 +2989,10 @@ public final class ComputerScreen extends Screen {
+         g.drawString(font, Component.literal("INSTALLED GAMES"), x, y, GREEN, false);
+         if (window.gameOpen) {
+             ComputerGame.Session game = gameSession(window).orElse(null);
+-            if (game != null) game.render(g, font, x, y + 16, 214, 155);
++            if (game != null) {
++                game.hover(mouseX - x, mouseY - (y + 16));
++                game.render(g, font, x, y + 16, 214, 155);
++            }
+             return;
+         }
+         List<ComputerGame> games = installedGames();
+@@ -3772,6 +3775,12 @@ public final class ComputerScreen extends Screen {
+                     }
+                     return true;
+                 }
++                if (window.type.equals("GAMES") && window.gameOpen) {
++                    int gameX = (int) mouseX - contentX, gameY = (int) mouseY - (contentY + 16);
++                    final int gameButton = button;
++                    gameSession(window).ifPresent(game -> game.mouseClicked(gameX, gameY, gameButton));
++                    return true;
++                }
+                 if (window.type.equals("GAMES") && !window.gameOpen) {
+                     List<ComputerGame> games = installedGames();
+                     int index = ((int) mouseY - (contentY + 18)) / 16;
+diff --git a/neoforge-1.21.1/build.gradle b/neoforge-1.21.1/build.gradle
+index afb5a66..d19eaa1 100644
+--- a/neoforge-1.21.1/build.gradle
++++ b/neoforge-1.21.1/build.gradle
+@@ -22,6 +22,7 @@ neoForge {
+ 
+ dependencies {
+     implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:${geckolib_version}"
++    testImplementation 'junit:junit:4.13.2'
+ }
+ 
+ processResources {

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#c:spears",
+      "required": false
+    },
+    {
+      "id": "#impaled:tridents",
+      "required": false
+    }
+  ]
+}

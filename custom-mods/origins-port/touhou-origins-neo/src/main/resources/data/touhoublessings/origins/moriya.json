@@ -1,0 +1,27 @@
+{
+  "powers": [
+    "touhoublessings:moriya/wind_protection",
+    "touhoublessings:moriya/miracle"
+  ],
+  "icon": {
+    "item": "minecraft:player_head",
+    "components": {
+      "minecraft:profile": {
+        "properties": [
+          {
+            "name": "textures",
+            "value": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWRhMTQ3YjM5NDk4MzdjNjg3MjI4NGI0NDdlNDZmY2U5NmI2ODc0YmY0ODE3ZWZiMzk4YWM0NmU3MjVmZDI4MiJ9fX0="
+          }
+        ],
+        "id": [
+          -602861126,
+          1670008535,
+          -1550711101,
+          -1417542111
+        ]
+      }
+    }
+  },
+  "order": 2,
+  "impact": 1
+}

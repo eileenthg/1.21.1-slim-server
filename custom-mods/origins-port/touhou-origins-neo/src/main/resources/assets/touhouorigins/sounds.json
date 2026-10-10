@@ -1,0 +1,496 @@
+{
+  "origin.oni.step": {
+    "sounds": [
+      "touhouorigins:oni_step1",
+      "touhouorigins:oni_step2",
+      "touhouorigins:oni_step3",
+      "touhouorigins:oni_step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "origin.fairy.heal": {
+    "sounds": [
+      {
+        "name": "block/beacon/activate",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.fairy.heal"
+  },
+  "origin.fairy.fly": {
+    "sounds": [
+      {
+        "name": "note/icechime",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.fairy.fly"
+  },
+  "origin.kappa.camouflage_activate": {
+    "sounds": [
+      {
+        "name": "mob/irongolem/throw"
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.kappa.camouflage_activate"
+  },
+  "origin.kappa.camouflage_deactivate": {
+    "sounds": [
+      {
+        "name": "mob/irongolem/throw",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.kappa.camouflage_deactivate"
+  },
+  "origin.kappa.dry": {
+    "sounds": [
+      {
+        "name": "item/bottle/empty1",
+        "pitch": 0.8
+      },
+      {
+        "name": "item/bottle/empty2",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.kappa.dry"
+  },
+  "origin.ghost.hurt": {
+    "sounds": [
+      {
+        "name": "mob/guardian/guardian_hit1",
+        "pitch": 2
+      },
+      {
+        "name": "mob/guardian/guardian_hit2",
+        "pitch": 2
+      },
+      {
+        "name": "mob/guardian/guardian_hit3",
+        "pitch": 2
+      },
+      {
+        "name": "mob/guardian/guardian_hit4",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "subtitles.entity.player.hurt"
+  },
+  "origin.ghost.death": {
+    "sounds": [
+      {
+        "name": "mob/guardian/guardian_death",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "subtitles.entity.player.death"
+  },
+  "origin.vengeful_spirit.heal": {
+    "sounds": [
+      {
+        "name": "mob/wither/death",
+        "pitch": 2,
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.vengeful_spirit.heal"
+  },
+  "origin.vengeful_spirit.harvest": {
+    "sounds": [
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed1",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed2",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed3",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed4",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed5",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed6",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed7",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed8",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed9",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed10",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed11",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed12",
+        "volume": 0.5
+      },
+      {
+        "attenuation_distance": 12,
+        "name": "enchant/soulspeed/soulspeed13",
+        "volume": 0.5
+      }
+    ]
+  },
+  "origin.vengeful_spirit.hurt": {
+    "sounds": [
+      {
+        "name": "mob/guardian/elder_hit1",
+        "pitch": 2,
+        "volume": 0.9
+      },
+      {
+        "name": "mob/guardian/elder_hit2",
+        "pitch": 2,
+        "volume": 0.9
+      },
+      {
+        "name": "mob/guardian/elder_hit3",
+        "pitch": 2,
+        "volume": 0.9
+      },
+      {
+        "name": "mob/guardian/elder_hit4",
+        "pitch": 2,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.entity.player.hurt"
+  },
+  "origin.vengeful_spirit.death": {
+    "sounds": [
+      {
+        "name": "mob/guardian/elder_death",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "subtitles.entity.player.death"
+  },
+  "entity.generic.gust": {
+    "sounds": [
+      {
+        "name": "mob/wither/shoot",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.entity.generic.gust"
+  },
+  "origin.wolf_tengu.growl": {
+    "sounds": [
+      "touhouorigins:growl1",
+      "touhouorigins:growl2",
+      "touhouorigins:growl3",
+      "touhouorigins:growl4"
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.wolf_tengu.growl"
+  },
+  "origin.wolf_tengu.parry": {
+    "sounds": [
+      {
+        "name": "mob/zombie/metal1",
+        "pitch": 1.5
+      },
+      {
+        "name": "mob/zombie/metal2",
+        "pitch": 1.5
+      },
+      {
+        "name": "mob/zombie/metal3",
+        "pitch": 1.5
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.wolf_tengu.parry"
+  },
+  "origin.rabbit.hop": {
+    "sounds": [
+      {
+        "name": "mob/irongolem/throw",
+        "pitch": 1.8
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.rabbit.hop"
+  },
+  "origin.moon_rabbit.activate": {
+    "sounds": [
+      {
+        "name": "block/respawn_anchor/deplete1",
+        "pitch": 2
+      },
+      {
+        "name": "block/respawn_anchor/deplete2",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.moon_rabbit.activate"
+  },
+  "origin.moon_rabbit.deactivate": {
+    "sounds": [
+      {
+        "name": "entity/glow_squid/squirt1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/glow_squid/squirt2",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/glow_squid/squirt3",
+        "volume": 0.8
+      }
+    ]
+  },
+  "origin.haniwa.resist": {
+    "sounds": [
+      "block/decorated_pot/step1",
+      "block/decorated_pot/step2",
+      "block/decorated_pot/step3",
+      "block/decorated_pot/step4",
+      "block/decorated_pot/step5"
+    ]
+  },
+  "origin.haniwa.break": {
+    "sounds": [
+      {
+        "name": "random/glass1",
+        "pitch": 0.5
+      },
+      {
+        "name": "random/glass2",
+        "pitch": 0.5
+      },
+      {
+        "name": "random/glass3",
+        "pitch": 0.5
+      }
+    ]
+  },
+  "origin.satori.recollect": {
+    "sounds": [
+      "block/bell/resonate",
+      {
+        "name": "block/bell/resonate",
+        "pitch": 0.85
+      },
+      {
+        "name": "block/bell/resonate",
+        "pitch": 0.9
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.satori.recollect"
+  },
+  "origin.satori.close_eye": {
+    "sounds": [
+      {
+        "name": "mob/wither/spawn",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.satori.close_eye"
+  },
+  "origin.celestial.enlightenment": {
+    "sounds": [
+      "touhouorigins:enlightenment1",
+      "touhouorigins:enlightenment2",
+      "touhouorigins:enlightenment3",
+      "touhouorigins:enlightenment4",
+      "touhouorigins:enlightenment5",
+      "touhouorigins:enlightenment6"
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.celestial.enlightenment"
+  },
+  "origin.celestial.temper": {
+    "sounds": [
+      {
+        "name": "mob/illusion_illager/prepare_blind",
+        "pitch": 1.1
+      },
+      {
+        "name": "mob/illusion_illager/prepare_blind",
+        "pitch": 1.2
+      },
+      {
+        "name": "mob/illusion_illager/prepare_blind",
+        "pitch": 1.3
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.celestial.temper"
+  },
+  "origin.oarfish.dry": {
+    "sounds": [
+      {
+        "name": "item/bottle/empty1",
+        "pitch": 0.8
+      },
+      {
+        "name": "item/bottle/empty2",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.oarfish.dry"
+  },
+  "origin.oarfish.prepare_lightning": {
+    "sounds": [
+      {
+        "name": "mob/illusion_illager/prepare_mirror",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.oarfish.prepare_lightning"
+  },
+  "entity.generic.flip": {
+    "sounds": [
+      "touhouorigins:flip"
+    ],
+    "subtitle": "touhouorigins.subtitles.entity.generic.flip"
+  },
+  "origin.amanojaku.flip": {
+    "sounds": [
+      "touhouorigins:flip"
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.amanojaku.flip"
+  },
+  "entity.generic.reverse": {
+    "sounds": [
+      "touhouorigins:reverse"
+    ],
+    "subtitle": "touhouorigins.subtitles.entity.generic.reverse"
+  },
+  "entity.generic.shikigami_link": {
+    "sounds": [
+      "block/respawn_anchor/deplete1",
+      "block/respawn_anchor/deplete2"
+    ]
+  },
+  "origin.shikigami.locate_fail": {
+    "sounds": [
+      {
+        "name": "note/bassattack",
+        "pitch": 0.5
+      }
+    ]
+  },
+  "origin.shikigami.channel": {
+    "sounds": [
+      {
+        "name": "touhouorigins:portal_trigger_mono",
+        "pitch": 0.9
+      },
+      {
+        "name": "touhouorigins:portal_trigger_mono",
+        "pitch": 0.95
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.shikigami.channel"
+  },
+  "origin.shikigami.teleport_fail": {
+    "sounds": [
+      {
+        "name": "note/didgeridoo",
+        "pitch": 0.5
+      }
+    ]
+  },
+  "origin.shikigami.teleport": {
+    "sounds": [
+      "mob/illusion_illager/mirror_move1",
+      "mob/illusion_illager/mirror_move2"
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.shikigami.teleport"
+  },
+  "origin.nue.transform": {
+    "sounds": [
+      {
+        "name": "mob/wither/idle1",
+        "volume": 0.5,
+        "pitch": 2.0
+      },
+      {
+        "name": "mob/wither/idle2",
+        "volume": 0.5,
+        "pitch": 2.0
+      },
+      {
+        "name": "mob/wither/idle3",
+        "volume": 0.5,
+        "pitch": 2.0
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.nue.transform"
+  },
+  "origin.bake_danuki.disguise": {
+    "sounds": [
+      {
+        "name": "entity/shulker_bullet/hit1",
+        "pitch": 1.4
+      },
+      {
+        "name": "entity/shulker_bullet/hit2",
+        "pitch": 1.4
+      },
+      {
+        "name": "entity/shulker_bullet/hit3",
+        "pitch": 1.4
+      },
+      {
+        "name": "entity/shulker_bullet/hit4",
+        "pitch": 1.4
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.bake_danuki.disguise"
+  },
+  "origin.bake_danuki.undisguise": {
+    "sounds": [
+      {
+        "name": "entity/shulker_bullet/hit1",
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/shulker_bullet/hit2",
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/shulker_bullet/hit3",
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/shulker_bullet/hit4",
+        "pitch": 1.2
+      }
+    ],
+    "subtitle": "touhouorigins.subtitles.origin.bake_danuki.undisguise"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "hidden": true,
+  "type": "apoli:multiple",
+  "transparent": {
+    "type": "apoli:model_color",
+    "alpha": 0.6,
+    "condition": {
+      "type": "apoli:relative_health",
+      "comparison": ">",
+      "compare_to": 0.5
+    }
+  },
+  "color": {
+    "type": "apoli:model_color",
+    "alpha": 0.6,
+    "green": 0.5,
+    "blue": 0.5,
+    "condition": {
+      "type": "apoli:relative_health",
+      "comparison": "<=",
+      "compare_to": 0.5
+    }
+  },
+  "hurt_sound": {
+    "type": "apoli:replace_sound_emission",
+    "sounds": {
+      "minecraft:entity\\.player\\.hurt.*": "touhouorigins:origin.vengeful_spirit.hurt"
+    }
+  },
+  "death_sound": {
+    "type": "apoli:replace_sound_emission",
+    "sounds": {
+      "minecraft:entity.player.death": "touhouorigins:origin.vengeful_spirit.death"
+    }
+  },
+  "hurt_sound_self": {
+    "type": "apoli:replace_sound_reception",
+    "sounds": {
+      "minecraft:entity\\.player\\.hurt.*": "touhouorigins:origin.vengeful_spirit.hurt"
+    }
+  },
+  "death_sound_self": {
+    "type": "apoli:replace_sound_reception",
+    "sounds": {
+      "minecraft:entity.player.death": "touhouorigins:origin.vengeful_spirit.death"
+    }
+  }
+}

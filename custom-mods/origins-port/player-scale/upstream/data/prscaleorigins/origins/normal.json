@@ -1,0 +1,13 @@
+{
+	"name": "Normal",
+	"description": "§oGlad we could see eye-to-eye on this.§r",
+    "powers": [
+    ],
+    "icon": {
+        "item": "minecraft:cornflower"
+    },
+    "order": 10,
+    "impact": 0,
+    "loading_priority": 100,
+    "unchoosable": false
+}

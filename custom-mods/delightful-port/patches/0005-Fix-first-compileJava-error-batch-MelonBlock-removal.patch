@@ -1,0 +1,243 @@
+From d0c3e1a17a585432b22f540ad38f400460370cb2 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 23:36:26 +0800
+Subject: [PATCH 05/12] Fix first compileJava error batch: MelonBlock removal,
+ Blueprint/Neapolitan/Spirit deps
+
+- Vanilla's MelonBlock class was removed in 1.21 (Blocks.MELON is now a plain Block); MiniBlock
+  and SlicedMiniMelonBlock now extend Block directly instead of the nonexistent MelonBlock.
+- Deleted DelightfulCauldronInteractions.java and SpiritCompat.java: both compiled against real
+  third-party APIs (com.teamabnormals.blueprint / com.teamabnormals.neapolitan,
+  me.codexadrian.spirit) that were compileOnly/implementation dependencies in the old 1.20.1
+  Forge build.gradle but are not declared (and not in the target pack) for this NeoForge port.
+  Both were already dead code without their mods present (gated by Modid.N.loaded() /
+  Modid.SP-based enabled() checks), so stripped them the same way as the Botania/Aether/
+  LetFishLove compat: DelightfulBlocks' milkshake cauldrons now always use a plain empty
+  CauldronInteraction map, ModEvents drops the registerCauldronInteractions() call, and
+  SoulSteelKnifeItem drops the SpiritCompat hurtEnemy/tooltip hooks (it's already
+  Spirit-gated via getModid() so this was unreachable regardless).
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../common/block/DelightfulBlocks.java        | 18 +++++---------
+ .../block/DelightfulCauldronInteractions.java | 19 ---------------
+ .../delightful/common/block/MiniBlock.java    |  5 ++--
+ .../common/block/SlicedMiniMelonBlock.java    |  5 ++--
+ .../delightful/common/events/ModEvents.java   |  7 +++---
+ .../compat/spirit/SoulSteelKnifeItem.java     | 24 +++----------------
+ .../delightful/compat/SpiritCompat.java       | 21 ----------------
+ 7 files changed, 18 insertions(+), 81 deletions(-)
+ delete mode 100644 src/main/java/net/brnbrd/delightful/common/block/DelightfulCauldronInteractions.java
+ delete mode 100644 src/main/java/net/brnbrd/delightful/compat/SpiritCompat.java
+
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java b/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
+index 86c2501b..84cd711f 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
+@@ -118,23 +118,17 @@ public class DelightfulBlocks {
+ 		() -> new Block(Block.Properties.copy(Blocks.SNOW_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.2F).sound(SoundType.SNOW)));
+ 	public static final DeferredHolder<Block, Block> SOURCE_BERRY_ICE_CREAM_BLOCK = BLOCKS.register("source_berry_ice_cream_block",
+ 		() -> new Block(Block.Properties.copy(Blocks.SNOW_BLOCK).mapColor(MapColor.COLOR_PURPLE).strength(0.2F).sound(SoundType.SNOW)));
++	// Blueprint/Neapolitan's real cauldron-fill APIs are not supported dependencies in this pack
++	// (see DelightfulCauldronInteractions removal); these always use a plain empty interaction map
++	// now instead of Modid.N.loaded() ? DelightfulCauldronInteractions... : CauldronInteraction.newInteractionMap().
+ 	public static final DeferredHolder<Block, Block> SALMONBERRY_MILKSHAKE_CAULDRON = BLOCKS.register("salmonberry_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(
+-			Modid.N.loaded() ?
+-			DelightfulCauldronInteractions.SALMONBERRY_MILKSHAKE.map() :
+-			CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
+ 	);
+ 	public static final DeferredHolder<Block, Block> MATCHA_MILKSHAKE_CAULDRON = BLOCKS.register("matcha_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(
+-			Modid.N.loaded() ?
+-			DelightfulCauldronInteractions.MATCHA_MILKSHAKE.map() :
+-			CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
+ 	);
+ 	public static final DeferredHolder<Block, Block> SOURCE_BERRY_MILKSHAKE_CAULDRON = BLOCKS.register("source_berry_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(
+-			Modid.N.loaded() ?
+-			DelightfulCauldronInteractions.SOURCE_BERRY_MILKSHAKE.map() :
+-			CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
+ 	);
+ 	public static final DeferredHolder<Block, Block> BLUEBERRY_SACK = BLOCKS.register("blueberry_sack",
+ 		() -> new Block(SACK(MapColor.TERRACOTTA_BLUE)));
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/DelightfulCauldronInteractions.java b/src/main/java/net/brnbrd/delightful/common/block/DelightfulCauldronInteractions.java
+deleted file mode 100644
+index 4c1ec6ea..00000000
+--- a/src/main/java/net/brnbrd/delightful/common/block/DelightfulCauldronInteractions.java
++++ /dev/null
+@@ -1,19 +0,0 @@
+-package net.brnbrd.delightful.common.block;
+-
+-import com.teamabnormals.blueprint.core.api.BlueprintCauldronInteraction;
+-import com.teamabnormals.neapolitan.core.other.NeapolitanCauldronInteractions;
+-import net.brnbrd.delightful.Util;
+-import net.brnbrd.delightful.common.item.DelightfulItems;
+-import net.minecraft.core.cauldron.CauldronInteraction;
+-
+-public class DelightfulCauldronInteractions {
+-	public static BlueprintCauldronInteraction MATCHA_MILKSHAKE = BlueprintCauldronInteraction.register(Util.delight("matcha_milkshake"), CauldronInteraction.newInteractionMap());
+-	public static BlueprintCauldronInteraction SALMONBERRY_MILKSHAKE = BlueprintCauldronInteraction.register(Util.delight("salmonberry_milkshake"), CauldronInteraction.newInteractionMap());
+-	public static BlueprintCauldronInteraction SOURCE_BERRY_MILKSHAKE = BlueprintCauldronInteraction.register(Util.delight("source_berry_milkshake"), CauldronInteraction.newInteractionMap());
+-
+-	public static void registerCauldronInteractions() {
+-		NeapolitanCauldronInteractions.addMilkshakeInteractions(DelightfulItems.MATCHA_MILKSHAKE.get(), DelightfulBlocks.MATCHA_MILKSHAKE_CAULDRON.get(), DelightfulItems.MATCHA_ICE_CREAM.get(), MATCHA_MILKSHAKE.map());
+-		NeapolitanCauldronInteractions.addMilkshakeInteractions(DelightfulItems.SALMONBERRY_MILKSHAKE.get(), DelightfulBlocks.SALMONBERRY_MILKSHAKE_CAULDRON.get(), DelightfulItems.SALMONBERRY_ICE_CREAM.get(), SALMONBERRY_MILKSHAKE.map());
+-		NeapolitanCauldronInteractions.addMilkshakeInteractions(DelightfulItems.SOURCE_BERRY_MILKSHAKE.get(), DelightfulBlocks.SOURCE_BERRY_MILKSHAKE_CAULDRON.get(), DelightfulItems.SOURCE_BERRY_ICE_CREAM.get(), SOURCE_BERRY_MILKSHAKE.map());
+-	}
+-}
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/MiniBlock.java b/src/main/java/net/brnbrd/delightful/common/block/MiniBlock.java
+index 87ff1fd2..7dc3a6b9 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/MiniBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/MiniBlock.java
+@@ -3,14 +3,15 @@ package net.brnbrd.delightful.common.block;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.block.Block;
+-import net.minecraft.world.level.block.MelonBlock;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.phys.shapes.CollisionContext;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+ import org.jetbrains.annotations.NotNull;
+ 
+-public class MiniBlock extends MelonBlock {
++// Vanilla's MelonBlock class was removed in 1.21 (Blocks.MELON is now a plain Block with no
++// special subclass), so this now extends Block directly instead.
++public class MiniBlock extends Block {
+ 	private static final VoxelShape SHAPE = Block.box(3D, 0D, 3D, 13D, 10D, 13D);
+ 
+ 	public MiniBlock(Properties pProperties) {
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java b/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
+index 54f6bdf2..9c8a9e5d 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
+@@ -19,7 +19,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.Block;
+-import net.minecraft.world.level.block.MelonBlock;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.StateDefinition;
+ import net.minecraft.world.level.block.state.properties.IntegerProperty;
+@@ -35,7 +34,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
+ import org.jetbrains.annotations.NotNull;
+ import org.jetbrains.annotations.Nullable;
+ 
+-public class SlicedMiniMelonBlock extends MelonBlock implements ISliceable {
++// Vanilla's MelonBlock class was removed in 1.21 (Blocks.MELON is now a plain Block); extends
++// Block directly instead.
++public class SlicedMiniMelonBlock extends Block implements ISliceable {
+ 	public static final Integer MAX_BITES = 3;
+ 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 1, MAX_BITES);
+ 	private final Supplier<Item> sliceItem;
+diff --git a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+index 10e11d0b..8158e577 100644
+--- a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
++++ b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+@@ -2,7 +2,6 @@ package net.brnbrd.delightful.common.events;
+ 
+ import net.brnbrd.delightful.Delightful;
+ import net.brnbrd.delightful.Util;
+-import net.brnbrd.delightful.common.block.DelightfulCauldronInteractions;
+ import net.brnbrd.delightful.common.item.DelightfulItems;
+ import net.brnbrd.delightful.common.item.IConfigured;
+ import net.brnbrd.delightful.common.item.knife.DKnifeItem;
+@@ -86,9 +85,9 @@ public class ModEvents {
+ 			// entirely tag-driven (minecraft:chicken_food / minecraft:parrot_food), so salmonberry
+ 			// pips and cantaloupe seeds are added to those tags via datagen instead
+ 			// (see DelightfulItemTagProvider).
+-			if (Modid.N.loaded()) {
+-				DelightfulCauldronInteractions.registerCauldronInteractions();
+-			}
++			// DelightfulCauldronInteractions (Blueprint/Neapolitan milkshake-cauldron fill
++			// integration) was removed: Neapolitan is not a supported dependency in this pack, and
++			// this was already a no-op without it (gated by Modid.N.loaded()).
+ 		});
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/spirit/SoulSteelKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/spirit/SoulSteelKnifeItem.java
+index 5adb3cd5..379caf5a 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/spirit/SoulSteelKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/spirit/SoulSteelKnifeItem.java
+@@ -3,20 +3,18 @@ package net.brnbrd.delightful.common.item.knife.compat.spirit;
+ import net.brnbrd.delightful.common.item.DelightfulTiers;
+ import net.brnbrd.delightful.common.item.knife.DKnifeItem;
+ import net.brnbrd.delightful.compat.Modid;
+-import net.brnbrd.delightful.compat.SpiritCompat;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.ChatFormatting;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+-import net.minecraft.world.item.TooltipFlag;
+ import net.minecraft.world.item.crafting.Ingredient;
+-import net.minecraft.world.level.Level;
+ import org.jetbrains.annotations.NotNull;
+-import org.jetbrains.annotations.Nullable;
+-import java.util.List;
+ 
++// Spirit is not a supported dependency in this pack; SpiritCompat's real me.codexadrian.spirit
++// API usage (empowered-tool combat text/on-hit handling) has been removed. This knife is
++// Spirit-gated via getModid() anyway, so enabled() was always false without the real mod present.
+ public class SoulSteelKnifeItem extends DKnifeItem {
+ 	public SoulSteelKnifeItem(Properties properties) {
+ 		super(DelightfulItemTags.SOUL_STEEL_INGOT, DelightfulTiers.SOUL_STEEL, properties, Modid.SP);
+@@ -37,20 +35,4 @@ public class SoulSteelKnifeItem extends DKnifeItem {
+ 	public Ingredient getRod() {
+ 		return Ingredient.of(Items.NETHERRACK);
+ 	}
+-
+-	@Override
+-	public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
+-		if (this.enabled()) {
+-			SpiritCompat.handleOnHitEntity(stack, target, attacker);
+-		}
+-		return super.hurtEnemy(stack, target, attacker);
+-	}
+-
+-	@Override
+-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tool, @NotNull TooltipFlag pIsAdvanced) {
+-		if (this.enabled()) {
+-			SpiritCompat.appendEmpoweredText(stack, tool);
+-		}
+-		super.appendHoverText(stack, level, tool, pIsAdvanced);
+-	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/compat/SpiritCompat.java b/src/main/java/net/brnbrd/delightful/compat/SpiritCompat.java
+deleted file mode 100644
+index 643685c1..00000000
+--- a/src/main/java/net/brnbrd/delightful/compat/SpiritCompat.java
++++ /dev/null
+@@ -1,21 +0,0 @@
+-package net.brnbrd.delightful.compat;
+-
+-import me.codexadrian.spirit.data.ToolType;
+-import me.codexadrian.spirit.utils.ToolUtils;
+-import net.minecraft.network.chat.Component;
+-import net.minecraft.world.entity.LivingEntity;
+-import net.minecraft.world.entity.player.Player;
+-import net.minecraft.world.item.ItemStack;
+-import java.util.List;
+-
+-public class SpiritCompat {
+-	public static void appendEmpoweredText(ItemStack itemStack, List<Component> list) {
+-		ToolUtils.appendEmpoweredText(itemStack, list);
+-	}
+-
+-	public static void handleOnHitEntity(ItemStack itemStack, LivingEntity victim, LivingEntity attacker) {
+-		if (attacker instanceof Player p) {
+-			ToolUtils.handleOnHitEntity(itemStack, ToolType.SWORD, victim, p);
+-		}
+-	}
+-}
+\ No newline at end of file
+-- 
+2.39.0.windows.1
+

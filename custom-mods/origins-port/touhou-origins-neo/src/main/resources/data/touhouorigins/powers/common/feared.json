@@ -1,0 +1,8 @@
+{
+  "type": "touhouorigins:modify_behavior",
+  "behavior": "hostile",
+  "entity_condition": {
+    "type": "apoli:in_tag",
+    "tag": "touhouorigins:villager_aligned"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/wolf_tengu_ears",
+  "texture_location": "touhouorigins:textures/entity/tlm/inubashiri_momizi.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:wolf_tengu"
+  }
+}

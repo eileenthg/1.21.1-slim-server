@@ -1,0 +1,8 @@
+{
+  "type": "touhouorigins:modify_behavior",
+  "behavior": "neutral",
+  "entity_condition": {
+    "type": "apoli:in_tag",
+    "tag": "touhouorigins:zombies"
+  }
+}

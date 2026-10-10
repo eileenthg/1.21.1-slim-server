@@ -1,0 +1,50 @@
+{
+  "type": "apoli:multiple",
+  "speed": {
+    "type": "apoli:conditioned_attribute",
+    "modifiers": {
+      "name": "Mountainous Blades attack speed penalty",
+      "attribute": "minecraft:generic.attack_speed",
+      "operation": "multiply_total",
+      "value": -0.3
+    },
+    "tick_rate": 1,
+    "condition": {
+      "type": "apoli:equipped_item",
+      "equipment_slot": "mainhand",
+      "item_condition": {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "minecraft:swords"
+        }
+      }
+    }
+  },
+  "range": {
+    "type": "apoli:attribute",
+    "modifiers": [
+      {
+        "name": "Wolf tengu block reach",
+        "attribute": "minecraft:player.block_interaction_range",
+        "operation": "multiply_base",
+        "value": 0.33
+      },
+      {
+        "name": "Wolf tengu entity reach",
+        "attribute": "minecraft:player.entity_interaction_range",
+        "operation": "multiply_base",
+        "value": 0.33
+      }
+    ],
+    "condition": {
+      "type": "apoli:equipped_item",
+      "equipment_slot": "mainhand",
+      "item_condition": {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "minecraft:swords"
+        }
+      }
+    }
+  }
+}

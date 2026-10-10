@@ -1,0 +1,9 @@
+{
+  "entity_types": [
+    "minecraft:player"
+  ],
+  "powers": [
+    "touhouorigins:cosmetics/haniwa_terracotta",
+    "touhouorigins:cosmetics/vengeful_spirit_orbs"
+  ]
+}

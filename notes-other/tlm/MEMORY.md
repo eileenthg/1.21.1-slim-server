@@ -1,0 +1,8 @@
+- [TLM trumpet addon](tlm-trumpet-addon.md) — NeoForge 1.21.1 addon + AI prompts fork; paused before datapack extensibility and publishing.
+- [TLM repo line endings](tlm-repo-line-endings.md) — CRLF blobs vs core.autocrlf=true; use `git -c core.autocrlf=false add`.
+- [Reply in English](reply-in-english.md) — override the TLM AGENTS.md Chinese-by-default clause.
+- [ChessPVP seated patch](chesspvp-seated-patch.md) — rewrite of closed-source ChessPVP: sit at either board side; built + GameTested, not yet tried in a client.
+- [AntOS mini-games](antos-games.md) — AntOS fork with 5 games at ~/Claude/antos-games; staging copy, hook lives in the addon.
+- [Working Maid Computers addon](tlm-computer-addon.md) — standalone addon: seated right-click on a TLM computer opens vendored AntOS; private use only.
+- [TLM keyboard music addon](tlm-keyboard-music-addon.md) — separate addon repo; character themes + in-game test pending.
+- [Love & Loathe Maid Voices](tlm-ll-voices-addon.md) — llvoices addon: maids speak needs/mood/drift via their LLM; installed in 1.21.1 slim, not yet tried in play.

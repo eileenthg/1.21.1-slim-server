@@ -1,0 +1,46 @@
+{
+  "type": "apoli:multiple",
+  "health_boost": {
+    "type": "apoli:attribute",
+    "modifier": {
+      "name": "Oni health bonus",
+      "attribute": "minecraft:generic.max_health",
+      "value": 10,
+      "operation": "addition"
+    }
+  },
+  "attack_boost": {
+    "type": "apoli:conditioned_attribute",
+    "modifier": {
+      "name": "Oni attack bonus",
+      "attribute": "minecraft:generic.attack_damage",
+      "operation": "addition",
+      "value": 6
+    },
+    "tick_rate": 1,
+    "condition": {
+      "type": "apoli:equipped_item",
+      "equipment_slot": "mainhand",
+      "item_condition": {
+        "type": "apoli:ingredient",
+        "ingredient": {
+          "tag": "touhouorigins:tools"
+        }
+      },
+      "inverted": true
+    }
+  },
+  "size": {
+    "type": "apoli:attribute",
+    "modifier": {
+      "name": "Oni size",
+      "attribute": "minecraft:generic.scale",
+      "operation": "multiply_base",
+      "value": 0.1
+    }
+  },
+  "footstep": {
+    "type": "touhouorigins:modify_footstep_sound",
+    "sound": "touhouorigins:origin.oni.step"
+  }
+}

@@ -1,0 +1,598 @@
+From 58ad79b7a0c597a7f77e561894a7567b195b7a37 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 23:22:31 +0800
+Subject: [PATCH 03/12] WIP: port datagen providers (recipes, loot, tags,
+ models, lang) to NeoForge 1.21.1
+
+- DelightfulPlacementModifiers: RegistryObject -> DeferredHolder, package renames.
+- DelightfulRecipeProvider (942 lines): buildRecipes(Consumer<FinishedRecipe>) ->
+  buildRecipes(RecipeOutput) matching the vanilla 1.20.2+ RecipeOutput refactor;
+  RecipeProvider's constructor now needs a CompletableFuture<HolderLookup.Provider>.
+  ConditionalRecipe (removed entirely in NeoForge) replaced with
+  RecipeOutput#withConditions(ICondition...) at each wrap()/cabinet()/knife()/
+  knifeSmeltAndBlast() call site; IConditionBuilder/ICondition moved package only
+  (net.minecraftforge.common.crafting.conditions -> net.neoforged.neoforge.common.conditions)
+  with identical method names, so DSL call sites (not(), and(), tagEmpty(), modLoaded(),
+  itemExists()) needed no changes. The one two-branch ConditionalRecipe usage
+  (farmersdelight:chocolate_pie override) was simplified to a single conditioned override,
+  relying on FD's own bundled recipe as the natural fallback when the condition is false
+  (documented inline).
+- DelightfulBlockLoot/DelightfulBlockTagProvider/DelightfulEntityTagProvider/
+  DelightfulBlockStateProvider/DelightfulItemModelProvider/DelightfulLanguageProvider:
+  RegistryObject -> DeferredHolder, ForgeRegistries -> BuiltInRegistries, provider packages
+  moved to net.neoforged.neoforge.*. BlockLootSubProvider's constructor now needs a
+  HolderLookup.Provider (matching FD's own FDBlockLoot pattern) - DelightfulBlockLoot and
+  Generators' LootTableProvider wiring updated accordingly. Fixed a lingering
+  `new ResourceLocation(...)` call in DelightfulItemModelProvider (removed public
+  constructor) to ResourceLocation.fromNamespaceAndPath.
+- Generators.java: @Mod.EventBusSubscriber -> top-level @EventBusSubscriber; threaded
+  CompletableFuture<HolderLookup.Provider> lookup through every provider constructor that
+  now needs one, matching FarmersDelight's own DataGenerators.java as ground truth.
+
+Remaining: DelightfulItemTagProvider.java (1083 lines) is the last file with
+net.minecraftforge imports.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../world/DelightfulPlacementModifiers.java   |   8 +-
+ .../data/gen/DelightfulBlockLoot.java         |  16 +-
+ .../gen/DelightfulBlockStateProvider.java     |  18 +--
+ .../data/gen/DelightfulBlockTagProvider.java  |   6 +-
+ .../data/gen/DelightfulEntityTagProvider.java |   2 +-
+ .../data/gen/DelightfulItemModelProvider.java |  12 +-
+ .../data/gen/DelightfulLanguageProvider.java  |   8 +-
+ .../data/gen/DelightfulRecipeProvider.java    | 141 ++++++------------
+ .../delightful/data/gen/Generators.java       |  30 ++--
+ 9 files changed, 98 insertions(+), 143 deletions(-)
+
+diff --git a/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java b/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
+index d29e9330..9bfe9a74 100644
+--- a/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
++++ b/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
+@@ -5,14 +5,14 @@ import net.brnbrd.delightful.Delightful;
+ import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+ import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+-import net.minecraftforge.eventbus.api.IEventBus;
+-import net.minecraftforge.registries.DeferredRegister;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.bus.api.IEventBus;
++import net.neoforged.neoforge.registries.DeferredHolder;
++import net.neoforged.neoforge.registries.DeferredRegister;
+ 
+ public class DelightfulPlacementModifiers {
+ 	public static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIERS = DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE.key(), Delightful.MODID);
+ 
+-	public static final RegistryObject<PlacementModifierType<ConfigEnabledFilter>> ENABLED = PLACEMENT_MODIFIERS.register("enabled", () -> typeConvert(ConfigEnabledFilter.CODEC));
++	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<ConfigEnabledFilter>> ENABLED = PLACEMENT_MODIFIERS.register("enabled", () -> typeConvert(ConfigEnabledFilter.CODEC));
+ 
+ 	private static <P extends PlacementModifier> PlacementModifierType<P> typeConvert(Codec<P> codec) {
+ 		return () -> codec;
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
+index 7d311324..460bbccc 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
+@@ -3,6 +3,7 @@ package net.brnbrd.delightful.data.gen;
+ import net.brnbrd.delightful.common.block.*;
+ import net.brnbrd.delightful.common.item.DelightfulItems;
+ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
++import net.minecraft.core.HolderLookup;
+ import net.minecraft.data.loot.BlockLootSubProvider;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.world.flag.FeatureFlags;
+@@ -14,10 +15,11 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
+ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import vectorwing.farmersdelight.common.block.FeastBlock;
+ import java.util.Collections;
+ import java.util.List;
++import java.util.Optional;
+ import org.jetbrains.annotations.NotNull;
+ 
+ public class DelightfulBlockLoot extends BlockLootSubProvider {
+@@ -25,15 +27,15 @@ public class DelightfulBlockLoot extends BlockLootSubProvider {
+ 		DelightfulBlocks.WILD_SALMONBERRIES.getId()
+ 	);
+ 
+-	protected DelightfulBlockLoot() {
+-		super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
++	protected DelightfulBlockLoot(HolderLookup.Provider holder) {
++		super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags(), holder);
+ 	}
+ 
+ 	@Override
+ 	protected void generate() {
+ 		// Cabinets
+ 		DelightfulBlocks.BLOCKS.getEntries().stream()
+-				.map(RegistryObject::get)
++				.map(DeferredHolder::get)
+ 				.filter(block -> block instanceof DelightfulCabinetBlock)
+ 				.forEach(this::dropSelf);
+ 
+@@ -183,11 +185,13 @@ public class DelightfulBlockLoot extends BlockLootSubProvider {
+ 		return DelightfulBlocks.BLOCKS.getEntries()
+ 				.stream()
+ 				.filter(o -> !NO_GEN.contains(o.getId()))
+-				.flatMap(RegistryObject::stream)
++				.map(DeferredHolder::asOptional)
++				.filter(Optional::isPresent)
++				.map(Optional::get)
+ 				::iterator;
+ 	}
+ 
+-	public void empty(RegistryObject<? extends Block> block) {
++	public void empty(DeferredHolder<Block, ? extends Block> block) {
+ 		this.add(block.get(), LootTable.lootTable());
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockStateProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockStateProvider.java
+index e2125a3b..a1c1a879 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockStateProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockStateProvider.java
+@@ -10,12 +10,12 @@ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.world.item.ItemDisplayContext;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.properties.IntegerProperty;
+-import net.minecraftforge.client.model.generators.BlockStateProvider;
+-import net.minecraftforge.client.model.generators.ConfiguredModel;
+-import net.minecraftforge.client.model.generators.ModelFile;
+-import net.minecraftforge.common.data.ExistingFileHelper;
+-import net.minecraftforge.registries.ForgeRegistries;
+-import net.minecraftforge.registries.RegistryObject;
++import net.minecraft.core.registries.BuiltInRegistries;
++import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
++import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
++import net.neoforged.neoforge.client.model.generators.ModelFile;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import vectorwing.farmersdelight.FarmersDelight;
+ import vectorwing.farmersdelight.common.block.CabinetBlock;
+ import vectorwing.farmersdelight.common.block.FeastBlock;
+@@ -194,7 +194,7 @@ public class DelightfulBlockStateProvider extends BlockStateProvider {
+ 
+ 	public void bigSlicedBlock(Block block, ResourceLocation inside, ResourceLocation side, ResourceLocation top) {
+ 		if (block instanceof ISliceable slice) {
+-			String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
++			String name = Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block)).getPath();
+ 			getVariantBuilder(block).forAllStates(state -> {
+ 						int bites = state.getValue(slice.getBitesProperty());
+ 						return ConfiguredModel.builder().modelFile(models().getBuilder(name + "_bite" + bites)
+@@ -217,7 +217,7 @@ public class DelightfulBlockStateProvider extends BlockStateProvider {
+ 	}
+ 
+ 	public void slicedMiniMelonBlock(SlicedMiniMelonBlock block, String alias, ResourceLocation side, ResourceLocation top) {
+-		String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
++		String name = Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block)).getPath();
+ 		getVariantBuilder(block).forAllStates(state -> {
+ 					int bites = state.getValue(block.getBitesProperty());
+ 					return ConfiguredModel.builder().modelFile(models().getBuilder(name + "_bite" + bites)
+@@ -258,7 +258,7 @@ public class DelightfulBlockStateProvider extends BlockStateProvider {
+ 	}
+ 
+ 	// Adapted from: https://github.com/vectorwing/FarmersDelight/blob/1.19/src/main/java/vectorwing/farmersdelight/data/BlockStates.java
+-	public void pieBlock(RegistryObject<? extends Block> block) {
++	public void pieBlock(DeferredHolder<Block, ? extends Block> block) {
+ 		getVariantBuilder(block.get()).forAllStates(state -> {
+ 					int bites = state.getValue(PieBlock.BITES);
+ 					String name = Util.name(block);
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
+index f0e407cc..9a0e52d5 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
+@@ -10,9 +10,9 @@ import net.minecraft.core.HolderLookup;
+ import net.minecraft.data.PackOutput;
+ import net.minecraft.tags.BlockTags;
+ import net.minecraft.world.level.block.Blocks;
+-import net.minecraftforge.common.Tags;
+-import net.minecraftforge.common.data.BlockTagsProvider;
+-import net.minecraftforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.common.Tags;
++import net.neoforged.neoforge.common.data.BlockTagsProvider;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
+ import vectorwing.farmersdelight.common.tag.CompatibilityTags;
+ import vectorwing.farmersdelight.common.tag.ModTags;
+ import java.util.concurrent.CompletableFuture;
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulEntityTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulEntityTagProvider.java
+index bdbe586e..5ab7b843 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulEntityTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulEntityTagProvider.java
+@@ -8,7 +8,7 @@ import net.minecraft.core.HolderLookup;
+ import net.minecraft.data.PackOutput;
+ import net.minecraft.data.tags.EntityTypeTagsProvider;
+ import net.minecraft.world.entity.EntityType;
+-import net.minecraftforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
+ import vectorwing.farmersdelight.common.tag.ModTags;
+ import java.util.concurrent.CompletableFuture;
+ import org.jetbrains.annotations.NotNull;
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemModelProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemModelProvider.java
+index 30110b10..e33aec1b 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemModelProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemModelProvider.java
+@@ -12,10 +12,10 @@ import net.minecraft.world.item.BlockItem;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemNameBlockItem;
+ import net.minecraft.world.level.block.WallBlock;
+-import net.minecraftforge.client.model.generators.ItemModelProvider;
+-import net.minecraftforge.client.model.generators.ModelFile;
+-import net.minecraftforge.common.data.ExistingFileHelper;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
++import net.neoforged.neoforge.client.model.generators.ModelFile;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import java.util.List;
+ 
+ public class DelightfulItemModelProvider extends ItemModelProvider {
+@@ -42,7 +42,7 @@ public class DelightfulItemModelProvider extends ItemModelProvider {
+ 
+ 	@Override
+ 	protected void registerModels() {
+-		for (RegistryObject<Item> entry : DelightfulItems.ITEMS.getEntries()) {
++		for (DeferredHolder<Item, ? extends Item> entry : DelightfulItems.ITEMS.getEntries()) {
+ 			ResourceLocation id = entry.getId();
+ 			if (id != null) {
+ 				if (DelightfulItems.NO_GEN.contains(id)) {
+@@ -85,7 +85,7 @@ public class DelightfulItemModelProvider extends ItemModelProvider {
+ 
+ 	public void flatBlock(ResourceLocation id) {
+ 		getBuilder(id.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+-			.texture("layer0", new ResourceLocation(id.getNamespace(), "block/" + id.getPath()));
++			.texture("layer0", ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "block/" + id.getPath()));
+ 	}
+ 
+ 	public void handheld(ResourceLocation item) {
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulLanguageProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulLanguageProvider.java
+index e63544c8..b15de9b8 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulLanguageProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulLanguageProvider.java
+@@ -10,9 +10,9 @@ import net.brnbrd.delightful.data.tags.DelightfulBlockTags;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.data.PackOutput;
+ import net.minecraft.tags.TagKey;
+-import net.minecraftforge.common.data.LanguageProvider;
+-import net.minecraftforge.fluids.FluidType;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.neoforge.common.data.LanguageProvider;
++import net.neoforged.neoforge.fluids.FluidType;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import org.jetbrains.annotations.NotNull;
+ import vectorwing.farmersdelight.FarmersDelight;
+ 
+@@ -279,7 +279,7 @@ public class DelightfulLanguageProvider extends LanguageProvider {
+ 		);
+ 	}
+ 
+-	public void addFluidType(@NotNull RegistryObject<FluidType> fluid, String translation) {
++	public void addFluidType(@NotNull DeferredHolder<FluidType, FluidType> fluid, String translation) {
+ 		add("fluid_type." + Delightful.MODID + "." + fluid.getId().getPath(), translation);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+index 16f35ed1..9a97828c 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+@@ -13,6 +13,8 @@ import net.brnbrd.delightful.common.item.knife.Knives;
+ import net.brnbrd.delightful.compat.Modid;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
++import net.minecraft.core.HolderLookup;
++import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.data.PackOutput;
+ import net.minecraft.data.recipes.*;
+ import net.minecraft.resources.ResourceLocation;
+@@ -24,15 +26,12 @@ import net.minecraft.world.item.crafting.RecipeType;
+ import net.minecraft.world.level.ItemLike;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+-import net.minecraftforge.common.Tags;
+-import net.minecraftforge.common.crafting.ConditionalRecipe;
+-import net.minecraftforge.common.crafting.conditions.ICondition;
+-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+-import net.minecraftforge.common.crafting.conditions.NotCondition;
+-import net.minecraftforge.registries.ForgeRegistries;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.neoforge.common.Tags;
++import net.neoforged.neoforge.common.conditions.ICondition;
++import net.neoforged.neoforge.common.conditions.IConditionBuilder;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import org.apache.commons.lang3.ArrayUtils;
++import java.util.concurrent.CompletableFuture;
+ import vectorwing.farmersdelight.FarmersDelight;
+ import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
+ import vectorwing.farmersdelight.common.registry.ModBlocks;
+@@ -44,29 +43,28 @@ import vectorwing.farmersdelight.data.recipe.CookingRecipes;
+ import java.util.Arrays;
+ import java.util.List;
+ import java.util.Objects;
+-import java.util.function.Consumer;
+ import vectorwing.farmersdelight.data.recipe.CuttingRecipes;
+ import org.jetbrains.annotations.NotNull;
+ 
+ public class DelightfulRecipeProvider extends RecipeProvider implements IConditionBuilder {
+-	public DelightfulRecipeProvider(PackOutput output) {
+-		super(output);
++	public DelightfulRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
++		super(output, lookupProvider);
+ 	}
+ 
+ 	@Override
+-	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> finished) {
++	protected void buildRecipes(@NotNull RecipeOutput finished) {
+ 		// Cabinets
+ 		cabinet(DelightfulBlocks.QUARTZ_CABINET.get(), ModBlocks.WARPED_CABINET.get(), Blocks.POLISHED_BLACKSTONE, finished);
+ 		cabinet(DelightfulBlocks.BASALT_CABINET.get(), ModBlocks.CRIMSON_CABINET.get(), Blocks.POLISHED_BLACKSTONE, finished);
+ 
+ 		// Knives
+ 		DelightfulItems.ITEMS.getEntries().stream()
+-			.map(RegistryObject::get)
++			.map(DeferredHolder::get)
+ 			.filter(item -> item instanceof DKnifeItem)
+ 			.map(item -> (DKnifeItem) item)
+ 			.filter(knife -> knife.getDependencyTag() != null && knife.getRecipeType() == RecipeType.CRAFTING)
+ 			.forEach(k -> knife(k, finished));
+-		knifeSmeltAndBlast((DKnifeItem) Knives.BONE.get(), "bone/knife", Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(Items.BONE_MEAL)), finished);
++		knifeSmeltAndBlast((DKnifeItem) Knives.BONE.get(), "bone/knife", Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(Items.BONE_MEAL)), finished);
+ 
+ 		// Smelting
+ 		foodSmeltingRecipes("cactus_steak", DelightfulItems.CACTUS_FLESH.get(), DelightfulItems.CACTUS_STEAK.get(), 0.35F, finished);
+@@ -742,9 +740,14 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"gummy/cantaloupe", finished, enabled(DelightfulItems.CANTALOUPE), enabled(DelightfulItems.CANTALOUPE_GUMMY));
+ 
+ 		// Unwrappables
+-		ConditionalRecipe.builder()
+-			.addCondition(not(tagEmpty(DelightfulItemTags.CHOCOLATE)))
+-			.addRecipe(f -> ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CHOCOLATE_PIE.get(), 1)
++		// The old ConditionalRecipe wrapper let both branches share a single recipe id
++		// (farmersdelight:chocolate_pie), one active at a time depending on the condition. The
++		// modern embedded-conditions format can only attach conditions to a single recipe per id,
++		// so only the "chocolate tag populated" override is emitted here (still overriding FD's
++		// bundled recipe at that id when active); when the tag is empty we simply don't write
++		// anything, so Farmer's Delight's own built-in chocolate_pie recipe (cocoa beans based,
++		// equivalent to the old fallback branch) is used unmodified instead.
++		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CHOCOLATE_PIE.get(), 1)
+ 			.pattern("ccc")
+ 			.pattern("mmm")
+ 			.pattern("xOx")
+@@ -753,20 +756,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.define('x', Items.SUGAR)
+ 			.define('O', ModItems.PIE_CRUST.get())
+ 			.unlockedBy("has_pie_crust", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PIE_CRUST.get()))
+-			.save(f))
+-			.addCondition(tagEmpty(DelightfulItemTags.CHOCOLATE))
+-			.addRecipe(f -> ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CHOCOLATE_PIE.get(), 1)
+-			.pattern("ccc")
+-			.pattern("mmm")
+-			.pattern("xOx")
+-			.define('c', Items.COCOA_BEANS)
+-			.define('m', CommonTags.Items.MILK)
+-			.define('x', Items.SUGAR)
+-			.define('O', ModItems.PIE_CRUST.get())
+-			.unlockedBy("has_pie_crust", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PIE_CRUST.get()))
+-			.save(f))
+-			.generateAdvancement()
+-			.build(finished, ModItems.CHOCOLATE_PIE.getId());
++			.save(finished.withConditions(not(tagEmpty(DelightfulItemTags.CHOCOLATE))), ModItems.CHOCOLATE_PIE.getId());
+ 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(DelightfulItems.WILD_SALMONBERRIES.get()), CuttingRecipes.KNIVES, DelightfulItems.SALMONBERRIES.get(), 2)
+ 			.addResultWithChance(Items.ORANGE_DYE, 0.5F)
+ 			.save(finished, Util.delight("cutting/wild_salmonberries"));
+@@ -777,68 +767,40 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.save(finished, Util.delight("cutting/sugar_cane"));
+ 	}
+ 
+-	private void wrap(RecipeBuilder builder, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(RecipeBuilder builder, String name, RecipeOutput consumer, ICondition... conds) {
+ 		wrap(builder, Delightful.MODID, name, consumer, conds);
+ 	}
+ 
+-	private void wrap(RecipeBuilder builder, String modid, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(RecipeBuilder builder, String modid, String name, RecipeOutput consumer, ICondition... conds) {
+ 		ResourceLocation loc = Util.rl(modid, name);
+-		FinishedRecipe[] recipe = new FinishedRecipe[1];
+-		builder.save(f -> recipe[0] = f, loc);
+-		ConditionalRecipe.Builder cond = ConditionalRecipe.builder();
+-		if (conds.length >= 1) {
+-			for (ICondition currentCond : conds) {
+-			cond.addCondition(currentCond);
+-			}
+-		}
++		List<ICondition> allConds = Lists.newArrayList(conds);
+ 		if (Modid.D.item(name) instanceof IConfigured conf) {
+ 			for (Modid conflict : conf.getConflicts()) {
+-			cond.addCondition(new NotCondition(new ModLoadedCondition(conflict.get())));
++				allConds.add(not(modLoaded(conflict.get())));
+ 			}
+ 		}
+-		cond.addRecipe(recipe[0])
+-			.generateAdvancement()
+-			.build(consumer, loc);
++		builder.save(consumer.withConditions(allConds.toArray(new ICondition[0])), loc);
+ 	}
+ 
+-	private void wrap(CuttingBoardRecipeBuilder builder, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(CuttingBoardRecipeBuilder builder, String name, RecipeOutput consumer, ICondition... conds) {
+ 		wrap(builder, Delightful.MODID, name, consumer, conds);
+ 	}
+ 
+-	private void wrap(CuttingBoardRecipeBuilder builder, String modid, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(CuttingBoardRecipeBuilder builder, String modid, String name, RecipeOutput consumer, ICondition... conds) {
+ 		ResourceLocation loc = Util.rl(modid, name);
+-		ConditionalRecipe.Builder cond = ConditionalRecipe.builder();
+-		if (conds.length >= 1) {
+-			for (ICondition currentCond : conds) {
+-			cond.addCondition(currentCond);
+-			}
+-		}
+-		FinishedRecipe[] recipe = new FinishedRecipe[1];
+-		builder.save(f -> recipe[0] = f, loc);
+-		cond.addRecipe(recipe[0])
+-			.build(consumer, loc);
++		builder.save(consumer.withConditions(conds), loc);
+ 	}
+ 
+-	private void wrap(CookingPotRecipeBuilder builder, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(CookingPotRecipeBuilder builder, String name, RecipeOutput consumer, ICondition... conds) {
+ 		wrap(builder, Delightful.MODID, name, consumer, conds);
+ 	}
+ 
+-	private void wrap(CookingPotRecipeBuilder builder, String modid, String name, Consumer<FinishedRecipe> consumer, ICondition... conds) {
++	private void wrap(CookingPotRecipeBuilder builder, String modid, String name, RecipeOutput consumer, ICondition... conds) {
+ 		ResourceLocation loc = Util.rl(modid, name);
+-		ConditionalRecipe.Builder cond = ConditionalRecipe.builder();
+-		if (conds.length >= 1) {
+-			for (ICondition currentCond : conds) {
+-			cond.addCondition(currentCond);
+-			}
+-		}
+-		FinishedRecipe[] recipe = new FinishedRecipe[1];
+-		builder.save(f -> recipe[0] = f, loc);
+-		cond.addRecipe(recipe[0])
+-			.generateAdvancement()
+-			.build(consumer, loc);
++		builder.save(consumer.withConditions(conds), loc);
+ 	}
+ 
+-	private void sack(RegistryObject<Item> sack, ItemLike ingredient, String name, Consumer<FinishedRecipe> finished) {
++	private void sack(DeferredHolder<Item, Item> sack, ItemLike ingredient, String name, RecipeOutput finished) {
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, sack.get(), 1)
+ 			.requires(ingredient, 9)
+ 			.unlockedBy("has_" + name, has(ingredient)),
+@@ -849,11 +811,9 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"storage/unpack_" + name + "_storage_block", finished, enabled(sack));
+ 	}
+ 
+-	private void cabinet(Block block, Block wood, Block counter, Consumer<FinishedRecipe> finished) {
++	private void cabinet(Block block, Block wood, Block counter, RecipeOutput finished) {
+ 		String path = Util.name(block);
+-		ConditionalRecipe.builder()
+-			.addCondition(enabled(path))
+-			.addRecipe(f -> ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block, 1)
++		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block, 1)
+ 			.define('b', ((DelightfulCabinetBlock) block).getIngredient())
+ 			.define('c', wood)
+ 			.define('t', counter)
+@@ -861,12 +821,10 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("bcb")
+ 			.pattern("bbb")
+ 			.unlockedBy("has_cabinet", has(wood))
+-			.save(f))
+-			.generateAdvancement()
+-			.build(finished, Delightful.MODID, "cabinets/" + path);
++			.save(finished.withConditions(enabled(path)), Util.rl(Delightful.MODID, "cabinets/" + path));
+ 	}
+ 
+-	private void knife(DKnifeItem knife, Consumer<FinishedRecipe> finished) {
++	private void knife(DKnifeItem knife, RecipeOutput finished) {
+ 		TagKey<Item> tag = knife.getDependencyTag();
+ 		if (tag != null) {
+ 			String path = Util.name(knife);
+@@ -906,24 +864,17 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		}
+ 	}
+ 
+-	private void knifeSmeltAndBlast(DKnifeItem knife, String metal, ResourceLocation nugget, Consumer<FinishedRecipe> finished) {
+-		ConditionalRecipe.builder()
+-			.addCondition(and(enabled(Util.name(knife)), itemExists(nugget.getNamespace(), nugget.getPath())))
+-			.addRecipe(f -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(knife), RecipeCategory.COMBAT, Objects.requireNonNull(Util.item(nugget)), 0.1F, 200)
++	private void knifeSmeltAndBlast(DKnifeItem knife, String metal, ResourceLocation nugget, RecipeOutput finished) {
++		ICondition cond = and(enabled(Util.name(knife)), itemExists(nugget.getNamespace(), nugget.getPath()));
++		SimpleCookingRecipeBuilder.smelting(Ingredient.of(knife), RecipeCategory.COMBAT, Objects.requireNonNull(Util.item(nugget)), 0.1F, 200)
+ 			.unlockedBy("has_" + metal + "_knife", InventoryChangeTrigger.TriggerInstance.hasItems(knife))
+-			.save(f, Util.delight("knives/smelting/" + metal + "_" + nugget.getNamespace())))
+-			.generateAdvancement()
+-			.build(finished, Delightful.MODID, "knives/smelting/" + metal + "_" + nugget.getNamespace());
+-		ConditionalRecipe.builder()
+-			.addCondition(and(enabled(Util.name(knife)), itemExists(nugget.getNamespace(), nugget.getPath())))
+-			.addRecipe(f -> SimpleCookingRecipeBuilder.blasting(Ingredient.of(knife), RecipeCategory.COMBAT, Objects.requireNonNull(Util.item(nugget)), 0.1F, 100)
++			.save(finished.withConditions(cond), Util.delight("knives/smelting/" + metal + "_" + nugget.getNamespace()));
++		SimpleCookingRecipeBuilder.blasting(Ingredient.of(knife), RecipeCategory.COMBAT, Objects.requireNonNull(Util.item(nugget)), 0.1F, 100)
+ 			.unlockedBy("has_" + metal + "_knife", InventoryChangeTrigger.TriggerInstance.hasItems(knife))
+-			.save(f, Util.delight("knives/blasting/" + metal + "_" + nugget.getNamespace())))
+-			.generateAdvancement()
+-			.build(finished, Delightful.MODID, "knives/blasting/" + metal + "_" + nugget.getNamespace());
++			.save(finished.withConditions(cond), Util.delight("knives/blasting/" + metal + "_" + nugget.getNamespace()));
+ 	}
+ 
+-	private EnabledCondition enabled(RegistryObject<Item> item) {
++	private EnabledCondition enabled(DeferredHolder<Item, Item> item) {
+ 		return new EnabledCondition(Util.name(item));
+ 	}
+ 
+@@ -931,13 +882,13 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		return new EnabledCondition(name);
+ 	}
+ 
+-	private void foodSmeltingRecipes(String name, ItemLike ingredient, ItemLike result, float experience, Consumer<FinishedRecipe> consumer) {
++	private void foodSmeltingRecipes(String name, ItemLike ingredient, ItemLike result, float experience, RecipeOutput consumer) {
+ 		wrap(SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 200).unlockedBy(name, has(ingredient)), "smelting/" + name, consumer, enabled(name));
+ 		wrap(SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 600).unlockedBy(name, has(ingredient)), "campfire/" + name, consumer, enabled(name));
+ 		wrap(SimpleCookingRecipeBuilder.smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 100).unlockedBy(name, has(ingredient)), "smoking/" + name, consumer, enabled(name));
+ 	}
+ 
+-	private ShapedRecipeBuilder shaped(RecipeCategory category, RegistryObject<Item> returns, int count) {
++	private ShapedRecipeBuilder shaped(RecipeCategory category, DeferredHolder<Item, Item> returns, int count) {
+ 		return ShapedRecipeBuilder.shaped(category, returns.get(), count);
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/Generators.java b/src/main/java/net/brnbrd/delightful/data/gen/Generators.java
+index c46f5d62..2008cf83 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/Generators.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/Generators.java
+@@ -6,15 +6,15 @@ import net.minecraft.data.DataGenerator;
+ import net.minecraft.data.PackOutput;
+ import net.minecraft.data.loot.LootTableProvider;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+-import net.minecraftforge.common.data.ExistingFileHelper;
+-import net.minecraftforge.data.event.GatherDataEvent;
+-import net.minecraftforge.eventbus.api.SubscribeEvent;
+-import net.minecraftforge.fml.common.Mod;
++import net.neoforged.bus.api.SubscribeEvent;
++import net.neoforged.fml.common.EventBusSubscriber;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.data.event.GatherDataEvent;
+ import java.util.Collections;
+ import java.util.List;
+ import java.util.concurrent.CompletableFuture;
+ 
+-@Mod.EventBusSubscriber(modid = Delightful.MODID)
++@EventBusSubscriber(modid = Delightful.MODID)
+ public class Generators {
+ 
+ 	// Gathering data
+@@ -26,16 +26,16 @@ public class Generators {
+ 		ExistingFileHelper helper = e.getExistingFileHelper();
+ 
+ 		gen.addProvider(e.includeServer(), new LootTableProvider(output, Collections.emptySet(),
+-				List.of(new LootTableProvider.SubProviderEntry(DelightfulBlockLoot::new, LootContextParamSets.BLOCK))));
+-		e.getGenerator().addProvider(e.includeServer(), new DelightfulRecipeProvider(output));
++				List.of(new LootTableProvider.SubProviderEntry(DelightfulBlockLoot::new, LootContextParamSets.BLOCK)), lookup));
++		gen.addProvider(e.includeServer(), new DelightfulRecipeProvider(output, lookup));
+ 		DelightfulBlockTagProvider blockTag = new DelightfulBlockTagProvider(output, lookup, helper);
+-		e.getGenerator().addProvider(e.includeServer(), blockTag);
+-		e.getGenerator().addProvider(e.includeServer(), new DelightfulItemTagProvider(output, lookup, blockTag.contentsGetter(), helper));
+-		e.getGenerator().addProvider(e.includeServer(), new DelightfulEntityTagProvider(output, lookup, helper));
+-		//e.getGenerator().addProvider(e.includeServer(), new DelightfulLootModifierProvider(output));
++		gen.addProvider(e.includeServer(), blockTag);
++		gen.addProvider(e.includeServer(), new DelightfulItemTagProvider(output, lookup, blockTag.contentsGetter(), helper));
++		gen.addProvider(e.includeServer(), new DelightfulEntityTagProvider(output, lookup, helper));
++		//gen.addProvider(e.includeServer(), new DelightfulLootModifierProvider(output, lookup));
+ 
+-		e.getGenerator().addProvider(e.includeClient(), new DelightfulBlockStateProvider(output, helper));
+-		e.getGenerator().addProvider(e.includeClient(), new DelightfulItemModelProvider(output, helper));
+-		e.getGenerator().addProvider(e.includeClient(), new DelightfulLanguageProvider(output));
++		gen.addProvider(e.includeClient(), new DelightfulBlockStateProvider(output, helper));
++		gen.addProvider(e.includeClient(), new DelightfulItemModelProvider(output, helper));
++		gen.addProvider(e.includeClient(), new DelightfulLanguageProvider(output));
+ 	}
+-}
+\ No newline at end of file
++}
+-- 
+2.39.0.windows.1
+

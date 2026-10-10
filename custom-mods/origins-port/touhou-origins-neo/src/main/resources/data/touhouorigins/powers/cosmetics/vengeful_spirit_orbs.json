@@ -1,0 +1,17 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:spirit_orbs",
+  "texture_location": "touhouorigins:textures/entity/spirit_orb.png",
+  "render_type": "emissive",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:vengeful_spirit"
+  },
+  "animations": {
+    "animation": "touhouorigins:cosmetics",
+    "name": "animation.embers",
+    "loop": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:axes",
+    "#minecraft:swords",
+    {
+      "id": "#c:spears",
+      "required": false
+    },
+    {
+      "id": "#c:hammers",
+      "required": false
+    }
+  ]
+}

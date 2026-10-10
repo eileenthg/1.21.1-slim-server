@@ -1,0 +1,36 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/crow_tengu_wings",
+  "texture_location": "touhouorigins:textures/entity/tlm/syameimaru_aya.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "apoli:and",
+    "conditions": [
+      {
+        "type": "origins:origin",
+        "origin": "touhouorigins:crow_tengu"
+      },
+      {
+        "type": "apoli:power_active",
+        "power": "touhouorigins:crow_tengu/youkai_of_the_sky_toggle"
+      }
+    ]
+  },
+  "animations": [
+    {
+      "animation": "touhouorigins:cosmetics",
+      "name": "animation.spread",
+      "loop": true,
+      "condition": {
+        "type": "apoli:fall_flying"
+      }
+    },
+    {
+      "animation": "touhouorigins:cosmetics",
+      "name": "animation.idle",
+      "loop": true
+    }
+  ]
+}

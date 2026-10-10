@@ -1,0 +1,20 @@
+{
+  "order": 15,
+  "origins": [
+    "touhoublessings:regular",
+    "touhoublessings:hakurei",
+    "touhoublessings:moriya",
+    "touhoublessings:high_stakes",
+    "touhoublessings:knowledge",
+    "touhoublessings:permadeath",
+    "touhoublessings:beast_spirits",
+    "touhoublessings:scarlet",
+    "touhoublessings:eientei"
+  ],
+  "allow_random": true,
+  "exclude_random": [
+    "touhoublessings:regular",
+    "touhoublessings:high_stakes",
+    "touhoublessings:permadeath"
+  ]
+}

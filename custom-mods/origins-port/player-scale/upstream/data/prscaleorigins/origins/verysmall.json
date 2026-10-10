@@ -1,0 +1,15 @@
+{
+	"name": "Very Small",
+	"description": "§oAw, look, a little buddy!§r",
+    "powers": [
+		"prscaleorigins:verysmall_scale",
+		"prscaleorigins:verysmall_balance"
+    ],
+    "icon": {
+        "item": "minecraft:dandelion"
+    },
+    "order": 30,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

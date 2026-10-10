@@ -1,0 +1,15 @@
+{
+	"name": "Small",
+	"description": "§oGet small or get gone!§r",
+    "powers": [
+		"prscaleorigins:small_scale",
+		"prscaleorigins:small_balance"
+    ],
+    "icon": {
+        "item": "minecraft:poppy"
+    },
+    "order": 20,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

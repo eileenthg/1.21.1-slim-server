@@ -1,0 +1,6 @@
+- [MCA extends vanilla Villager](mca-extends-vanilla-villager.md) — the brief's core premise is false; Liberty's Villagers already reaches MCA villagers.
+- [Liberty's Villagers tasks are inert](libertyvillagers-tasks-are-inert.md) — unremapped Yarn names mean its golem/potion/fishing tasks never run at all.
+- [Brain tasks and WALK_TARGET contention](brain-task-walk-target-contention.md) — requiring WALK_TARGET absent silently disables a task on MCA guards.
+- [MCA strips vanilla professions](mca-strips-vanilla-professions.md) — LoseUnimportantJobTask wipes them unless the villager has XP or a job site.
+- [Villager fishing bobbers die instantly](villager-fishing-bobber-dies.md) — casting works, catching cannot; LV's FishingHook patch is ineffective.
+- [Headless servers stop ticking entities](headless-server-stops-ticking-entities.md) — no player online means frozen entities that look like broken behaviour.

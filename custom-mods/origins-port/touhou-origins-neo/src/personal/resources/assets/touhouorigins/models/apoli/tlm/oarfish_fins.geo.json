@@ -1,0 +1,145 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.oarfish_fins.geo",
+    "texture_width": 128,
+    "texture_height": 128
+   },
+   "bones": [
+    {
+     "name": "head",
+     "pivot": [
+      0.0,
+      24.0,
+      0.0
+     ]
+    },
+    {
+     "name": "earRight",
+     "parent": "head",
+     "pivot": [
+      -4.0,
+      26.0,
+      -2.0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -14.0,
+        20.0,
+        -8.0
+       ],
+       "size": [
+        16,
+        16,
+        16
+       ],
+       "uv": [
+        0,
+        33
+       ],
+       "inflate": -6,
+       "mirror": true
+      }
+     ]
+    },
+    {
+     "name": "bone32",
+     "parent": "earRight",
+     "pivot": [
+      0.0,
+      24.0,
+      0.0
+     ],
+     "rotation": [
+      0,
+      0,
+      -45
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -0.91421,
+        28.74264,
+        -2.5
+       ],
+       "size": [
+        1,
+        5,
+        1
+       ],
+       "uv": [
+        0,
+        8
+       ],
+       "inflate": -0.4
+      }
+     ]
+    },
+    {
+     "name": "earLeft",
+     "parent": "head",
+     "pivot": [
+      4.0,
+      26.0,
+      -2.0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -2.0,
+        20.0,
+        -8.0
+       ],
+       "size": [
+        16,
+        16,
+        16
+       ],
+       "uv": [
+        0,
+        33
+       ],
+       "inflate": -6
+      }
+     ]
+    },
+    {
+     "name": "bone33",
+     "parent": "earLeft",
+     "pivot": [
+      0.0,
+      24.0,
+      0.0
+     ],
+     "rotation": [
+      0,
+      0,
+      45
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -0.08579,
+        28.74264,
+        -2.5
+       ],
+       "size": [
+        1,
+        5,
+        1
+       ],
+       "uv": [
+        0,
+        8
+       ],
+       "inflate": -0.4
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

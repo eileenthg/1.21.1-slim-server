@@ -1,0 +1,17 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/ghost_spirit",
+  "texture_location": "touhouorigins:textures/entity/tlm/saigyouji_yuyuko.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:ghost"
+  },
+  "animations": {
+    "animation": "touhouorigins:cosmetics",
+    "name": "animation.drift",
+    "loop": true
+  }
+}

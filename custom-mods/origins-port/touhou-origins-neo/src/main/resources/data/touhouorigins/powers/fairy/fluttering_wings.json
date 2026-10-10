@@ -1,0 +1,436 @@
+{
+  "type": "apoli:multiple",
+  "toggle": {
+    "type": "apoli:toggle",
+    "active_by_default": true,
+    "key": {
+      "key": "key.touhouorigins.toggle"
+    }
+  },
+  "flight": {
+    "type": "apoli:active_self",
+    "entity_action": {
+      "type": "apoli:apply_effect",
+      "effect": {
+        "effect": "minecraft:levitation",
+        "duration": 3,
+        "amplifier": 4,
+        "show_particles": false,
+        "show_icon": false
+      }
+    },
+    "cooldown": 0,
+    "key": {
+      "key": "key.jump",
+      "continuous": true
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:food_level",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "hunger": {
+    "type": "apoli:active_self",
+    "entity_action": {
+      "type": "apoli:exhaust",
+      "amount": 4
+    },
+    "cooldown": 20,
+    "key": {
+      "key": "key.jump",
+      "continuous": true
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:food_level",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        {
+          "type": "apoli:command",
+          "command": "data get entity @s abilities.mayfly",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "floating": {
+    "type": "apoli:action_over_time",
+    "entity_action": {
+      "type": "apoli:apply_effect",
+      "effect": {
+        "effect": "minecraft:slow_falling",
+        "duration": 2,
+        "show_particles": false,
+        "show_icon": false
+      }
+    },
+    "interval": 1,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:levitation",
+          "inverted": true
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "particles_up": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "minecraft:dust",
+      "params": "1 1 0.25 1"
+    },
+    "frequency": 4,
+    "count": 15,
+    "spread": {
+      "x": 0.2,
+      "y": 0.2,
+      "z": 0.2
+    },
+    "offset_y": 0.8,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:levitation",
+          "min_amplifier": 4
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "particles_down": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "minecraft:dust",
+      "params": "1 1 0.25 1"
+    },
+    "frequency": 5,
+    "count": 15,
+    "spread": {
+      "x": 0.2,
+      "y": 0.2,
+      "z": 0.2
+    },
+    "offset_y": 0.8,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:slow_falling"
+        },
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:levitation",
+          "inverted": true
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "sound_up": {
+    "type": "apoli:action_over_time",
+    "entity_action": {
+      "type": "apoli:choice",
+      "actions": [
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 2
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 1.9
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 1.8
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:nothing"
+          },
+          "weight": 8
+        }
+      ]
+    },
+    "interval": 4,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:levitation",
+          "min_amplifier": 4
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "sound_down": {
+    "type": "apoli:action_over_time",
+    "entity_action": {
+      "type": "apoli:choice",
+      "actions": [
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 1.7
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 1.6
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:play_sound",
+            "sound": "touhouorigins:origin.fairy.fly",
+            "pitch": 1.5
+          },
+          "weight": 5
+        },
+        {
+          "element": {
+            "type": "apoli:nothing"
+          },
+          "weight": 8
+        }
+      ]
+    },
+    "interval": 5,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:slow_falling"
+        },
+        {
+          "type": "apoli:status_effect",
+          "effect": "minecraft:levitation",
+          "inverted": true
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        }
+      ]
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:keybind",
+      "sprite": "origins:textures/gui/badge/isaacfanta/toggle.png",
+      "text": "origins.gui.badge.toggle",
+      "key": "key.touhouorigins.toggle"
+    },
+    {
+      "type": "origins:keybind",
+      "sprite": "origins:textures/gui/badge/isaacfanta/active.png",
+      "text": "origins.gui.badge.active",
+      "key": "key.jump"
+    }
+  ],
+  "wing_state": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 1
+  },
+  "wing_announce": {
+    "type": "apoli:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:power_active",
+        "power": "*:*_toggle"
+      },
+      "if_action": {
+        "type": "apoli:if_else",
+        "condition": {
+          "type": "apoli:resource",
+          "resource": "*:*_wing_state",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:change_resource",
+              "resource": "*:*_wing_state",
+              "operation": "set",
+              "change": 1
+            },
+            {
+              "type": "apoli:execute_command",
+              "command": "title @s actionbar {\"translate\":\"power.touhouorigins.fairy/fluttering_wings.spread\",\"color\":\"yellow\"}"
+            }
+          ]
+        },
+        "else_action": {
+          "type": "apoli:nothing"
+        }
+      },
+      "else_action": {
+        "type": "apoli:if_else",
+        "condition": {
+          "type": "apoli:resource",
+          "resource": "*:*_wing_state",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        "if_action": {
+          "type": "apoli:and",
+          "actions": [
+            {
+              "type": "apoli:change_resource",
+              "resource": "*:*_wing_state",
+              "operation": "set",
+              "change": 0
+            },
+            {
+              "type": "apoli:execute_command",
+              "command": "title @s actionbar {\"translate\":\"power.touhouorigins.fairy/fluttering_wings.folded\",\"color\":\"gray\"}"
+            }
+          ]
+        },
+        "else_action": {
+          "type": "apoli:nothing"
+        }
+      }
+    }
+  },
+  "flight_blocked": {
+    "type": "apoli:active_self",
+    "cooldown": 20,
+    "key": {
+      "key": "key.jump",
+      "continuous": true
+    },
+    "entity_action": {
+      "type": "apoli:execute_command",
+      "command": "title @s actionbar {\"translate\":\"power.touhouorigins.fairy/fluttering_wings.starving\",\"color\":\"red\"}"
+    },
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:food_level",
+          "comparison": "<=",
+          "compare_to": 0
+        },
+        {
+          "type": "apoli:creative_flying",
+          "inverted": true
+        },
+        {
+          "type": "apoli:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "apoli:on_block",
+          "inverted": true
+        }
+      ]
+    }
+  }
+}

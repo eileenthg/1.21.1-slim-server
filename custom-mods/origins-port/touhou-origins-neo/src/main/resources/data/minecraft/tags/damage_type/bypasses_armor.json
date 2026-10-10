@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "touhouorigins:sun",
+    "touhouorigins:probe",
+    "touhouorigins:parry",
+    "touhouorigins:master_death"
+  ]
+}

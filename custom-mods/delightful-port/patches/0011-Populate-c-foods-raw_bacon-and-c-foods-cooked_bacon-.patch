@@ -1,0 +1,96 @@
+From 16aaa9134030a48f0a6c2c88e46978bb27ad5cfe Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Fri, 4 Sep 2026 01:37:46 +0800
+Subject: [PATCH 11/12] Populate c:foods/raw_bacon and c:foods/cooked_bacon
+ convention tags
+
+Farmer's Delight declares these CommonTags.Items constants but ships no
+json for them (same situation already fixed for chicken/beef/pork/mutton).
+wrapped_cantaloupe's crafting recipe requires c:foods/cooked_bacon
+directly, so without this it was a registered-but-uncraftable item in a
+vanilla + Delightful + Farmer's Delight setup. Populated with FD's own
+bacon/cooked_bacon items, same pattern as the existing meat tag fixes.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84          | 4 +++-
+ .../resources/data/c/tags/item/foods/cooked_bacon.json       | 5 +++++
+ .../resources/data/c/tags/item/foods/raw_bacon.json          | 5 +++++
+ .../delightful/data/gen/DelightfulItemTagProvider.java       | 2 ++
+ 4 files changed, 15 insertions(+), 1 deletion(-)
+ create mode 100644 src/generated/resources/data/c/tags/item/foods/cooked_bacon.json
+ create mode 100644 src/generated/resources/data/c/tags/item/foods/raw_bacon.json
+
+diff --git a/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84 b/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
+index 9cf20f6c..f69e1359 100644
+--- a/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
++++ b/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
+@@ -1,4 +1,4 @@
+-// 1.21.1	2026-09-04T01:07:57.4053216	delightful
++// 1.21.1	2026-09-04T01:37:26.0821443	delightful
+ 8980358a7235536580c6b076956e78e18eca38e9 data/additionaladditions/tags/item/gilded_netherite_upgrade.json
+ 251ab39f668c15d972d4630264e39f06ec646606 data/additionaladditions/tags/item/gold_ring.json
+ 9136930399e99d219f34c05a02844b699ef0873a data/additionaladditions/tags/item/rose_gold_alloy.json
+@@ -74,6 +74,7 @@ b4c8d4816b358b269c3373caeaf9fb54fd68d233 data/c/tags/item/eggs.json
+ ee1ac15d884dd785aef09cee456c6b5e64e1ebb2 data/c/tags/item/flour.json
+ 1dab5d213885a414168c7dd3bdb1b0b541a8d4a0 data/c/tags/item/foods/berry.json
+ a19bc80a0a6a6592086cf23f68d4a8bde2440542 data/c/tags/item/foods/bread.json
++3303db8c35b37ceda9538f0642448ff9ee6c42d0 data/c/tags/item/foods/cooked_bacon.json
+ 6ddb26f62487e2f1691999b5c3549e4a5bf5e8fb data/c/tags/item/foods/cooked_beef.json
+ c3c27458abd0552603e7efa5057e67df2cdca0e5 data/c/tags/item/foods/cooked_chicken.json
+ 5b067065b0eeff7839dcf6dbb72efcdfaa6826ee data/c/tags/item/foods/cooked_egg.json
+@@ -84,6 +85,7 @@ ca292a094655661e46a424ec2855cf75d359675d data/c/tags/item/foods/dough.json
+ 7a150ff53109e030bf6fe4d1972e27f9160dc2ec data/c/tags/item/foods/meat.json
+ 96f3149669dced06b3b7d9e4ac6e735251a7eb3e data/c/tags/item/foods/meat/cooked.json
+ 854369106a5a318916d277e75c3806179e7be6b3 data/c/tags/item/foods/meat/raw.json
++ef52cc197127c8679eb1c5b78795a4bde37e1d04 data/c/tags/item/foods/raw_bacon.json
+ d14710b6121edb04c184b88cb21ce8d106aafd32 data/c/tags/item/foods/raw_beef.json
+ 3acc48b98a61c64992c20898e3cda550f0dac516 data/c/tags/item/foods/raw_chicken.json
+ 19f281c1478eaa940631620bb4131c557d710d68 data/c/tags/item/foods/raw_fish.json
+diff --git a/src/generated/resources/data/c/tags/item/foods/cooked_bacon.json b/src/generated/resources/data/c/tags/item/foods/cooked_bacon.json
+new file mode 100644
+index 00000000..f73a0260
+--- /dev/null
++++ b/src/generated/resources/data/c/tags/item/foods/cooked_bacon.json
+@@ -0,0 +1,5 @@
++{
++  "values": [
++    "farmersdelight:cooked_bacon"
++  ]
++}
+\ No newline at end of file
+diff --git a/src/generated/resources/data/c/tags/item/foods/raw_bacon.json b/src/generated/resources/data/c/tags/item/foods/raw_bacon.json
+new file mode 100644
+index 00000000..1a36c3e5
+--- /dev/null
++++ b/src/generated/resources/data/c/tags/item/foods/raw_bacon.json
+@@ -0,0 +1,5 @@
++{
++  "values": [
++    "farmersdelight:bacon"
++  ]
++}
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+index ee11f622..e3df78ab 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+@@ -667,6 +667,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(CommonTags.Items.FOODS_RAW_BEEF).add(Items.BEEF);
+ 		this.tag(CommonTags.Items.FOODS_RAW_PORK).add(Items.PORKCHOP);
+ 		this.tag(CommonTags.Items.FOODS_RAW_MUTTON).add(Items.MUTTON);
++		this.tag(CommonTags.Items.FOODS_RAW_BACON).add(ModItems.BACON.get());
+ 		this.tag(DelightfulItemTags.FOODS_MEAT_RAW)
+ 			.addOptionalTag(Modid.LOADER.rl("raw_meat"))
+ 			.addTag(Tags.Items.FOODS_RAW_FISH)
+@@ -696,6 +697,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(CommonTags.Items.FOODS_COOKED_BEEF).add(Items.COOKED_BEEF);
+ 		this.tag(CommonTags.Items.FOODS_COOKED_PORK).add(Items.COOKED_PORKCHOP);
+ 		this.tag(CommonTags.Items.FOODS_COOKED_MUTTON).add(Items.COOKED_MUTTON);
++		this.tag(CommonTags.Items.FOODS_COOKED_BACON).add(ModItems.COOKED_BACON.get());
+ 		this.tag(DelightfulItemTags.FOODS_MEAT_COOKED)
+ 			.addOptionalTag(Modid.LOADER.rl("cooked_meat"))
+ 			.addTag(Tags.Items.FOODS_COOKED_FISH)
+-- 
+2.39.0.windows.1
+

@@ -1,0 +1,12 @@
+{
+  "powers": [
+    "touhouorigins:fairy/regeneration",
+    "touhouorigins:fairy/fluttering_wings",
+    "touhouorigins:fairy/aspect_of_nature",
+    "touhouorigins:fairy/vegetarians_can_fly",
+    "touhouorigins:fairy/fodder"
+  ],
+  "icon": "minecraft:sunflower",
+  "order": 2,
+  "impact": 2
+}

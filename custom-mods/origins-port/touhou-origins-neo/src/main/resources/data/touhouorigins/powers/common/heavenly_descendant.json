@@ -1,0 +1,27 @@
+{
+  "type": "apoli:multiple",
+  "melee_damage": {
+    "type": "apoli:modify_damage_dealt",
+    "modifier": {
+      "name": "Heavenly Descendant melee damage penalty",
+      "operation": "multiply_total_multiplicative",
+      "value": -0.8
+    },
+    "condition": {
+      "type": "apoli:dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  },
+  "ranged_damage": {
+    "type": "apoli:modify_projectile_damage",
+    "modifier": {
+      "name": "Heavenly Descendant ranged damage penalty",
+      "operation": "multiply_total_multiplicative",
+      "value": -0.8
+    },
+    "condition": {
+      "type": "apoli:dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  }
+}

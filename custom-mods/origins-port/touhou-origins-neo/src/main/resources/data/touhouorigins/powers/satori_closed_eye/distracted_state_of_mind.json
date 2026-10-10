@@ -1,0 +1,17 @@
+{
+  "type": "apoli:prevent_item_use",
+  "item_condition": {
+    "type": "apoli:ingredient",
+    "ingredient": [
+      {
+        "tag": "c:tools/bow"
+      },
+      {
+        "tag": "c:tools/crossbow"
+      },
+      {
+        "tag": "c:tools/shield"
+      }
+    ]
+  }
+}

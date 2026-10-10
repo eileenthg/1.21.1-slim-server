@@ -1,0 +1,486 @@
+{
+  "type": "apoli:multiple",
+  "boolean": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 1
+  },
+  "set": {
+    "type": "apoli:entity_set"
+  },
+  "link": {
+    "type": "apoli:action_on_entity_use",
+    "bientity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:add_to_set",
+          "set": "*:*_set"
+        },
+        {
+          "type": "touhouorigins:remember_master"
+        },
+        {
+          "type": "apoli:target_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:spawn_particles",
+                "particle": {
+                  "type": "minecraft:dust",
+                  "params": "1 0 0 1"
+                },
+                "count": 125,
+                "force": true,
+                "spread": {
+                  "x": 0.4,
+                  "y": 0.125,
+                  "z": 0.4
+                },
+                "offset_y": 1
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.linked_master\",\"color\":\"dark_red\"}"
+              },
+              {
+                "type": "apoli:if_else",
+                "condition": {
+                  "type": "apoli:equipped_item",
+                  "equipment_slot": "mainhand",
+                  "item_condition": {
+                    "type": "apoli:and",
+                    "conditions": [
+                      {
+                        "type": "apoli:ingredient",
+                        "ingredient": {
+                          "item": "minecraft:lead"
+                        }
+                      },
+                      {
+                        "type": "touhouorigins:named",
+                        "name": "Tether"
+                      }
+                    ]
+                  }
+                },
+                "if_action": {
+                  "type": "apoli:equipped_item_action",
+                  "equipment_slot": "mainhand",
+                  "action": {
+                    "type": "apoli:consume",
+                    "amount": 1
+                  }
+                },
+                "else_action": {
+                  "type": "apoli:equipped_item_action",
+                  "equipment_slot": "offhand",
+                  "action": {
+                    "type": "apoli:consume",
+                    "amount": 1
+                  }
+                }
+              },
+              {
+                "type": "apoli:give",
+                "stack": {
+                  "item": "minecraft:written_book",
+                  "amount": 1,
+                  "components": {
+                    "minecraft:written_book_content": {
+                      "title": "Shikigami Contract",
+                      "author": "Touhou Origins",
+                      "pages": [
+                        "{\"text\": \"\\u00a75\\u00a7lShikigami Contract\\u00a7r\\n\\nThe pact is sealed.\\n\\nOne of you is the \\u00a74\\u00a7lservant\\u00a7r,\\nthe other the \\u00a71\\u00a7lmaster\\u00a7r.\\n\\n\\u00a78Which you are was decided\\nby what you held.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lThe Servant\\u00a7r\\n\\nYou held the \\u00a7lContract\\u00a7r book.\\n\\nYou carry every power of\\nthe pact. The master is\\nyour anchor, not a rival.\\n\\n\\u00a78Both items were consumed\\nwhen the pact was made.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lServant powers\\u00a7r\\n\\n\\u00a72\\u00a7lK\\u00a7r  Return to your master.\\n\\u00a78Costs 50 XP. You are held\\nin place ~4s, then arrive.\\nWorks across dimensions.\\u00a7r\\n\\n\\u00a72\\u00a7lN\\u00a7r  See your master glow\\n\\u00a78through walls, coloured by\\ntheir health.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lServant powers\\u00a7r\\n\\nWithin 32 blocks of your\\nmaster you strike harder.\\n\\n\\u00a74\\u00a7lIf your master dies,\\nyou die with them.\\u00a7r\\n\\n\\u00a78That is the price of the\\npact. Guard them well.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a71\\u00a7lThe Master\\u00a7r\\n\\nYou held the \\u00a7lTether\\u00a7r lead.\\n\\nYou gain no powers from\\nthe pact - you are what it\\nis anchored to.\\n\\n\\u00a78When your servant returns\\nto you, you are granted\\nResistance briefly.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a75\\u00a7lBreaking the pact\\u00a7r\\n\\nEither of you may use the\\norigin screen to end it.\\n\\nThe \\u00a71\\u00a7lmaster\\u00a7r may also cut\\nthe tether: right-click\\nthe servant with \\u00a7lshears\\u00a7r\\ncursed with \\u00a7lVanishing\\u00a7r.\\n\\n\\u00a78Add \\u00a7lSilk Touch\\u00a7r\\u00a78 to get\\nthe Tether back.\\u00a7r\"}"
+                      ],
+                      "resolved": true
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "apoli:actor_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:change_resource",
+                "resource": "*:*_boolean",
+                "change": 1,
+                "operation": "set"
+              },
+              {
+                "type": "apoli:play_sound",
+                "sound": "touhouorigins:entity.generic.shikigami_link"
+              },
+              {
+                "type": "apoli:spawn_particles",
+                "particle": {
+                  "type": "minecraft:dust",
+                  "params": "1 0 0 1"
+                },
+                "count": 125,
+                "force": true,
+                "spread": {
+                  "x": 0.4,
+                  "y": 0.125,
+                  "z": 0.4
+                },
+                "offset_y": 1
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.linked_shikigami\",\"color\":\"dark_red\"}"
+              },
+              {
+                "type": "apoli:give",
+                "stack": {
+                  "item": "minecraft:written_book",
+                  "amount": 1,
+                  "components": {
+                    "minecraft:written_book_content": {
+                      "title": "Shikigami Contract",
+                      "author": "Touhou Origins",
+                      "pages": [
+                        "{\"text\": \"\\u00a75\\u00a7lShikigami Contract\\u00a7r\\n\\nThe pact is sealed.\\n\\nOne of you is the \\u00a74\\u00a7lservant\\u00a7r,\\nthe other the \\u00a71\\u00a7lmaster\\u00a7r.\\n\\n\\u00a78Which you are was decided\\nby what you held.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lThe Servant\\u00a7r\\n\\nYou held the \\u00a7lContract\\u00a7r book.\\n\\nYou carry every power of\\nthe pact. The master is\\nyour anchor, not a rival.\\n\\n\\u00a78Both items were consumed\\nwhen the pact was made.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lServant powers\\u00a7r\\n\\n\\u00a72\\u00a7lK\\u00a7r  Return to your master.\\n\\u00a78Costs 50 XP. You are held\\nin place ~4s, then arrive.\\nWorks across dimensions.\\u00a7r\\n\\n\\u00a72\\u00a7lN\\u00a7r  See your master glow\\n\\u00a78through walls, coloured by\\ntheir health.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a74\\u00a7lServant powers\\u00a7r\\n\\nWithin 32 blocks of your\\nmaster you strike harder.\\n\\n\\u00a74\\u00a7lIf your master dies,\\nyou die with them.\\u00a7r\\n\\n\\u00a78That is the price of the\\npact. Guard them well.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a71\\u00a7lThe Master\\u00a7r\\n\\nYou held the \\u00a7lTether\\u00a7r lead.\\n\\nYou gain no powers from\\nthe pact - you are what it\\nis anchored to.\\n\\n\\u00a78When your servant returns\\nto you, you are granted\\nResistance briefly.\\u00a7r\"}",
+                        "{\"text\": \"\\u00a75\\u00a7lBreaking the pact\\u00a7r\\n\\nEither of you may use the\\norigin screen to end it.\\n\\nThe \\u00a71\\u00a7lmaster\\u00a7r may also cut\\nthe tether: right-click\\nthe servant with \\u00a7lshears\\u00a7r\\ncursed with \\u00a7lVanishing\\u00a7r.\\n\\n\\u00a78Add \\u00a7lSilk Touch\\u00a7r\\u00a78 to get\\nthe Tether back.\\u00a7r\"}"
+                      ],
+                      "resolved": true
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "bientity_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:target_condition",
+          "condition": {
+            "type": "apoli:and",
+            "conditions": [
+              {
+                "type": "apoli:entity_type",
+                "entity_type": "minecraft:player"
+              },
+              {
+                "type": "apoli:or",
+                "conditions": [
+                  {
+                    "type": "apoli:equipped_item",
+                    "equipment_slot": "mainhand",
+                    "item_condition": {
+                      "type": "apoli:and",
+                      "conditions": [
+                        {
+                          "type": "apoli:ingredient",
+                          "ingredient": {
+                            "item": "minecraft:lead"
+                          }
+                        },
+                        {
+                          "type": "touhouorigins:named",
+                          "name": "Tether"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "apoli:equipped_item",
+                    "equipment_slot": "offhand",
+                    "item_condition": {
+                      "type": "apoli:and",
+                      "conditions": [
+                        {
+                          "type": "apoli:ingredient",
+                          "ingredient": {
+                            "item": "minecraft:lead"
+                          }
+                        },
+                        {
+                          "type": "touhouorigins:named",
+                          "name": "Tether"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "apoli:invert",
+          "condition": {
+            "type": "apoli:in_set",
+            "set": "*:*_set"
+          },
+          "inverted": true
+        }
+      ]
+    },
+    "held_item_action": {
+      "type": "apoli:consume"
+    },
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "item": "minecraft:written_book"
+          }
+        },
+        {
+          "type": "touhouorigins:named",
+          "name": "Contract"
+        }
+      ]
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "*:*_boolean",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "unlink": {
+    "type": "touhouorigins:action_on_origin_gui",
+    "entity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:action_on_set",
+          "set": "*:*_set",
+          "bientity_action": {
+            "type": "apoli:remove_from_set",
+            "set": "*:*_set"
+          }
+        },
+        {
+          "type": "apoli:change_resource",
+          "resource": "*:*_boolean",
+          "change": 0,
+          "operation": "set"
+        }
+      ]
+    }
+  },
+  "sever_tether": {
+    "type": "apoli:action_on_being_used",
+    "bientity_condition": {
+      "type": "touhouorigins:pact_servant"
+    },
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "item": "minecraft:shears"
+          }
+        },
+        {
+          "type": "apoli:enchantment",
+          "enchantment": "minecraft:vanishing_curse",
+          "comparison": ">=",
+          "compare_to": 1
+        },
+        {
+          "type": "apoli:enchantment",
+          "enchantment": "minecraft:silk_touch",
+          "comparison": "<",
+          "compare_to": 1
+        }
+      ]
+    },
+    "bientity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:target_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:action_on_set",
+                "set": "*:*_set",
+                "bientity_action": {
+                  "type": "apoli:remove_from_set",
+                  "set": "*:*_set"
+                }
+              },
+              {
+                "type": "apoli:change_resource",
+                "resource": "*:*_boolean",
+                "change": 0,
+                "operation": "set"
+              },
+              {
+                "type": "apoli:spawn_particles",
+                "particle": {
+                  "type": "minecraft:dust",
+                  "params": "0.2 0.2 0.2 1"
+                },
+                "count": 60,
+                "force": true,
+                "spread": {
+                  "x": 0.4,
+                  "y": 0.125,
+                  "z": 0.4
+                },
+                "offset_y": 1
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.severed_shikigami\",\"color\":\"gray\"}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "apoli:actor_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:play_sound",
+                "sound": "minecraft:entity.sheep.shear"
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.severed_master\",\"color\":\"gray\"}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "held_item_action": {
+      "type": "apoli:damage",
+      "amount": 1
+    }
+  },
+  "sever_tether_silk": {
+    "type": "apoli:action_on_being_used",
+    "bientity_condition": {
+      "type": "touhouorigins:pact_servant"
+    },
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "item": "minecraft:shears"
+          }
+        },
+        {
+          "type": "apoli:enchantment",
+          "enchantment": "minecraft:vanishing_curse",
+          "comparison": ">=",
+          "compare_to": 1
+        },
+        {
+          "type": "apoli:enchantment",
+          "enchantment": "minecraft:silk_touch",
+          "comparison": ">=",
+          "compare_to": 1
+        }
+      ]
+    },
+    "bientity_action": {
+      "type": "apoli:and",
+      "actions": [
+        {
+          "type": "apoli:target_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:action_on_set",
+                "set": "*:*_set",
+                "bientity_action": {
+                  "type": "apoli:remove_from_set",
+                  "set": "*:*_set"
+                }
+              },
+              {
+                "type": "apoli:change_resource",
+                "resource": "*:*_boolean",
+                "change": 0,
+                "operation": "set"
+              },
+              {
+                "type": "apoli:spawn_particles",
+                "particle": {
+                  "type": "minecraft:dust",
+                  "params": "0.2 0.2 0.2 1"
+                },
+                "count": 60,
+                "force": true,
+                "spread": {
+                  "x": 0.4,
+                  "y": 0.125,
+                  "z": 0.4
+                },
+                "offset_y": 1
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.severed_shikigami\",\"color\":\"gray\"}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "apoli:actor_action",
+          "action": {
+            "type": "apoli:and",
+            "actions": [
+              {
+                "type": "apoli:play_sound",
+                "sound": "minecraft:entity.sheep.shear"
+              },
+              {
+                "type": "apoli:execute_command",
+                "command": "title @s actionbar {\"translate\":\"power.touhouorigins.boundless_servitude.severed_master_recovered\",\"color\":\"gray\"}"
+              },
+              {
+                "type": "apoli:give",
+                "stack": {
+                  "item": "minecraft:lead",
+                  "amount": 1,
+                  "components": {
+                    "minecraft:custom_name": "Tether"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "held_item_action": {
+      "type": "apoli:damage",
+      "amount": 1
+    }
+  }
+}

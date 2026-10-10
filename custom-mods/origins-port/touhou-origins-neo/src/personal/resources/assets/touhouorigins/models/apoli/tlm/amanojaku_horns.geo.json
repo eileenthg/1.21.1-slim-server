@@ -1,0 +1,310 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.amanojaku_horns.geo",
+    "texture_width": 128,
+    "texture_height": 128
+   },
+   "bones": [
+    {
+     "name": "head",
+     "pivot": [
+      0.0,
+      24.0,
+      0.0
+     ]
+    },
+    {
+     "name": "hornLeft",
+     "parent": "head",
+     "pivot": [
+      1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      45,
+      0,
+      -45
+     ]
+    },
+    {
+     "name": "bone14",
+     "parent": "hornLeft",
+     "pivot": [
+      1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      15,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        0.5,
+        34.52985,
+        4.07115
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ],
+       "mirror": true
+      }
+     ]
+    },
+    {
+     "name": "bone15",
+     "parent": "hornLeft",
+     "pivot": [
+      1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      -15,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        0.5,
+        34.52985,
+        -1.07115
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ],
+       "mirror": true
+      }
+     ]
+    },
+    {
+     "name": "bone16",
+     "parent": "hornLeft",
+     "pivot": [
+      1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      0,
+      0,
+      15
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -2.07115,
+        34.52985,
+        1.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ],
+       "mirror": true
+      }
+     ]
+    },
+    {
+     "name": "bone17",
+     "parent": "hornLeft",
+     "pivot": [
+      1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      0,
+      0,
+      -15
+     ],
+     "cubes": [
+      {
+       "origin": [
+        3.07115,
+        34.52985,
+        1.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ],
+       "mirror": true
+      }
+     ]
+    },
+    {
+     "name": "hornRight",
+     "parent": "head",
+     "pivot": [
+      -1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      45,
+      0,
+      45
+     ]
+    },
+    {
+     "name": "bone13",
+     "parent": "hornRight",
+     "pivot": [
+      -1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      15,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        34.52985,
+        4.07115
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bone18",
+     "parent": "hornRight",
+     "pivot": [
+      -1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      -15,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        34.52985,
+        -1.07115
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bone19",
+     "parent": "hornRight",
+     "pivot": [
+      -1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      0,
+      0,
+      -15
+     ],
+     "cubes": [
+      {
+       "origin": [
+        1.07115,
+        34.52985,
+        1.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bone20",
+     "parent": "hornRight",
+     "pivot": [
+      -1.0,
+      27.0,
+      2.0
+     ],
+     "rotation": [
+      0,
+      0,
+      15
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -4.07115,
+        34.52985,
+        1.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        0,
+        35
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

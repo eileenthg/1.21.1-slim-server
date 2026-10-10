@@ -1,0 +1,37 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.reimaden.touhouorigins.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BadgeLoaderHouraiMixin",
+    "CatTamingMixin",
+    "EnchantmentHelperVulnerabilityMixin",
+    "EntityFlipGravityMixin",
+    "EntityStepMixin",
+    "LivingEntityShieldMixin",
+    "LivingEntityUndeadMixin",
+    "NearestAttackableTargetGoalMixin",
+    "OcelotTamingMixin",
+    "OrbOfOriginUnlinkMixin",
+    "OriginCommandUnlinkMixin",
+    "ParrotTamingMixin",
+    "PlayerPickupRangeMixin",
+    "ProjectileDivergenceMixin",
+    "RunAroundLikeCrazyGoalMixin",
+    "ServerGamePacketListenerImplMixin",
+    "TamableAnimalMixin",
+    "VillagerHostilesSensorMixin",
+    "WolfTamingMixin"
+  ],
+  "client": [
+    "client.ChooseOriginGridMixin",
+    "client.GameRendererFlipViewMixin",
+    "client.HumanoidModelZombieArmsMixin",
+    "client.LivingEntityRendererFlipMixin",
+    "client.LocalPlayerItemSlowdownMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

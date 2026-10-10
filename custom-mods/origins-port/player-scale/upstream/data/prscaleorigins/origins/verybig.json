@@ -1,0 +1,15 @@
+{
+	"name": "Very Big",
+	"description": "§oI'm really sorry about the chandelier.§r",
+    "powers": [
+		"prscaleorigins:verybig_scale",
+		"prscaleorigins:verybig_balance"
+    ],
+    "icon": {
+        "item": "minecraft:acacia_sapling"
+    },
+    "order": 50,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

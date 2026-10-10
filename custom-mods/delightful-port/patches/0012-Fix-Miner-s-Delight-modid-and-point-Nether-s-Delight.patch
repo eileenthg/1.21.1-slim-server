@@ -1,0 +1,204 @@
+From 42559a1e7ee80d125ea2923d7281c2ebd0db33d2 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Sun, 6 Sep 2026 05:22:25 +0800
+Subject: [PATCH 12/12] Fix Miner's Delight modid and point Nether's Delight
+ tag at its 1.21.1 successor
+
+MD was "miners_delight" but the actual mod id is "minersdelight" -- fixes
+every optional cross-mod reference that used it (water_cup, vegan_patty,
+bowl_of_stuffed_squid, etc). Also repoints the meal_item tag from the
+discontinued "nethersdelight" onto "mynethersdelight", its 1.21.1
+continuation.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../1a8985602f34b95c1867d6fdcd6ba577e537da84       | 14 +++++++-------
+ .../resources/data/c/tags/item/cookies.json        |  2 +-
+ .../c/tags/item/raw_fishes/squid/tentacles.json    |  2 +-
+ .../resources/data/c/tags/item/raw_squid.json      |  4 ++--
+ .../resources/data/c/tags/item/water.json          |  2 +-
+ .../delightful/tags/item/patties/vegetarian.json   |  2 +-
+ .../tags/item/meal_item.json                       |  2 +-
+ .../java/net/brnbrd/delightful/compat/Modid.java   |  2 +-
+ .../data/gen/DelightfulItemTagProvider.java        |  4 ++--
+ 9 files changed, 17 insertions(+), 17 deletions(-)
+ rename src/generated/resources/data/{nethersdelight => mynethersdelight}/tags/item/meal_item.json (63%)
+
+diff --git a/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84 b/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
+index f69e1359..b3f3f0d6 100644
+--- a/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
++++ b/src/generated/resources/.cache/1a8985602f34b95c1867d6fdcd6ba577e537da84
+@@ -1,4 +1,4 @@
+-// 1.21.1	2026-09-04T01:37:26.0821443	delightful
++// 1.21.1	2026-09-06T05:21:27.7854093	delightful
+ 8980358a7235536580c6b076956e78e18eca38e9 data/additionaladditions/tags/item/gilded_netherite_upgrade.json
+ 251ab39f668c15d972d4630264e39f06ec646606 data/additionaladditions/tags/item/gold_ring.json
+ 9136930399e99d219f34c05a02844b699ef0873a data/additionaladditions/tags/item/rose_gold_alloy.json
+@@ -44,7 +44,7 @@ a7608c3cfb4abd95bcb2481c958e85ea3d99f561 data/c/tags/item/cooked_goat.json
+ a948b48d3cbea884a1ace570d465fb8a81e6973e data/c/tags/item/cooked_nuts.json
+ 9f77948b8bcc8ff9ce8d4f192f7156c733795ab7 data/c/tags/item/cooked_rabbit.json
+ 522cf04b2689c42171edbe4fe3fa6e3fa9651b1f data/c/tags/item/cooked_venison.json
+-c2eee527ba19ae42795f9d5c824c253cea0c8869 data/c/tags/item/cookies.json
++dd8ad58c2a0a639526a2f0315de9c28c2f40a043 data/c/tags/item/cookies.json
+ b909ff8d1fa9d605fe5c66fa82057da1bcfbc4cc data/c/tags/item/cookies/source_berry.json
+ f5e3bd9ca2ad5fe644f414c1b701920c77f05156 data/c/tags/item/cornbread.json
+ 2d4c8227d44f59c95bd83e909b17250fc18feae8 data/c/tags/item/crab_claw.json
+@@ -165,11 +165,11 @@ e8e26d091206f92c561549acd4866a68894834c8 data/c/tags/item/pancakes.json
+ e4bfec188fb63173110be9c4748fef5945689603 data/c/tags/item/raw_crab_meat.json
+ 65540c326746380f0b29818f3507d94d7902ab98 data/c/tags/item/raw_duck.json
+ 67d15207ae7e3ab40a5c9915eebb0e4644c505c1 data/c/tags/item/raw_fishes/squid.json
+-7aed28987ab04641dd99ccb0ea9b6d705012ecd5 data/c/tags/item/raw_fishes/squid/tentacles.json
++0e20c804265e2be86c15b8cb41855fc23ce7789b data/c/tags/item/raw_fishes/squid/tentacles.json
+ fd607ecbeb9e2a3344b7ee09eb8c2e8230aa4a8c data/c/tags/item/raw_fishes/sturgeon.json
+ 4057965e783eac051b006c93f37a045a814ec2de data/c/tags/item/raw_goat.json
+ 676cee16d107d62d62093f32df13eb8e934c7db9 data/c/tags/item/raw_rabbit.json
+-d5df2003d6210b443fc989b821eee01651146c3b data/c/tags/item/raw_squid.json
++5dd45ba2a14c7c5be8ddd7e05a497450ac40f2ce data/c/tags/item/raw_squid.json
+ c28b2966b7751691456f3c7ae84cb77f31a4f245 data/c/tags/item/raw_venison.json
+ d3adc320d1c91d6c84ad71e48a5a9b225663b09a data/c/tags/item/roe.json
+ eede30f09088aaf8a642eb4ea1ebc60e3b69e020 data/c/tags/item/ropes.json
+@@ -203,7 +203,7 @@ b4088db8c78220bdadc8c24288bd4da0fe773e25 data/c/tags/item/tea_leaves/green.json
+ 3f42128b4b110e2faf9c39acc4ea8cec58684613 data/c/tags/item/tortilla.json
+ 29578b65c050e12022c001ad035c1e6a5a23833a data/c/tags/item/vegetables/cucumber.json
+ a26dbd8c64614a5dc85633d75ca32dc40ffe3b26 data/c/tags/item/vegetables/spicy.json
+-ee1ab77d913acb34659dad10b13b1a2ea518b10e data/c/tags/item/water.json
++f15467ad4c732f81b2e42d4fa06565c89262e953 data/c/tags/item/water.json
+ 85434dfa942bd02b48f061627d567bca91caf436 data/c/tags/item/wrenches.json
+ b306cd52d0a89b88fd149766a3ccc1f9d27d4e5f data/deeperdarker/tags/item/reinforced_echo_shard.json
+ ea08bf83fedea8a54423800d88b8e9df50cd0449 data/deeperdarker/tags/item/resonarium.json
+@@ -218,7 +218,7 @@ ae718511234f1a47f26d2f294e4d17f33374a95d data/delightful/tags/item/cooked_veniso
+ c635f7a0507d48b606bd3d26bfe43ade5cfe05ee data/delightful/tags/item/fire_knives.json
+ d2cf3299b597ec61e95af27aa61b198e0381d4ce data/delightful/tags/item/hot_spices.json
+ c136db00204949ac06e5f146923a591bc2151c58 data/delightful/tags/item/patties.json
+-2964acf3704922c84a693bfc8aee32543246ae22 data/delightful/tags/item/patties/vegetarian.json
++31cdcb684d33f927ee4ed54f17ab17e78d306a41 data/delightful/tags/item/patties/vegetarian.json
+ 25157ad740de48c4baa7d586db2ff57f50fe0a05 data/delightful/tags/item/quartz_knife.json
+ 2ff5cfe0c5823c3c18040d2127a488836e4c4908 data/delightful/tags/item/raw_venison_chop_compat.json
+ 6c2f8fbf4dd74017f049b2ef88a10e285aae2c0c data/delightful/tags/item/raw_venison_compat.json
+@@ -252,8 +252,8 @@ b3903dd6f2911c9bfd601eeed539d4df52a7dc6f data/minecraft/tags/item/fox_food.json
+ ccf8a58ba350ded67f8a3689f5b1419c159e2cef data/minecraft/tags/item/stairs.json
+ f3d389bd6892248142900ae5f52fe8a51dae2311 data/minecraft/tags/item/walls.json
+ 1d52affe88d5ba9a543a34a4bb46a12cfc85b2ea data/mynethersdelight/tags/item/curry_meats.json
++9a05b1900f91645a8625088ef98ccb7f19c246d1 data/mynethersdelight/tags/item/meal_item.json
+ 8ee247d64fc75db3c10d19eb161dafacf741251c data/neapolitan/tags/item/ice_cream.json
+-a95df2279e05baa5f0608937c6c66f68c44ebf2d data/nethersdelight/tags/item/meal_item.json
+ 39eb11aaa538dbe439118c3d75817b4407cf07a0 data/nethers_exoticism/tags/item/kiwano_peel.json
+ 03f129936289d77fd6e02c93156c4b31152fbbf8 data/nourished_nether/tags/item/necronium_tools.json
+ 412e4ad2cd2cf8c79da0017d1732450bf9e85e9b data/salt/tags/item/can_be_salted.json
+diff --git a/src/generated/resources/data/c/tags/item/cookies.json b/src/generated/resources/data/c/tags/item/cookies.json
+index 088c6f6a..24ccd759 100644
+--- a/src/generated/resources/data/c/tags/item/cookies.json
++++ b/src/generated/resources/data/c/tags/item/cookies.json
+@@ -26,7 +26,7 @@
+       "required": false
+     },
+     {
+-      "id": "miners_delight:bat_cookie",
++      "id": "minersdelight:bat_cookie",
+       "required": false
+     },
+     {
+diff --git a/src/generated/resources/data/c/tags/item/raw_fishes/squid/tentacles.json b/src/generated/resources/data/c/tags/item/raw_fishes/squid/tentacles.json
+index c218820c..7ace880e 100644
+--- a/src/generated/resources/data/c/tags/item/raw_fishes/squid/tentacles.json
++++ b/src/generated/resources/data/c/tags/item/raw_fishes/squid/tentacles.json
+@@ -1,7 +1,7 @@
+ {
+   "values": [
+     {
+-      "id": "miners_delight:tentacles",
++      "id": "minersdelight:tentacles",
+       "required": false
+     },
+     {
+diff --git a/src/generated/resources/data/c/tags/item/raw_squid.json b/src/generated/resources/data/c/tags/item/raw_squid.json
+index 32815379..bc965048 100644
+--- a/src/generated/resources/data/c/tags/item/raw_squid.json
++++ b/src/generated/resources/data/c/tags/item/raw_squid.json
+@@ -1,11 +1,11 @@
+ {
+   "values": [
+     {
+-      "id": "miners_delight:squid",
++      "id": "minersdelight:squid",
+       "required": false
+     },
+     {
+-      "id": "miners_delight:glow_squid",
++      "id": "minersdelight:glow_squid",
+       "required": false
+     },
+     {
+diff --git a/src/generated/resources/data/c/tags/item/water.json b/src/generated/resources/data/c/tags/item/water.json
+index 9213c0b7..8c81acfc 100644
+--- a/src/generated/resources/data/c/tags/item/water.json
++++ b/src/generated/resources/data/c/tags/item/water.json
+@@ -2,7 +2,7 @@
+   "values": [
+     "#c:buckets/water",
+     {
+-      "id": "miners_delight:water_cup",
++      "id": "minersdelight:water_cup",
+       "required": false
+     }
+   ]
+diff --git a/src/generated/resources/data/delightful/tags/item/patties/vegetarian.json b/src/generated/resources/data/delightful/tags/item/patties/vegetarian.json
+index 4cac3ad8..caf33aec 100644
+--- a/src/generated/resources/data/delightful/tags/item/patties/vegetarian.json
++++ b/src/generated/resources/data/delightful/tags/item/patties/vegetarian.json
+@@ -1,7 +1,7 @@
+ {
+   "values": [
+     {
+-      "id": "miners_delight:vegan_patty",
++      "id": "minersdelight:vegan_patty",
+       "required": false
+     },
+     {
+diff --git a/src/generated/resources/data/nethersdelight/tags/item/meal_item.json b/src/generated/resources/data/mynethersdelight/tags/item/meal_item.json
+similarity index 63%
+rename from src/generated/resources/data/nethersdelight/tags/item/meal_item.json
+rename to src/generated/resources/data/mynethersdelight/tags/item/meal_item.json
+index 0f6538e6..86f66fe0 100644
+--- a/src/generated/resources/data/nethersdelight/tags/item/meal_item.json
++++ b/src/generated/resources/data/mynethersdelight/tags/item/meal_item.json
+@@ -2,7 +2,7 @@
+   "values": [
+     "delightful:stuffed_cantaloupe",
+     {
+-      "id": "miners_delight:bowl_of_stuffed_squid",
++      "id": "minersdelight:bowl_of_stuffed_squid",
+       "required": false
+     }
+   ]
+diff --git a/src/main/java/net/brnbrd/delightful/compat/Modid.java b/src/main/java/net/brnbrd/delightful/compat/Modid.java
+index 125f7caf..283b7704 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/Modid.java
++++ b/src/main/java/net/brnbrd/delightful/compat/Modid.java
+@@ -95,7 +95,7 @@ public enum Modid {
+ 	LMFL("letmorefishlove"),
+ 	MB("mythicbotany"),
+ 	MEKT("mekanismtools"),
+-	MD("miners_delight"),
++	MD("minersdelight"),
+ 	MND("mynethersdelight"),
+ 	MOD("moredelight"),
+ 	N("neapolitan"),
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+index e3df78ab..949b7639 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+@@ -904,8 +904,8 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.add(DelightfulItems.ENDER_NECTAR.get());
+ 		this.tag(BrewinChewinCompat.PIZZA_TOPPINGS).addTag(DelightfulItemTags.PATTIES);
+ 
+-		// Nether's Delight
+-		this.tag(Modid.ND.it("meal_item"))
++		// Nether's Delight -> My Nether's Delight is its 1.21.1 continuation
++		this.tag(Modid.MND.it("meal_item"))
+ 			.add(DelightfulItems.STUFFED_CANTALOUPE.get())
+ 			.addOptional(Modid.MD.rl("bowl_of_stuffed_squid"));
+ 
+-- 
+2.39.0.windows.1
+

@@ -1,0 +1,16 @@
+{
+	"name": "size",
+	"replace": false,
+	"order": 86,
+	"enabled": true,
+	"auto_choose": true,
+	"origins": [
+		"prscaleorigins:normal",
+		"prscaleorigins:small",
+		"prscaleorigins:verysmall",
+		"prscaleorigins:big",
+		"prscaleorigins:verybig",
+		"prscaleorigins:micro",
+		"prscaleorigins:giant"
+	]
+}

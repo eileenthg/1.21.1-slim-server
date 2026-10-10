@@ -1,0 +1,20 @@
+{
+  "powers": [
+    "touhouorigins:amanojaku/turnabout",
+    "touhouorigins:amanojaku/this_side_down",
+    "touhouorigins:amanojaku/mirror_movement",
+    "touhouorigins:amanojaku/reverse_ideology",
+    "touhouorigins:amanojaku/cost_of_misfortune",
+    "touhouorigins:amanojaku/antagonist"
+  ],
+  "icon": {
+    "item": "minecraft:tipped_arrow",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 16262179
+      }
+    }
+  },
+  "order": 4,
+  "impact": 3
+}

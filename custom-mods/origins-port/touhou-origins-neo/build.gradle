@@ -1,0 +1,129 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.143'
+    id 'idea'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+repositories {
+    mavenCentral()
+    // Apoli, built from reference source and published locally. NOT the Modrinth release:
+    // Overgrown's Apoli source HEAD is ahead of its own published 1.56.0 jar (the release is
+    // missing IconData/IconRenderer/ExprPeer and has a 2-arg ResolvedVar), and Origins HEAD
+    // does not compile against it. Apoli and Origins must be built as a matched pair.
+    mavenLocal()
+    // Pehkui only.
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    // Overgrown's Origins is unpublished, so we consume the jar we build ourselves
+    // from reference source into ../build-deps/. See NOTES.md Phase 2.
+    flatDir {
+        dirs "${rootProject.projectDir}/../build-deps/jars"
+    }
+}
+
+// Mojang ships Java 21 for 1.21.1, so target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+dependencies {
+    // Apoli — the power engine. Every one of our 149 apoli: types resolves against this.
+    // From mavenLocal: build-deps/og-apoli via publishToMavenLocal. See NOTES.md Phase 2.
+    implementation "dev.overgrown.apoli:apoli:${apoli_maven_version}"
+
+    // Overgrown's Origins — built locally, see build-deps/. Provides the Orb, the choose
+    // screen, and OriginsServerNetwork.openChooseScreen (our single mixin target).
+    implementation name: "origins-${origins_version}"
+
+    // Pehkui — needed only for relative visibility scaling on bake_danuki/smelly (D3).
+    implementation "maven.modrinth:pehkui:${pehkui_version}"
+}
+
+// Expand ${...} placeholders in the neoforge.mods.toml template.
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+
+// Personal-only content that must never ship in a published build: assets derived from
+// Touhou Little Maid (code MIT, but ASSETS are CC BY-NC-SA 4.0) and the powers that
+// reference them. Everything lives under src/personal/resources with no references from
+// src/main, so stripping it leaves no dangling ids.
+//
+//   ./gradlew build                  -> personal build, TLM cosmetics included
+//   ./gradlew build -PstripPersonal  -> publishable build, src/personal excluded entirely
+// The personal root is added last and wins on path collisions, so a file there can *replace*
+// its src/main counterpart rather than only adding alongside it. Crow tengu needs this: its
+// wings are a textured elytra in the shipped mod, and a modelled pair in the personal build,
+// and only one of the two should render. Without the override a stripped build would inherit
+// the personal version's hidden elytra and have no wings at all.
+if (!providers.gradleProperty('stripPersonal').isPresent()) {
+    sourceSets.main.resources.srcDir 'src/personal/resources'
+    tasks.named('processResources') { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
+}
+neoForge.ideSyncTask generateModMetadata
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "origins": [
+    "touhouorigins:vampire",
+    "touhouorigins:oni",
+    "touhouorigins:fairy",
+    "touhouorigins:kappa",
+    "touhouorigins:ghost",
+    "touhouorigins:vengeful_spirit",
+    "touhouorigins:crow_tengu",
+    "touhouorigins:wolf_tengu",
+    "touhouorigins:earth_rabbit",
+    "touhouorigins:moon_rabbit",
+    "touhouorigins:jiang_shi",
+    "touhouorigins:haniwa",
+    "touhouorigins:satori",
+    "touhouorigins:satori_closed_eye",
+    "touhouorigins:celestial",
+    "touhouorigins:oarfish",
+    "touhouorigins:amanojaku",
+    "touhouorigins:nue",
+    "touhouorigins:bake_danuki"
+  ]
+}

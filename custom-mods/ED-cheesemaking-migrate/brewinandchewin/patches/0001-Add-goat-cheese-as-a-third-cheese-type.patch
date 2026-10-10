@@ -1,0 +1,1999 @@
+From a8c37573d9075c0b3ed8c1b8eb92692a54a42add Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Sun, 6 Sep 2026 00:40:04 +0800
+Subject: [PATCH] Add goat cheese as a third cheese type
+
+Migrates Expanded Delight's goat cheese into B&C as a full cheese type
+alongside Flaxen and Scarlet, using B&C's existing keg pipeline rather
+than ED's cask mechanic.
+
+ED's plain "Cheese" is deliberately NOT ported: it is functionally the
+same as Flaxen Cheese, so bringing it across would recreate the overlap
+this migration exists to remove. Only goat cheese is genuinely new.
+
+Pipeline mirrors the existing cheeses end to end:
+  goat milk -> ferment (honeycomb, wheat seeds, sugar, rennet @ temp 4)
+  -> goat cheese fluid -> pour with honeycomb -> unripe wheel -> ages
+  -> ripe wheel -> knife-cut into 8 wedges -> 8 wedges craft back
+
+Adds two fluids (goat_cheese, goat_milk) across common and both loader
+implementations, the wheel/unripe-wheel blocks, the wedge and its food
+properties, fluid/item/block tags, loot and the slicing loot modifier,
+an advancement criterion, and JEI + EMI entries.
+
+Goat milk is intentionally not implemented here. A NeoForge-only pouring
+recipe, gated on neoforge:mod_loaded expandeddelight, fills the goat milk
+fluid from ED's goat milk bucket. Consequence: goat cheese is unobtainable
+in a B&C-only install.
+
+Textures are derived from the flaxen set by a hue/saturation shift to a
+pale ivory, and are placeholder quality pending real art.
+
+Also fixes a pre-existing typo in BnCFluidTags: the scarlet_cheese fluid
+tag contained FLOWING_FLAXEN_CHEESE instead of FLOWING_SCARLET_CHEESE.
+
+Verified: :neoforge:compileJava, :fabric:compileJava, and :neoforge:runData
+all pass. Not yet tested in game.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+---
+ .../advancement/main/ferment_cheese.json      |  13 ++++-
+ .../goat_cheese_from_goat_milk.json           |  33 +++++++++++++
+ .../food/goat_cheese_wheel_from_wedges.json   |  32 +++++++++++++
+ .../blocks/unripe_goat_cheese_wheel.json      |  21 ++++++++
+ .../recipe/cutting/goat_cheese_wheel.json     |  19 ++++++++
+ .../goat_cheese_from_goat_milk.json           |  32 +++++++++++++
+ .../recipe/goat_cheese_wheel_from_wedges.json |  18 +++++++
+ .../pouring/unripe_goat_cheese_wheel.json     |  17 +++++++
+ .../tags/block/cheese_wheels/ripe.json        |   3 +-
+ .../tags/block/cheese_wheels/unripe.json      |   3 +-
+ .../tags/fluid/goat_cheese.json               |   6 +++
+ .../brewinandchewin/tags/fluid/goat_milk.json |   6 +++
+ .../tags/fluid/scarlet_cheese.json            |   2 +-
+ .../tags/item/cheese_wheels/ripe.json         |   3 +-
+ .../tags/item/cheese_wheels/unripe.json       |   3 +-
+ .../tags/item/foods/cheese_wedge.json         |   3 +-
+ .../tags/block/mineable/knife.json            |   2 +
+ .../common/fluid/BnCFluidConstants.java       |   5 ++
+ .../common/registry/BnCBlocks.java            |   8 ++++
+ .../common/registry/BnCFluids.java            |  10 ++++
+ .../common/registry/BnCFoods.java             |   2 +
+ .../common/registry/BnCItems.java             |   8 ++++
+ .../brewinandchewin/common/tag/BnCTags.java   |   2 +
+ .../integration/emi/EMIPlugin.java            |   1 +
+ .../integration/jei/BnCJEIRecipes.java        |   1 +
+ .../blockstates/goat_cheese_wheel.json        |  16 +++++++
+ .../blockstates/unripe_goat_cheese_wheel.json |  10 ++++
+ .../coaster/goat_cheese_wedge.json            |   4 ++
+ .../fluid_item_displays/default_displays.json |   3 +-
+ .../assets/brewinandchewin/lang/en_us.json    |   7 +++
+ .../block/coaster_goat_cheese_wedge.json      |   6 +++
+ .../models/block/goat_cheese_wheel.json       |   9 ++++
+ .../models/block/goat_cheese_wheel1.json      |  10 ++++
+ .../models/block/goat_cheese_wheel2.json      |  10 ++++
+ .../models/block/goat_cheese_wheel3.json      |  10 ++++
+ .../block/semiripe_goat_cheese_wheel.json     |   9 ++++
+ .../block/unripe_goat_cheese_wheel.json       |   9 ++++
+ .../models/item/goat_cheese_wedge.json        |   6 +++
+ .../models/item/goat_cheese_wheel.json        |   6 +++
+ .../models/item/unripe_goat_cheese_wheel.json |   6 +++
+ .../textures/block/goat_cheese_flow.png       | Bin 0 -> 9628 bytes
+ .../block/goat_cheese_flow.png.mcmeta         |   5 ++
+ .../textures/block/goat_cheese_still.png      | Bin 0 -> 9774 bytes
+ .../block/goat_cheese_still.png.mcmeta        |  45 ++++++++++++++++++
+ .../textures/block/goat_cheese_wedge.png      | Bin 0 -> 442 bytes
+ .../block/goat_cheese_wheel_bottom.png        | Bin 0 -> 235 bytes
+ .../block/goat_cheese_wheel_inside.png        | Bin 0 -> 252 bytes
+ .../textures/block/goat_cheese_wheel_side.png | Bin 0 -> 220 bytes
+ .../textures/block/goat_cheese_wheel_top.png  | Bin 0 -> 285 bytes
+ .../semiripe_goat_cheese_wheel_bottom.png     | Bin 0 -> 636 bytes
+ .../block/semiripe_goat_cheese_wheel_side.png | Bin 0 -> 616 bytes
+ .../block/semiripe_goat_cheese_wheel_top.png  | Bin 0 -> 669 bytes
+ .../block/unripe_goat_cheese_wheel_bottom.png | Bin 0 -> 634 bytes
+ .../block/unripe_goat_cheese_wheel_side.png   | Bin 0 -> 615 bytes
+ .../block/unripe_goat_cheese_wheel_top.png    | Bin 0 -> 674 bytes
+ .../textures/item/goat_cheese_wedge.png       | Bin 0 -> 360 bytes
+ .../textures/item/goat_cheese_wheel.png       | Bin 0 -> 366 bytes
+ .../item/unripe_goat_cheese_wheel.png         | Bin 0 -> 314 bytes
+ .../emi/recipe/defaults/brewinandchewin.json  |   7 ++-
+ .../slicing_goat_cheese_wheel.json            |  28 +++++++++++
+ .../loot_modifiers/global_loot_modifiers.json |   1 +
+ .../fabric/BrewinAndChewinFabric.java         |   5 ++
+ .../client/BrewinAndChewinFabricClient.java   |   7 +++
+ .../fabric/registry/BnCFluidsImpl.java        |   4 ++
+ .../brewinandchewin/data/BnCAdvancements.java |   1 +
+ .../brewinandchewin/data/BnCBlockTags.java    |   8 +++-
+ .../brewinandchewin/data/BnCFluidTags.java    |   6 ++-
+ .../brewinandchewin/data/BnCItemTags.java     |   3 +-
+ .../data/loot/BnCBlockLoot.java               |   1 +
+ .../data/recipe/BnCCraftingRecipes.java       |   7 +++
+ .../data/recipe/BnCCuttingBoardRecipes.java   |   2 +
+ .../data/recipe/KegFermentingRecipes.java     |   9 ++++
+ .../data/recipe/KegPouringRecipes.java        |   4 ++
+ .../client/BrewinAndChewinNeoForgeClient.java |  12 +++++
+ .../neoforge/registry/BnCFluidTypes.java      |   4 ++
+ .../neoforge/registry/BnCFluidsImpl.java      |   6 +++
+ .../recipe/pouring/goat_milk_bucket.json      |  18 +++++++
+ 77 files changed, 543 insertions(+), 14 deletions(-)
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/advancement/recipes/fermenting/goat_cheese_from_goat_milk.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/advancement/recipes/food/goat_cheese_wheel_from_wedges.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/loot_table/blocks/unripe_goat_cheese_wheel.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/recipe/cutting/goat_cheese_wheel.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/recipe/fermenting/goat_cheese_from_goat_milk.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/recipe/goat_cheese_wheel_from_wedges.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/recipe/pouring/unripe_goat_cheese_wheel.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_cheese.json
+ create mode 100644 common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_milk.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/blockstates/goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/blockstates/unripe_goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/brewinandchewin/coaster/goat_cheese_wedge.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/coaster_goat_cheese_wedge.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel1.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel2.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel3.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/semiripe_goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/block/unripe_goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wedge.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/models/item/unripe_goat_cheese_wheel.json
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png.mcmeta
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png.mcmeta
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wedge.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_bottom.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_inside.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_side.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_top.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_bottom.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_side.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_top.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_bottom.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_side.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_top.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wedge.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wheel.png
+ create mode 100644 common/src/main/resources/assets/brewinandchewin/textures/item/unripe_goat_cheese_wheel.png
+ create mode 100644 common/src/main/resources/data/brewinandchewin/loot_modifiers/slicing_goat_cheese_wheel.json
+ create mode 100644 neoforge/src/main/resources/data/brewinandchewin/recipe/pouring/goat_milk_bucket.json
+
+diff --git a/common/src/generated/resources/data/brewinandchewin/advancement/main/ferment_cheese.json b/common/src/generated/resources/data/brewinandchewin/advancement/main/ferment_cheese.json
+index c1cf038..48a0f5f 100644
+--- a/common/src/generated/resources/data/brewinandchewin/advancement/main/ferment_cheese.json
++++ b/common/src/generated/resources/data/brewinandchewin/advancement/main/ferment_cheese.json
+@@ -11,6 +11,16 @@
+       },
+       "trigger": "minecraft:inventory_changed"
+     },
++    "has_unripe_goat_cheese_wheel": {
++      "conditions": {
++        "items": [
++          {
++            "items": "brewinandchewin:unripe_goat_cheese_wheel"
++          }
++        ]
++      },
++      "trigger": "minecraft:inventory_changed"
++    },
+     "has_unripe_scarlet_cheese_wheel": {
+       "conditions": {
+         "items": [
+@@ -37,7 +47,8 @@
+   "requirements": [
+     [
+       "has_unripe_flaxen_cheese_wheel",
+-      "has_unripe_scarlet_cheese_wheel"
++      "has_unripe_scarlet_cheese_wheel",
++      "has_unripe_goat_cheese_wheel"
+     ]
+   ],
+   "sends_telemetry_event": true
+diff --git a/common/src/generated/resources/data/brewinandchewin/advancement/recipes/fermenting/goat_cheese_from_goat_milk.json b/common/src/generated/resources/data/brewinandchewin/advancement/recipes/fermenting/goat_cheese_from_goat_milk.json
+new file mode 100644
+index 0000000..7fb9456
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/advancement/recipes/fermenting/goat_cheese_from_goat_milk.json
+@@ -0,0 +1,33 @@
++{
++  "parent": "minecraft:recipes/root",
++  "criteria": {
++    "has_rennet": {
++      "conditions": {
++        "items": [
++          {
++            "items": "brewinandchewin:rennet"
++          }
++        ]
++      },
++      "trigger": "minecraft:inventory_changed"
++    },
++    "has_the_recipe": {
++      "conditions": {
++        "recipe": "brewinandchewin:fermenting/goat_cheese_from_goat_milk"
++      },
++      "trigger": "minecraft:recipe_unlocked"
++    }
++  },
++  "requirements": [
++    [
++      "has_rennet",
++      "has_the_recipe"
++    ]
++  ],
++  "rewards": {
++    "recipes": [
++      "brewinandchewin:fermenting/goat_cheese_from_goat_milk"
++    ]
++  },
++  "sends_telemetry_event": true
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/advancement/recipes/food/goat_cheese_wheel_from_wedges.json b/common/src/generated/resources/data/brewinandchewin/advancement/recipes/food/goat_cheese_wheel_from_wedges.json
+new file mode 100644
+index 0000000..fdd467e
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/advancement/recipes/food/goat_cheese_wheel_from_wedges.json
+@@ -0,0 +1,32 @@
++{
++  "parent": "minecraft:recipes/root",
++  "criteria": {
++    "has_cheese": {
++      "conditions": {
++        "items": [
++          {
++            "items": "brewinandchewin:goat_cheese_wedge"
++          }
++        ]
++      },
++      "trigger": "minecraft:inventory_changed"
++    },
++    "has_the_recipe": {
++      "conditions": {
++        "recipe": "brewinandchewin:goat_cheese_wheel_from_wedges"
++      },
++      "trigger": "minecraft:recipe_unlocked"
++    }
++  },
++  "requirements": [
++    [
++      "has_the_recipe",
++      "has_cheese"
++    ]
++  ],
++  "rewards": {
++    "recipes": [
++      "brewinandchewin:goat_cheese_wheel_from_wedges"
++    ]
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/loot_table/blocks/unripe_goat_cheese_wheel.json b/common/src/generated/resources/data/brewinandchewin/loot_table/blocks/unripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..2ff2d8e
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/loot_table/blocks/unripe_goat_cheese_wheel.json
+@@ -0,0 +1,21 @@
++{
++  "type": "minecraft:block",
++  "pools": [
++    {
++      "bonus_rolls": 0.0,
++      "conditions": [
++        {
++          "condition": "minecraft:survives_explosion"
++        }
++      ],
++      "entries": [
++        {
++          "type": "minecraft:item",
++          "name": "brewinandchewin:unripe_goat_cheese_wheel"
++        }
++      ],
++      "rolls": 1.0
++    }
++  ],
++  "random_sequence": "brewinandchewin:blocks/unripe_goat_cheese_wheel"
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/recipe/cutting/goat_cheese_wheel.json b/common/src/generated/resources/data/brewinandchewin/recipe/cutting/goat_cheese_wheel.json
+new file mode 100644
+index 0000000..68ea9b7
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/recipe/cutting/goat_cheese_wheel.json
+@@ -0,0 +1,19 @@
++{
++  "type": "farmersdelight:cutting",
++  "ingredients": [
++    {
++      "item": "brewinandchewin:goat_cheese_wheel"
++    }
++  ],
++  "result": [
++    {
++      "item": {
++        "count": 8,
++        "id": "brewinandchewin:goat_cheese_wedge"
++      }
++    }
++  ],
++  "tool": {
++    "tag": "c:tools/knife"
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/recipe/fermenting/goat_cheese_from_goat_milk.json b/common/src/generated/resources/data/brewinandchewin/recipe/fermenting/goat_cheese_from_goat_milk.json
+new file mode 100644
+index 0000000..2b74c6f
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/recipe/fermenting/goat_cheese_from_goat_milk.json
+@@ -0,0 +1,32 @@
++{
++  "type": "brewinandchewin:fermenting",
++  "base_fluid": {
++    "amount": 1000,
++    "ingredient": {
++      "tag": "#brewinandchewin:goat_milk"
++    },
++    "unit": "millibuckets"
++  },
++  "category": "meals",
++  "experience": 1.0,
++  "ingredients": [
++    {
++      "item": "minecraft:honeycomb"
++    },
++    {
++      "item": "minecraft:wheat_seeds"
++    },
++    {
++      "item": "minecraft:sugar"
++    },
++    {
++      "item": "brewinandchewin:rennet"
++    }
++  ],
++  "result": {
++    "amount": 1000,
++    "id": "brewinandchewin:goat_cheese"
++  },
++  "temperature": 4,
++  "unit": "millibuckets"
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/recipe/goat_cheese_wheel_from_wedges.json b/common/src/generated/resources/data/brewinandchewin/recipe/goat_cheese_wheel_from_wedges.json
+new file mode 100644
+index 0000000..918efb3
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/recipe/goat_cheese_wheel_from_wedges.json
+@@ -0,0 +1,18 @@
++{
++  "type": "minecraft:crafting_shaped",
++  "category": "misc",
++  "key": {
++    "p": {
++      "item": "brewinandchewin:goat_cheese_wedge"
++    }
++  },
++  "pattern": [
++    "ppp",
++    "p p",
++    "ppp"
++  ],
++  "result": {
++    "count": 1,
++    "id": "brewinandchewin:goat_cheese_wheel"
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/recipe/pouring/unripe_goat_cheese_wheel.json b/common/src/generated/resources/data/brewinandchewin/recipe/pouring/unripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..d905019
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/recipe/pouring/unripe_goat_cheese_wheel.json
+@@ -0,0 +1,17 @@
++{
++  "type": "brewinandchewin:keg_pouring",
++  "can_fill": false,
++  "container": {
++    "count": 1,
++    "id": "minecraft:honeycomb"
++  },
++  "fluid": {
++    "amount": 1000,
++    "id": "brewinandchewin:goat_cheese"
++  },
++  "output": {
++    "count": 1,
++    "id": "brewinandchewin:unripe_goat_cheese_wheel"
++  },
++  "unit": "millibuckets"
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/ripe.json b/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/ripe.json
+index 288e6c8..06ade32 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/ripe.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/ripe.json
+@@ -1,6 +1,7 @@
+ {
+   "values": [
+     "brewinandchewin:flaxen_cheese_wheel",
+-    "brewinandchewin:scarlet_cheese_wheel"
++    "brewinandchewin:scarlet_cheese_wheel",
++    "brewinandchewin:goat_cheese_wheel"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/unripe.json b/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/unripe.json
+index aed405b..adfb470 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/unripe.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/block/cheese_wheels/unripe.json
+@@ -1,6 +1,7 @@
+ {
+   "values": [
+     "brewinandchewin:unripe_flaxen_cheese_wheel",
+-    "brewinandchewin:unripe_scarlet_cheese_wheel"
++    "brewinandchewin:unripe_scarlet_cheese_wheel",
++    "brewinandchewin:unripe_goat_cheese_wheel"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_cheese.json b/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_cheese.json
+new file mode 100644
+index 0000000..fe968b5
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_cheese.json
+@@ -0,0 +1,6 @@
++{
++  "values": [
++    "brewinandchewin:goat_cheese",
++    "brewinandchewin:flowing_goat_cheese"
++  ]
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_milk.json b/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_milk.json
+new file mode 100644
+index 0000000..569b55e
+--- /dev/null
++++ b/common/src/generated/resources/data/brewinandchewin/tags/fluid/goat_milk.json
+@@ -0,0 +1,6 @@
++{
++  "values": [
++    "brewinandchewin:goat_milk",
++    "brewinandchewin:flowing_goat_milk"
++  ]
++}
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/fluid/scarlet_cheese.json b/common/src/generated/resources/data/brewinandchewin/tags/fluid/scarlet_cheese.json
+index e69a7cb..a2f4fd0 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/fluid/scarlet_cheese.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/fluid/scarlet_cheese.json
+@@ -1,6 +1,6 @@
+ {
+   "values": [
+     "brewinandchewin:scarlet_cheese",
+-    "brewinandchewin:flowing_flaxen_cheese"
++    "brewinandchewin:flowing_scarlet_cheese"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/ripe.json b/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/ripe.json
+index 288e6c8..06ade32 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/ripe.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/ripe.json
+@@ -1,6 +1,7 @@
+ {
+   "values": [
+     "brewinandchewin:flaxen_cheese_wheel",
+-    "brewinandchewin:scarlet_cheese_wheel"
++    "brewinandchewin:scarlet_cheese_wheel",
++    "brewinandchewin:goat_cheese_wheel"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/unripe.json b/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/unripe.json
+index aed405b..adfb470 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/unripe.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/item/cheese_wheels/unripe.json
+@@ -1,6 +1,7 @@
+ {
+   "values": [
+     "brewinandchewin:unripe_flaxen_cheese_wheel",
+-    "brewinandchewin:unripe_scarlet_cheese_wheel"
++    "brewinandchewin:unripe_scarlet_cheese_wheel",
++    "brewinandchewin:unripe_goat_cheese_wheel"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/brewinandchewin/tags/item/foods/cheese_wedge.json b/common/src/generated/resources/data/brewinandchewin/tags/item/foods/cheese_wedge.json
+index 754a663..7d4377c 100644
+--- a/common/src/generated/resources/data/brewinandchewin/tags/item/foods/cheese_wedge.json
++++ b/common/src/generated/resources/data/brewinandchewin/tags/item/foods/cheese_wedge.json
+@@ -1,6 +1,7 @@
+ {
+   "values": [
+     "brewinandchewin:flaxen_cheese_wedge",
+-    "brewinandchewin:scarlet_cheese_wedge"
++    "brewinandchewin:scarlet_cheese_wedge",
++    "brewinandchewin:goat_cheese_wedge"
+   ]
+ }
+\ No newline at end of file
+diff --git a/common/src/generated/resources/data/farmersdelight/tags/block/mineable/knife.json b/common/src/generated/resources/data/farmersdelight/tags/block/mineable/knife.json
+index 2280424..2a8134c 100644
+--- a/common/src/generated/resources/data/farmersdelight/tags/block/mineable/knife.json
++++ b/common/src/generated/resources/data/farmersdelight/tags/block/mineable/knife.json
+@@ -8,6 +8,8 @@
+     "brewinandchewin:flaxen_cheese_wheel",
+     "brewinandchewin:unripe_scarlet_cheese_wheel",
+     "brewinandchewin:scarlet_cheese_wheel",
++    "brewinandchewin:unripe_goat_cheese_wheel",
++    "brewinandchewin:goat_cheese_wheel",
+     "brewinandchewin:pizza",
+     "brewinandchewin:quiche"
+   ]
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/fluid/BnCFluidConstants.java b/common/src/main/java/umpaz/brewinandchewin/common/fluid/BnCFluidConstants.java
+index 4d183ed..245f676 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/fluid/BnCFluidConstants.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/fluid/BnCFluidConstants.java
+@@ -14,6 +14,9 @@ public class BnCFluidConstants {
+         public static final ResourceLocation SCARLET_STILL_TEXTURE = BrewinAndChewin.asResource("block/scarlet_cheese_still");
+         public static final ResourceLocation SCARLET_FLOWING_TEXTURE = BrewinAndChewin.asResource("block/scarlet_cheese_flow");
+ 
++        public static final ResourceLocation GOAT_STILL_TEXTURE = BrewinAndChewin.asResource("block/goat_cheese_still");
++        public static final ResourceLocation GOAT_FLOWING_TEXTURE = BrewinAndChewin.asResource("block/goat_cheese_flow");
++
+         public static final ResourceLocation HONEY_FLUID_STILL_TEXTURE = ResourceLocation.withDefaultNamespace("block/honey_block_top"); //ResourceLocation(BrewinAndChewin.MODID, "block/honey_fluid_still");
+         public static final ResourceLocation HONEY_FLUID_FLOWING_TEXTURE = ResourceLocation.withDefaultNamespace("block/honey_block_top"); //ResourceLocation(BrewinAndChewin.MODID, "block/honey_fluid_flow");
+     }
+@@ -43,5 +46,7 @@ public class BnCFluidConstants {
+         public static final int CURRANT_WINE = 0xFF6E2A55;
+         public static final int VERRUCA_WINE = 0xFF8E2F2F;
+         public static final int TWISTED_WINE = 0xFF2F8F86;
++
++        public static final int GOAT_MILK = 0xFFF7F4EC;
+     }
+ }
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCBlocks.java b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCBlocks.java
+index 01b7348..5a7c96d 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCBlocks.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCBlocks.java
+@@ -71,6 +71,12 @@ public class BnCBlocks {
+     public static final Block SCARLET_CHEESE_WHEEL = new
+             CheeseWheelBlock(() -> BnCItems.SCARLET_CHEESE_WEDGE, Block.Properties.ofFullCopy(Blocks.CAKE));
+ 
++    public static final Block UNRIPE_GOAT_CHEESE_WHEEL = new
++            UnripeCheeseWheelBlock(() -> BnCBlocks.GOAT_CHEESE_WHEEL, Block.Properties.ofFullCopy(Blocks.CAKE));
++
++    public static final Block GOAT_CHEESE_WHEEL = new
++            CheeseWheelBlock(() -> BnCItems.GOAT_CHEESE_WEDGE, Block.Properties.ofFullCopy(Blocks.CAKE));
++
+     // Feasts
+     public static final Block FIERY_FONDUE_POT = new
+             FieryFonduePotBlock(Block.Properties.ofFullCopy(Blocks.CAULDRON));
+@@ -118,6 +124,8 @@ public class BnCBlocks {
+         Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("flaxen_cheese_wheel"), FLAXEN_CHEESE_WHEEL);
+         Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("unripe_scarlet_cheese_wheel"), UNRIPE_SCARLET_CHEESE_WHEEL);
+         Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("scarlet_cheese_wheel"), SCARLET_CHEESE_WHEEL);
++        Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("unripe_goat_cheese_wheel"), UNRIPE_GOAT_CHEESE_WHEEL);
++        Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("goat_cheese_wheel"), GOAT_CHEESE_WHEEL);
+ 
+         Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("fiery_fondue_pot"), FIERY_FONDUE_POT);
+         Registry.register(BuiltInRegistries.BLOCK, BrewinAndChewin.asResource("pizza"), PIZZA);
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFluids.java b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFluids.java
+index 9be4915..94972cf 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFluids.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFluids.java
+@@ -79,6 +79,12 @@ public class BnCFluids {
+     public static FlowingFluid SCARLET_CHEESE;
+     public static FlowingFluid FLOWING_SCARLET_CHEESE;
+ 
++    public static FlowingFluid GOAT_CHEESE;
++    public static FlowingFluid FLOWING_GOAT_CHEESE;
++
++    public static FlowingFluid GOAT_MILK;
++    public static FlowingFluid FLOWING_GOAT_MILK;
++
+     public static void registerAll() {
+         BrewinAndChewin.getHelper(). initFluids();
+ 
+@@ -148,5 +154,9 @@ public class BnCFluids {
+         Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("flowing_flaxen_cheese"), FLOWING_FLAXEN_CHEESE);
+         Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("scarlet_cheese"), SCARLET_CHEESE);
+         Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("flowing_scarlet_cheese"), FLOWING_SCARLET_CHEESE);
++        Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("goat_cheese"), GOAT_CHEESE);
++        Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("flowing_goat_cheese"), FLOWING_GOAT_CHEESE);
++        Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("goat_milk"), GOAT_MILK);
++        Registry.register(BuiltInRegistries.FLUID, BrewinAndChewin.asResource("flowing_goat_milk"), FLOWING_GOAT_MILK);
+     }
+ }
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFoods.java b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFoods.java
+index 1fb89be..ab5f471 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFoods.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCFoods.java
+@@ -108,6 +108,8 @@ public class BnCFoods {
+             .nutrition(4).saturationModifier(1.0F).build();
+     public static final FoodProperties SCARLET_CHEESE = (new FoodProperties.Builder())
+             .nutrition(4).saturationModifier(1.0F).build();
++    public static final FoodProperties GOAT_CHEESE = (new FoodProperties.Builder())
++            .nutrition(4).saturationModifier(1.0F).build();
+ 
+     public static final FoodProperties VEGETABLE_OMELET = (new FoodProperties.Builder())
+             .nutrition(12).saturationModifier(0.8F)
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCItems.java b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCItems.java
+index 6b691e9..a0504cc 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCItems.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/registry/BnCItems.java
+@@ -102,6 +102,10 @@ public class BnCItems {
+     public static final Item SCARLET_CHEESE_WHEEL = new BlockItem(BnCBlocks.SCARLET_CHEESE_WHEEL, new Item.Properties().stacksTo(16));
+     public static final Item SCARLET_CHEESE_WEDGE = new Item(new Item.Properties().food(BnCFoods.SCARLET_CHEESE));
+ 
++    public static final Item UNRIPE_GOAT_CHEESE_WHEEL = new BlockItem(BnCBlocks.UNRIPE_GOAT_CHEESE_WHEEL, new Item.Properties().stacksTo(16));
++    public static final Item GOAT_CHEESE_WHEEL = new BlockItem(BnCBlocks.GOAT_CHEESE_WHEEL, new Item.Properties().stacksTo(16));
++    public static final Item GOAT_CHEESE_WEDGE = new Item(new Item.Properties().food(BnCFoods.GOAT_CHEESE));
++
+     public static final Item VEGETABLE_OMELET = new ConsumableItem(new Item.Properties().stacksTo(16).food(BnCFoods.VEGETABLE_OMELET).craftRemainder(Items.BOWL), true);
+     public static final Item CREAMY_ONION_SOUP = new ConsumableItem(new Item.Properties().stacksTo(16).food(BnCFoods.CREAMY_ONION_SOUP).craftRemainder(Items.BOWL), true);
+     public static final Item CHEESY_PASTA = new ConsumableItem(new Item.Properties().stacksTo(16).food(BnCFoods.CHEESY_PASTA).craftRemainder(Items.BOWL), true);
+@@ -222,6 +226,10 @@ public class BnCItems {
+         registerWithTab("scarlet_cheese_wheel", SCARLET_CHEESE_WHEEL);
+         registerWithTab("scarlet_cheese_wedge", SCARLET_CHEESE_WEDGE);
+ 
++        registerWithTab("unripe_goat_cheese_wheel", UNRIPE_GOAT_CHEESE_WHEEL);
++        registerWithTab("goat_cheese_wheel", GOAT_CHEESE_WHEEL);
++        registerWithTab("goat_cheese_wedge", GOAT_CHEESE_WEDGE);
++
+         registerWithTab("vegetable_omelet", VEGETABLE_OMELET);
+         registerWithTab("creamy_onion_soup", CREAMY_ONION_SOUP);
+         registerWithTab("cheesy_pasta", CHEESY_PASTA);
+diff --git a/common/src/main/java/umpaz/brewinandchewin/common/tag/BnCTags.java b/common/src/main/java/umpaz/brewinandchewin/common/tag/BnCTags.java
+index 249e3e1..2761d66 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/common/tag/BnCTags.java
++++ b/common/src/main/java/umpaz/brewinandchewin/common/tag/BnCTags.java
+@@ -79,6 +79,8 @@ public class BnCTags {
+ 
+         public static final TagKey<Fluid> FLAXEN_CHEESE = modFluidTag("flaxen_cheese");
+         public static final TagKey<Fluid> SCARLET_CHEESE = modFluidTag("scarlet_cheese");
++        public static final TagKey<Fluid> GOAT_CHEESE = modFluidTag("goat_cheese");
++        public static final TagKey<Fluid> GOAT_MILK = modFluidTag("goat_milk");
+ 
+         private static TagKey<Fluid> modFluidTag(String path) {
+             return TagKey.create(Registries.FLUID, BrewinAndChewin.asResource(path));
+diff --git a/common/src/main/java/umpaz/brewinandchewin/integration/emi/EMIPlugin.java b/common/src/main/java/umpaz/brewinandchewin/integration/emi/EMIPlugin.java
+index 0784835..2134c92 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/integration/emi/EMIPlugin.java
++++ b/common/src/main/java/umpaz/brewinandchewin/integration/emi/EMIPlugin.java
+@@ -58,6 +58,7 @@ public class EMIPlugin implements EmiPlugin {
+ 
+         registry.addRecipe(new CheeseEmiRecipe(BrewinAndChewin.asResource("/cheese/flaxen"), EmiStack.of(BnCItems.UNRIPE_FLAXEN_CHEESE_WHEEL), EmiStack.of(BnCItems.FLAXEN_CHEESE_WHEEL)));
+         registry.addRecipe(new CheeseEmiRecipe(BrewinAndChewin.asResource("/cheese/scarlet"), EmiStack.of(BnCItems.UNRIPE_SCARLET_CHEESE_WHEEL), EmiStack.of(BnCItems.SCARLET_CHEESE_WHEEL)));
++        registry.addRecipe(new CheeseEmiRecipe(BrewinAndChewin.asResource("/cheese/goat"), EmiStack.of(BnCItems.UNRIPE_GOAT_CHEESE_WHEEL), EmiStack.of(BnCItems.GOAT_CHEESE_WHEEL)));
+     }
+ 
+     private EmiIngredient getFluidIngredient(RecipeHolder<KegFermentingRecipe> recipe) {
+diff --git a/common/src/main/java/umpaz/brewinandchewin/integration/jei/BnCJEIRecipes.java b/common/src/main/java/umpaz/brewinandchewin/integration/jei/BnCJEIRecipes.java
+index 3fbcfbf..c3dab5c 100644
+--- a/common/src/main/java/umpaz/brewinandchewin/integration/jei/BnCJEIRecipes.java
++++ b/common/src/main/java/umpaz/brewinandchewin/integration/jei/BnCJEIRecipes.java
+@@ -59,6 +59,7 @@ public class BnCJEIRecipes {
+ 
+       cheese.add(new CheeseAgingRecipe(BnCBlocks.UNRIPE_FLAXEN_CHEESE_WHEEL.asItem(), BnCBlocks.FLAXEN_CHEESE_WHEEL.asItem()));
+       cheese.add(new CheeseAgingRecipe(BnCBlocks.UNRIPE_SCARLET_CHEESE_WHEEL.asItem(), BnCBlocks.SCARLET_CHEESE_WHEEL.asItem()));
++      cheese.add(new CheeseAgingRecipe(BnCBlocks.UNRIPE_GOAT_CHEESE_WHEEL.asItem(), BnCBlocks.GOAT_CHEESE_WHEEL.asItem()));
+ 
+       // find every instance of Unripe Cheese Wheel block, and call the supplier :)
+       return cheese;
+diff --git a/common/src/main/resources/assets/brewinandchewin/blockstates/goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/blockstates/goat_cheese_wheel.json
+new file mode 100644
+index 0000000..ca7222a
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/blockstates/goat_cheese_wheel.json
+@@ -0,0 +1,16 @@
++{
++  "variants": {
++    "servings=3": {
++      "model": "brewinandchewin:block/goat_cheese_wheel"
++    },
++    "servings=2": {
++      "model": "brewinandchewin:block/goat_cheese_wheel1"
++    },
++    "servings=1": {
++      "model": "brewinandchewin:block/goat_cheese_wheel2"
++    },
++    "servings=0": {
++      "model": "brewinandchewin:block/goat_cheese_wheel3"
++    }
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/blockstates/unripe_goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/blockstates/unripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..126c1b1
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/blockstates/unripe_goat_cheese_wheel.json
+@@ -0,0 +1,10 @@
++{
++  "variants": {
++    "age=0": {
++      "model": "brewinandchewin:block/unripe_goat_cheese_wheel"
++    },
++    "age=1": {
++      "model": "brewinandchewin:block/semiripe_goat_cheese_wheel"
++    }
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/brewinandchewin/coaster/goat_cheese_wedge.json b/common/src/main/resources/assets/brewinandchewin/brewinandchewin/coaster/goat_cheese_wedge.json
+new file mode 100644
+index 0000000..fa31675
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/brewinandchewin/coaster/goat_cheese_wedge.json
+@@ -0,0 +1,4 @@
++{
++  "item": "brewinandchewin:goat_cheese_wedge",
++  "models": "brewinandchewin:block/coaster_goat_cheese_wedge"
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/brewinandchewin/fluid_item_displays/default_displays.json b/common/src/main/resources/assets/brewinandchewin/brewinandchewin/fluid_item_displays/default_displays.json
+index 922d980..0d436e3 100644
+--- a/common/src/main/resources/assets/brewinandchewin/brewinandchewin/fluid_item_displays/default_displays.json
++++ b/common/src/main/resources/assets/brewinandchewin/brewinandchewin/fluid_item_displays/default_displays.json
+@@ -32,5 +32,6 @@
+   "#brewinandchewin:red_rum": "brewinandchewin:red_rum",
+   "#brewinandchewin:withering_dross": "brewinandchewin:withering_dross",
+   "#brewinandchewin:flaxen_cheese": "brewinandchewin:unripe_flaxen_cheese_wheel",
+-  "#brewinandchewin:scarlet_cheese": "brewinandchewin:unripe_scarlet_cheese_wheel"
++  "#brewinandchewin:scarlet_cheese": "brewinandchewin:unripe_scarlet_cheese_wheel",
++  "#brewinandchewin:goat_cheese": "brewinandchewin:unripe_goat_cheese_wheel"
+ }
+diff --git a/common/src/main/resources/assets/brewinandchewin/lang/en_us.json b/common/src/main/resources/assets/brewinandchewin/lang/en_us.json
+index a9e7619..465f83f 100644
+--- a/common/src/main/resources/assets/brewinandchewin/lang/en_us.json
++++ b/common/src/main/resources/assets/brewinandchewin/lang/en_us.json
+@@ -18,6 +18,8 @@
+   "fluid_type.brewinandchewin.red_rum": "Red Rum",
+   "fluid_type.brewinandchewin.withering_dross": "Withering Dross",
+   "fluid_type.brewinandchewin.flaxen_cheese": "Flaxen Cheese",
++  "fluid_type.brewinandchewin.goat_cheese": "Goat Cheese",
++  "fluid_type.brewinandchewin.goat_milk": "Goat Milk",
+   "fluid_type.brewinandchewin.scarlet_cheese": "Scarlet Cheese",
+   "block.brewinandchewin.keg": "Keg",
+   "block.brewinandchewin.heating_cask": "Heating Cask",
+@@ -86,9 +88,12 @@
+   "item.brewinandchewin.horror_lasagna": "Horror Lasagna",
+   "block.brewinandchewin.unripe_flaxen_cheese_wheel": "Unripe Flaxen Cheese Wheel",
+   "block.brewinandchewin.flaxen_cheese_wheel": "Flaxen Cheese Wheel",
++  "block.brewinandchewin.unripe_goat_cheese_wheel": "Unripe Goat Cheese Wheel",
++  "block.brewinandchewin.goat_cheese_wheel": "Goat Cheese Wheel",
+   "block.brewinandchewin.unripe_scarlet_cheese_wheel": "Unripe Scarlet Cheese Wheel",
+   "block.brewinandchewin.scarlet_cheese_wheel": "Scarlet Cheese Wheel",
+   "item.brewinandchewin.flaxen_cheese_wedge": "Flaxen Cheese Wedge",
++  "item.brewinandchewin.goat_cheese_wedge": "Goat Cheese Wedge",
+   "item.brewinandchewin.scarlet_cheese_wedge": "Scarlet Cheese Wedge",
+   "block.brewinandchewin.pizza": "Pizza",
+   "item.brewinandchewin.pizza_slice": "Pizza Slice",
+@@ -187,6 +192,8 @@
+   "tag.fluid.brewinandchewin.withering_dross": "Withering Dross",
+   "tag.fluid.brewinandchewin.kombucha": "Kombucha",
+   "tag.fluid.brewinandchewin.flaxen_cheese": "Flaxen Cheese",
++  "tag.fluid.brewinandchewin.goat_cheese": "Goat Cheese",
++  "tag.fluid.brewinandchewin.goat_milk": "Goat Milk",
+   "tag.fluid.brewinandchewin.scarlet_cheese": "Scarlet Cheese",
+   "tag.mob_effect.brewinandchewin.low_priority.milk_bottle": "Low Priority for Milk Bottle",
+   "tag.mob_effect.brewinandchewin.low_priority.hot_cocoa": "Low Priority for Hot Cocoa",
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/coaster_goat_cheese_wedge.json b/common/src/main/resources/assets/brewinandchewin/models/block/coaster_goat_cheese_wedge.json
+new file mode 100644
+index 0000000..48f9c74
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/coaster_goat_cheese_wedge.json
+@@ -0,0 +1,6 @@
++{
++  "parent": "brewinandchewin:block/coaster_cheese",
++  "textures": {
++    "cheese": "brewinandchewin:block/goat_cheese_wedge"
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel.json
+new file mode 100644
+index 0000000..41802f5
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel.json
+@@ -0,0 +1,9 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template",
++	"textures": {
++		"top": "brewinandchewin:block/goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/goat_cheese_wheel_side",
++		"bottom": "brewinandchewin:block/goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel1.json b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel1.json
+new file mode 100644
+index 0000000..a16fabb
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel1.json
+@@ -0,0 +1,10 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template1",
++	"textures": {
++		"top": "brewinandchewin:block/goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/goat_cheese_wheel_side",
++		"inside": "brewinandchewin:block/goat_cheese_wheel_inside",
++		"bottom": "brewinandchewin:block/goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel2.json b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel2.json
+new file mode 100644
+index 0000000..ceae99c
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel2.json
+@@ -0,0 +1,10 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template2",
++	"textures": {
++		"top": "brewinandchewin:block/goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/goat_cheese_wheel_side",
++		"inside": "brewinandchewin:block/goat_cheese_wheel_inside",
++		"bottom": "brewinandchewin:block/goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel3.json b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel3.json
+new file mode 100644
+index 0000000..5c378e2
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/goat_cheese_wheel3.json
+@@ -0,0 +1,10 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template3",
++	"textures": {
++		"top": "brewinandchewin:block/goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/goat_cheese_wheel_side",
++		"inside": "brewinandchewin:block/goat_cheese_wheel_inside",
++		"bottom": "brewinandchewin:block/goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/semiripe_goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/models/block/semiripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..53fd552
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/semiripe_goat_cheese_wheel.json
+@@ -0,0 +1,9 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template",
++	"textures": {
++		"top": "brewinandchewin:block/semiripe_goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/semiripe_goat_cheese_wheel_side",
++		"bottom": "brewinandchewin:block/semiripe_goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/semiripe_goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/block/unripe_goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/models/block/unripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..b060db7
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/block/unripe_goat_cheese_wheel.json
+@@ -0,0 +1,9 @@
++{
++	"parent": "brewinandchewin:block/cheese_wheel_template",
++	"textures": {
++		"top": "brewinandchewin:block/unripe_goat_cheese_wheel_top",
++		"side": "brewinandchewin:block/unripe_goat_cheese_wheel_side",
++		"bottom": "brewinandchewin:block/unripe_goat_cheese_wheel_bottom",
++		"particle": "brewinandchewin:block/unripe_goat_cheese_wheel_top"
++	}
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wedge.json b/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wedge.json
+new file mode 100644
+index 0000000..a206b72
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wedge.json
+@@ -0,0 +1,6 @@
++{
++    "parent": "item/generated",
++    "textures": {
++        "layer0": "brewinandchewin:item/goat_cheese_wedge"
++    }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wheel.json
+new file mode 100644
+index 0000000..3e7470b
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/item/goat_cheese_wheel.json
+@@ -0,0 +1,6 @@
++{
++    "parent": "item/generated",
++    "textures": {
++        "layer0": "brewinandchewin:item/goat_cheese_wheel"
++    }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/models/item/unripe_goat_cheese_wheel.json b/common/src/main/resources/assets/brewinandchewin/models/item/unripe_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..b8f9627
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/models/item/unripe_goat_cheese_wheel.json
+@@ -0,0 +1,6 @@
++{
++    "parent": "item/generated",
++    "textures": {
++        "layer0": "brewinandchewin:item/unripe_goat_cheese_wheel"
++    }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..417a3b4ef5f8d1b5454da6f297b66c5d03b8dcdb
+GIT binary patch
+literal 9628
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png.mcmeta b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png.mcmeta
+new file mode 100644
+index 0000000..8e55e43
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_flow.png.mcmeta
+@@ -0,0 +1,5 @@
++{
++  "animation": {
++    "frametime": 3
++  }
++}
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a321c04d06e6c6113ddab4bf74c7a18563a2ad95
+GIT binary patch
+literal 9774
+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
+Wr=Hz(eFNMB1KrlYr&o@2i1<Hrq+$dB
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png.mcmeta b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png.mcmeta
+new file mode 100644
+index 0000000..7ceb363
+--- /dev/null
++++ b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_still.png.mcmeta
+@@ -0,0 +1,45 @@
++{
++  "animation": {
++    "frametime": 2,
++    "frames": [
++      0,
++      1,
++      2,
++      3,
++      4,
++      5,
++      6,
++      7,
++      8,
++      9,
++      10,
++      11,
++      12,
++      13,
++      14,
++      15,
++      16,
++      17,
++      18,
++      19,
++      18,
++      17,
++      16,
++      15,
++      14,
++      13,
++      12,
++      11,
++      10,
++      9,
++      8,
++      7,
++      6,
++      5,
++      4,
++      3,
++      2,
++      1
++    ]
++  }
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wedge.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wedge.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..73bd1376232ea50dbab94d4db1c3d3e39c9b4be9
+GIT binary patch
+literal 442
+zcmV;r0Y(0aP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004jNkl<Zc$|Hb
+zziPrz6vltXEE2^{gg_NFAc&LD2dIPi5*>UAU%=<Ekhyelkq&m~SacFWFot9Z1UjlX
+zi5>J@Z~W75$;r9roco>cyQ!`JegyEth)T&u;^~{4;*8&?#u1=aF5(5Tr0EablmTF6
+zb5u$;R=%L(Yt+g`oT^Q?-J(`5s=VQc5i*3s{-&|#&H(U&nDJ!BY8@rc%}U9JbOsK4
+zcH0dy@IQD#tXLSp>E?6>D_@}5sNbxh)0Sq@!UWiDH^2rfo4d>6ns#CZxHvFhEblfr
+zRhvr5rlZw5VMKr6Vk!r+Ihu|7nGH<8F9T#H-68oJLiuAfc}V&5>j!}OVyR+T)6{9o
+zFfWMdpY0Rqy6CYf6Hlrpn*fHdExaI3sIS{-0(4%UakQrl&>y%e?zUU%OzMP%;Z#pQ
+zt967QMp)V0jg2C*E}jx`wLaTYJtcPA4b4VfHTT>Zei$it9*U^nBE^DhSA;Qu=>;*~
+ka0HNeuGbh(W(g4me*i$#|LY|c=Kufz07*qoM6N<$f?wmy9RL6T
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_bottom.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_bottom.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..b04aff17e983a996dccb15f063bf21bbe3de756b
+GIT binary patch
+literal 235
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`n><|{Ln`K+on**&$biSSUa-C6
+zifYhh;V&FMds(h0ygYHpbcdMZsUXem3z&aR&6NrJ@WkcY=kNXv@$Sc;Y?~8*CYUF$
+zP_Oj7{`G2h2KUGbNe3*xFf<%5zAIf}&$oA1cte=6`tzXJRIkQdAHx;Ki9#hG%2FKl
+zL_cQ+rLT5k)ah8Y?<o5LzYig%jCXD}Z}ACX*w<tl)HF*jV&%NTnyl~g4Ecv`M1?YZ
+jLm76i-oC!|pL@=)%FMIrlO(l(u4nLc^>bP0l+XkK2+3U?
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_inside.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_inside.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..7c64bede6c39237bf21ed9a363054e753b4e5821
+GIT binary patch
+literal 252
+zcmV<Y00aMtP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0002PNkl<Zc%1E!
+zJqp4w7>3_UH}wP=3N3*^$m#)HJb+j53?9NWcm*9?oazAtClQ1+r5OU<+s-<~ucYDu
+z9QsV(@ct#h$jCns(Q(*sU#sN;rFBqJ^n$K!P+EsHVJNKw0BGZ|-s~a(h)KvZFVMz|
+zloYr>o={RCO&F%LIg}LW+Gem|LWefKg=eg9CPQf*j;9=<mWc5MwNXg8kitUxfTF6w
+zKTn{)(8hsh3~Az5k-4bq-wV$9%^#QRK&Xuym_pu9oLMFSp2=DO0000<MNUMnLSTY(
+Cu4vT&
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_side.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_side.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..d3ff25ee19a9cd2cbc7e986f851139076baea2bf
+GIT binary patch
+literal 220
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`i#=T&Ln`LH?J?v!WFX-de{}6j
+zy^<9o>F*!N?rBf|DEH3q5oe5uV}|rC#S6A4W0u>i9A&onqWiO=zGB0M5Bw=c^S*x$
+z30GyPGPn}jDaXUG|IfdIQ<EAlPtS}yAKF-Mw#RUlT^fV7V3om>RSMy*Hy){qRV%X0
+zI`?4i)35(jqz_nkmzz~|GOc+WRWspkN!!o)H(DKT_iy=oB5${+*@3U$JZjE}&t^`}
+UW&14f3g}!0Pgg&ebxsLQ0JVTzSO5S3
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_top.png b/common/src/main/resources/assets/brewinandchewin/textures/block/goat_cheese_wheel_top.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..93358ae67049ab669a932adc422b9ec5aba0cb89
+GIT binary patch
+literal 285
+zcmV+&0pk9NP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0002wNkl<Zc$~#j
+zK?;K~5FE7^NkSixgWyRJ`-i@$Z|RHrhn7N5f(I|&M1v=354!0_V|#QUnCxbDcGduU
+zBcRRwc73ObMp@NJ6Ab`A_owqE0DzDRP?8{|LYim@saC4|?!lKN68~~_4%-1G%BlvU
+z7yw}U4v*&xh++t-Af!T(XHEx>1*<d;wup0{V;n0BLMoWPgE&sA4rv@<`p&Uo3sBG*
+zoJWz*!zo~i9+GJrOI{*eML203ro}q^YoW-qX$EsQrfux>DZcp^(nNn1qS&f)Wz%<l
+j3(E&$+Gdlqyt^+xdYpAd2_2a|00000NkvXXu0mjf%>!_{
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_bottom.png b/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_bottom.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..5ec101fc3fc8c7412d096fa6702d91aaa763b46b
+GIT binary patch
+literal 636
+zcmV-?0)zdDP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nhvPnciRCt`tlCcrOFbqY1IL1g3r*`25
+z*nlc?Fabr16imQiE?i>@_8<lKbCM#{f-2c3J$-!}_;qwlZu8~MJjLJ^=Tf))y4*Ve
+zILd+)1ID2T06d<rt%3LB(5rg|Xf<<kF4a}06xhZTgE|u?K?iR~7UWVfoloj)RVaW3
+zQPsED0qg`%RTIFSJxI$$1>h@KBPFQmftBhR$ESAx0q`-*Qz3!YR0WW`diz@Ff5Zw^
+W|7nI9I~;!i0000<MNUMnLSTY}To;D`
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_side.png b/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_side.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..e9bb3f4b864b73d2aa6eafd7ba7a168b58362503
+GIT binary patch
+literal 616
+zcmV-u0+;=XP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nho=HSORCt{2j-d|1KoCS<39`wVOPb~s
+z3Iqbhukei+6n}t2RaBtbie4_4U`X&F=w7-FK_fb5C$lfR1G8rRgEBF<>+$8v0stQ(
+zt}O5&0`M*0><<~hQVs}|8;cv}+E|{CJGrqRX2Jq2#P|>s_)AkJHE6nC*B)RWV)`sz
+z7<GWrqUm~7S$2}kR0pcMrK($Y+m-SFr}IVSW4!?uCq?yNpyoON0000<MNUMnLSTZi
+CEe`Ae
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_top.png b/common/src/main/resources/assets/brewinandchewin/textures/block/semiripe_goat_cheese_wheel_top.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..e4444806aa37405a9a6e8f50be75aeae67416a83
+GIT binary patch
+literal 669
+zcmV;O0%HA%P)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nh(@8`@RCt`lP)iEJFch5HZVEy-g;H_=
+z3+}y&XY?xWg}Rm!0zn7_x+=P`lTT~JT?ay5UMBNq0&I<pMSs1#MB8AH3ZiWQ;Ah>P
+z&KUp{6yPPXuWE>Sw?;>IA-BK+qHVCRYA3Q3yZ5(<zhf~-<saqcr<s>-QS8tiBL_}^
+zldaLfG<p%hpTpi#Ak6MEPosA-pRLi(ZS)6&R4ym&ew)buNJdCmUBya8AnfzuBhbyi
+z5v<YPO(4R4G6G41RMABC!+j+X+F}HX@ew&o?zVUXqVaHVFI7H}00000NkvXXu0mjf
+DJ}4_U
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_bottom.png b/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_bottom.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..e0235e783cf2493692bf3dfb4c7bd0743cb1fc76
+GIT binary patch
+literal 634
+zcmV-=0)_pFP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nhut`KgRCt`tlCcrOFbqY1I2K9Lx^v+%
+zsJP1>G-QI%FqjK>Zh=uq!Tp@1$h4qJ_DN4)-v)ji9h3WVeKSunxW&2DEx*jS4gij_
+zAjN=w7y$sU=VNQ&eLsxqUIALooSaK_l_>?bF~y+Hgh|lB+mQviR7~fSI$ISAU_n&%
+zEp`Aq!Bf=)aAyzFGEo8e3f4#oYI<O$ddBgo-G2al4D(b-pfyzi<gVVn7WyBt0{MVx
+UTs>-OY5)KL07*qoM6N<$g8uv&3jhEB
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_side.png b/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_side.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..89e4a9fc12e962989f670b407328fae82bba07ca
+GIT binary patch
+literal 615
+zcmV-t0+{`YP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nhok>JNRCt{2jy(&)Fcd{k#0p&sA!KsY
+zO*aSe9}E5v>CmlieoRiG6uJmH)FHfRqBuMBEbnr2-_3)8fqy`WxE}YtH3a~!>9D52
+zH5~xo{ONq7qJn#S=mD}^^SHHSxd!;q!bC3=z(@?&bRqbQG&2@)IiHfVeb}G<`otPS
+zCMuACl))@4%A5FpCIw|xQ&u(W)iTlm+g<Fx^8{d@PTk~9k%a&N002ovPDHLkV1h05
+B6NCT&
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_top.png b/common/src/main/resources/assets/brewinandchewin/textures/block/unripe_goat_cheese_wheel_top.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2519d435c43b6ca1e9b34ccc67a6b528e86c3a5
+GIT binary patch
+literal 674
+zcmV;T0$u%yP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004nX+uL$Nkc;*
+zP;zf(X>4Tx0C=2zkv&MmP!xqvQ;Q-MhgJ}A$WWauh>GYYRV;#q(pG5I!Q`cX(4-+r
+zad8w}3l9D)RvlcNb#-tR1i>E=M<*vm7b)?+q|hS93y=44-aUu+?gNBIg{fxOIG}2l
+zk&4H}Y;INTenkL2gfM_viJ5vLy_kV#ece+p)m@ZldH4NUeM;VBfKMczW4d7xZxBy!
+zS~}-_;xH>o3h_Ddm_ZjLe&o9B@*C%(!vfC?8=2HRahO;vcCg&RtYoOfQ^XNP)hJ)c
+zx~y>C;;dF`taVTR!eCxoNpqdnFydH30!fIFQ9~IOScuZDkzyi6=P?iekmFC1OD0zt
+zj2sK7LWSh`!T;d*Y|X;tgqswM0f86W{ulwecY$Wzw!e>UyLkfmpMfi_?XNa~nNQN|
+zZ7p&H^lt+f*KJMS11@)f!6#iZBuDbo5()+2{fxdT2ZU~c-Zgh_t#h0{02!Lq@(pls
+z2#gjfd)?#RJ)Lv=x2H9~ACN6_v(hWx)c^nh*hxe|RCt`lQLzfbFciF2J9My6LKYRe
+z_!IvB;7_<H>QYLf6*7dPLweyQsjhv?3(32CcNbvo%6NEQFCVQcwA}!$DggL<KAg@O
+z0OTa#BdaKDXjP#o>tw5(-7Y;6B)e9wzaF<>-V;z_QP#j_2TY^uUXknjV*_jYlz?Ds
+zdN(Y<0ogPL3UWk6l3-YXt?AKrLrTzgg9rNHqzbV>h8X;U_rCy)Gx=$OW#9ME?;LDw
+zA^HWEwhL1H21)08trir}m){^Z@?Q3YK+2*8k`ct2cy`_T0ye32P98D9CjbBd07*qo
+IM6N<$f^|tQVE_OC
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wedge.png b/common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wedge.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..5a5841e6e242c8041ecb7e03fd9dc91e169b06e5
+GIT binary patch
+literal 360
+zcmV-u0hj)XP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0003mNkl<Zc$~$O
+zy-LGS7=|BzC`gjAP{@#ywooW3bm;|j=>>QTUW491C%5iS?mD<ghc<gbgoHpKrr1J2
+zbdn?l1c^gPY&<nx1V0El!+GBGyzs$)&%wS6mN`xHv*!n#o?Vuh$^grprn;sg$qE2*
+z6f#>ZOCg6<u+i%x$qKgPa(g#Nk`>0IAvag&h1GEtoR87#qH8K~6bg3*1IwJIMt^|q
+zxFuk<4v=J}sI$``hXIWK06r5qIw>q{#|7Z&`9%!ahN;!F|Hm8g`zxz;!2SGzcC$gJ
+zrB+m^)w3_zK(fKM9s$rbm3Ffs^cO0SYzj?XQ_;2W*E%f~&kykYpdx^5S#r(UVp&qo
+zyI)MMi#-qm#-pL|>Mn3+Kpcgv)@99~tNUxfcE5elpUxM5$9??w`)tPm0000<MNUMn
+GLSTZg=Ah01
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wheel.png b/common/src/main/resources/assets/brewinandchewin/textures/item/goat_cheese_wheel.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..03e22cf00f152f51667a92dff5de468356b1d019
+GIT binary patch
+literal 366
+zcmV-!0g?WRP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0003sNkl<Zc%1E#
+zy=uZx6vuz5B7`J3#U(=^;;0~$?(NVnUE01v_iptCoZQ;ElhCmbkR{!-6byn8Ep`Zq
+zPNG2&#18S^<~EKUd!~C1=l^vs{FioYICy{B=lgh)0C0ETE9@%+0c^I~%2K+V1K<Z?
+zfk?}Po2@qNHl*tnpI-^0mqdqoJV_*pCc&qduw4}5q{}&e5YnhSc&-D0VOsQ_U+HxF
+zT3K#x7f`X~J6+B(Ober0<M!q{b5hb_w;>viB&@8+2?rG$!?x9VNtd?}M^y<9*$vam
+z07tR|c&<aE?l7LtRDyK9!l>3HC>oCNTqlcRT8eVs!3jX?{6X`BP+Am9K$bhF98VI)
+z(;1y^|K}G(y}dl{0j@62GS!k!H2A=C9sD4awgtFA@S8}~G2oxoH@1C_C{b3lPXGV_
+M07*qoM6N<$g0mN*Bme*a
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/brewinandchewin/textures/item/unripe_goat_cheese_wheel.png b/common/src/main/resources/assets/brewinandchewin/textures/item/unripe_goat_cheese_wheel.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..1dd2c78184603d91487fef599539feac7f666ecd
+GIT binary patch
+literal 314
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4(FKU}W@kaSW-Llbj&I+H-@Y|4q~<
+z`I+?}Px-O|LED=}X*^$bZkWuPDP^=_(`N$^`19{)t7D+2<gzFByBvE?%vzh9v(f7F
+z_w)KZ>+jb!eKyaz#b(~Zx$dSW!|F5%0num8n}dawC5nt6{aal1@Om^Gn^_`@be6Hv
+zgh`W<e*FE+eR$>N=MR%K5*aRY7<Y)CJ&=BWp5dMS<>Ic~s~A1l4(7D~l#Ny9F*qo3
+zexB{&RSY-Z8!&W-?O-&^GwhKz%RQXQ!OYBTqop6W^JKx}YtC&ajl~R&3>K&^Sy{XF
+zzodkO1k;~A56lkl*^qeItWA2moDt9q2TYSC8uA2q5-xj~GBC`y&kkl>?7s#WCJdgg
+KelF{r5}E*Zpn8=6
+
+literal 0
+HcmV?d00001
+
+diff --git a/common/src/main/resources/assets/emi/recipe/defaults/brewinandchewin.json b/common/src/main/resources/assets/emi/recipe/defaults/brewinandchewin.json
+index 43f9467..27a3862 100644
+--- a/common/src/main/resources/assets/emi/recipe/defaults/brewinandchewin.json
++++ b/common/src/main/resources/assets/emi/recipe/defaults/brewinandchewin.json
+@@ -57,6 +57,9 @@
+     "brewinandchewin:fermenting/vodka_from_water",
+     "brewinandchewin:pouring/beer",
+     "brewinandchewin:pizza",
+-    "brewinandchewin:keg"
++    "brewinandchewin:keg",
++    "brewinandchewin:/cheese/goat",
++    "brewinandchewin:pouring/unripe_goat_cheese_wheel",
++    "brewinandchewin:fermenting/goat_cheese_from_goat_milk"
+   ]
+-}
+\ No newline at end of file
++}
+diff --git a/common/src/main/resources/data/brewinandchewin/loot_modifiers/slicing_goat_cheese_wheel.json b/common/src/main/resources/data/brewinandchewin/loot_modifiers/slicing_goat_cheese_wheel.json
+new file mode 100644
+index 0000000..32e47e9
+--- /dev/null
++++ b/common/src/main/resources/data/brewinandchewin/loot_modifiers/slicing_goat_cheese_wheel.json
+@@ -0,0 +1,28 @@
++{
++  "type": "brewinandchewin:slicing",
++  "conditions": [
++    {
++      "condition": "minecraft:any_of",
++      "terms": [
++        {
++          "condition": "minecraft:block_state_property",
++          "block": "brewinandchewin:goat_cheese_wheel",
++          "properties": {
++            "servings": "3"
++          }
++        },
++        {
++          "condition": "minecraft:match_tool",
++          "predicate": {
++            "tag": "farmersdelight:tools/knives"
++          }
++        }
++      ]
++    },
++    {
++      "condition": "minecraft:block_state_property",
++      "block": "brewinandchewin:goat_cheese_wheel"
++    }
++  ],
++  "slice": "brewinandchewin:goat_cheese_wedge"
++}
+\ No newline at end of file
+diff --git a/common/src/main/resources/data/neoforge/loot_modifiers/global_loot_modifiers.json b/common/src/main/resources/data/neoforge/loot_modifiers/global_loot_modifiers.json
+index 5119fc4..16e1105 100644
+--- a/common/src/main/resources/data/neoforge/loot_modifiers/global_loot_modifiers.json
++++ b/common/src/main/resources/data/neoforge/loot_modifiers/global_loot_modifiers.json
+@@ -4,6 +4,7 @@
+     "brewinandchewin:slicing_pizza",
+     "brewinandchewin:slicing_flaxen_cheese_wheel",
+     "brewinandchewin:slicing_scarlet_cheese_wheel",
++    "brewinandchewin:slicing_goat_cheese_wheel",
+     "brewinandchewin:slicing_quiche",
+     "brewinandchewin:old_wine_simple_dungeon",
+     "brewinandchewin:old_wine_abandoned_mineshaft",
+diff --git a/fabric/src/main/java/umpaz/brewinandchewin/fabric/BrewinAndChewinFabric.java b/fabric/src/main/java/umpaz/brewinandchewin/fabric/BrewinAndChewinFabric.java
+index f2e1d52..8af45f0 100644
+--- a/fabric/src/main/java/umpaz/brewinandchewin/fabric/BrewinAndChewinFabric.java
++++ b/fabric/src/main/java/umpaz/brewinandchewin/fabric/BrewinAndChewinFabric.java
+@@ -219,5 +219,10 @@ public class BrewinAndChewinFabric implements ModInitializer {
+         FluidVariantAttributes.register(BnCFluids.FLOWING_FLAXEN_CHEESE, BnCFluidVariantAttributeHandler.INSTANCE);
+         FluidVariantAttributes.register(BnCFluids.SCARLET_CHEESE, BnCFluidVariantAttributeHandler.INSTANCE);
+         FluidVariantAttributes.register(BnCFluids.FLOWING_SCARLET_CHEESE, BnCFluidVariantAttributeHandler.INSTANCE);
++
++        FluidVariantAttributes.register(BnCFluids.GOAT_CHEESE, BnCFluidVariantAttributeHandler.INSTANCE);
++        FluidVariantAttributes.register(BnCFluids.FLOWING_GOAT_CHEESE, BnCFluidVariantAttributeHandler.INSTANCE);
++        FluidVariantAttributes.register(BnCFluids.GOAT_MILK, BnCFluidVariantAttributeHandler.INSTANCE);
++        FluidVariantAttributes.register(BnCFluids.FLOWING_GOAT_MILK, BnCFluidVariantAttributeHandler.INSTANCE);
+     }
+ }
+diff --git a/fabric/src/main/java/umpaz/brewinandchewin/fabric/client/BrewinAndChewinFabricClient.java b/fabric/src/main/java/umpaz/brewinandchewin/fabric/client/BrewinAndChewinFabricClient.java
+index f0a323f..0dde692 100644
+--- a/fabric/src/main/java/umpaz/brewinandchewin/fabric/client/BrewinAndChewinFabricClient.java
++++ b/fabric/src/main/java/umpaz/brewinandchewin/fabric/client/BrewinAndChewinFabricClient.java
+@@ -182,6 +182,13 @@ public class BrewinAndChewinFabricClient implements ClientModInitializer {
+                         BnCFluidConstants.Textures.SCARLET_STILL_TEXTURE,
+                         BnCFluidConstants.Textures.SCARLET_FLOWING_TEXTURE
+                 ));
++        FluidRenderHandlerRegistry.INSTANCE.register(BnCFluids.GOAT_CHEESE, BnCFluids.FLOWING_GOAT_CHEESE,
++                new SimpleFluidRenderHandler(
++                        BnCFluidConstants.Textures.GOAT_STILL_TEXTURE,
++                        BnCFluidConstants.Textures.GOAT_FLOWING_TEXTURE
++                ));
++        FluidRenderHandlerRegistry.INSTANCE.register(BnCFluids.GOAT_MILK, BnCFluids.FLOWING_GOAT_MILK,
++                createWaterExtension(BnCFluidConstants.Colors.GOAT_MILK));
+     }
+ 
+     private static FluidRenderHandler createHoneyRenderHandler(int color) {
+diff --git a/fabric/src/main/java/umpaz/brewinandchewin/fabric/registry/BnCFluidsImpl.java b/fabric/src/main/java/umpaz/brewinandchewin/fabric/registry/BnCFluidsImpl.java
+index 364cdfd..652f2a6 100644
+--- a/fabric/src/main/java/umpaz/brewinandchewin/fabric/registry/BnCFluidsImpl.java
++++ b/fabric/src/main/java/umpaz/brewinandchewin/fabric/registry/BnCFluidsImpl.java
+@@ -65,5 +65,9 @@ public class BnCFluidsImpl {
+         BnCFluids.FLOWING_FLAXEN_CHEESE = new BnCFluidFabric.Flowing(() -> BnCFluids.FLAXEN_CHEESE);
+         BnCFluids.SCARLET_CHEESE = new BnCFluidFabric.Source(() -> BnCFluids.FLOWING_SCARLET_CHEESE);
+         BnCFluids.FLOWING_SCARLET_CHEESE = new BnCFluidFabric.Flowing(() -> BnCFluids.SCARLET_CHEESE);
++        BnCFluids.GOAT_CHEESE = new BnCFluidFabric.Source(() -> BnCFluids.FLOWING_GOAT_CHEESE);
++        BnCFluids.FLOWING_GOAT_CHEESE = new BnCFluidFabric.Flowing(() -> BnCFluids.GOAT_CHEESE);
++        BnCFluids.GOAT_MILK = new BnCFluidFabric.Source(() -> BnCFluids.FLOWING_GOAT_MILK);
++        BnCFluids.FLOWING_GOAT_MILK = new BnCFluidFabric.Flowing(() -> BnCFluids.GOAT_MILK);
+     }
+ }
+\ No newline at end of file
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCAdvancements.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCAdvancements.java
+index 1621e6a..c1f0298 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCAdvancements.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCAdvancements.java
+@@ -101,6 +101,7 @@ public class BnCAdvancements implements NeoForgeAdvancementProvider.AdvancementG
+         AdvancementHolder fermentCheese = getAdvancement(placeKeg, BnCItems.UNRIPE_FLAXEN_CHEESE_WHEEL, Component.translatable("brewinandchewin.advancement.ferment_cheese"), Component.translatable("brewinandchewin.advancement.ferment_cheese.desc"), AdvancementType.TASK, true, true, false)
+                 .addCriterion("has_unripe_flaxen_cheese_wheel", InventoryChangeTrigger.TriggerInstance.hasItems(BnCItems.UNRIPE_FLAXEN_CHEESE_WHEEL))
+                 .addCriterion("has_unripe_scarlet_cheese_wheel", InventoryChangeTrigger.TriggerInstance.hasItems(BnCItems.UNRIPE_SCARLET_CHEESE_WHEEL))
++                .addCriterion("has_unripe_goat_cheese_wheel", InventoryChangeTrigger.TriggerInstance.hasItems(BnCItems.UNRIPE_GOAT_CHEESE_WHEEL))
+                 .requirements(AdvancementRequirements.Strategy.OR)
+                 .save(saver, BrewinAndChewin.asResource("main/ferment_cheese").toString());
+         AdvancementHolder cookFieryFondue = getAdvancement(fermentCheese, BnCItems.FIERY_FONDUE_POT, Component.translatable("brewinandchewin.advancement.cook_fiery_fondue"), Component.translatable("brewinandchewin.advancement.cook_fiery_fondue.desc"), AdvancementType.CHALLENGE, true, true, false)
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCBlockTags.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCBlockTags.java
+index 2755116..583bda8 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCBlockTags.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCBlockTags.java
+@@ -65,6 +65,8 @@ public class BnCBlockTags extends BlockTagsProvider
+                 BnCBlocks.FLAXEN_CHEESE_WHEEL,
+                 BnCBlocks.UNRIPE_SCARLET_CHEESE_WHEEL,
+                 BnCBlocks.SCARLET_CHEESE_WHEEL,
++                BnCBlocks.UNRIPE_GOAT_CHEESE_WHEEL,
++                BnCBlocks.GOAT_CHEESE_WHEEL,
+                 BnCBlocks.PIZZA,
+                 BnCBlocks.QUICHE
+         );
+@@ -73,10 +75,12 @@ public class BnCBlockTags extends BlockTagsProvider
+     protected void registerModTags() {
+         tag(BnCTags.Blocks.CHEESE_WHEELS_UNRIPE)
+                 .add(BnCBlocks.UNRIPE_FLAXEN_CHEESE_WHEEL)
+-                .add(BnCBlocks.UNRIPE_SCARLET_CHEESE_WHEEL);
++                .add(BnCBlocks.UNRIPE_SCARLET_CHEESE_WHEEL)
++                .add(BnCBlocks.UNRIPE_GOAT_CHEESE_WHEEL);
+         tag(BnCTags.Blocks.CHEESE_WHEELS_RIPE)
+                 .add(BnCBlocks.FLAXEN_CHEESE_WHEEL)
+-                .add(BnCBlocks.SCARLET_CHEESE_WHEEL);
++                .add(BnCBlocks.SCARLET_CHEESE_WHEEL)
++                .add(BnCBlocks.GOAT_CHEESE_WHEEL);
+ 
+         tag(BnCTags.Blocks.FREEZE_SOURCES).add(
+                 BnCBlocks.ICE_CRATE,
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCFluidTags.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCFluidTags.java
+index e324cef..a86b723 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCFluidTags.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCFluidTags.java
+@@ -69,7 +69,11 @@ public class BnCFluidTags extends FluidTagsProvider {
+         tag(BnCTags.Fluids.FLAXEN_CHEESE)
+                 .add(BnCFluids.FLAXEN_CHEESE, BnCFluids.FLOWING_FLAXEN_CHEESE);
+         tag(BnCTags.Fluids.SCARLET_CHEESE)
+-                .add(BnCFluids.SCARLET_CHEESE, BnCFluids.FLOWING_FLAXEN_CHEESE);
++                .add(BnCFluids.SCARLET_CHEESE, BnCFluids.FLOWING_SCARLET_CHEESE);
++        tag(BnCTags.Fluids.GOAT_CHEESE)
++                .add(BnCFluids.GOAT_CHEESE, BnCFluids.FLOWING_GOAT_CHEESE);
++        tag(BnCTags.Fluids.GOAT_MILK)
++                .add(BnCFluids.GOAT_MILK, BnCFluids.FLOWING_GOAT_MILK);
+     }
+ 
+     private void registerConventionalTags() {
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCItemTags.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCItemTags.java
+index 20bb94c..6640e02 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCItemTags.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/BnCItemTags.java
+@@ -55,7 +55,8 @@ public class BnCItemTags extends ItemTagsProvider {
+                 .add(BnCItems.DREAD_NOG);
+         tag(BnCTags.Items.FOOD_CHEESE_WEDGE)
+                 .add(BnCItems.FLAXEN_CHEESE_WEDGE)
+-                .add(BnCItems.SCARLET_CHEESE_WEDGE);
++                .add(BnCItems.SCARLET_CHEESE_WEDGE)
++                .add(BnCItems.GOAT_CHEESE_WEDGE);
+         tag(BnCTags.Items.FOOD_PIZZA_TOPPING)
+                 .add(Items.BROWN_MUSHROOM).add(Items.RED_MUSHROOM)
+                 .add(Items.CARROT).add(Items.BEETROOT).add(ModItems.CABBAGE_LEAF.get()).add(ModItems.ONION.get())
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/loot/BnCBlockLoot.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/loot/BnCBlockLoot.java
+index 60abf6f..145784c 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/loot/BnCBlockLoot.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/loot/BnCBlockLoot.java
+@@ -53,6 +53,7 @@ public class BnCBlockLoot extends BlockLootSubProvider {
+         dropSelf(BnCBlocks.ICE_CRATE);
+         dropSelf(BnCBlocks.UNRIPE_FLAXEN_CHEESE_WHEEL);
+         dropSelf(BnCBlocks.UNRIPE_SCARLET_CHEESE_WHEEL);
++        dropSelf(BnCBlocks.UNRIPE_GOAT_CHEESE_WHEEL);
+         add(BnCBlocks.COASTER, (block) -> LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CoasterBlock.INVISIBLE, false))))));
+ 
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCraftingRecipes.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCraftingRecipes.java
+index 34bfa6a..8b4abe6 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCraftingRecipes.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCraftingRecipes.java
+@@ -204,6 +204,13 @@ public class BnCCraftingRecipes {
+                 .define('p', BnCItems.SCARLET_CHEESE_WEDGE)
+                 .unlockedBy("has_cheese", InventoryChangeTrigger.TriggerInstance.hasItems(BnCItems.SCARLET_CHEESE_WEDGE))
+                 .save(consumer, BrewinAndChewin.asResource("scarlet_cheese_wheel_from_wedges"));
++        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, BnCItems.GOAT_CHEESE_WHEEL)
++                .pattern("ppp")
++                .pattern("p p")
++                .pattern("ppp")
++                .define('p', BnCItems.GOAT_CHEESE_WEDGE)
++                .unlockedBy("has_cheese", InventoryChangeTrigger.TriggerInstance.hasItems(BnCItems.GOAT_CHEESE_WEDGE))
++                .save(consumer, BrewinAndChewin.asResource("goat_cheese_wheel_from_wedges"));
+         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, BnCItems.QUICHE)
+                 .pattern("pp")
+                 .pattern("pp")
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCuttingBoardRecipes.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCuttingBoardRecipes.java
+index 08987e3..91f80b1 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCuttingBoardRecipes.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/BnCCuttingBoardRecipes.java
+@@ -19,6 +19,8 @@ public class BnCCuttingBoardRecipes {
+                 .build(consumer);
+         BnCCuttingRecipeBuilder.cuttingRecipe(Ingredient.of(BnCItems.SCARLET_CHEESE_WHEEL), Ingredient.of(CommonTags.Items.TOOLS_KNIFE), BnCItems.SCARLET_CHEESE_WEDGE, 8)
+                 .build(consumer);
++        BnCCuttingRecipeBuilder.cuttingRecipe(Ingredient.of(BnCItems.GOAT_CHEESE_WHEEL), Ingredient.of(CommonTags.Items.TOOLS_KNIFE), BnCItems.GOAT_CHEESE_WEDGE, 8)
++                .build(consumer);
+         BnCCuttingRecipeBuilder.cuttingRecipe(Ingredient.of(BnCItems.QUICHE), Ingredient.of(CommonTags.Items.TOOLS_KNIFE), BnCItems.QUICHE_SLICE, 4)
+                 .build(consumer);
+         BnCCuttingRecipeBuilder.cuttingRecipe(Ingredient.of(BnCItems.PIZZA), Ingredient.of(CommonTags.Items.TOOLS_KNIFE), BnCItems.PIZZA_SLICE, 4)
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegFermentingRecipes.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegFermentingRecipes.java
+index 94a641c..fa69d77 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegFermentingRecipes.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegFermentingRecipes.java
+@@ -207,6 +207,15 @@ public class KegFermentingRecipes {
+               .addIngredient(BnCItems.RENNET)
+               .unlockedByItems("has_rennet", BnCItems.RENNET)
+               .build(output);
++      KegFermentingRecipeBuilder.kegFermentingRecipe(FermentingBookCategory.MEALS, BnCFluids.GOAT_CHEESE, 1000, MEDIUM_EXP, 4)
++              .addFluidIngredient(BnCTags.Fluids.GOAT_MILK, 1000, FluidUnit.MILLIBUCKET)
++              .setFluidUnit(FluidUnit.MILLIBUCKET)
++              .addIngredient(Items.HONEYCOMB)
++              .addIngredient(Items.WHEAT_SEEDS)
++              .addIngredient(Items.SUGAR)
++              .addIngredient(BnCItems.RENNET)
++              .unlockedByItems("has_rennet", BnCItems.RENNET)
++              .build(output);
+       KegFermentingRecipeBuilder.kegFermentingRecipe(FermentingBookCategory.MEALS, BnCItems.JERKY, 3, MEDIUM_EXP, 4)
+               .addIngredient(BnCTags.Items.FOOD_JERKY_MEAT)
+               .addIngredient(BnCTags.Items.FOOD_JERKY_MEAT)
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegPouringRecipes.java b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegPouringRecipes.java
+index dc63ebc..9416610 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegPouringRecipes.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/data/recipe/KegPouringRecipes.java
+@@ -115,5 +115,9 @@ public class KegPouringRecipes {
+                 .setFluidUnit(FluidUnit.MILLIBUCKET)
+                 .withContainer(Items.HONEYCOMB)
+                 .build(consumer);
++        KegPouringRecipeBuilder.kegPouringRecipe(BnCFluids.GOAT_CHEESE, 1000, BnCItems.UNRIPE_GOAT_CHEESE_WHEEL, false)
++                .setFluidUnit(FluidUnit.MILLIBUCKET)
++                .withContainer(Items.HONEYCOMB)
++                .build(consumer);
+     }
+ }
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/client/BrewinAndChewinNeoForgeClient.java b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/client/BrewinAndChewinNeoForgeClient.java
+index 75964ab..3744465 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/client/BrewinAndChewinNeoForgeClient.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/client/BrewinAndChewinNeoForgeClient.java
+@@ -116,6 +116,18 @@ public class BrewinAndChewinNeoForgeClient {
+                     return BnCFluidConstants.Textures.SCARLET_FLOWING_TEXTURE;
+                 }
+             }, BnCFluidTypes.SCARLET_CHEESE);
++            event.registerFluidType(new IClientFluidTypeExtensions() {
++                @Override
++                public ResourceLocation getStillTexture() {
++                    return BnCFluidConstants.Textures.GOAT_STILL_TEXTURE;
++                }
++
++                @Override
++                public ResourceLocation getFlowingTexture() {
++                    return BnCFluidConstants.Textures.GOAT_FLOWING_TEXTURE;
++                }
++            }, BnCFluidTypes.GOAT_CHEESE);
++            event.registerFluidType(createAlcoholExtension(BnCFluidConstants.Colors.GOAT_MILK), BnCFluidTypes.GOAT_MILK);
+         }
+ 
+         private static IClientFluidTypeExtensions createHoneyExtension(int color) {
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidTypes.java b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidTypes.java
+index 8be6d4c..cdef362 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidTypes.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidTypes.java
+@@ -33,6 +33,8 @@ public class BnCFluidTypes {
+     public static final FluidType TWISTED_WINE = new BnCFluidType();
+     public static final FluidType FLAXEN_CHEESE = new BnCFluidType();
+     public static final FluidType SCARLET_CHEESE = new BnCFluidType();
++    public static final FluidType GOAT_CHEESE = new BnCFluidType();
++    public static final FluidType GOAT_MILK = new BnCFluidType();
+ 
+     public static void registerAll() {
+         Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("honey"), HONEY);
+@@ -61,6 +63,8 @@ public class BnCFluidTypes {
+         Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("twisted_wine"), TWISTED_WINE);
+         Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("flaxen_cheese"), FLAXEN_CHEESE);
+         Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("scarlet_cheese"), SCARLET_CHEESE);
++        Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("goat_cheese"), GOAT_CHEESE);
++        Registry.register(NeoForgeRegistries.FLUID_TYPES, BrewinAndChewin.asResource("goat_milk"), GOAT_MILK);
+     }
+ 
+ }
+diff --git a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidsImpl.java b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidsImpl.java
+index 0025fd3..77c120c 100644
+--- a/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidsImpl.java
++++ b/neoforge/src/main/java/umpaz/brewinandchewin/neoforge/registry/BnCFluidsImpl.java
+@@ -31,6 +31,8 @@ public class BnCFluidsImpl {
+ 
+     public static final BaseFlowingFluid.Properties FLAXEN_CHEESE_FLUID_PROPERTIES = new BaseFlowingFluid.Properties(() -> BnCFluidTypes.FLAXEN_CHEESE, () -> BnCFluids.FLAXEN_CHEESE, () -> BnCFluids.FLOWING_FLAXEN_CHEESE);
+     public static final BaseFlowingFluid.Properties SCARLET_CHEESE_FLUID_PROPERTIES = new BaseFlowingFluid.Properties(() -> BnCFluidTypes.SCARLET_CHEESE, () -> BnCFluids.SCARLET_CHEESE, () -> BnCFluids.FLOWING_SCARLET_CHEESE);
++    public static final BaseFlowingFluid.Properties GOAT_CHEESE_FLUID_PROPERTIES = new BaseFlowingFluid.Properties(() -> BnCFluidTypes.GOAT_CHEESE, () -> BnCFluids.GOAT_CHEESE, () -> BnCFluids.FLOWING_GOAT_CHEESE);
++    public static final BaseFlowingFluid.Properties GOAT_MILK_FLUID_PROPERTIES = new BaseFlowingFluid.Properties(() -> BnCFluidTypes.GOAT_MILK, () -> BnCFluids.GOAT_MILK, () -> BnCFluids.FLOWING_GOAT_MILK);
+ 
+     public static void init() {
+         BnCFluids.HONEY = new BaseFlowingFluid.Source(BnCFluidsImpl.HONEY_FLUID_PROPERTIES);
+@@ -81,5 +83,9 @@ public class BnCFluidsImpl {
+         BnCFluids.FLOWING_FLAXEN_CHEESE = new BaseFlowingFluid.Flowing(BnCFluidsImpl.FLAXEN_CHEESE_FLUID_PROPERTIES);
+         BnCFluids.SCARLET_CHEESE = new BaseFlowingFluid.Source(BnCFluidsImpl.SCARLET_CHEESE_FLUID_PROPERTIES);
+         BnCFluids.FLOWING_SCARLET_CHEESE = new BaseFlowingFluid.Flowing(BnCFluidsImpl.SCARLET_CHEESE_FLUID_PROPERTIES);
++        BnCFluids.GOAT_CHEESE = new BaseFlowingFluid.Source(BnCFluidsImpl.GOAT_CHEESE_FLUID_PROPERTIES);
++        BnCFluids.FLOWING_GOAT_CHEESE = new BaseFlowingFluid.Flowing(BnCFluidsImpl.GOAT_CHEESE_FLUID_PROPERTIES);
++        BnCFluids.GOAT_MILK = new BaseFlowingFluid.Source(BnCFluidsImpl.GOAT_MILK_FLUID_PROPERTIES);
++        BnCFluids.FLOWING_GOAT_MILK = new BaseFlowingFluid.Flowing(BnCFluidsImpl.GOAT_MILK_FLUID_PROPERTIES);
+     }
+ }
+\ No newline at end of file
+diff --git a/neoforge/src/main/resources/data/brewinandchewin/recipe/pouring/goat_milk_bucket.json b/neoforge/src/main/resources/data/brewinandchewin/recipe/pouring/goat_milk_bucket.json
+new file mode 100644
+index 0000000..c21139f
+--- /dev/null
++++ b/neoforge/src/main/resources/data/brewinandchewin/recipe/pouring/goat_milk_bucket.json
+@@ -0,0 +1,18 @@
++{
++  "neoforge:conditions": [
++    {
++      "type": "neoforge:mod_loaded",
++      "modid": "expandeddelight"
++    }
++  ],
++  "type": "brewinandchewin:keg_pouring",
++  "fluid": {
++    "amount": 1000,
++    "id": "brewinandchewin:goat_milk"
++  },
++  "output": {
++    "count": 1,
++    "id": "expandeddelight:goat_milk_bucket"
++  },
++  "unit": "millibuckets"
++}
+-- 
+2.39.0.windows.1
+

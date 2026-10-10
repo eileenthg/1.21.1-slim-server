@@ -1,0 +1,14 @@
+{
+  "type": "apoli:multiple",
+  "toggle": {
+    "type": "apoli:toggle",
+    "active_by_default": true,
+    "key": {
+      "key": "key.touhouorigins.toggle"
+    }
+  },
+  "flight": {
+    "type": "apoli:elytra_flight",
+    "render_elytra": false
+  }
+}

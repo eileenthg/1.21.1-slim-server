@@ -1,0 +1,17 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/satori_third_eye",
+  "texture_location": "touhouorigins:textures/entity/tlm/komeiji_satori.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:satori"
+  },
+  "animations": {
+    "animation": "touhouorigins:cosmetics",
+    "name": "animation.drift",
+    "loop": true
+  }
+}

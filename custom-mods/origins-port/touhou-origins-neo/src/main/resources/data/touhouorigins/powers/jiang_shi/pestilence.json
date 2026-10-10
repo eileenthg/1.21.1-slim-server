@@ -1,0 +1,32 @@
+{
+  "type": "apoli:multiple",
+  "immunity": {
+    "type": "apoli:effect_immunity",
+    "effects": [
+      "minecraft:poison",
+      "minecraft:hunger",
+      "minecraft:regeneration"
+    ]
+  },
+  "color": {
+    "type": "apoli:model_color",
+    "red": 0.95,
+    "green": 1.0,
+    "blue": 0.94
+  },
+  "invert_effects": {
+    "type": "touhouorigins:reverse_instant_effects"
+  },
+  "smite": {
+    "type": "touhouorigins:enchantment_vulnerability",
+    "enchantment": "minecraft:smite"
+  },
+  "zombify": {
+    "type": "touhouorigins:convert_entity",
+    "entity_condition": {
+      "type": "apoli:entity_type",
+      "entity_type": "minecraft:villager"
+    },
+    "convert_to": "minecraft:zombie_villager"
+  }
+}

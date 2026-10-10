@@ -16,3 +16,5 @@ DFR 1.2.1's JEI mixins broke at JEI 19.40.0 (Jul 2026: overlay refactor). As of 
 
 **Why:** the upstream author has been inactive since Feb 2025.
 **How to apply:** resume from HANDOFF.md. In-game tests need the local instance (test-client/run-dfrtest.ps1 + dfr-tester). Related: [[main-instance-renamed-slim]].
+
+- **Update (found in transcripts, 10 Oct):** on 25 Sep the work moved to a cloud session (https://claude.ai/code/session_01PYNrAx1NTvNJev7BrVNrDw); the branch was pushed and **PR #27 is open** on txnimc/DistractionFreeRecipes from `eileenthg:fix/jei-19.40-overlay-fp3dmd`. The 'NOT pushed' statement above is outdated.

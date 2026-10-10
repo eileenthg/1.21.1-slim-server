@@ -48,3 +48,5 @@ Bugs found 19 Sep:
   `Destination.java`; the config file overrides them; and each hut's Settings tab has a "Minimum gear before leaving" dropdown
   (`BuildingExpedition.MIN_GEAR`) that overrides both. Under-equipped workers wait and request that tier.
 - `generate.py` now fails on any bad id. Loot and research items must have an item model; a block without an item (spectrum:doombloom) hung server start.
+
+- **Update:** installed in the live pack on 20 Sep at the owner's request (jar + default config); the 'NOT installed' line above is outdated.

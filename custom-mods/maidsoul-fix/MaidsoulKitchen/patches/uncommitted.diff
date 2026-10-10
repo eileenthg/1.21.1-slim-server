@@ -1,0 +1,1015 @@
+diff --git a/libs/1.21.1/compileOnly/l2core-3.0.8+3.jar b/libs/1.21.1/compileOnly/l2core-3.0.8+3.jar
+deleted file mode 100644
+index d55a8ad..0000000
+Binary files a/libs/1.21.1/compileOnly/l2core-3.0.8+3.jar and /dev/null differ
+diff --git a/libs/1.21.1/compileOnly/l2damagetracker-3.0.3+8.jar b/libs/1.21.1/compileOnly/l2damagetracker-3.0.3+8.jar
+deleted file mode 100644
+index 0264a84..0000000
+Binary files a/libs/1.21.1/compileOnly/l2damagetracker-3.0.3+8.jar and /dev/null differ
+diff --git a/libs/1.21.1/compileOnly/l2modularblocks-3.0.0+4.jar b/libs/1.21.1/compileOnly/l2modularblocks-3.0.0+4.jar
+deleted file mode 100644
+index 5369fca..0000000
+Binary files a/libs/1.21.1/compileOnly/l2modularblocks-3.0.0+4.jar and /dev/null differ
+diff --git a/libs/1.21.1/compileOnly/l2serial-3.0.9+5.jar b/libs/1.21.1/compileOnly/l2serial-3.0.9+5.jar
+deleted file mode 100644
+index d159647..0000000
+Binary files a/libs/1.21.1/compileOnly/l2serial-3.0.9+5.jar and /dev/null differ
+diff --git a/setting/version/1.21.1/gradle.properties b/setting/version/1.21.1/gradle.properties
+index 9916a1f..08847b4 100644
+--- a/setting/version/1.21.1/gradle.properties
++++ b/setting/version/1.21.1/gradle.properties
+@@ -28,11 +28,11 @@ miners_delight_version=
+ # 1.7.5
+ my_nethers_delight_version=1.7.8
+ # 2.4.28 -> 3.0.4
+-l2library_file_id=6083582
++l2library_file_id=
+ # MC1.20-1.3.11
+-registrate_version=MC1.21-1.3.0+50
++registrate_version=
+ # 2.3.5
+-youkaishomecoming_version=3.0.6
++youkaishomecoming_version=
+ # 3.1.2
+ brewin_and_chewin_version=4.0.4+1.21.1-neoforge
+ # 1.20.1-2.1
+@@ -60,7 +60,7 @@ beachparty_file_id=5320668
+ # 1.4.25
+ vinery_file_id=5467441
+ # 1.2.13
+-do_api_version=1.3.0-beta-release
++do_api_version=
+ # let's do 1.0
+ #
+ brewery_file_id=5320650
+diff --git a/src/main/java/com/github/wallev/maidsoulkitchen/mixin/MixinManager.java b/src/main/java/com/github/wallev/maidsoulkitchen/mixin/MixinManager.java
+index b3ddff5..4bc1480 100644
+--- a/src/main/java/com/github/wallev/maidsoulkitchen/mixin/MixinManager.java
++++ b/src/main/java/com/github/wallev/maidsoulkitchen/mixin/MixinManager.java
+@@ -43,7 +43,6 @@ public class MixinManager {
+         putMixin("md.MixinCopperPotBlockEntity", true);
+         putMixin("bnc.KegBlockEntityAccessor", true);
+         putMixin("fr.MixinKettleBlockEntity", true);
+-        putMixin("yhc.KettleBlockAccessor", true);
+         putMixin("yhc.MixinBasePotBlockEntity", true);
+ 
+         putMixin("mc.AbstractFurnaceAccessor", true);
+diff --git a/src/main/java/com/github/wallev/maidsoulkitchen/mixin/youkaishomecoming/KettleBlockAccessor.java b/src/main/java/com/github/wallev/maidsoulkitchen/mixin/youkaishomecoming/KettleBlockAccessor.java
+deleted file mode 100644
+index 6f58073..0000000
+--- a/src/main/java/com/github/wallev/maidsoulkitchen/mixin/youkaishomecoming/KettleBlockAccessor.java
++++ /dev/null
+@@ -1,16 +0,0 @@
+-package com.github.wallev.maidsoulkitchen.mixin.youkaishomecoming;
+-
+-import dev.xkmc.youkaishomecoming.content.pot.kettle.KettleBlock;
+-import net.minecraft.world.item.crafting.Ingredient;
+-import net.neoforged.neoforge.common.util.Lazy;
+-import org.spongepowered.asm.mixin.Mixin;
+-import org.spongepowered.asm.mixin.gen.Accessor;
+-
+-import java.util.Map;
+-
+-@Mixin(value = KettleBlock.class, remap = false)
+-public interface KettleBlockAccessor {
+-    @Accessor
+-    Lazy<Map<Ingredient, Integer>> getMAP();
+-
+-}
+diff --git a/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcFermentationTank.java b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcFermentationTank.java
+index cbeae24..075e4c7 100644
+--- a/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcFermentationTank.java
++++ b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcFermentationTank.java
+@@ -11,15 +11,13 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+ import com.github.wallev.maidsoulkitchen.util.FakePlayerUtil;
+ import com.google.common.collect.Lists;
+ import com.mojang.datafixers.util.Pair;
+-import dev.xkmc.youkaishomecoming.content.item.fluid.IYHSake;
+-import dev.xkmc.youkaishomecoming.content.item.fluid.SakeBottleItem;
+-import dev.xkmc.youkaishomecoming.content.item.fluid.SakeFluid;
+ import dev.xkmc.youkaishomecoming.content.pot.ferment.*;
+ import dev.xkmc.youkaishomecoming.init.registrate.YHBlocks;
+ import net.minecraft.core.NonNullList;
+ import net.minecraft.core.RegistryAccess;
+ import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.resources.ResourceLocation;
++import net.minecraft.tags.TagKey;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+@@ -35,13 +33,13 @@ import net.minecraft.world.level.material.Fluid;
+ import net.neoforged.neoforge.fluids.FluidStack;
+ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+ import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
+-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+ import net.neoforged.neoforge.items.IItemHandlerModifiable;
+ import net.neoforged.neoforge.items.ItemHandlerHelper;
+ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+ import net.neoforged.neoforge.capabilities.Capabilities;
+ 
+ import java.util.*;
++import java.util.function.Predicate;
+ 
+ import static dev.xkmc.youkaishomecoming.content.pot.ferment.FermentationTankBlock.OPEN;
+ 
+@@ -78,12 +76,14 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+         return new MaidRecipesManager<>(maid, this, true) {
+             @Override
+             protected Pair<List<Integer>, List<Item>> getAmountIngredient(FermentationRecipe<?> recipe, Map<Item, Integer> available) {
+-                MaidFermentationRecipe maidKettleRecipe = FERMENTATION_RECIPE_INGREDIENTS.get((SimpleFermentationRecipe) recipe);
+                 List<Item> invIngredient = new ArrayList<>();
+                 Map<Item, Integer> itemTimes = new HashMap<>();
+ 
++                if (!(recipe instanceof SimpleFermentationRecipe simpleRecipe)) {
++                    return Pair.of(new ArrayList<>(), new ArrayList<>());
++                }
++                MaidFermentationRecipe maidKettleRecipe = FERMENTATION_RECIPE_INGREDIENTS.get(simpleRecipe);
+                 if (maidKettleRecipe == null) {
+-                    int a = 1;
+                     return Pair.of(new ArrayList<>(), new ArrayList<>());
+                 }
+ 
+@@ -186,9 +186,10 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+         if (!fluidInTank.isEmpty() && beRecipe.isEmpty()) {
+             boolean hasFluidContainer;
+ 
+-            if (fluid instanceof SakeFluid sakeFluid) {
+-                ItemStack outputFluidContainers = sakeFluid.type.getContainer().getDefaultInstance();
+-                hasFluidContainer = recManager.hasOutputAdditionItem(itemStack -> itemStack.is(outputFluidContainers.getItem()));
++            YhFluidItem holder = YhFluidItem.of(fluid);
++            if (holder != null) {
++                Item outputFluidContainer = holder.container();
++                hasFluidContainer = recManager.hasOutputAdditionItem(itemStack -> itemStack.is(outputFluidContainer));
+             } else {
+                 List<ItemStack> outputFluidContainers = FLUID_CONTAINERS.getOrDefault(fluid, Collections.emptyList());
+                 hasFluidContainer = recManager.hasOutputAdditionItem(itemStack -> outputFluidContainers.stream().anyMatch(stack -> stack.is(itemStack.getItem())));
+@@ -233,11 +234,12 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+         // 有未取出的流体并且没有在发酵
+         if (!fluidInTank.isEmpty() && beRecipe.isEmpty()) {
+             ItemStack fluidContainer;
++            YhFluidItem holder = YhFluidItem.of(fluid);
+ 
+             // 获取流体容器
+-            if (fluid instanceof SakeFluid sakeFluid) {
+-                ItemStack outputFluidContainers = sakeFluid.type.getContainer().getDefaultInstance();
+-                fluidContainer = recManager.findOutputAdditionItem(itemStack -> itemStack.is(outputFluidContainers.getItem()));
++            if (holder != null) {
++                Item outputFluidContainer = holder.container();
++                fluidContainer = recManager.findOutputAdditionItem(itemStack -> itemStack.is(outputFluidContainer));
+             } else {
+                 List<ItemStack> outputFluidContainers = FLUID_CONTAINERS.getOrDefault(fluid, Collections.emptyList());
+                 fluidContainer = recManager.findOutputAdditionItem(itemStack -> outputFluidContainers.stream().anyMatch(stack -> stack.is(itemStack.getItem())));
+@@ -245,6 +247,7 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+ 
+             // 取出流体
+             while (!fluidInTank.isEmpty() && !fluidContainer.isEmpty()) {
++                int beforeAmount = fluidInTank.getAmount();
+                 ItemStack interactItem = fluidContainer.copyWithCount(1);
+                 ItemStack interactedItem = FakePlayerUtil.interactUseOnBlock(maid, blockEntity.getBlockPos(), interactItem.copy());
+ 
+@@ -256,8 +259,8 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+                             maid.spawnAtLocation(leftItem);
+                         }
+                     }
+-                } else if (fluid instanceof SakeFluid sakeFluid) {
+-                    ItemStack leftItem = ItemHandlerHelper.insertItemStacked(outputInv, sakeFluid.type.asStack(1), false);
++                } else if (holder != null) {
++                    ItemStack leftItem = ItemHandlerHelper.insertItemStacked(outputInv, holder.stack().copy(), false);
+                     fluidContainer.shrink(1);
+                     if (!leftItem.isEmpty()) {
+                         maid.spawnAtLocation(leftItem);
+@@ -267,6 +270,11 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+                 blockEntity.notifyTile();
+ 
+                 extracted = true;
++
++                // 罐内余量不足以装满一个容器时交互不会消耗流体，此时必须退出，否则会死循环卡住服务端
++                if (fluidInTank.getAmount() == beforeAmount) {
++                    break;
++                }
+             }
+ 
+             // 将剩下的容器放回背包
+@@ -303,9 +311,14 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+                 }
+ 
+                 // 填充流体
++                // fluidItems 为空但 times 又要求大于 0 时内层循环不会推进 times，这里必须挡一下，否则死循环
+                 List<ItemStack> fluidItems = recipeIngredient.getSecond().get(0);
+-                for (int times = 0; times < recipeIngredient.getFirst().get(0); ) {
++                for (int times = 0; times < recipeIngredient.getFirst().get(0) && !fluidItems.isEmpty(); ) {
+                     for (ItemStack fluidItem : fluidItems) {
++                        if (fluidItem.isEmpty()) {
++                            times++;
++                            continue;
++                        }
+                         ItemStack interactItem = fluidItem.copyWithCount(1);
+                         ItemStack interactedStack = FakePlayerUtil.interactUseOnBlock(maid, blockEntity.getBlockPos(), interactItem.copy());
+                         if (!ItemStack.isSameItem(interactItem, interactedStack)) {
+@@ -359,141 +372,138 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+ 
+     @Override
+     public List<RecipeHolder<FermentationRecipe<?>>> getRecipeHolders(Level level) {
+-        if (FERMENTATION_RECIPES.isEmpty()) {
+-            FLUID_CONTAINERS.clear();
+-            FERMENTATION_RECIPE_INGREDIENTS.clear();
++        List<RecipeHolder<FermentationRecipe<?>>> recipeHolders = ICookTask.super.getRecipeHolders(level);
++        // 配方在 /reload 或换存档后会被整体替换，缓存必须跟着重建，
++        // 否则下面几张表查出来恒为 null，女仆就再也不会往发酵罐里放东西了
++        if (!FERMENTATION_RECIPES.isEmpty() && FERMENTATION_RECIPES.equals(recipeHolders)) {
++            return FERMENTATION_RECIPES;
++        }
+ 
+-            List<RecipeHolder<FermentationRecipe<?>>> recipeHolders = ICookTask.super.getRecipeHolders(level);
+-            List<? extends FermentationRecipe<?>> recipes = recipeHolders.stream().map(RecipeHolder::value).toList();
++        FERMENTATION_RECIPES.clear();
++        FLUID_CONTAINERS.clear();
++        FERMENTATION_RECIPE_INGREDIENTS.clear();
+ 
+-            Map<Fluid, List<Pair<ItemStack, Integer>>> fluidItems1 = new HashMap<>();
+-            Map<Fluid, List<ItemStack>> fluidContainers1 = new HashMap<>();
++        // 流体 -> 能提供该流体的物品，以及单个物品提供的量
++        Map<Fluid, List<Pair<ItemStack, Integer>>> fluidItems = new HashMap<>();
++        // 流体 -> 能盛装该流体的空容器
++        Map<Fluid, List<ItemStack>> fluidContainers = new HashMap<>();
+ 
+-            for (Fluid fluid : BuiltInRegistries.FLUID) {
+-                if (fluid instanceof EmptyFluid) continue;
++        for (Fluid fluid : BuiltInRegistries.FLUID) {
++            if (fluid instanceof EmptyFluid) continue;
+ 
+-                ItemStack container = fluid.getBucket().getDefaultInstance().getCraftingRemainingItem();
+-                if (!container.isEmpty()) {
+-                    if (fluidContainers1.containsKey(fluid)) {
+-                        List<ItemStack> itemStacks = fluidContainers1.getOrDefault(fluid, Collections.emptyList());
+-                        if (itemStacks.stream().noneMatch(itemStack1 -> itemStack1.is(container.getItem()))) {
+-                            itemStacks.add(container);
+-                        }
+-                    } else {
+-                        fluidContainers1.put(fluid, Lists.newArrayList(container));
+-                    }
+-                }
++            ItemStack container = fluid.getBucket().getDefaultInstance().getCraftingRemainingItem();
++            if (!container.isEmpty()) {
++                addContainer(fluidContainers, fluid, container);
+             }
+-            for (Item item : BuiltInRegistries.ITEM) {
+-                if (item instanceof SakeBottleItem sakeBottleItem) {
+-                    SakeFluid sakeFluid = sakeBottleItem.getFluid();
+-                    IYHSake iyhSake = sakeFluid.type;
+-                    Fluid rawFluid = sakeFluid.getSource();
+-
+-                    if (fluidItems1.containsKey(rawFluid)) {
+-                        List<Pair<ItemStack, Integer>> fluidItems2 = fluidItems1.getOrDefault(rawFluid, Collections.emptyList());
+-                        if (fluidItems2.stream().noneMatch(pair1 -> pair1.getFirst().is(item))) {
+-                            fluidItems1.get(rawFluid).add(Pair.of(item.getDefaultInstance(), iyhSake.amount()));
+-                        }
+-                    } else {
+-                        fluidItems1.put(rawFluid, Lists.newArrayList(Pair.of(item.getDefaultInstance(), iyhSake.amount())));
+-                    }
+ 
+-                    ItemStack container = iyhSake.getContainer().getDefaultInstance();
+-                    if (!container.isEmpty()) {
+-                        if (fluidContainers1.containsKey(rawFluid)) {
+-                            List<ItemStack> itemStacks = fluidContainers1.getOrDefault(rawFluid, Collections.emptyList());
+-                            if (itemStacks.stream().noneMatch(itemStack1 -> itemStack1.is(container.getItem()))) {
+-                                itemStacks.add(container);
+-                            }
+-                        } else {
+-                            fluidContainers1.put(rawFluid, Lists.newArrayList(container));
+-                        }
+-                    }
+-                    continue;
++            // 妖归自己的瓶装流体（清酒、果酒等）没有桶，只能从 IYHSake / IYHFluidHolder 上取
++            YhFluidItem holder = YhFluidItem.of(fluid);
++            if (holder != null) {
++                addFluidItem(fluidItems, fluid, holder.stack(), holder.amount());
++                ItemStack yhContainer = holder.container().getDefaultInstance();
++                if (!yhContainer.isEmpty()) {
++                    addContainer(fluidContainers, fluid, yhContainer);
+                 }
++            }
++        }
+ 
+-                ItemStack defaultInstance = item.getDefaultInstance().copy();
+-                IFluidHandlerItem iFluidHandlerItem = defaultInstance.getCapability(Capabilities.FluidHandler.ITEM);
+-                if (iFluidHandlerItem != null && iFluidHandlerItem instanceof FluidBucketWrapper fluidBucketWrapper) {
+-                    FluidStack fluidStack = fluidBucketWrapper.getFluid();
+-                    Fluid rawFluid = fluidStack.getFluid();
++        for (Item item : BuiltInRegistries.ITEM) {
++            ItemStack defaultInstance = item.getDefaultInstance().copy();
++            IFluidHandlerItem iFluidHandlerItem = defaultInstance.getCapability(Capabilities.FluidHandler.ITEM);
++            if (!(iFluidHandlerItem instanceof FluidBucketWrapper fluidBucketWrapper)) continue;
+ 
+-                    if (!fluidStack.isEmpty() && !(rawFluid instanceof EmptyFluid)) {
++            FluidStack fluidStack = fluidBucketWrapper.getFluid();
++            Fluid rawFluid = fluidStack.getFluid();
++            if (fluidStack.isEmpty() || rawFluid instanceof EmptyFluid) continue;
+ 
+-                        if (fluidItems1.containsKey(rawFluid)) {
+-                            List<Pair<ItemStack, Integer>> fluidItems2 = fluidItems1.getOrDefault(rawFluid, Collections.emptyList());
+-                            if (fluidItems2.stream().noneMatch(pair1 -> pair1.getFirst().is(defaultInstance.getItem()))) {
+-                                fluidItems1.get(rawFluid).add(Pair.of(defaultInstance, fluidStack.getAmount()));
+-                            }
+-                        } else {
+-                            fluidItems1.put(rawFluid, Lists.newArrayList(Pair.of(defaultInstance, fluidStack.getAmount())));
+-                        }
++            addFluidItem(fluidItems, rawFluid, defaultInstance, fluidStack.getAmount());
+ 
+-                        ItemStack container = fluidBucketWrapper.getContainer().getCraftingRemainingItem();
+-                        if (!container.isEmpty()) {
+-                            if (fluidContainers1.containsKey(rawFluid)) {
+-                                List<ItemStack> itemStacks = fluidContainers1.getOrDefault(rawFluid, Collections.emptyList());
+-                                if (itemStacks.stream().noneMatch(itemStack1 -> itemStack1.is(container.getItem()))) {
+-                                    itemStacks.add(container);
+-                                }
+-                            } else {
+-                                fluidContainers1.put(rawFluid, Lists.newArrayList(container));
+-                            }
+-                        }
+-                    }
+-                }
++            ItemStack container = fluidBucketWrapper.getContainer().getCraftingRemainingItem();
++            if (!container.isEmpty()) {
++                addContainer(fluidContainers, rawFluid, container);
+             }
++        }
+ 
+-            FLUID_CONTAINERS.putAll(fluidContainers1);
+-
+-            for (FermentationRecipe<?> recipe : recipes) {
+-                SimpleFermentationRecipe fermentationRecipe = (SimpleFermentationRecipe) recipe;
+-                // 输入的流体
+-                FluidIngredient fluidIn = fermentationRecipe.inputFluid;
+-
+-                if (fluidIn != null && !fluidIn.isEmpty()) {
+-                    List<ItemStack> fluidItems = new ArrayList<>();
+-
+-                    fluidItems1.forEach((fluid, itemStacks) -> {
+-                        for (FluidStack stack : fluidIn.getStacks()) {
+-                            if (fluid.isSame(stack.getFluid())) {
+-                                for (Pair<ItemStack, Integer> fluidStackPair : itemStacks) {
+-                                    ItemStack outputFluidItem = fluidStackPair.getFirst().copy();
+-                                    int amount = fluidStackPair.getSecond();
+-                                    int amountTotal = stack.getAmount();
+-                                    outputFluidItem.setCount(Math.max(1, amountTotal / amount));
+-
+-                                    if (fluidItems.stream().noneMatch(itemStack -> itemStack.is(outputFluidItem.getItem()) && itemStack.getCount() == outputFluidItem.getCount())) {
+-                                        fluidItems.add(outputFluidItem);
+-                                    }
+-                                }
+-                            }
+-                        }
+-                    });
++        FLUID_CONTAINERS.putAll(fluidContainers);
+ 
+-                    MaidFermentationRecipe maidKegFermentingRecipe = new MaidFermentationRecipe(fluidItems, fermentationRecipe.ingredients);
+-                    FERMENTATION_RECIPE_INGREDIENTS.put(fermentationRecipe, maidKegFermentingRecipe);
+-                } else {
+-                    MaidFermentationRecipe maidKegFermentingRecipe = new MaidFermentationRecipe(Collections.emptyList(), fermentationRecipe.ingredients);
+-                    FERMENTATION_RECIPE_INGREDIENTS.put(fermentationRecipe, maidKegFermentingRecipe);
++        for (RecipeHolder<FermentationRecipe<?>> recipeHolder : recipeHolders) {
++            if (!(recipeHolder.value() instanceof SimpleFermentationRecipe fermentationRecipe)) continue;
++            FERMENTATION_RECIPE_INGREDIENTS.put(fermentationRecipe,
++                    new MaidFermentationRecipe(inputFluidItems(fermentationRecipe, fluidItems), fermentationRecipe.ingredients));
++        }
++
++        FERMENTATION_RECIPES.addAll(recipeHolders);
++        return FERMENTATION_RECIPES;
++    }
++
++    /**
++     * 算出为了满足配方的流体需求，女仆需要携带哪些物品、各带几个。
++     * 4.x 的 inputFluid 从 FluidIngredient 退化成了单个 FluidStack，
++     * 同时新增了按流体标签匹配的 inputFluidTag 分支（例如任意水源发酵）。
++     */
++    private static List<ItemStack> inputFluidItems(SimpleFermentationRecipe recipe, Map<Fluid, List<Pair<ItemStack, Integer>>> fluidItems) {
++        List<ItemStack> result = new ArrayList<>();
++
++        FluidStack inputFluid = recipe.inputFluid;
++        if (inputFluid != null && !inputFluid.isEmpty()) {
++            collectFluidItems(fluidItems, result, fluid -> fluid.isSame(inputFluid.getFluid()), inputFluid.getAmount());
++            return result;
++        }
++
++        String inputFluidTag = recipe.inputFluidTag;
++        if (inputFluidTag == null || inputFluidTag.isEmpty()) {
++            return result;
++        }
++        ResourceLocation tagId = ResourceLocation.tryParse(inputFluidTag);
++        if (tagId == null) {
++            return result;
++        }
++        TagKey<Fluid> tagKey = TagKey.create(BuiltInRegistries.FLUID.key(), tagId);
++        // SimpleFermentationRecipe#matches 对标签配方要求罐内流体量“正好等于”这个值
++        int amountTotal = recipe.outputFluid.getAmount() == 0 ? 1000 : recipe.outputFluid.getAmount();
++        collectFluidItems(fluidItems, result, fluid -> fluid.is(tagKey), amountTotal);
++        return result;
++    }
++
++    private static void collectFluidItems(Map<Fluid, List<Pair<ItemStack, Integer>>> fluidItems, List<ItemStack> out,
++                                          Predicate<Fluid> match, int amountTotal) {
++        fluidItems.forEach((fluid, itemStacks) -> {
++            if (!match.test(fluid)) return;
++            for (Pair<ItemStack, Integer> pair : itemStacks) {
++                int amount = pair.getSecond();
++                if (amount <= 0) continue;
++                ItemStack fluidItem = pair.getFirst().copy();
++                fluidItem.setCount(Math.max(1, amountTotal / amount));
++                if (out.stream().noneMatch(stack -> stack.is(fluidItem.getItem()) && stack.getCount() == fluidItem.getCount())) {
++                    out.add(fluidItem);
+                 }
+             }
++        });
++    }
+ 
+-            FERMENTATION_RECIPES.addAll(recipeHolders);
++    private static void addContainer(Map<Fluid, List<ItemStack>> map, Fluid fluid, ItemStack container) {
++        List<ItemStack> list = map.computeIfAbsent(fluid, f -> Lists.newArrayList());
++        if (list.stream().noneMatch(stack -> stack.is(container.getItem()))) {
++            list.add(container);
+         }
++    }
+ 
+-        return FERMENTATION_RECIPES;
++    private static void addFluidItem(Map<Fluid, List<Pair<ItemStack, Integer>>> map, Fluid fluid, ItemStack stack, int amount) {
++        List<Pair<ItemStack, Integer>> list = map.computeIfAbsent(fluid, f -> Lists.newArrayList());
++        if (list.stream().noneMatch(pair -> pair.getFirst().is(stack.getItem()))) {
++            list.add(Pair.of(stack.copy(), amount));
++        }
+     }
+ 
+     @Override
+     public NonNullList<Ingredient> getIngredients(Recipe<?> recipe) {
+-        SimpleFermentationRecipe fermentationRecipe = (SimpleFermentationRecipe) recipe;
+         NonNullList<Ingredient> ingredinetNonNullList = NonNullList.create();
++        if (!(recipe instanceof SimpleFermentationRecipe fermentationRecipe)) {
++            return ingredinetNonNullList;
++        }
+ 
+         MaidFermentationRecipe maidKegRecipe = FERMENTATION_RECIPE_INGREDIENTS.get(fermentationRecipe);
+         if (maidKegRecipe == null) {
+-            int a = 1;
+             return ingredinetNonNullList;
+         }
+         if (!maidKegRecipe.inFluids.isEmpty()) {
+@@ -508,10 +518,16 @@ public class TaskYhcFermentationTank implements ICookTask<FermentationTankBlockE
+ 
+     @Override
+     public ItemStack getResultItem(Recipe<?> recipe, RegistryAccess pRegistryAccess) {
+-        SimpleFermentationRecipe fermentationRecipe = (SimpleFermentationRecipe) recipe;
+-        Fluid fluid = fermentationRecipe.outputFluid.getFluid();
+-        if (fluid instanceof SakeFluid sakeFluid) {
+-            return sakeFluid.type.asStack(1);
++        if (!(recipe instanceof SimpleFermentationRecipe fermentationRecipe)) {
++            return Items.AIR.getDefaultInstance();
++        }
++        YhFluidItem holder = YhFluidItem.of(fermentationRecipe.outputFluid.getFluid());
++        if (holder != null) {
++            return holder.stack().copy();
++        }
++        // 4.x 的发酵配方也可以直接产出物品，而不只是流体
++        if (!fermentationRecipe.results.isEmpty()) {
++            return fermentationRecipe.results.get(0).copy();
+         }
+         return Items.AIR.getDefaultInstance();
+     }
+diff --git a/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcTeaKettle.java b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcTeaKettle.java
+index 13690e9..395a388 100644
+--- a/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcTeaKettle.java
++++ b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/TaskYhcTeaKettle.java
+@@ -1,83 +1,66 @@
+ package com.github.wallev.maidsoulkitchen.task.cook.youkaishomecoming;
+ 
++import com.github.tartaricacid.touhoulittlemaid.api.entity.data.TaskDataKey;
++import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
++import com.github.wallev.maidsoulkitchen.api.task.v1.cook.ICookTask;
+ import com.github.wallev.maidsoulkitchen.entity.data.inner.task.CookData;
+ import com.github.wallev.maidsoulkitchen.entity.passive.IAddonMaid;
+ import com.github.wallev.maidsoulkitchen.init.touhoulittlemaid.DataRegister;
+-import com.github.wallev.maidsoulkitchen.mixin.youkaishomecoming.KettleBlockAccessor;
+ import com.github.wallev.maidsoulkitchen.task.TaskInfo;
+ import com.github.wallev.maidsoulkitchen.task.cook.common.inventory.MaidRecipesManager;
+-import com.github.wallev.maidsoulkitchen.task.cook.common.TaskFdPot;
+ import com.github.wallev.maidsoulkitchen.util.FakePlayerUtil;
+-import com.github.tartaricacid.touhoulittlemaid.api.entity.data.TaskDataKey;
+-import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+-import com.github.tartaricacid.touhoulittlemaid.util.ItemsUtil;
+ import com.mojang.datafixers.util.Pair;
+ import dev.xkmc.youkaishomecoming.content.pot.kettle.KettleBlockEntity;
++import dev.xkmc.youkaishomecoming.content.pot.kettle.KettleInput;
+ import dev.xkmc.youkaishomecoming.content.pot.kettle.KettleRecipe;
+ import dev.xkmc.youkaishomecoming.init.registrate.YHBlocks;
++import net.minecraft.core.NonNullList;
++import net.minecraft.core.RegistryAccess;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.server.level.ServerLevel;
+-import net.minecraft.world.InteractionHand;
+-import net.minecraft.world.InteractionResult;
++import net.minecraft.tags.FluidTags;
++import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
++import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.crafting.Ingredient;
++import net.minecraft.world.item.crafting.Recipe;
++import net.minecraft.world.item.crafting.RecipeHolder;
+ import net.minecraft.world.item.crafting.RecipeType;
+-import net.minecraft.world.level.block.Block;
++import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+-import net.minecraft.world.level.block.state.BlockState;
+-import net.neoforged.neoforge.common.util.FakePlayer;
+-import net.neoforged.neoforge.common.util.Lazy;
++import net.neoforged.neoforge.fluids.FluidStack;
++import net.neoforged.neoforge.items.IItemHandlerModifiable;
+ import net.neoforged.neoforge.items.ItemHandlerHelper;
+-import net.neoforged.neoforge.items.ItemStackHandler;
+-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+ 
+-import java.lang.ref.WeakReference;
++import java.util.ArrayList;
++import java.util.Collections;
++import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Optional;
+-import java.util.Set;
+-import java.util.stream.Stream;
+-
+-public class TaskYhcTeaKettle extends TaskFdPot<KettleBlockEntity, KettleRecipe> {
+-    @Override
+-    public ItemStackHandler getItemStackHandler(KettleBlockEntity be) {
+-        return be.getInventory();
+-    }
+-
+-    @Override
+-    public int getOutputSlot() {
+-        return KettleBlockEntity.OUTPUT_SLOT;
+-    }
+-
+-    @Override
+-    public int getInputSize() {
+-        return 4;
+-    }
+-
+-    @Override
+-    public ItemStackHandler getBeInv(KettleBlockEntity kettleBlockEntity) {
+-        return kettleBlockEntity.getInventory();
+-    }
+-
+-    @Override
+-    public int getMealStackSlot() {
+-        return KettleBlockEntity.MEAL_DISPLAY_SLOT;
+-    }
+-
+-    @Override
+-    public int getContainerStackSlot() {
+-        return KettleBlockEntity.CONTAINER_SLOT;
+-    }
+ 
+-    @Override
+-    public ItemStack getFoodContainer(KettleBlockEntity blockEntity) {
+-        return blockEntity.getContainer();
+-    }
++/**
++ * 妖归 4.x 把茶壶从农夫乐事锅那一套（{@code BasePotBlockEntity}：输入槽 / 成品槽 / 容器槽 / {@code getWater()}）
++ * 换成了 l2core 的“物品栏 + 流体罐 + 加热值”结构，流程也跟着变了：
++ * <ol>
++ *     <li>往壶里注满 1000mB 水，一个水桶正好一罐；</li>
++ *     <li>底下点火，加热值从 0 涨到 1000 才开始煮；</li>
++ *     <li>4 个格子每格放 1 份材料，凑齐某个配方；</li>
++ *     <li>煮好后整罐水直接变成成品流体，再拿瓶子一瓶瓶装出来。</li>
++ * </ol>
++ * 成品是流体不是物品，所以这里没法再继承 {@code TaskFdPot}，只能照发酵罐那套流体流程重写。
++ */
++public class TaskYhcTeaKettle implements ICookTask<KettleBlockEntity, KettleRecipe> {
++
++    /** 茶壶只有一个 1000mB 的罐子，注满才会开始加热。 */
++    private static final int TANK_AMOUNT = 1000;
++
++    /** 唯一能一次注满整罐的水源；水瓶只有 250mB，而且和其他药水共用同一个 Item，女仆分不出来。 */
++    private static final Item WATER_ITEM = Items.WATER_BUCKET;
+ 
+     @Override
+-    public boolean isHeated(KettleBlockEntity be) {
+-        return be.isHeated();
++    public TaskDataKey<CookData> getCookDataKey() {
++        return DataRegister.YHC_TEA_KETTLE;
+     }
+ 
+     @Override
+@@ -101,133 +84,261 @@ public class TaskYhcTeaKettle extends TaskFdPot<KettleBlockEntity, KettleRecipe>
+     }
+ 
+     @Override
+-    public TaskDataKey<CookData> getCookDataKey() {
+-        return DataRegister.YHC_TEA_KETTLE;
+-    }
++    public MaidRecipesManager<KettleRecipe> getRecipesManager(EntityMaid maid) {
++        return new MaidRecipesManager<>(maid, this, true) {
++            @Override
++            protected Pair<List<Integer>, List<Item>> getAmountIngredient(KettleRecipe recipe, Map<Item, Integer> available) {
++                List<Item> invIngredient = new ArrayList<>();
++                Map<Item, Integer> itemTimes = new HashMap<>();
++
++                // 索引 0 固定留给水，processCookMake 依赖这个约定
++                invIngredient.add(WATER_ITEM);
++                itemTimes.merge(WATER_ITEM, 1, Integer::sum);
++
++                // 配方是 4 条独立的 Ingredient，同一种材料会重复出现，itemTimes 正好累出总需求量
++                for (Ingredient ingredient : recipe.input) {
++                    boolean hasIngredient = false;
++                    for (Item item : available.keySet()) {
++                        if (ingredient.test(item.getDefaultInstance())) {
++                            invIngredient.add(item);
++                            itemTimes.merge(item, 1, Integer::sum);
++                            hasIngredient = true;
++                            break;
++                        }
++                    }
+ 
+-    @Override
+-    public boolean canCook(KettleBlockEntity be, KettleRecipe recipe) {
+-        return super.canCook(be, recipe) && be.getWater() > 0;
+-    }
++                    if (!hasIngredient) {
++                        return Pair.of(Collections.emptyList(), Collections.emptyList());
++                    }
++                }
+ 
+-    @Override
+-    public boolean shouldMoveTo(ServerLevel level, EntityMaid maid, KettleBlockEntity be, MaidRecipesManager<KettleRecipe> manager) {
+-        return super.shouldMoveTo(level, maid, be, manager);
+-    }
++                if (itemTimes.entrySet().stream().anyMatch(entry -> available.getOrDefault(entry.getKey(), 0) < entry.getValue())) {
++                    return Pair.of(Collections.emptyList(), Collections.emptyList());
++                }
+ 
+-    @Override
+-    public void processCookMake(ServerLevel level, EntityMaid maid, KettleBlockEntity be, MaidRecipesManager<KettleRecipe> manager) {
+-        super.processCookMake(level, maid, be, manager);
+-    }
++                List<Integer> countList = new ArrayList<>();
++                for (Item item : invIngredient) {
++                    countList.add(1);
++                    available.put(item, available.getOrDefault(item, 0) - 1);
++                }
+ 
+-    @Override
+-    public void tryInsertItem(ServerLevel serverLevel, EntityMaid entityMaid, KettleBlockEntity blockEntity, MaidRecipesManager<KettleRecipe> maidRecipesManager) {
+-        if(this.needWater(blockEntity)) return;
+-        super.tryInsertItem(serverLevel, entityMaid, blockEntity, maidRecipesManager);
++                return Pair.of(countList, invIngredient);
++            }
++        };
+     }
+ 
+     @Override
+-    public boolean maidShouldMoveTo(ServerLevel level, EntityMaid maid, KettleBlockEntity kettleBlockEntity, MaidRecipesManager<KettleRecipe> manager) {
+-        ItemStackHandler inventory = getItemStackHandler(kettleBlockEntity);
+-        ItemStack outputStack = inventory.getStackInSlot(getOutputSlot());
+-        // 有最终物品
+-        if (!outputStack.isEmpty()) {
++    public boolean shouldMoveTo(ServerLevel serverLevel, EntityMaid maid, KettleBlockEntity be, MaidRecipesManager<KettleRecipe> recManager) {
++        // 煮好了，而且女仆带着能装它的空容器
++        if (hasBrewedFluid(be) && hasFluidContainer(be, recManager)) {
+             return true;
+         }
+ 
+-        ItemStack mealStack = getBeInvMealStack(kettleBlockEntity, inventory);
+-        ItemStack container = getFoodContainer(kettleBlockEntity);
+-        boolean hasOutputAdditionItem = manager.hasOutputAdditionItem(container);
+-        // 有待取出物品和对应的容器
+-        if (!mealStack.isEmpty() && hasOutputAdditionItem) {
++        // 壶里的材料凑不出任何配方，得清出来
++        if (!be.items.isEmpty() && getMatchingRecipe(serverLevel, be).isEmpty()) {
+             return true;
+         }
+ 
+-        boolean heated = isHeated(kettleBlockEntity);
+-        Optional<KettleRecipe> recipe = getMatchingRecipe(kettleBlockEntity, new RecipeWrapper(inventory));
+-        // 现在是否可以做饭（厨锅有没有正在做饭）
+-        boolean b = recipe.isPresent() && canCook(kettleBlockEntity, recipe.get());
+-        List<Pair<List<Integer>, List<List<ItemStack>>>> recipesIngredients = manager.getRecipesIngredients();
+-        if (!b && !recipesIngredients.isEmpty() && heated && (!needWater(kettleBlockEntity) || findMaidHasWaterResource(maid, kettleBlockEntity) != -1) && mealStack.isEmpty()) {
+-            return true;
++        // 可以下一锅，并且女仆备齐了水和材料
++        return canStartBatch(be) && !recManager.getRecipesIngredients().isEmpty();
++    }
++
++    @Override
++    public void processCookMake(ServerLevel serverLevel, EntityMaid maid, KettleBlockEntity be, MaidRecipesManager<KettleRecipe> recManager) {
++        IItemHandlerModifiable inputInv = recManager.getInputInv();
++        IItemHandlerModifiable outputAdditionInv = recManager.getOutputAdditionInv();
++        IItemHandlerModifiable outputInv = recManager.getOutputInv();
++
++        boolean extracted = false;
++
++        // 1. 把煮好的成品一瓶瓶装出来
++        if (hasBrewedFluid(be)) {
++            extracted = extractBrewedFluid(maid, be, recManager, outputInv, outputAdditionInv);
+         }
+ 
+-        // 能做饭现在和有输入（也就是厨锅现在有物品再里面但是不符合配方
+-        if (!b && hasInput(inventory)) {
+-            return true;
++        // 2. 壶里的材料凑不出配方，倒回女仆背包
++        if (!be.items.isEmpty() && getMatchingRecipe(serverLevel, be).isEmpty()) {
++            for (int i = 0; i < be.items.getContainerSize(); i++) {
++                ItemStack item = be.items.getItem(i);
++                if (item.isEmpty()) continue;
++
++                ItemStack leftItem = ItemHandlerHelper.insertItemStacked(inputInv, item.copy(), false);
++                item.shrink(item.getCount() - leftItem.getCount());
++                extracted = true;
++            }
++            be.notifyTile();
+         }
+ 
+-        ItemStack containerInputStack = inventory.getStackInSlot(getContainerStackSlot());
+-        //当厨锅没有物品，又有杯具在时，就取出杯具
+-        if (!hasInput(inventory) && !containerInputStack.isEmpty()) {
+-            return true;
++        if (extracted) {
++            IAddonMaid.pickupAction(maid);
+         }
+ 
+-        return false;
+-    }
++        // 3. 下一锅：先注满水，再放材料
++        if (!canStartBatch(be) || recManager.getRecipesIngredients().isEmpty()) {
++            return;
++        }
+ 
+-    public boolean needWater(KettleBlockEntity kettleBlockEntity) {
+-        return kettleBlockEntity.getWater() <= 200;
+-    }
++        Pair<List<Integer>, List<List<ItemStack>>> recipeIngredient = recManager.getRecipeIngredient();
++        if (recipeIngredient.getFirst().isEmpty()) {
++            return;
++        }
+ 
+-    @Override
+-    public void tryExtractItem(ServerLevel serverLevel, EntityMaid entityMaid, KettleBlockEntity blockEntity, MaidRecipesManager<KettleRecipe> maidRecipesManager) {
+-        this.replenishWater(entityMaid, blockEntity);
+-        super.tryExtractItem(serverLevel, entityMaid, blockEntity, maidRecipesManager);
+-    }
+-
+-    private boolean replenishWater(EntityMaid entityMaid, KettleBlockEntity blockEntity) {
+-        if (this.needWater(blockEntity)) {
+-            int stackSlot = findMaidHasWaterResource(entityMaid, blockEntity);
+-            if (stackSlot != -1) {
+-                ItemStack waterStack = entityMaid.getAvailableInv(true).getStackInSlot(stackSlot);
+-                WeakReference<FakePlayer> fakePlayer$tlma = ((IAddonMaid) entityMaid).tlmk$getFakePlayer();
+-                FakePlayer fakePlayer = fakePlayer$tlma.get();
+-                if (fakePlayer != null) {
+-                    fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, waterStack.split(1));
+-                    try {
+-                        InteractionResult interactionResult = FakePlayerUtil.interactUseOnBlock(fakePlayer$tlma, entityMaid.level, blockEntity.getBlockPos(), InteractionHand.MAIN_HAND, null);
+-
+-                        if (interactionResult != InteractionResult.PASS) {
+-                            ItemStack itemInHand = fakePlayer.getItemInHand(InteractionHand.MAIN_HAND);
+-                            ItemHandlerHelper.insertItemStacked(entityMaid.getAvailableInv(true), itemInHand.copy(), false);
+-                            fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+-                        } else {
+-                            fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+-                        }
++        // 罐子空的才注水；已经是满的就把水桶留着下次用
++        if (be.fluids.getFluidInTank(0).isEmpty()) {
++            fillWater(maid, be, recipeIngredient.getSecond().get(0), inputInv);
++        }
+ 
+-                        if (interactionResult == InteractionResult.PASS) {
+-                            BlockState blockState = entityMaid.level.getBlockState(blockEntity.getBlockPos());
+-                            Block block = blockState.getBlock();
+-                        }
+-                    } catch (Exception e) {
+-                        return false;
++        // 水没注满就先别放材料，免得材料白卡在壶里
++        if (be.fluids.getFluidInTank(0).getAmount() < TANK_AMOUNT) {
++            IAddonMaid.pickupAction(maid);
++            return;
++        }
++
++        // 4 个格子每格只放得下 1 个
++        int index = 0;
++        for (List<ItemStack> itemStacks : recipeIngredient.getSecond()) {
++            if (index++ < 1) continue; // 索引 0 是水，上面已经处理过
++
++            itemStacks.stream().filter(stack -> !stack.isEmpty()).findFirst().ifPresent(stack -> {
++                ItemStack copy = stack.copyWithCount(1);
++                if (be.items.canAddItem(copy)) {
++                    ItemStack remain = be.items.addItem(copy);
++                    if (remain.isEmpty()) {
++                        stack.shrink(1);
++                        be.notifyTile();
+                     }
+                 }
++            });
++        }
++
++        IAddonMaid.pickupAction(maid);
++    }
++
++    /**
++     * 拿空容器右键茶壶，把罐里的成品流体一瓶瓶装走。
++     *
++     * @return 是否真的取出了东西
++     */
++    private boolean extractBrewedFluid(EntityMaid maid, KettleBlockEntity be, MaidRecipesManager<KettleRecipe> recManager,
++                                       IItemHandlerModifiable outputInv, IItemHandlerModifiable outputAdditionInv) {
++        FluidStack fluidInTank = be.fluids.getFluidInTank(0);
++        YhFluidItem holder = YhFluidItem.of(fluidInTank.getFluid());
++        if (holder == null) {
++            return false;
++        }
++
++        Item container = holder.container();
++        ItemStack fluidContainer = recManager.findOutputAdditionItem(stack -> stack.is(container));
++        boolean extracted = false;
++
++        while (!fluidInTank.isEmpty() && !fluidContainer.isEmpty()) {
++            int beforeAmount = fluidInTank.getAmount();
++
++            ItemStack interactItem = fluidContainer.copyWithCount(1);
++            ItemStack interactedItem = FakePlayerUtil.interactUseOnBlock(maid, be.getBlockPos(), interactItem.copy());
++
++            if (interactedItem.isEmpty()) {
++                // 妖归把装好的成品塞进了假玩家背包里，这里直接补给女仆
++                giveOrDrop(maid, outputInv, holder.stack().copy());
++                fluidContainer.shrink(1);
++            } else if (!ItemStack.isSameItem(interactItem, interactedItem)) {
++                giveOrDrop(maid, outputInv, interactedItem);
++                fluidContainer.shrink(1);
+             }
+ 
++            be.notifyTile();
++            extracted = true;
++
++            // 罐里余量不够装满一个容器时交互不消耗流体，必须退出，否则会死循环卡住服务端
++            if (fluidInTank.getAmount() == beforeAmount) {
++                break;
++            }
++        }
++
++        // 没用完的空容器放回去
++        giveOrDrop(maid, outputAdditionInv, fluidContainer);
++        return extracted;
++    }
++
++    /** 拿水桶右键茶壶注水，空桶收回女仆背包。 */
++    private void fillWater(EntityMaid maid, KettleBlockEntity be, List<ItemStack> waterItems, IItemHandlerModifiable inputInv) {
++        for (ItemStack waterItem : waterItems) {
++            if (waterItem.isEmpty()) continue;
++            if (be.fluids.getFluidInTank(0).getAmount() >= TANK_AMOUNT) break;
++
++            ItemStack interactItem = waterItem.copyWithCount(1);
++            ItemStack interactedItem = FakePlayerUtil.interactUseOnBlock(maid, be.getBlockPos(), interactItem.copy());
++            if (ItemStack.isSameItem(interactItem, interactedItem)) {
++                // 没倒进去（罐子里已经有别的液体之类），别把水桶吞掉
++                break;
++            }
++
++            waterItem.shrink(1);
++            if (!interactedItem.isEmpty()) {
++                giveOrDrop(maid, inputInv, interactedItem);
++            }
++        }
++    }
++
++    private static void giveOrDrop(EntityMaid maid, IItemHandlerModifiable inv, ItemStack stack) {
++        if (stack.isEmpty()) return;
++        ItemStack leftItem = ItemHandlerHelper.insertItemStacked(inv, stack, false);
++        if (!leftItem.isEmpty()) {
++            maid.spawnAtLocation(leftItem);
+         }
+-        return false;
+     }
+ 
+-    public List<ItemStack> getWaterSourceList(KettleBlockEntity kettleBlockEntity) {
+-        Block block = kettleBlockEntity.getBlockState().getBlock();
++    /** 罐里装的已经不是水了，说明这锅煮好了。 */
++    private static boolean hasBrewedFluid(KettleBlockEntity be) {
++        FluidStack fluid = be.fluids.getFluidInTank(0);
++        return !fluid.isEmpty() && !fluid.getFluid().is(FluidTags.WATER);
++    }
++
++    private static boolean hasFluidContainer(KettleBlockEntity be, MaidRecipesManager<KettleRecipe> recManager) {
++        YhFluidItem holder = YhFluidItem.of(be.fluids.getFluidInTank(0).getFluid());
++        if (holder == null) {
++            return false;
++        }
++        Item container = holder.container();
++        return recManager.hasOutputAdditionItem(stack -> stack.is(container));
++    }
+ 
+-        Lazy<Map<Ingredient, Integer>> waterMAP = ((KettleBlockAccessor) block).getMAP();
+-        Set<Ingredient> ingredients = waterMAP.get().keySet();
+-        List<ItemStack> list = ingredients.stream().map(Ingredient::getItems).flatMap(Stream::of).toList();
+-//        LOGGER.info("getWaterSourceList: " + list);
+-        return list;
++    /**
++     * 能不能开新的一锅。罐里剩着半罐水时整桶水倒不进去（{@code FluidUtil} 要求一次全部装下），
++     * 这种情况直接判定为不能开锅，免得女仆反复跑过来空转。
++     */
++    private static boolean canStartBatch(KettleBlockEntity be) {
++        if (hasBrewedFluid(be) || !be.items.isEmpty()) {
++            return false;
++        }
++        int amount = be.fluids.getFluidInTank(0).getAmount();
++        return amount == 0 || amount >= TANK_AMOUNT;
+     }
+ 
+-    public int findMaidHasWaterResource(EntityMaid entityMaid, KettleBlockEntity kettleBlockEntity) {
+-        List<ItemStack> waterSourceList = getWaterSourceList(kettleBlockEntity);
++    private static Optional<RecipeHolder<KettleRecipe>> getMatchingRecipe(Level level, KettleBlockEntity be) {
++        if (be.items.isEmpty()) {
++            return Optional.empty();
++        }
++        return level.getRecipeManager().getRecipeFor(YHBlocks.KETTLE_RT.get(), new KettleInput(be.items), level);
++    }
+ 
+-        CombinedInvWrapper availableInv = entityMaid.getAvailableInv(true);
+-        int stackSlot = ItemsUtil.findStackSlot(availableInv, itemStack -> {
+-            return waterSourceList.stream().anyMatch(ingredient -> ingredient.is(itemStack.getItem()));
+-        });
++    @Override
++    public NonNullList<Ingredient> getIngredients(Recipe<?> recipe) {
++        NonNullList<Ingredient> ingredients = NonNullList.create();
++        if (!(recipe instanceof KettleRecipe kettleRecipe)) {
++            return ingredients;
++        }
++        ingredients.add(Ingredient.of(WATER_ITEM));
++        ingredients.addAll(kettleRecipe.input);
++        return ingredients;
++    }
+ 
+-        return stackSlot;
++    @Override
++    public ItemStack getResultItem(Recipe<?> recipe, RegistryAccess registryAccess) {
++        if (!(recipe instanceof KettleRecipe kettleRecipe)) {
++            return Items.AIR.getDefaultInstance();
++        }
++        YhFluidItem holder = YhFluidItem.of(kettleRecipe.result.getFluid());
++        return holder == null ? Items.AIR.getDefaultInstance() : holder.stack().copy();
+     }
+ }
+diff --git a/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/YhFluidItem.java b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/YhFluidItem.java
+new file mode 100644
+index 0000000..936b26e
+--- /dev/null
++++ b/src/main/java/com/github/wallev/maidsoulkitchen/task/cook/youkaishomecoming/YhFluidItem.java
+@@ -0,0 +1,39 @@
++package com.github.wallev.maidsoulkitchen.task.cook.youkaishomecoming;
++
++import dev.xkmc.youkaishomecoming.content.item.fluid.IYHFluidHolder;
++import dev.xkmc.youkaishomecoming.content.item.fluid.IYHSake;
++import dev.xkmc.youkaishomecoming.content.item.fluid.SakeFluid;
++import dev.xkmc.youkaishomecoming.content.item.fluid.YHFluid;
++import net.minecraft.world.item.Item;
++import net.minecraft.world.item.ItemStack;
++import net.minecraft.world.level.material.Fluid;
++import org.jetbrains.annotations.Nullable;
++
++/**
++ * 妖归 4.x 里瓶装流体分成了两套接口：老的 {@link IYHSake}（YHSake 枚举，对应 {@link SakeFluid}）
++ * 和新的 {@link IYHFluidHolder}（BottledFluid，对应 {@link YHFluid}）。
++ * 两者成员完全一致却没有公共父类，这里统一成一个视图。
++ * <p>
++ * 注意不要再用 {@code SakeBottleItem#getFluid()} 反查：它声明返回 {@link YHFluid}，
++ * 但清酒实际拿到的是 {@link SakeFluid}，取出来就会 ClassCastException。
++ * 从流体注册表反过来找才是安全的。
++ *
++ * @param container 装这种流体要用的空容器（玻璃瓶、竹筒等）
++ * @param stack     装满之后得到的成品物品
++ * @param amount    一个容器能装走多少 mB
++ */
++public record YhFluidItem(Item container, ItemStack stack, int amount) {
++
++    @Nullable
++    public static YhFluidItem of(Fluid fluid) {
++        if (fluid instanceof SakeFluid sakeFluid) {
++            IYHSake type = sakeFluid.type;
++            return new YhFluidItem(type.getContainer(), type.asStack(1), type.amount());
++        }
++        if (fluid instanceof YHFluid yhFluid) {
++            IYHFluidHolder type = yhFluid.type;
++            return new YhFluidItem(type.getContainer(), type.asStack(1), type.amount());
++        }
++        return null;
++    }
++}
+diff --git a/src/main/resources/maidsoulkitchen.mixins.json b/src/main/resources/maidsoulkitchen.mixins.json
+index 09f370b..e91135e 100644
+--- a/src/main/resources/maidsoulkitchen.mixins.json
++++ b/src/main/resources/maidsoulkitchen.mixins.json
+@@ -19,7 +19,6 @@
+     "minecraft.AbstractFurnaceMixin",
+     "touhoulittlemaid.EntityMaidMixin",
+     "touhoulittlemaid.MaidRunOneMixin",
+-    "youkaishomecoming.BasePotBlockEntityMixin",
+-    "youkaishomecoming.KettleBlockAccessor"
++    "youkaishomecoming.BasePotBlockEntityMixin"
+   ]
+ }

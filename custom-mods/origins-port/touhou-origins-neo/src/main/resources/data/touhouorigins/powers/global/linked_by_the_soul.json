@@ -1,0 +1,34 @@
+{
+  "type": "touhouorigins:action_on_entity_death",
+  "bientity_action": {
+    "type": "apoli:if_else",
+    "condition": {
+      "type": "touhouorigins:killed_target"
+    },
+    "if_action": {
+      "type": "apoli:actor_action",
+      "action": {
+        "type": "apoli:damage",
+        "damage_type": "touhouorigins:master_betrayal",
+        "amount": 1000000
+      }
+    },
+    "else_action": {
+      "type": "apoli:actor_action",
+      "action": {
+        "type": "apoli:damage",
+        "damage_type": "touhouorigins:master_death",
+        "amount": 1000000
+      }
+    }
+  },
+  "bientity_condition": {
+    "type": "touhouorigins:pact_master"
+  },
+  "condition": {
+    "type": "apoli:resource",
+    "resource": "*:global/boundless_servitude_boolean",
+    "comparison": "==",
+    "compare_to": 1
+  }
+}

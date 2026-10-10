@@ -1,0 +1,146 @@
+From 17e89b16dae4d6a9fe76d88a6cd0d2153cb6914c Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 23:26:22 +0800
+Subject: [PATCH 04/12] Finish mechanical Forge->NeoForge import port; zero
+ net.minecraftforge imports remain
+
+- DelightfulItemTagProvider.java: last remaining file, RegistryObject -> DeferredHolder,
+  Tags/ExistingFileHelper package renames.
+- Cross-checked every real (non-FD-CommonTags/ModTags) Tags.Items.* and Tags.Blocks.*
+  reference in the codebase against the actual NeoForge 21.1.219 jar's Tags class and fixed
+  4 renamed constants that would otherwise have failed to compile or (worse) silently
+  resolved to nothing: STRING -> STRINGS, TOOLS_FISHING_RODS -> TOOLS_FISHING_ROD,
+  SHEARS -> TOOLS_SHEAR, SAND/SANDSTONE -> SANDS/SANDSTONE_BLOCKS (WildSalmonberriesBlock,
+  CantaloupePlantBlock, DelightfulRecipeProvider, DelightfulBlockTagProvider).
+
+grep -rl "net.minecraftforge" src/main/java now returns nothing. Next: attempt compileJava
+and fix whatever the compiler surfaces.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../common/block/CantaloupePlantBlock.java           |  4 ++--
+ .../common/block/WildSalmonberriesBlock.java         |  2 +-
+ .../data/gen/DelightfulBlockTagProvider.java         |  6 +++---
+ .../data/gen/DelightfulItemTagProvider.java          | 12 ++++++------
+ .../data/gen/DelightfulRecipeProvider.java           |  2 +-
+ 5 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java b/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
+index 69c32404..db1542f4 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
+@@ -57,7 +57,7 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 
+ 	@Override
+ 	protected boolean mayPlaceOn(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
+-		return pState.is(Tags.Blocks.SAND);
++		return pState.is(Tags.Blocks.SANDS);
+ 	}
+ 
+ 	@Override
+@@ -101,7 +101,7 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 	@Override
+ 	public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
+ 		BlockState blockstate = pLevel.getBlockState(pPos.below());
+-		if (blockstate.is(Tags.Blocks.SAND)) {
++		if (blockstate.is(Tags.Blocks.SANDS)) {
+ 			BlockPos blockpos = pPos.below();
+ 			for (Direction direction : Direction.Plane.HORIZONTAL) {
+ 				if (
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java b/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
+index 430def28..02855ff0 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
+@@ -29,7 +29,7 @@ public class WildSalmonberriesBlock extends WildCropBlock {
+ 	@Override
+ 	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+ 		final ItemStack itemInHand = player.getItemInHand(hand);
+-		final boolean isShears = itemInHand.is(Tags.Items.SHEARS);
++		final boolean isShears = itemInHand.is(Tags.Items.TOOLS_SHEAR);
+ 		popResource(level, pos, Util.getStack(DelightfulItems.SALMONBERRIES, isShears ? 2 : 1));
+ 		level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1F, 0.8F + level.random.nextFloat() * 0.4F);
+ 		if (isShears) itemInHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
+index 9a0e52d5..9ac5deca 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockTagProvider.java
+@@ -48,8 +48,8 @@ public class DelightfulBlockTagProvider extends BlockTagsProvider {
+ 		this.tag(DelightfulBlockTags.ADD_ACORN).addOptional(Util.rl("natural_decoration", "oak_acorn"));
+ 		this.tag(DelightfulBlockTags.DROPS_GREEN_TEA_LEAF).addTag(BlockTags.LEAVES);
+ 		this.tag(DelightfulBlockTags.CANTALOUPE_SPAWNS)
+-			.addTag(Tags.Blocks.SAND)
+-			.addTag(Tags.Blocks.SANDSTONE);
++			.addTag(Tags.Blocks.SANDS)
++			.addTag(Tags.Blocks.SANDSTONE_BLOCKS);
+ 
+ 		// Forge
+ 		this.tag(DelightfulBlockTags.STORAGE_BLOCKS_SALMONBERRIES).add(DelightfulBlocks.SALMONBERRY_SACK.get());
+@@ -73,7 +73,7 @@ public class DelightfulBlockTagProvider extends BlockTagsProvider {
+ 			.addTag(DelightfulBlockTags.STORAGE_BLOCKS_GREEN_APPLE)
+ 			.addTag(DelightfulBlockTags.STORAGE_BLOCKS_YUCCA_FRUIT)
+ 			.addTag(DelightfulBlockTags.STORAGE_BLOCKS_BAOBAB_FRUIT);
+-		this.tag(Tags.Blocks.SAND).addTag(BlockTags.SAND);
++		this.tag(Tags.Blocks.SANDS).addTag(BlockTags.SAND);
+ 		this.tag(ModTags.Blocks.MINEABLE_WITH_KNIFE)
+ 			.add(DelightfulBlocks.SLICED_PUMPKIN.get())
+ 			.add(DelightfulBlocks.SLICED_MELON.get())
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+index 6506888b..daa61789 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+@@ -21,9 +21,9 @@ import net.minecraft.tags.TagKey;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.level.block.Block;
+-import net.minecraftforge.common.Tags;
+-import net.minecraftforge.common.data.ExistingFileHelper;
+-import net.minecraftforge.registries.RegistryObject;
++import net.neoforged.neoforge.common.Tags;
++import net.neoforged.neoforge.common.data.ExistingFileHelper;
++import net.neoforged.neoforge.registries.DeferredHolder;
+ import vectorwing.farmersdelight.common.item.KnifeItem;
+ import vectorwing.farmersdelight.common.registry.ModItems;
+ import vectorwing.farmersdelight.common.tag.CommonTags;
+@@ -109,7 +109,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		var FDknives = this.tag(ModTags.Items.KNIVES);
+ 		var toolsknives = this.tag(CommonTags.Items.TOOLS_KNIVES);
+ 		DelightfulItems.ITEMS.getEntries().stream()
+-			.map(RegistryObject::get).filter(i -> i instanceof KnifeItem).forEach(knife -> {
++			.map(DeferredHolder::get).filter(i -> i instanceof KnifeItem).forEach(knife -> {
+ 				FDknives.add(knife);
+ 				toolsknives.add(knife);
+ 			});
+@@ -338,7 +338,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addTag(DelightfulItemTags.STORAGE_BLOCKS_YUCCA_FRUIT)
+ 			.addTag(DelightfulItemTags.STORAGE_BLOCKS_BAOBAB_FRUIT);
+ 		this.tag(Tags.Items.MUSHROOMS).addOptional(Modid.FORA.rl("blewit_mushroom"));
+-		this.tag(Tags.Items.TOOLS_FISHING_RODS).addOptional(Modid.RA.rl("flux_fishing_rod"));
++		this.tag(Tags.Items.TOOLS_FISHING_ROD).addOptional(Modid.RA.rl("flux_fishing_rod"));
+ 		this.tag(DelightfulItemTags.TOOLS_WRENCH).addOptional(Modid.FOR.rl("wrench"));
+ 		this.tag(ItemTags.TOOLS).addTag(DelightfulItemTags.TOOLS_WRENCH);
+ 		this.tag(DelightfulItemTags.WRENCHES).addTag(DelightfulItemTags.TOOLS_WRENCH);
+@@ -504,7 +504,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Modid.SOB.rl("roasted_peanuts"))
+ 			.addOptional(Modid.HH.rl("roasted_peanuts"))
+ 			.addOptional(Modid.VD.rl("roasted_peanut"));
+-		this.tag(Tags.Items.STRING).addOptional(Modid.AN.rl("magebloom_fiber"));
++		this.tag(Tags.Items.STRINGS).addOptional(Modid.AN.rl("magebloom_fiber"));
+ 		this.tag(DelightfulItemTags.JAMS_GLOW)
+ 			.add(DelightfulItems.GLOW_JAM_JAR.get())
+ 			.addOptionalTag(Modid.LOADER.rl("jams/glow_berries"))
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+index 9a97828c..eb3675a6 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+@@ -584,7 +584,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"torch_from_animal_oil_bottle", finished, enabled(DelightfulItems.ANIMAL_OIL_BOTTLE));
+ 		wrap(ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.CANDLE, 1)
+ 			.define('f', DelightfulItems.ANIMAL_FAT.get())
+-			.define('s', Tags.Items.STRING)
++			.define('s', Tags.Items.STRINGS)
+ 			.pattern("s")
+ 			.pattern("f")
+ 			.pattern("f")
+-- 
+2.39.0.windows.1
+

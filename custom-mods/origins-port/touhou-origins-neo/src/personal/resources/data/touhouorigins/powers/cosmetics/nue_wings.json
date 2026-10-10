@@ -1,0 +1,27 @@
+{
+  "type": "apoli:custom_model_render",
+  "hidden": true,
+  "mode": "geometry",
+  "model_location": "touhouorigins:tlm/nue_wings",
+  "texture_location": "touhouorigins:textures/entity/tlm/houjuu_nue.png",
+  "render_type": "cutout_no_cull",
+  "condition": {
+    "type": "origins:origin",
+    "origin": "touhouorigins:nue"
+  },
+  "animations": [
+    {
+      "animation": "touhouorigins:cosmetics",
+      "name": "animation.glide",
+      "loop": true,
+      "condition": {
+        "type": "apoli:fall_flying"
+      }
+    },
+    {
+      "animation": "touhouorigins:cosmetics",
+      "name": "animation.idle",
+      "loop": true
+    }
+  ]
+}

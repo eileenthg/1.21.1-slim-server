@@ -1,0 +1,97 @@
+From 70281d4b3d87d07490aa39d9fa3ed13d5a4334d1 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Sun, 6 Sep 2026 00:48:23 +0800
+Subject: [PATCH 1/2] Point cheese tags at Brewin & Chewin
+
+Cheesemaking has moved to Brewin & Chewin, so ED's own cheese items are
+removed from c:foods/cheese and c:foods/goat_cheese and replaced with
+B&C's wedges.
+
+Every cheese-consuming recipe in ED (mac and cheese, grilled cheese,
+cranberry goat cheese toast, honeyed goat cheese tart, goat cheese
+beetroot salad, asparagus frittata, ...) takes cheese through these two
+tags rather than a concrete item, so this one change retargets all of
+them at once with no recipe edits. The recipes themselves stay in ED
+because they depend on ED-only ingredients.
+
+Entries are addOptional so ED still loads standalone; the tags are simply
+empty without B&C, which pairs with Item Obliterator hiding ED's now
+unobtainable cheese items.
+
+The two generated tag files were updated by hand rather than by datagen.
+runData cannot run on this repo: src/main/templates/ does not exist, so
+generateModMetadata produces nothing, and the tracked raw
+src/main/resources/META-INF/neoforge.mods.toml is read instead, failing
+with "Invalid bare key: '${mod_id}'". That is a pre-existing workspace
+bug unrelated to this change. The hand-written output matches byte for
+byte what ItemTagsProvider emits for addOptional. Re-running datagen
+after that build issue is fixed should be a no-op.
+
+Verified: the module compiles (warnings only, no errors). Not yet tested
+in game.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+---
+ .../resources/data/c/tags/item/foods/cheese.json         | 9 ++++++++-
+ .../resources/data/c/tags/item/foods/goat_cheese.json    | 5 ++++-
+ .../java/ianm1647/expandeddelight/data/EDItemTags.java   | 8 ++++++--
+ 3 files changed, 18 insertions(+), 4 deletions(-)
+
+diff --git a/src/generated/resources/data/c/tags/item/foods/cheese.json b/src/generated/resources/data/c/tags/item/foods/cheese.json
+index 2c457c7..35d639f 100644
+--- a/src/generated/resources/data/c/tags/item/foods/cheese.json
++++ b/src/generated/resources/data/c/tags/item/foods/cheese.json
+@@ -1,5 +1,12 @@
+ {
+   "values": [
+-    "expandeddelight:cheese_slice"
++    {
++      "id": "brewinandchewin:flaxen_cheese_wedge",
++      "required": false
++    },
++    {
++      "id": "brewinandchewin:scarlet_cheese_wedge",
++      "required": false
++    }
+   ]
+ }
+\ No newline at end of file
+diff --git a/src/generated/resources/data/c/tags/item/foods/goat_cheese.json b/src/generated/resources/data/c/tags/item/foods/goat_cheese.json
+index 9efbb2c..980ea72 100644
+--- a/src/generated/resources/data/c/tags/item/foods/goat_cheese.json
++++ b/src/generated/resources/data/c/tags/item/foods/goat_cheese.json
+@@ -1,6 +1,9 @@
+ {
+   "values": [
+-    "expandeddelight:goat_cheese_slice",
++    {
++      "id": "brewinandchewin:goat_cheese_wedge",
++      "required": false
++    },
+     {
+       "id": "hearthandharvest:goat_cheese_slice",
+       "required": false
+diff --git a/src/main/java/ianm1647/expandeddelight/data/EDItemTags.java b/src/main/java/ianm1647/expandeddelight/data/EDItemTags.java
+index 115d36c..14754ab 100644
+--- a/src/main/java/ianm1647/expandeddelight/data/EDItemTags.java
++++ b/src/main/java/ianm1647/expandeddelight/data/EDItemTags.java
+@@ -172,10 +172,14 @@ public class EDItemTags extends ItemTagsProvider {
+         tag(EDCommonTags.FOODS_SWEET_POTATO).add(EDItems.SWEET_POTATO.get());
+         tag(EDCommonTags.FOODS_CHILI_PEPPER).add(EDItems.CHILI_PEPPER.get());
+         tag(EDCommonTags.FOODS_PEANUT).add(EDItems.PEANUT.get());
++        // Cheesemaking migrated to Brewin & Chewin. ED's own cheese items are no longer
++        // part of these tags; every ED recipe below consumes cheese through the tag, so
++        // they now resolve to B&C's wedges instead.
+         tag(EDCommonTags.FOODS_CHEESE)
+-                .add(EDItems.CHEESE_SLICE.get());
++                .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin", "flaxen_cheese_wedge"))
++                .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin", "scarlet_cheese_wedge"));
+         tag(EDCommonTags.FOODS_GOAT_CHEESE)
+-                .add(EDItems.GOAT_CHEESE_SLICE.get())
++                .addOptional(ResourceLocation.fromNamespaceAndPath("brewinandchewin", "goat_cheese_wedge"))
+                 .addOptional(ResourceLocation.fromNamespaceAndPath("hearthandharvest", "goat_cheese_slice"));
+         //jams
+         tag(EDCommonTags.JAMS)
+-- 
+2.39.0.windows.1
+

@@ -1,0 +1,76 @@
+{
+  "powers": [
+    "touhouorigins:wolf_tengu/warrior_spirit",
+    "touhouorigins:common/tengu_speed",
+    "touhouorigins:wolf_tengu/mountainous_blades",
+    "touhouorigins:wolf_tengu/steadfast_defense",
+    "touhouorigins:wolf_tengu/clumsy_archer",
+    "touhouorigins:wolf_tengu/big_appetite"
+  ],
+  "icon": {
+    "item": "minecraft:shield",
+    "components": {
+      "minecraft:base_color": "white",
+      "minecraft:banner_patterns": [
+        {
+          "pattern": {
+            "asset_id": "minecraft:rhombus",
+            "translation_key": "block.minecraft.banner.rhombus.red"
+          },
+          "color": "red"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:flower",
+            "translation_key": "block.minecraft.banner.flower.red"
+          },
+          "color": "red"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:curly_border",
+            "translation_key": "block.minecraft.banner.curly_border.white"
+          },
+          "color": "white"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:square_top_left",
+            "translation_key": "block.minecraft.banner.square_top_left.white"
+          },
+          "color": "white"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:square_top_right",
+            "translation_key": "block.minecraft.banner.square_top_right.white"
+          },
+          "color": "white"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:rhombus",
+            "translation_key": "block.minecraft.banner.rhombus.red"
+          },
+          "color": "red"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:square_top_left",
+            "translation_key": "block.minecraft.banner.square_top_left.white"
+          },
+          "color": "white"
+        },
+        {
+          "pattern": {
+            "asset_id": "minecraft:square_top_right",
+            "translation_key": "block.minecraft.banner.square_top_right.white"
+          },
+          "color": "white"
+        }
+      ]
+    }
+  },
+  "order": 4,
+  "impact": 2
+}

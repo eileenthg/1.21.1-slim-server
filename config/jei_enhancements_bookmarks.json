@@ -38,6 +38,14 @@
       "factor": 1,
       "amount": 1,
       "type": 0
+    },
+    {
+      "groupId": 0,
+      "pageId": 4,
+      "itemKey": "farmersdelight:organic_compost",
+      "factor": 1,
+      "amount": 1,
+      "type": 0
     }
   ]
 }

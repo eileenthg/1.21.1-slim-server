@@ -28,3 +28,4 @@ One bug was fixed after the test: the item-book cooldown used game time, which i
 **How to apply:** for problems, run `test-client/run-guidelibtest.ps1` with Minecraft closed and read the GLTEST lines.
 
 Related: [[test-instance-copy-resets-configs]].
+- **Update:** client-tested 19 Sep (20 books, unlock on pickup, locked books refused); only the later 0.25 s click-limit fix for MCA books is untested.

@@ -1,0 +1,57 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+# Single mixin on OriginsServerNetwork.openChooseScreen, replacing the two Fabric mixins.
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+
+# NeoForge itself.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Minecraft.
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Apoli supplies every power/condition/action type our data uses (149 of them).
+# Declared hard so a missing Apoli fails fast at load rather than as parse errors later.
+[[dependencies.${mod_id}]]
+    modId="apoli"
+    type="required"
+    versionRange="[1.56.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Overgrown's Origins supplies the origin layer, the Orb, and our mixin target.
+[[dependencies.${mod_id}]]
+    modId="origins"
+    type="required"
+    versionRange="[1.27.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Pehkui is required only for relative visibility scaling (bake_danuki/smelly).
+# Kept 'required' because Eileen runs Origins: Player Scale alongside this, which
+# needs Pehkui anyway. Revisit if this is ever shipped standalone.
+[[dependencies.${mod_id}]]
+    modId="pehkui"
+    type="required"
+    versionRange="[3.8.3,)"
+    ordering="AFTER"
+    side="BOTH"

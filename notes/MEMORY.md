@@ -64,3 +64,4 @@
 - [Corn Delight raw tortilla off](corn-delight-raw-tortilla-off.md) — standalone datapack stubs the dead-end crafting recipe; 8 Oct, untested
 - [Duplicate recipes → plateable](duplicate-recipes-plateable.md) — zzz-duplicate-recipes datapack 8 Oct; grilled corn + smores; judgement list left
 - [Ground Berries mod](ground-berries-mod.md) — ET bushes ripen on ground via mixin; installed 8 Oct, server test queued, in-game untested
+- [Slim server reference repo](slim-server-repo.md) — private GitHub repo for cloud sessions: WORKLOG, SESSIONS, manifest, sources; how to refresh and push

@@ -1,0 +1,15 @@
+{
+	"name": "Big",
+	"description": "§oHow's the weather up there?§r",
+    "powers": [
+		"prscaleorigins:big_scale",
+		"prscaleorigins:big_balance"
+    ],
+    "icon": {
+        "item": "minecraft:oxeye_daisy"
+    },
+    "order": 40,
+    "impact": 1,
+    "loading_priority": 100,
+    "unchoosable": false
+}

@@ -1,0 +1,152 @@
+{
+  "type": "apoli:multiple",
+  "hidden": true,
+  "variant": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 3
+  },
+  "assign": {
+    "type": "apoli:action_over_time",
+    "interval": 20,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "touhouorigins:oni"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "*:*_variant",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "apoli:choice",
+      "actions": [
+        {
+          "weight": 1,
+          "element": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_variant",
+            "operation": "set",
+            "change": 1
+          }
+        },
+        {
+          "weight": 1,
+          "element": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_variant",
+            "operation": "set",
+            "change": 2
+          }
+        },
+        {
+          "weight": 1,
+          "element": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_variant",
+            "operation": "set",
+            "change": 3
+          }
+        }
+      ]
+    }
+  },
+  "reset": {
+    "type": "apoli:action_over_time",
+    "interval": 20,
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "touhouorigins:oni",
+          "inverted": true
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "*:*_variant",
+          "comparison": "!=",
+          "compare_to": 0
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "apoli:change_resource",
+      "resource": "*:*_variant",
+      "operation": "set",
+      "change": 0
+    }
+  },
+  "suika": {
+    "type": "apoli:custom_model_render",
+    "mode": "geometry",
+    "model_location": "touhouorigins:tlm/oni_horns_suika",
+    "texture_location": "touhouorigins:textures/entity/tlm/ibuki_suika.png",
+    "render_type": "cutout_no_cull",
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "touhouorigins:oni"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "*:*_variant",
+          "comparison": "==",
+          "compare_to": 1
+        }
+      ]
+    }
+  },
+  "yugi": {
+    "type": "apoli:custom_model_render",
+    "mode": "geometry",
+    "model_location": "touhouorigins:tlm/oni_horns_yugi",
+    "texture_location": "touhouorigins:textures/entity/tlm/hoshiguma_yugi.png",
+    "render_type": "cutout_no_cull",
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "touhouorigins:oni"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "*:*_variant",
+          "comparison": "==",
+          "compare_to": 2
+        }
+      ]
+    }
+  },
+  "kasen": {
+    "type": "apoli:custom_model_render",
+    "mode": "geometry",
+    "model_location": "touhouorigins:tlm/oni_horns_kasen",
+    "texture_location": "touhouorigins:textures/entity/tlm/ibaraki_kasen_2.png",
+    "render_type": "cutout_no_cull",
+    "condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "origins:origin",
+          "origin": "touhouorigins:oni"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "*:*_variant",
+          "comparison": "==",
+          "compare_to": 3
+        }
+      ]
+    }
+  }
+}

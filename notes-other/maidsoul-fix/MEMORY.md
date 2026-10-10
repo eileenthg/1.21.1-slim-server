@@ -1,0 +1,2 @@
+- [MaidsoulKitchen / Youkai's Homecoming port setup](maidsoul-kitchen-yh-port-setup.md) — which trees and jars, and the gradle.properties edits that make it compile.
+- [Youkai's Homecoming 4.x fluid API](yh-4x-fluid-api-shape.md) — two parallel bottled-fluid interfaces, and the getFluid() CCE trap.

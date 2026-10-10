@@ -1,0 +1,28 @@
+{
+  "type": "apoli:multiple",
+  "flip": {
+    "type": "touhouorigins:flip_model",
+    "flip_view": true
+  },
+  "reverse_y": {
+    "type": "touhouorigins:flip_gravity_turnabout",
+    "condition": {
+      "type": "apoli:gamemode",
+      "gamemode": "creative",
+      "inverted": true
+    }
+  },
+  "prevent_kick": {
+    "type": "touhouorigins:prevent_flying_kick"
+  },
+  "revoke": {
+    "type": "apoli:action_over_time",
+    "interval": 200,
+    "entity_action": {
+      "type": "apoli:revoke_power",
+      "power": "*:*",
+      "source": "touhouorigins:amanojaku"
+    }
+  },
+  "hidden": true
+}

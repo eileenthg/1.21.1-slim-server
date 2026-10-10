@@ -1,0 +1,50 @@
+{
+  "type": "apoli:multiple",
+  "food": {
+    "type": "apoli:action_on_item_use",
+    "entity_action": {
+      "type": "apoli:feed",
+      "food": 8,
+      "saturation": 0.5
+    },
+    "item_condition": {
+      "type": "apoli:and",
+      "conditions": [
+        {
+          "type": "apoli:ingredient",
+          "ingredient": {
+            "item": "minecraft:potion"
+          }
+        },
+        {
+          "type": "touhouorigins:potion",
+          "potion": "minecraft:water",
+          "inverted": true
+        },
+        {
+          "type": "touhouorigins:potion",
+          "potion": "minecraft:mundane",
+          "inverted": true
+        },
+        {
+          "type": "touhouorigins:potion",
+          "potion": "minecraft:thick",
+          "inverted": true
+        },
+        {
+          "type": "touhouorigins:potion",
+          "potion": "minecraft:awkward",
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "penalty": {
+    "type": "apoli:modify_food",
+    "food_modifier": {
+      "name": "Heavy Drinker food penalty",
+      "operation": "multiply_total",
+      "value": -0.5
+    }
+  }
+}

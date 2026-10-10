@@ -1,0 +1,13 @@
+{
+  "parent": "touhouorigins:root",
+  "criteria": {
+    "chose_closed_eye": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "chose_closed_eye"
+    ]
+  ]
+}

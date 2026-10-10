@@ -1,0 +1,25 @@
+{
+  "entity_types": [
+    "minecraft:player"
+  ],
+  "powers": [
+    "touhouorigins:cosmetics/amanojaku_horns",
+    "touhouorigins:cosmetics/bake_danuki_ears",
+    "touhouorigins:cosmetics/bake_danuki_tail",
+    "touhouorigins:cosmetics/crow_tengu_wings",
+    "touhouorigins:cosmetics/earth_rabbit_ears",
+    "touhouorigins:cosmetics/fairy_wings",
+    "touhouorigins:cosmetics/ghost_spirit",
+    "touhouorigins:cosmetics/jiang_shi_talisman",
+    "touhouorigins:cosmetics/kappa_hat",
+    "touhouorigins:cosmetics/koishi_third_eye",
+    "touhouorigins:cosmetics/moon_rabbit_ears",
+    "touhouorigins:cosmetics/nue_wings",
+    "touhouorigins:cosmetics/oarfish_fins",
+    "touhouorigins:cosmetics/oni_horns",
+    "touhouorigins:cosmetics/satori_third_eye",
+    "touhouorigins:cosmetics/vampire_wings",
+    "touhouorigins:cosmetics/wolf_tengu_ears",
+    "touhouorigins:cosmetics/wolf_tengu_tail"
+  ]
+}

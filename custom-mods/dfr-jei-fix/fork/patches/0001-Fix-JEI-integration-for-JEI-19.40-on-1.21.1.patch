@@ -1,0 +1,350 @@
+From dc63b756ceab47b849208b93411bab9e9c9aaadb Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 14:05:10 +0800
+Subject: [PATCH] Fix JEI integration for JEI 19.40+ on 1.21.1
+
+JEI 19.40 moved the ingredient grid behind IIngredientListOverlayContents,
+removed IngredientGridWithNavigation$UserInputHandler, and split
+IngredientListOverlay drawing into background/foreground passes, so both
+JEI mixins failed to apply.
+
+On 1.21.1 the mixins now gate each call from IngredientListOverlay into its
+contents (draw, tooltips, hover) and wrap the grid's input handler for the
+Show/Hide Recipes buttons. Hidden ingredients can no longer be clicked,
+scrolled or hovered. The 1.20.1 code is unchanged behind #else. On JEI older
+than 19.40 the plugin skips the JEI mixins with a warning instead of crashing.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ build.gradle.kts                              |  2 +-
+ .../distractionfreerecipes/MixinPlugin.java   | 24 +++++
+ .../foundation/JEIAccessor.java               |  4 +
+ .../foundation/JEIHelper.java                 |  4 +
+ .../foundation/JEIInputHandler.java           | 74 ++++++++++++++
+ .../mixins/JEICombinedInputHandlerMixin.java  | 22 +++++
+ .../mixins/JEIIngredientListOverlayMixin.java | 97 ++++++++++++++++++-
+ 7 files changed, 225 insertions(+), 2 deletions(-)
+ create mode 100644 src/main/java/toni/distractionfreerecipes/foundation/JEIInputHandler.java
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 0bb0c62..204d38e 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -7,7 +7,7 @@ val templateSettings = object : BlahajSettings {
+ 		override fun addGlobal(mod : ModData, deps: DependencyHandler) {
+ 			deps.modCompileOnly(modrinth("emi", "1.1.18+${mod.mcVersion}+${mod.loader}"))
+ 			deps.modCompileOnly("mezz.jei:jei-${mod.mcVersion}-${mod.loader}:${when (mod.mcVersion) {
+-				"1.21.1" -> "19.21.0.247"
++				"1.21.1" -> "19.57.0.447"
+ 				"1.20.1" -> "15.20.0.105"
+ 				else -> ""
+ 			}}")
+diff --git a/src/main/java/toni/distractionfreerecipes/MixinPlugin.java b/src/main/java/toni/distractionfreerecipes/MixinPlugin.java
+index 09f6bcb..23aa067 100644
+--- a/src/main/java/toni/distractionfreerecipes/MixinPlugin.java
++++ b/src/main/java/toni/distractionfreerecipes/MixinPlugin.java
+@@ -1,14 +1,33 @@
+ package toni.distractionfreerecipes;
+ 
++import org.apache.logging.log4j.LogManager;
+ import org.objectweb.asm.tree.ClassNode;
+ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
+ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
++import org.spongepowered.asm.service.MixinService;
+ import toni.lib.utils.PlatformUtils;
+ 
+ import java.util.List;
+ import java.util.Set;
+ 
+ public class MixinPlugin implements IMixinConfigPlugin {
++    #if AFTER_21_1
++    private Boolean modernJei;
++
++    // The 1.21.1 JEI mixins target the overlay layout introduced in JEI 19.40; skip them on older JEI.
++    private boolean isModernJei() {
++        if (modernJei == null) {
++            try {
++                MixinService.getService().getBytecodeProvider().getClassNode("mezz.jei.gui.overlay.ingredients.IIngredientListOverlayContents");
++                modernJei = true;
++            } catch (Exception e) {
++                modernJei = false;
++                LogManager.getLogger("DistractionFreeRecipes").warn("JEI is older than 19.40; Distraction Free Recipes' JEI support is disabled. Update JEI to use it.");
++            }
++        }
++        return modernJei;
++    }
++    #endif
+ 
+     @Override
+     public void onLoad(String mixinPackage) {
+@@ -31,6 +50,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
+         if (mixinClassName.contains("JEI") && (!PlatformUtils.isModLoaded("jei") || PlatformUtils.isModLoaded("emi")))
+             return false;
+ 
++        #if AFTER_21_1
++        if (mixinClassName.contains("JEI") && !isModernJei())
++            return false;
++        #endif
++
+         return true;
+     }
+ 
+diff --git a/src/main/java/toni/distractionfreerecipes/foundation/JEIAccessor.java b/src/main/java/toni/distractionfreerecipes/foundation/JEIAccessor.java
+index 9b98271..541899f 100644
+--- a/src/main/java/toni/distractionfreerecipes/foundation/JEIAccessor.java
++++ b/src/main/java/toni/distractionfreerecipes/foundation/JEIAccessor.java
+@@ -6,4 +6,8 @@ public interface JEIAccessor {
+ 
+ 
+     public boolean distractionFreeRecipes$isSearchEmpty();
++
++    #if AFTER_21_1
++    public boolean distractionFreeRecipes$isHidden();
++    #endif
+ }
+diff --git a/src/main/java/toni/distractionfreerecipes/foundation/JEIHelper.java b/src/main/java/toni/distractionfreerecipes/foundation/JEIHelper.java
+index 03ff262..022f873 100644
+--- a/src/main/java/toni/distractionfreerecipes/foundation/JEIHelper.java
++++ b/src/main/java/toni/distractionfreerecipes/foundation/JEIHelper.java
+@@ -1,6 +1,10 @@
+ package toni.distractionfreerecipes.foundation;
+ 
++#if AFTER_21_1
++import mezz.jei.common.input.UserInput;
++#else
+ import mezz.jei.gui.input.UserInput;
++#endif
+ import toni.distractionfreerecipes.foundation.config.AllConfigs;
+ 
+ public class JEIHelper {
+diff --git a/src/main/java/toni/distractionfreerecipes/foundation/JEIInputHandler.java b/src/main/java/toni/distractionfreerecipes/foundation/JEIInputHandler.java
+new file mode 100644
+index 0000000..814339b
+--- /dev/null
++++ b/src/main/java/toni/distractionfreerecipes/foundation/JEIInputHandler.java
+@@ -0,0 +1,74 @@
++package toni.distractionfreerecipes.foundation;
++
++#if AFTER_21_1
++import com.mojang.blaze3d.platform.InputConstants;
++import mezz.jei.common.input.IInternalKeyMappings;
++import mezz.jei.common.input.IUserInputHandler;
++import mezz.jei.common.input.UserInput;
++import net.minecraft.client.gui.screens.Screen;
++import toni.distractionfreerecipes.foundation.config.AllConfigs;
++
++import java.util.Optional;
++
++/**
++ * Wraps the ingredient grid's input handler. Handles the Show/Hide Recipes buttons and swallows
++ * input aimed at the grid while it is hidden, so invisible ingredients can't be clicked or paged.
++ * Replaces the pre-19.40 mixin on IngredientGridWithNavigation$UserInputHandler.
++ */
++public class JEIInputHandler implements IUserInputHandler {
++    private final IUserInputHandler delegate;
++    private final JEIAccessor overlay;
++
++    public JEIInputHandler(IUserInputHandler delegate, JEIAccessor overlay) {
++        this.delegate = delegate;
++        this.overlay = overlay;
++    }
++
++    @Override
++    public Optional<IUserInputHandler> handleUserInput(Screen screen, UserInput input, IInternalKeyMappings keyBindings) {
++        if (input.getKey().getType() == InputConstants.Type.MOUSE) {
++            int mouseX = (int) input.getMouseX();
++            int mouseY = (int) input.getMouseY();
++            boolean leftClick = input.getKey().getValue() == InputConstants.MOUSE_BUTTON_LEFT;
++            var config = AllConfigs.client();
++
++            if (!config.enabled.get()) {
++                if (leftClick && config.showToggleButton.get() && GuiHelpers.getHideRecipesBounds().contains(mouseX, mouseY)) {
++                    if (!input.isSimulate())
++                        config.enabled.set(true);
++                    return Optional.of(this);
++                }
++            } else if (overlay.distractionFreeRecipes$isSearchEmpty()) {
++                if (leftClick && config.showToggleButton.get() && GuiHelpers.getShowRecipesBounds().contains(mouseX, mouseY)) {
++                    if (!input.isSimulate())
++                        config.enabled.set(false);
++                    return Optional.of(this);
++                }
++                if (GuiHelpers.searchBounds.contains(mouseX, mouseY))
++                    return Optional.of(this);
++            }
++        }
++
++        return delegate.handleUserInput(screen, input, keyBindings);
++    }
++
++    @Override
++    public void unfocus() {
++        delegate.unfocus();
++    }
++
++    @Override
++    public Optional<IUserInputHandler> handleMouseScrolled(double mouseX, double mouseY, double scrollDeltaX, double scrollDeltaY) {
++        if (overlay.distractionFreeRecipes$isHidden() && GuiHelpers.searchBounds.contains((int) mouseX, (int) mouseY))
++            return Optional.of(this);
++        return delegate.handleMouseScrolled(mouseX, mouseY, scrollDeltaX, scrollDeltaY);
++    }
++
++    @Override
++    public Optional<IUserInputHandler> handleMouseDragged(double mouseX, double mouseY, InputConstants.Key mouseKey, double dragX, double dragY) {
++        if (overlay.distractionFreeRecipes$isHidden())
++            return Optional.empty();
++        return delegate.handleMouseDragged(mouseX, mouseY, mouseKey, dragX, dragY);
++    }
++}
++#endif
+diff --git a/src/main/java/toni/distractionfreerecipes/mixins/JEICombinedInputHandlerMixin.java b/src/main/java/toni/distractionfreerecipes/mixins/JEICombinedInputHandlerMixin.java
+index 56deca2..ab0027e 100644
+--- a/src/main/java/toni/distractionfreerecipes/mixins/JEICombinedInputHandlerMixin.java
++++ b/src/main/java/toni/distractionfreerecipes/mixins/JEICombinedInputHandlerMixin.java
+@@ -1,5 +1,26 @@
+ package toni.distractionfreerecipes.mixins;
+ 
++#if AFTER_21_1
++import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
++import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
++import mezz.jei.common.input.IUserInputHandler;
++import mezz.jei.gui.overlay.IngredientListOverlay;
++import mezz.jei.gui.overlay.ingredients.IIngredientListOverlayContents;
++import org.spongepowered.asm.mixin.Mixin;
++import org.spongepowered.asm.mixin.injection.At;
++import toni.distractionfreerecipes.foundation.JEIAccessor;
++import toni.distractionfreerecipes.foundation.JEIInputHandler;
++
++// JEI 19.40+ removed IngredientGridWithNavigation$UserInputHandler; the grid's input handler is now
++// created by IIngredientListOverlayContents, so it is wrapped where IngredientListOverlay builds it.
++@Mixin(value = IngredientListOverlay.class #if FORGE , remap = false #endif)
++public class JEICombinedInputHandlerMixin {
++    @WrapOperation(method = "createInputHandler", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;createInputHandler()Lmezz/jei/common/input/IUserInputHandler;"))
++    private IUserInputHandler distractionFreeRecipes$createInputHandler(IIngredientListOverlayContents instance, Operation<IUserInputHandler> original) {
++        return new JEIInputHandler(original.call(instance), (JEIAccessor) this);
++    }
++}
++#else
+ import com.mojang.blaze3d.platform.InputConstants;
+ import mezz.jei.common.Internal;
+ import mezz.jei.common.input.IInternalKeyMappings;
+@@ -47,3 +68,4 @@ public class JEICombinedInputHandlerMixin {
+         }
+     }
+ }
++#endif
+diff --git a/src/main/java/toni/distractionfreerecipes/mixins/JEIIngredientListOverlayMixin.java b/src/main/java/toni/distractionfreerecipes/mixins/JEIIngredientListOverlayMixin.java
+index 085c4d7..36676f7 100644
+--- a/src/main/java/toni/distractionfreerecipes/mixins/JEIIngredientListOverlayMixin.java
++++ b/src/main/java/toni/distractionfreerecipes/mixins/JEIIngredientListOverlayMixin.java
+@@ -1,5 +1,99 @@
+ package toni.distractionfreerecipes.mixins;
+ 
++#if AFTER_21_1
++import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
++import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
++import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
++import mezz.jei.gui.input.GuiTextFieldFilter;
++import mezz.jei.gui.overlay.IngredientListOverlay;
++import mezz.jei.gui.overlay.ingredients.IIngredientListOverlayContents;
++import net.minecraft.client.Minecraft;
++import net.minecraft.client.gui.GuiGraphics;
++import org.spongepowered.asm.mixin.Final;
++import org.spongepowered.asm.mixin.Mixin;
++import org.spongepowered.asm.mixin.Shadow;
++import org.spongepowered.asm.mixin.injection.At;
++import org.spongepowered.asm.mixin.injection.Inject;
++import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
++import toni.distractionfreerecipes.foundation.GuiHelpers;
++import toni.distractionfreerecipes.foundation.JEIAccessor;
++import toni.distractionfreerecipes.foundation.config.AllConfigs;
++
++import java.util.stream.Stream;
++
++// JEI 19.40+ moved the ingredient grid behind IIngredientListOverlayContents and split drawing into
++// drawBackground / drawForeground / drawTooltips / drawOnForeground. Every call into the contents is
++// gated, so the search bar, config button and lookup history keep working while the grid is hidden.
++@Mixin(value = IngredientListOverlay.class #if FORGE , remap = false #endif)
++public abstract class JEIIngredientListOverlayMixin implements JEIAccessor {
++    @Shadow @Final private GuiTextFieldFilter searchField;
++    @Shadow @Final private IIngredientListOverlayContents contents;
++
++    @Override
++    public boolean distractionFreeRecipes$isSearchEmpty() {
++        return searchField.getValue().isEmpty();
++    }
++
++    @Override
++    public boolean distractionFreeRecipes$isHidden() {
++        return AllConfigs.client().enabled.get() && distractionFreeRecipes$isSearchEmpty();
++    }
++
++    @WrapWithCondition(method = "drawBackground", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;drawBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"))
++    private boolean distractionFreeRecipes$drawBackground(IIngredientListOverlayContents instance, GuiGraphics guiGraphics) {
++        var area = contents.getBackgroundArea();
++        GuiHelpers.searchBounds.setPosition(area.getX(), area.getY());
++        GuiHelpers.searchBounds.setWidth(area.getWidth());
++        GuiHelpers.searchBounds.setHeight(area.getHeight());
++        return !distractionFreeRecipes$isHidden();
++    }
++
++    @WrapWithCondition(method = "drawForeground", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;drawForeground(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/GuiGraphics;IIF)V"))
++    private boolean distractionFreeRecipes$drawForeground(IIngredientListOverlayContents instance, Minecraft minecraft, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
++        if (distractionFreeRecipes$isHidden()) {
++            GuiHelpers.drawShowRecipesButton(guiGraphics);
++            return false;
++        }
++        return true;
++    }
++
++    @Inject(method = "drawForeground", at = @At("TAIL"))
++    private void distractionFreeRecipes$drawHideButton(Minecraft minecraft, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
++        var config = AllConfigs.client();
++        if (!config.enabled.get() && config.showToggleButton.get() && ((IngredientListOverlay) (Object) this).isListDisplayed())
++            GuiHelpers.drawHideRecipesButton(guiGraphics);
++    }
++
++    @WrapWithCondition(method = "drawTooltips", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;drawTooltips(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/GuiGraphics;II)V"))
++    private boolean distractionFreeRecipes$drawTooltips(IIngredientListOverlayContents instance, Minecraft minecraft, GuiGraphics guiGraphics, int mouseX, int mouseY) {
++        return !distractionFreeRecipes$isHidden();
++    }
++
++    @WrapWithCondition(method = "drawOnForeground", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;drawOnForeground(Lnet/minecraft/client/gui/GuiGraphics;II)V"))
++    private boolean distractionFreeRecipes$drawOnForeground(IIngredientListOverlayContents instance, GuiGraphics guiGraphics, int mouseX, int mouseY) {
++        return !distractionFreeRecipes$isHidden();
++    }
++
++    // Hidden ingredients must not be hoverable, or R/U/bookmark keys act on invisible slots.
++    @WrapOperation(
++        method = {
++            "getIngredientUnderMouse(DD)Ljava/util/stream/Stream;",
++            "getIngredientUnderMouse()Ljava/util/Optional;",
++            "getIngredientUnderMouse(Lmezz/jei/api/ingredients/IIngredientType;)Ljava/lang/Object;"
++        },
++        at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;getIngredientUnderMouse(DD)Ljava/util/stream/Stream;"),
++        require = 3
++    )
++    private Stream<?> distractionFreeRecipes$getIngredientUnderMouse(IIngredientListOverlayContents instance, double mouseX, double mouseY, Operation<Stream<?>> original) {
++        return distractionFreeRecipes$isHidden() ? Stream.empty() : original.call(instance, mouseX, mouseY);
++    }
++
++    @WrapOperation(method = "getDraggableIngredientUnderMouse", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/ingredients/IIngredientListOverlayContents;getDraggableIngredientUnderMouse(DD)Ljava/util/stream/Stream;"))
++    private Stream<?> distractionFreeRecipes$getDraggableIngredientUnderMouse(IIngredientListOverlayContents instance, double mouseX, double mouseY, Operation<Stream<?>> original) {
++        return distractionFreeRecipes$isHidden() ? Stream.empty() : original.call(instance, mouseX, mouseY);
++    }
++}
++#else
+ import mezz.jei.gui.elements.GuiIconToggleButton;
+ import mezz.jei.gui.input.GuiTextFieldFilter;
+ import mezz.jei.gui.overlay.IngredientGridWithNavigation;
+@@ -60,4 +154,5 @@ public class JEIIngredientListOverlayMixin implements JEIAccessor {
+     public boolean distractionFreeRecipes$isSearchEmpty() {
+         return searchField.getValue().isEmpty();
+     }
+-}
+\ No newline at end of file
++}
++#endif
+-- 
+2.39.0.windows.1
+

@@ -1,0 +1,2527 @@
+From 9f930c3b2c21ed018e64f69f37b2977c8ed126c1 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Fri, 4 Sep 2026 00:42:03 +0800
+Subject: [PATCH 08/12] Fix remaining compileJava errors: tag renames,
+ use/useItemOn split, Tier API
+
+- Rework CommonTags.Items references: FD's real 1.21.1 CommonTags class was
+  trimmed down (verified against the real jar); missing constants now map to
+  either FD's renamed FOODS_* equivalents, NeoForge's own Tags.Items
+  convention tags, or the new DelightfulItemTags.SALAD_INGREDIENTS umbrella
+  (across DelightfulItemTagProvider and DelightfulRecipeProvider).
+- Split all block use() overrides into useItemOn()/useWithoutItem() per the
+  1.21 BlockBehaviour API split (CantaloupeBlock, CantaloupePlantBlock,
+  MiniMelonBlock, SalmonberryBushBlock, WildSalmonberriesBlock,
+  SlicedMelonBlock, SlicedMiniMelonBlock, SlicedGourdBlock,
+  SlicedGloomgourdBlock); fixed isValidBonemealTarget (dropped removed
+  isClient param) and getCloneItemStack (new LevelReader/BlockPos/BlockState
+  signature) across the same classes plus DPieBlock.
+- Fixed DelightfulMilkshakeCauldronBlock for LayeredCauldronBlock's new
+  (Precipitation, InteractionMap, Properties) constructor order and
+  CauldronInteraction.newInteractionMap(String) requiring a name.
+- Fixed DKnifeItem/KnifeItem constructor (attack damage/speed floats no
+  longer accepted; baked into FD's real KnifeItem base class instead).
+- Fixed FluixKnifeItem for the Holder<Enchantment>-based getEnchantmentLevel
+  and removed Enchantments.MOB_LOOTING (now a ResourceKey-only registry).
+- Removed AllthemodiumKnifeItem/AlfsteelTier's canBeDepleted()/getLevel()
+  overrides (both removed from Item/Tier with no replacement).
+- Fixed ForgeEvents wandering-trader offers for MerchantOffer's new ItemCost
+  parameter, KnifeEvents for igniteForSeconds, ModEvents for creative-tab key
+  lookup via BuiltInRegistries, DelightfulItems for BowlFoodItem's removal
+  (plain Item now), RockCandyItem for Holder<MobEffect>/formatDuration's new
+  tick-rate parameter, FurnaceFuelItem for getBlockEntity.
+- Fixed StairBlock's now-eager BlockState constructor arg in DelightfulBlocks.
+
+compileJava now succeeds cleanly (previously ~250 errors across 4 rounds of
+this session plus earlier sessions).
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ compile_output.txt                            | 434 ++++++++++--------
+ .../common/block/CantaloupeBlock.java         |  13 +-
+ .../common/block/CantaloupePlantBlock.java    |  22 +-
+ .../delightful/common/block/DPieBlock.java    |   7 +-
+ .../common/block/DelightfulBlocks.java        |  10 +-
+ .../DelightfulMilkshakeCauldronBlock.java     |  15 +-
+ .../common/block/MiniMelonBlock.java          |  15 +-
+ .../common/block/SalmonberryBushBlock.java    |  22 +-
+ .../common/block/SlicedGourdBlock.java        |  24 +-
+ .../common/block/SlicedMelonBlock.java        |  29 +-
+ .../common/block/SlicedMiniMelonBlock.java    |  28 +-
+ .../common/block/WildSalmonberriesBlock.java  |  21 +-
+ .../delightful/common/events/ForgeEvents.java |   7 +-
+ .../delightful/common/events/KnifeEvents.java |   2 +-
+ .../delightful/common/events/ModEvents.java   |   2 +-
+ .../common/item/DelightfulItems.java          |   2 +-
+ .../common/item/FurnaceFuelItem.java          |   2 +-
+ .../common/item/food/Nutrition.java           |  31 +-
+ .../common/item/food/RockCandyItem.java       |   6 +-
+ .../common/item/food/ShakeItem.java           |   3 +-
+ .../common/item/knife/DKnifeItem.java         |   6 +-
+ .../item/knife/compat/ae2/FluixKnifeItem.java |   9 +-
+ .../allthemodium/AllthemodiumKnifeItem.java   |   8 +-
+ .../compat/botania/ManasteelKnifeItem.java    |   2 +-
+ .../botania/mythicbotany/AlfsteelTier.java    |  13 +-
+ .../compat/create_sa/BlazingKnifeItem.java    |   3 +-
+ .../compat/twilightforest/FieryKnifeItem.java |  12 +-
+ .../undergarden/ForgottenKnifeItem.java       |   2 +-
+ .../common/loot/SmeltLootModifier.java        |   3 +-
+ .../common/world/ConfigEnabledFilter.java     |   3 +-
+ .../world/DelightfulPlacementModifiers.java   |   4 +-
+ .../compat/ars_nouveau/ArsNouveauCompat.java  |   4 +-
+ .../compat/brewinandchewin/AgedRoeItem.java   |   3 +-
+ .../brewinandchewin/BCEnderNectarCompat.java  |   2 +-
+ .../compat/brewinandchewin/BCLFLCompat.java   |   4 +-
+ .../compat/brewinandchewin/CaviarItem.java    |   3 +-
+ .../compat/brewinandchewin/DBoozeItem.java    |   3 +-
+ .../FermentedEnderNectarItem.java             |   3 +-
+ .../compat/collectorsreap/GummyItem.java      |   3 +-
+ .../undergarden/SlicedGloomgourdBlock.java    |   8 +-
+ .../data/gen/DelightfulBlockLoot.java         |   2 +-
+ .../data/gen/DelightfulItemTagProvider.java   |  56 +--
+ .../data/gen/DelightfulRecipeProvider.java    | 120 ++---
+ .../data/tags/DelightfulItemTags.java         |   3 +
+ 44 files changed, 533 insertions(+), 441 deletions(-)
+
+diff --git a/compile_output.txt b/compile_output.txt
+index fe6ab7ca..b5451e08 100644
+--- a/compile_output.txt
++++ b/compile_output.txt
+@@ -2,39 +2,13 @@
+ > Task :createMinecraftArtifacts UP-TO-DATE
+ 
+ > Task :compileJava
+-.\gradlew.bat : C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:178: error: cannot find symbol
++.\gradlew.bat : C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupeBlock.java:24: error: method does not override or implement a method from a supertype
+ At line:2 char:1
+ + .\gradlew.bat compileJava --console=plain 2>&1 | Out-String -Width 30 ...
+ + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-    + CategoryInfo          : NotSpecified: (C:\Users\eteil....not find symbol:String) [], RemoteException
++    + CategoryInfo          : NotSpecified: (C:\Users\eteil....rom a supertype:String) [], RemoteException
+     + FullyQualifiedErrorId : NativeCommandError
+  
+-		return BuiltInRegistries.ITEM.getValue(this.rl(name));
+-		                             ^
+-  symbol:   method getValue(ResourceLocation)
+-  location: variable ITEM of type DefaultedRegistry<Item>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:192: error: cannot find symbol
+-			Item returnItem = BuiltInRegistries.ITEM.getValue(this.rl(name));
+-			                                        ^
+-  symbol:   method getValue(ResourceLocation)
+-  location: variable ITEM of type DefaultedRegistry<Item>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:204: error: cannot find symbol
+-		return BuiltInRegistries.BLOCK.getValue(this.rl(name));
+-		                              ^
+-  symbol:   method getValue(ResourceLocation)
+-  location: variable BLOCK of type DefaultedRegistry<Block>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:210: error: cannot find symbol
+-			Block returnBlock = BuiltInRegistries.BLOCK.getValue(this.rl(name));
+-			                                           ^
+-  symbol:   method getValue(ResourceLocation)
+-  location: variable BLOCK of type DefaultedRegistry<Block>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:229: error: incompatible types: @org.jetbrains.annotations.NotNull MobEffect cannot be converted to Holder<MobEffect>
+-			new MobEffectInstance(backup, backupDur, backupAmp) :
+-			                      ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:230: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-			new MobEffectInstance(effect, duration, amplifier);
+-			                      ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupeBlock.java:24: error: method does not override or implement a method from a supertype
+ 	@Override
+ 	^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:39: error: CantaloupePlantBlock is not abstract and does not override abstract method isValidBonemealTarget(LevelReader,BlockPos,BlockState) in BonemealableBlock
+@@ -163,11 +137,6 @@ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\co
+ 		                                                            ^
+   symbol:   method getKey()
+   location: variable TAB_FARMERS_DELIGHT of type Supplier<CreativeModeTab>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ModEvents.java:121: error: cannot find symbol
+-				Item toast = BuiltInRegistries.ITEM.getValue(TOAST_WITH_BLUEBERRIES);
+-				                                   ^
+-  symbol:   method getValue(ResourceLocation)
+-  location: variable ITEM of type DefaultedRegistry<Item>
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\fluid\DFluidType.java:23: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
+ 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+ 	            ^
+@@ -176,115 +145,11 @@ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\co
+ 						          ^
+   symbol:   class BowlFoodItem
+   location: class DelightfulItems
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:15: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:19: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:23: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 1), 0.7F).build();
+-		                                                                 ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:26: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 300, 0), 1F).build();
+-		                                                                 ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:29: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 0), 1F)
+-		                                                                 ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:33: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:34: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 1), 1F)
+-		                                                                 ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:41: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:46: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(CosmopolitanCompat.getTracer(), 1200, 0), 1F).build();
+-		                                                                ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:51: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:52: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:56: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:59: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:64: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:67: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:68: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(SOBCompat.getToughness(), 1800, 0), 1F).build();
+-		                                                          ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:71: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:75: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:92: error: cannot find symbol
+ 		.meat()
+ 		^
+   symbol:   method meat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:104: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:108: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:111: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:114: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:117: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:120: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:124: error: cannot find symbol
+ 		.meat()
+ 		^
+@@ -310,112 +175,275 @@ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\co
+ 		^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:152: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:156: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:160: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:164: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:168: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 600, 0), 1F).build();
+-		                                                      ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:171: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 1200, 0), 1F).build();
+-		                                                      ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:172: error: cannot find symbol
+ 	public static final FoodProperties LAVENDER_TEA = (new FoodProperties.Builder()).alwaysEat()
+ 	                                                                                ^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:173: error: cannot find symbol
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
+-		                                                          ^
+-  symbol:   method get()
+-  location: variable NOURISHMENT of type Holder<MobEffect>
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:174: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 600, 0), 1F).build();
+-		                                                            ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:175: error: cannot find symbol
+ 	public static final FoodProperties AZALEA_TEA = (new FoodProperties.Builder()).alwaysEat()
+ 	                                                                              ^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:178: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getYellowTeaEffect(), 4800, 1), 1F).build();
+-		                                                                ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:179: error: cannot find symbol
+ 	public static final FoodProperties MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
+ 	                                                                                ^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:182: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:183: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
+-		                                                            ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:184: error: cannot find symbol
+ 	public static final FoodProperties BERRY_MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
+ 	                                                                                      ^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:187: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:188: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
+-		                                                            ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:190: error: cannot find symbol
+ 		.nutrition(4).saturationModifier(0F).alwaysEat()
+ 		                                    ^
+   symbol:   method alwaysEat()
+   location: class Builder
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:192: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 2), 1F)
+-		                                                            ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:193: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(ExquisitoCompat.getResonance(), 500, 0), 1F)
+-		                                                                ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:194: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 2400, 0), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:199: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 500, 1), 1F)
+-		                                                               ^
+-C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:200: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
+-		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 400, 0), 1F).build();
+-		                                                            ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:202: error: cannot find symbol
+ 		.nutrition(2).saturationModifier(1.5F).alwaysEat()
+ 		                                      ^
+   symbol:   method alwaysEat()
+   location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:209: error: cannot find symbol
++		.nutrition(2).saturationModifier(1.5F).alwaysEat()
++		                                      ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:226: error: cannot find symbol
++		.nutrition(2).saturationModifier(0F).alwaysEat()
++		                                    ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:229: error: cannot find symbol
++		.nutrition(2).saturationModifier(0F).alwaysEat()
++		                                    ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:232: error: cannot find symbol
++		.nutrition(2).saturationModifier(0F).alwaysEat()
++		                                    ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\RockCandyItem.java:101: error: incompatible types: Holder<MobEffect> cannot be converted to MobEffect
++				MobEffect effect = effectInstance.getEffect();
++				                                           ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\RockCandyItem.java:106: error: method formatDuration in class MobEffectUtil cannot be applied to given types;
++					effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F)).append(")");
++					                                                   ^
++  required: MobEffectInstance,float,float
++  found:    MobEffectInstance,float
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\RockCandyItem.java:113: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\ShakeItem.java:13: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\FurnaceFuelItem.java:73: error: cannot find symbol
++			con.getLevel().getExistingBlockEntity(con.getClickedPos()),
++			              ^
++  symbol:   method getExistingBlockEntity(BlockPos)
++  location: class Level
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\DKnifeItem.java:32: error: constructor KnifeItem in class KnifeItem cannot be applied to given types;
++		super(tier, 0.5F, -2F, properties);
++		^
++  required: Tier,Properties
++  found:    Tier,float,float,Properties
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\DKnifeItem.java:38: error: constructor KnifeItem in class KnifeItem cannot be applied to given types;
++		super(tier, 0.5F, -2F, properties);
++		^
++  required: Tier,Properties
++  found:    Tier,float,float,Properties
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\DKnifeItem.java:44: error: constructor KnifeItem in class KnifeItem cannot be applied to given types;
++		super(tier, 0.5F, -2F, properties);
++		^
++  required: Tier,Properties
++  found:    Tier,float,float,Properties
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\ae2\FluixKnifeItem.java:20: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\ae2\FluixKnifeItem.java:22: error: cannot find symbol
++		if (enchantment.equals(Enchantments.MOB_LOOTING)) {
++		                                   ^
++  symbol:   variable MOB_LOOTING
++  location: class Enchantments
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\ae2\FluixKnifeItem.java:23: error: cannot find symbol
++			return Math.max(1, super.getEnchantmentLevel(stack, Enchantments.MOB_LOOTING));
++			                                                                ^
++  symbol:   variable MOB_LOOTING
++  location: class Enchantments
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\ae2\FluixKnifeItem.java:25: error: incompatible types: Enchantment cannot be converted to Holder<Enchantment>
++		return super.getEnchantmentLevel(stack, enchantment);
++		                                        ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\ae2\FluixKnifeItem.java:30: error: cannot find symbol
++		return List.of(Component.literal("Always has at least ").append(Enchantments.MOB_LOOTING.getFullname(1)));
++		                                                                            ^
++  symbol:   variable MOB_LOOTING
++  location: class Enchantments
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\allthemodium\AllthemodiumKnifeItem.java:49: error: name clash: damageItem(ItemStack,int,T#1,Consumer<T#1>) in AllthemodiumKnifeItem and damageItem(ItemStack,int,T#2,Consumer<Item>) in 
++IItemExtension have the same erasure, yet neither overrides the other
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	                                    ^
++  where T#1,T#2 are type-variables:
++    T#1 extends LivingEntity declared in method <T#1>damageItem(ItemStack,int,T#1,Consumer<T#1>)
++    T#2 extends LivingEntity declared in method <T#2>damageItem(ItemStack,int,T#2,Consumer<Item>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\allthemodium\AllthemodiumKnifeItem.java:48: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\allthemodium\AllthemodiumKnifeItem.java:53: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\ManasteelKnifeItem.java:32: error: name clash: damageItem(ItemStack,int,T#1,Consumer<T#1>) in ManasteelKnifeItem and damageItem(ItemStack,int,T#2,Consumer<Item>) in IItemExtension have the 
++same erasure, yet neither overrides the other
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	                                    ^
++  where T#1,T#2 are type-variables:
++    T#1 extends LivingEntity declared in method <T#1>damageItem(ItemStack,int,T#1,Consumer<T#1>)
++    T#2 extends LivingEntity declared in method <T#2>damageItem(ItemStack,int,T#2,Consumer<Item>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\ManasteelKnifeItem.java:31: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\ManasteelKnifeItem.java:33: error: incompatible types: Consumer<T> cannot be converted to Consumer<Item>
++		return super.damageItem(stack, amount, entity, onBroken);
++		                                               ^
++  where T is a type-variable:
++    T extends LivingEntity declared in method <T>damageItem(ItemStack,int,T,Consumer<T>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\mythicbotany\AlfsteelTier.java:11: error: AlfsteelTier is not abstract and does not override abstract method getIncorrectBlocksForDrops() in Tier
++public class AlfsteelTier implements Tier {
++       ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\mythicbotany\AlfsteelTier.java:31: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\botania\mythicbotany\AlfsteelTier.java:33: error: cannot find symbol
++		return terra().getLevel() + 1;
++		              ^
++  symbol:   method getLevel()
++  location: interface Tier
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\create_sa\BlazingKnifeItem.java:24: error: name clash: damageItem(ItemStack,int,T#1,Consumer<T#1>) in BlazingKnifeItem and damageItem(ItemStack,int,T#2,Consumer<Item>) in IItemExtension have the 
++same erasure, yet neither overrides the other
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	                                    ^
++  where T#1,T#2 are type-variables:
++    T#1 extends LivingEntity declared in method <T#1>damageItem(ItemStack,int,T#1,Consumer<T#1>)
++    T#2 extends LivingEntity declared in method <T#2>damageItem(ItemStack,int,T#2,Consumer<Item>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\create_sa\BlazingKnifeItem.java:23: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\create_sa\BlazingKnifeItem.java:28: error: incompatible types: Consumer<T> cannot be converted to Consumer<Item>
++		return super.damageItem(stack, amount, entity, onBroken);
++		                                               ^
++  where T is a type-variable:
++    T extends LivingEntity declared in method <T>damageItem(ItemStack,int,T,Consumer<T>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\twilightforest\FieryKnifeItem.java:45: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\twilightforest\FieryKnifeItem.java:47: error: incomparable types: @org.jetbrains.annotations.NotNull Enchantment and ResourceKey<Enchantment>
++		return enchantment != Enchantments.FIRE_ASPECT && super.canApplyAtEnchantingTable(stack, enchantment);
++		                   ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\twilightforest\FieryKnifeItem.java:47: error: cannot find symbol
++		return enchantment != Enchantments.FIRE_ASPECT && super.canApplyAtEnchantingTable(stack, enchantment);
++		                                                       ^
++  symbol: method canApplyAtEnchantingTable(@org.jetbrains.annotations.NotNull ItemStack,@org.jetbrains.annotations.NotNull Enchantment)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\twilightforest\FieryKnifeItem.java:52: error: cannot find symbol
++		return !EnchantmentHelper.getEnchantments(book).containsKey(Enchantments.FIRE_ASPECT) && super.isBookEnchantable(stack, book);
++		                         ^
++  symbol:   method getEnchantments(ItemStack)
++  location: class EnchantmentHelper
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\knife\compat\undergarden\ForgottenKnifeItem.java:58: error: method canChangeDimensions in class Entity cannot be applied to given types;
++			e.getEntity().canChangeDimensions()
++			             ^
++  required: Level,Level
++  found:    no arguments
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\loot\SmeltLootModifier.java:40: error: cannot find symbol
++					.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack, stack.getCount() * itemStack.getCount()))
++					                                   ^
++  symbol:   method copyStackWithSize(ItemStack,int)
++  location: class ItemHandlerHelper
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\loot\SmeltLootModifier.java:41: error: incompatible types: Object cannot be converted to ItemStack
++					.orElse(stack);
++					       ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\world\DelightfulPlacementModifiers.java:18: error: incompatible types: bad return type in lambda expression
++		return () -> codec;
++		             ^
++    Codec<P> cannot be converted to MapCodec<P>
++  where P is a type-variable:
++    P extends PlacementModifier declared in method <P>typeConvert(Codec<P>)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\ars_nouveau\ArsNouveauCompat.java:29: error: cannot find symbol
++			.nutrition(2).saturationModifier(1.5F).alwaysEat()
++			                                      ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\ars_nouveau\ArsNouveauCompat.java:33: error: cannot find symbol
++			.nutrition(2).saturationModifier(0F).alwaysEat()
++			                                    ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\collectorsreap\GummyItem.java:12: error: method does not override or implement a method from a supertype
++	@Override
++	^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\brewinandchewin\AgedRoeFluidType.java:24: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
+ 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+ 	            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\brewinandchewin\DBoozeItem.java:18: error: incompatible types: Fluid cannot be converted to Supplier<Fluid>
++		super(fluid, properties);
++		      ^
+ C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\brewinandchewin\CaviarFluidType.java:24: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
+ 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+ 	            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulBlockLoot.java:185: error: incompatible types: bad return type in method reference
++		return DelightfulBlocks.BLOCKS.getEntries()
++		       ^
++    Iterator<CAP#1> cannot be converted to Iterator<Block>
++  where CAP#1 is a fresh type-variable:
++    CAP#1 extends Block from capture of ? extends Block
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:48: error: cannot find symbol
++		this.tag(ItemTags.FOX_FOOD).addTag(CommonTags.Items.BERRIES);
++		                                                   ^
++  symbol:   variable BERRIES
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:110: error: cannot find symbol
++		var toolsknives = this.tag(CommonTags.Items.TOOLS_KNIVES);
++		                                           ^
++  symbol:   variable TOOLS_KNIVES
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:173: error: cannot find symbol
++		this.tag(CommonTags.Items.CROPS).replace(false)
++		                         ^
++  symbol:   variable CROPS
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:181: error: cannot find symbol
++		this.tag(CommonTags.Items.SALAD_INGREDIENTS).addTag(DelightfulItemTags.SALAD_INGREDIENTS_CLOVER);
++		                         ^
++  symbol:   variable SALAD_INGREDIENTS
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:192: error: cannot find symbol
++		this.tag(CommonTags.Items.VEGETABLES).replace(false)
++		                         ^
++  symbol:   variable VEGETABLES
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:238: error: cannot find symbol
++			.addTag(CommonTags.Items.BERRIES)
++			                        ^
++  symbol:   variable BERRIES
++  location: class Items
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\data\gen\DelightfulItemTagProvider.java:253: error: cannot find symbol
++		this.tag(CommonTags.Items.BERRIES).replace(false)
++		                         ^
++  symbol:   variable BERRIES
++  location: class Items
+ Note: Some input files use or override a deprecated API.
+ Note: Recompile with -Xlint:deprecation for details.
++Note: Some input files use unchecked or unsafe operations.
++Note: Recompile with -Xlint:unchecked for details.
+ Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+ 100 errors
+ 3 warnings
+-only showing the first 100 errors, of 265 total; use -Xmaxerrs if you would like to see more
++only showing the first 100 errors, of 181 total; use -Xmaxerrs if you would like to see more
+ 
+ > Task :compileJava FAILED
+ 
+@@ -429,6 +457,6 @@ Execution failed for task ':compileJava'.
+ > Run with --info option to get more log output.
+ > Run with --scan to get full insights.
+ 
+-BUILD FAILED in 5s
++BUILD FAILED in 7s
+ 3 actionable tasks: 1 executed, 2 up-to-date
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/CantaloupeBlock.java b/src/main/java/net/brnbrd/delightful/common/block/CantaloupeBlock.java
+index 6a2ed197..bbf7a592 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/CantaloupeBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/CantaloupeBlock.java
+@@ -6,9 +6,10 @@ import net.minecraft.core.Direction;
+ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.world.InteractionHand;
+-import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
++import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.phys.BlockHitResult;
+@@ -22,8 +23,8 @@ public class CantaloupeBlock extends MiniBlock {
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		if (player.getItemInHand(hand).is(ModTags.Items.KNIVES)) {
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (stack.is(ModTags.Items.KNIVES)) {
+ 			if (!level.isClientSide()) {
+ 				SlicedMiniMelonBlock sliced = (SlicedMiniMelonBlock) DelightfulBlocks.SLICED_CANTALOUPE.get();
+ 				level.setBlock(pos, sliced.defaultBlockState(), 2);
+@@ -36,10 +37,10 @@ public class CantaloupeBlock extends MiniBlock {
+ 					player
+ 				);
+ 				level.playSound(null, pos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1F, 1F);
+-				player.getItemInHand(hand).hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
++				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+ 			}
+-			return InteractionResult.sidedSuccess(level.isClientSide());
++			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+ 		}
+-		return InteractionResult.FAIL;
++		return ItemInteractionResult.FAIL;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java b/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
+index f16a3748..b8824b07 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/CantaloupePlantBlock.java
+@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.util.RandomSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+@@ -59,7 +60,7 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		return Util.getStack(this.isMaxAge(state) ? DelightfulItems.CANTALOUPE : DelightfulItems.CANTALOUPE_SEEDS);
+ 	}
+ 
+@@ -124,11 +125,16 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 	}
+ 
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+-		boolean flag = this.isMaxAge(state);
+-		if (!flag && pPlayer.getItemInHand(pHand).is(Items.BONE_MEAL)) {
+-			return InteractionResult.PASS;
+-		} else if (flag) {
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (!this.isMaxAge(state) && stack.is(Items.BONE_MEAL)) {
++			return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
++		}
++		return super.useItemOn(stack, state, level, pos, player, hand, hit);
++	}
++
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull BlockHitResult pHit) {
++		if (this.isMaxAge(state)) {
+ 			popResource(pLevel, pPos, Util.getStack(DelightfulItems.CANTALOUPE));
+ 			pLevel.playSound(null, pPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1F, 0.8F + pLevel.random.nextFloat() * 0.4F);
+ 			BlockState blockstate = state.setValue(AGE, 0);
+@@ -136,7 +142,7 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 			pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pPlayer, blockstate));
+ 			return InteractionResult.sidedSuccess(pLevel.isClientSide);
+ 		} else {
+-			return super.use(state, pLevel, pPos, pPlayer, pHand, pHit);
++			return super.useWithoutItem(state, pLevel, pPos, pPlayer, pHit);
+ 		}
+ 	}
+ 
+@@ -146,7 +152,7 @@ public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock
+ 	}
+ 
+ 	@Override
+-	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState state, boolean pIsClient) {
++	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState state) {
+ 		return !this.isMaxAge(state);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/DPieBlock.java b/src/main/java/net/brnbrd/delightful/common/block/DPieBlock.java
+index 5fe2f885..f80ab7aa 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/DPieBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/DPieBlock.java
+@@ -8,10 +8,9 @@ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+-import net.minecraft.world.level.BlockGetter;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.BlockState;
+-import net.minecraft.world.phys.HitResult;
+ import org.jetbrains.annotations.NotNull;
+ import vectorwing.farmersdelight.common.block.PieBlock;
+ import vectorwing.farmersdelight.common.registry.ModBlocks;
+@@ -43,8 +42,8 @@ public class DPieBlock extends PieBlock {
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		ItemStack stack = this.getStack();
+-		return !stack.isEmpty() ? stack : super.getCloneItemStack(state, target, level, pos, player);
++		return !stack.isEmpty() ? stack : super.getCloneItemStack(level, pos, state);
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java b/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
+index 51dc58ec..bbc16432 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/DelightfulBlocks.java
+@@ -122,13 +122,13 @@ public class DelightfulBlocks {
+ 	// (see DelightfulCauldronInteractions removal); these always use a plain empty interaction map
+ 	// now instead of Modid.N.loaded() ? DelightfulCauldronInteractions... : CauldronInteraction.newInteractionMap().
+ 	public static final DeferredHolder<Block, Block> SALMONBERRY_MILKSHAKE_CAULDRON = BLOCKS.register("salmonberry_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap("salmonberry_milkshake"))
+ 	);
+ 	public static final DeferredHolder<Block, Block> MATCHA_MILKSHAKE_CAULDRON = BLOCKS.register("matcha_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap("matcha_milkshake"))
+ 	);
+ 	public static final DeferredHolder<Block, Block> SOURCE_BERRY_MILKSHAKE_CAULDRON = BLOCKS.register("source_berry_milkshake_cauldron",
+-		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap("source_berry_milkshake"))
+ 	);
+ 	public static final DeferredHolder<Block, Block> BLUEBERRY_SACK = BLOCKS.register("blueberry_sack",
+ 		() -> new Block(SACK(MapColor.TERRACOTTA_BLUE)));
+@@ -150,7 +150,7 @@ public class DelightfulBlocks {
+ 		() -> new Block(COOKIE(MapColor.COLOR_YELLOW)));
+ 	public static final DeferredHolder<Block, StairBlock> GLOW_JAM_COOKIE_TILE_STAIRS = BLOCKS.register("glow_jam_cookie_tile_stairs",
+ 		() -> new StairBlock(
+-			GLOW_JAM_COOKIE_TILES.get()::defaultBlockState,
++			GLOW_JAM_COOKIE_TILES.get().defaultBlockState(),
+ 			COOKIE(MapColor.COLOR_YELLOW)
+ 		));
+ 	public static final DeferredHolder<Block, SlabBlock> GLOW_JAM_COOKIE_TILE_SLAB = BLOCKS.register("glow_jam_cookie_tile_slab",
+@@ -161,7 +161,7 @@ public class DelightfulBlocks {
+ 		() -> new Block(COOKIE(MapColor.COLOR_PURPLE)));
+ 	public static final DeferredHolder<Block, StairBlock> SOURCE_BERRY_COOKIE_TILE_STAIRS = BLOCKS.register("source_berry_cookie_tile_stairs",
+ 		() -> new StairBlock(
+-			SOURCE_BERRY_COOKIE_TILES.get()::defaultBlockState,
++			SOURCE_BERRY_COOKIE_TILES.get().defaultBlockState(),
+ 			COOKIE(MapColor.COLOR_PURPLE)
+ 		));
+ 	public static final DeferredHolder<Block, SlabBlock> SOURCE_BERRY_COOKIE_TILE_SLAB = BLOCKS.register("source_berry_cookie_tile_slab",
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/DelightfulMilkshakeCauldronBlock.java b/src/main/java/net/brnbrd/delightful/common/block/DelightfulMilkshakeCauldronBlock.java
+index 78a418f4..c15d1f47 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/DelightfulMilkshakeCauldronBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/DelightfulMilkshakeCauldronBlock.java
+@@ -2,28 +2,21 @@ package net.brnbrd.delightful.common.block;
+ 
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.core.cauldron.CauldronInteraction;
+-import net.minecraft.world.entity.player.Player;
+-import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+-import net.minecraft.world.level.BlockGetter;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.biome.Biome;
+ import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.block.LayeredCauldronBlock;
+ import net.minecraft.world.level.block.state.BlockState;
+-import net.minecraft.world.phys.HitResult;
+-import java.util.Map;
+-import java.util.function.Predicate;
+ 
+ public class DelightfulMilkshakeCauldronBlock extends LayeredCauldronBlock {
+-	public static final Predicate<Biome.Precipitation> FALSE = (precipitation) -> false;
+-
+-	public DelightfulMilkshakeCauldronBlock(Map<Item, CauldronInteraction> map) {
+-		super(Properties.ofFullCopy(Blocks.CAULDRON), FALSE, map);
++	public DelightfulMilkshakeCauldronBlock(CauldronInteraction.InteractionMap map) {
++		super(Biome.Precipitation.NONE, map, Properties.ofFullCopy(Blocks.CAULDRON));
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		return new ItemStack(Items.CAULDRON);
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/MiniMelonBlock.java b/src/main/java/net/brnbrd/delightful/common/block/MiniMelonBlock.java
+index 6e1a7ca2..f9fbf2bf 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/MiniMelonBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/MiniMelonBlock.java
+@@ -8,9 +8,10 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.util.RandomSource;
+ import net.minecraft.world.InteractionHand;
+-import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
++import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Blocks;
+@@ -53,7 +54,7 @@ public class MiniMelonBlock extends MiniBlock implements BonemealableBlock {
+ 	}
+ 
+ 	@Override
+-	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, boolean pIsClient) {
++	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState) {
+ 		return true;
+ 	}
+ 
+@@ -64,8 +65,8 @@ public class MiniMelonBlock extends MiniBlock implements BonemealableBlock {
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		if (player.getItemInHand(hand).is(ModTags.Items.KNIVES)) {
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (stack.is(ModTags.Items.KNIVES)) {
+ 			if (!level.isClientSide()) {
+ 				SlicedMiniMelonBlock sliced = (SlicedMiniMelonBlock) DelightfulBlocks.SLICED_MINI_MELON.get();
+ 				level.setBlock(pos, sliced.defaultBlockState(), 2);
+@@ -78,10 +79,10 @@ public class MiniMelonBlock extends MiniBlock implements BonemealableBlock {
+ 					player
+ 				);
+ 				level.playSound(null, pos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1F, 1F);
+-				player.getItemInHand(hand).hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
++				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+ 			}
+-			return InteractionResult.sidedSuccess(level.isClientSide());
++			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+ 		}
+-		return InteractionResult.FAIL;
++		return ItemInteractionResult.FAIL;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/SalmonberryBushBlock.java b/src/main/java/net/brnbrd/delightful/common/block/SalmonberryBushBlock.java
+index 2390c86b..8fad11e6 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/SalmonberryBushBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/SalmonberryBushBlock.java
+@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.util.RandomSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+@@ -52,7 +53,7 @@ public class SalmonberryBushBlock extends BushBlock implements BonemealableBlock
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		return state.getValue(AGE) <= 2 ? Util.getStack(DelightfulItems.SALMONBERRY_PIPS) : DelightfulItems.SALMONBERRIES.get().getDefaultInstance();
+ 	}
+ 
+@@ -96,11 +97,18 @@ public class SalmonberryBushBlock extends BushBlock implements BonemealableBlock
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++	protected ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (!this.isMaxAge(state) && stack.is(Items.BONE_MEAL)) {
++			return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
++		}
++		return super.useItemOn(stack, state, level, pos, player, hand, hit);
++	}
++
++	@SuppressWarnings("deprecation")
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hit) {
+ 		boolean maxAge = this.isMaxAge(state);
+-		if (!maxAge && player.getItemInHand(hand).is(Items.BONE_MEAL)) {
+-			return InteractionResult.PASS;
+-		} else if (state.getValue(AGE) > 2) {
++		if (state.getValue(AGE) > 2) {
+ 			popResource(level, pos, Util.getStack(DelightfulItems.SALMONBERRIES, (maxAge ? 2 + level.random.nextInt(2) : 1)));
+ 			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1F, 0.8F + level.random.nextFloat() * 0.4F);
+ 			BlockState blockstate = state.setValue(AGE, 1);
+@@ -108,7 +116,7 @@ public class SalmonberryBushBlock extends BushBlock implements BonemealableBlock
+ 			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, blockstate));
+ 			return InteractionResult.sidedSuccess(level.isClientSide());
+ 		} else {
+-			return super.use(state, level, pos, player, hand, hit);
++			return super.useWithoutItem(state, level, pos, player, hit);
+ 		}
+ 	}
+ 
+@@ -118,7 +126,7 @@ public class SalmonberryBushBlock extends BushBlock implements BonemealableBlock
+ 	}
+ 
+ 	@Override
+-	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState state, boolean pIsClient) {
++	public boolean isValidBonemealTarget(@NotNull LevelReader pLevel, @NotNull BlockPos pPos, @NotNull BlockState state) {
+ 		return !this.isMaxAge(state);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/SlicedGourdBlock.java b/src/main/java/net/brnbrd/delightful/common/block/SlicedGourdBlock.java
+index 7e9c02df..3e21881d 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/SlicedGourdBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/SlicedGourdBlock.java
+@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
+@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.context.BlockPlaceContext;
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.Level;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.StateDefinition;
+@@ -41,7 +43,7 @@ public class SlicedGourdBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		ItemStack item = this.getSliceItem();
+ 		return item != null ? item : ItemStack.EMPTY;
+ 	}
+@@ -81,14 +83,24 @@ public class SlicedGourdBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		ItemStack heldStack = player.getItemInHand(hand);
+-		if (heldStack.is(ModTags.Items.KNIVES)) {
+-			return this.cutSlice(level, pos, state, player, hand, hit);
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (stack.is(ModTags.Items.KNIVES)) {
++			return toItemResult(this.cutSlice(level, pos, state, player, hand, hit), level);
+ 		}
++		return toItemResult(this.consumeBite(level, pos, state, player), level);
++	}
++
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull BlockHitResult hit) {
+ 		return this.consumeBite(level, pos, state, player);
+ 	}
+ 
++	private static ItemInteractionResult toItemResult(InteractionResult result, Level level) {
++		if (result == InteractionResult.PASS) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
++		if (result == InteractionResult.FAIL) return ItemInteractionResult.FAIL;
++		return ItemInteractionResult.sidedSuccess(level.isClientSide());
++	}
++
+ 	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
+ 		if (!playerIn.canEat(false)) {
+ 			return InteractionResult.PASS;
+@@ -154,7 +166,7 @@ public class SlicedGourdBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull PathComputationType type) {
++	protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType type) {
+ 		return false;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/SlicedMelonBlock.java b/src/main/java/net/brnbrd/delightful/common/block/SlicedMelonBlock.java
+index 83a72690..6f2f3f1c 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/SlicedMelonBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/SlicedMelonBlock.java
+@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
+@@ -18,6 +19,7 @@ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.context.BlockPlaceContext;
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.Level;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.StateDefinition;
+@@ -46,7 +48,7 @@ public class SlicedMelonBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		return this.getSliceItem();
+ 	}
+ 
+@@ -97,16 +99,27 @@ public class SlicedMelonBlock extends Block implements ISliceable {
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		ItemStack heldStack = player.getItemInHand(hand);
+-		if (heldStack.is(ModTags.Items.KNIVES)) {
+-			return this.cutSlice(level, pos, state, player, hand, hit);
+-		} else if (heldStack.is(Items.GLASS_BOTTLE) && DelightfulConfig.MELON_JUICING.get()) {
+-			return this.bottleJuice(level, pos, state, player, hand);
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (stack.is(ModTags.Items.KNIVES)) {
++			return toItemResult(this.cutSlice(level, pos, state, player, hand, hit), level);
++		} else if (stack.is(Items.GLASS_BOTTLE) && DelightfulConfig.MELON_JUICING.get()) {
++			return toItemResult(this.bottleJuice(level, pos, state, player, hand), level);
+ 		}
++		return toItemResult(this.consumeBite(level, pos, state, player), level);
++	}
++
++	@SuppressWarnings("deprecation")
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull BlockHitResult hit) {
+ 		return this.consumeBite(level, pos, state, player);
+ 	}
+ 
++	private static ItemInteractionResult toItemResult(InteractionResult result, Level level) {
++		if (result == InteractionResult.PASS) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
++		if (result == InteractionResult.FAIL) return ItemInteractionResult.FAIL;
++		return ItemInteractionResult.sidedSuccess(level.isClientSide());
++	}
++
+ 	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
+ 		if (!playerIn.canEat(false)) {
+ 			return InteractionResult.PASS;
+@@ -193,7 +206,7 @@ public class SlicedMelonBlock extends Block implements ISliceable {
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull PathComputationType type) {
++	protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType type) {
+ 		return false;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java b/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
+index 17d127c9..90730e94 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/SlicedMiniMelonBlock.java
+@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
+@@ -18,6 +19,7 @@ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.context.BlockPlaceContext;
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.Level;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.StateDefinition;
+@@ -50,7 +52,7 @@ public class SlicedMiniMelonBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		return this.getSliceItem();
+ 	}
+ 
+@@ -99,16 +101,26 @@ public class SlicedMiniMelonBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		ItemStack heldStack = player.getItemInHand(hand);
+-		if (heldStack.is(ModTags.Items.KNIVES)) {
+-			return this.cutSlice(level, pos, state, player, hand, hit);
+-		} else if (heldStack.is(Items.GLASS_BOTTLE) && this.juiceItem.get() != null && DelightfulConfig.MELON_JUICING.get()) {
+-			return this.bottleJuice(level, pos, state, player, hand);
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		if (stack.is(ModTags.Items.KNIVES)) {
++			return toItemResult(this.cutSlice(level, pos, state, player, hand, hit), level);
++		} else if (stack.is(Items.GLASS_BOTTLE) && this.juiceItem.get() != null && DelightfulConfig.MELON_JUICING.get()) {
++			return toItemResult(this.bottleJuice(level, pos, state, player, hand), level);
+ 		}
++		return toItemResult(this.consumeBite(level, pos, state, player), level);
++	}
++
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull BlockHitResult hit) {
+ 		return this.consumeBite(level, pos, state, player);
+ 	}
+ 
++	private static ItemInteractionResult toItemResult(InteractionResult result, Level level) {
++		if (result == InteractionResult.PASS) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
++		if (result == InteractionResult.FAIL) return ItemInteractionResult.FAIL;
++		return ItemInteractionResult.sidedSuccess(level.isClientSide());
++	}
++
+ 	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
+ 		if (!playerIn.canEat(false)) {
+ 			return InteractionResult.PASS;
+@@ -192,7 +204,7 @@ public class SlicedMiniMelonBlock extends Block implements ISliceable {
+ 	}
+ 
+ 	@Override
+-	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull PathComputationType type) {
++	protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType type) {
+ 		return false;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java b/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
+index e675f29f..89361084 100644
+--- a/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
++++ b/src/main/java/net/brnbrd/delightful/common/block/WildSalmonberriesBlock.java
+@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.sounds.SoundSource;
+ import net.minecraft.world.InteractionHand;
+ import net.minecraft.world.InteractionResult;
++import net.minecraft.world.ItemInteractionResult;
+ import net.minecraft.world.effect.MobEffects;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.player.Player;
+@@ -28,16 +29,26 @@ public class WildSalmonberriesBlock extends WildCropBlock {
+ 
+ 	@SuppressWarnings("deprecation")
+ 	@Override
+-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+-		final ItemStack itemInHand = player.getItemInHand(hand);
+-		final boolean isShears = itemInHand.is(Tags.Items.TOOLS_SHEAR);
++	protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
++		final boolean isShears = stack.is(Tags.Items.TOOLS_SHEAR);
++		harvest(state, level, pos, player, isShears);
++		if (isShears) stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
++		return ItemInteractionResult.sidedSuccess(level.isClientSide());
++	}
++
++	@SuppressWarnings("deprecation")
++	@Override
++	protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull BlockHitResult hit) {
++		harvest(state, level, pos, player, false);
++		return InteractionResult.sidedSuccess(level.isClientSide());
++	}
++
++	private void harvest(BlockState state, Level level, BlockPos pos, Player player, boolean isShears) {
+ 		popResource(level, pos, Util.getStack(DelightfulItems.SALMONBERRIES, isShears ? 2 : 1));
+ 		level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1F, 0.8F + level.random.nextFloat() * 0.4F);
+-		if (isShears) itemInHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+ 		final BlockState newState = this.getPickedBushState();
+ 		level.setBlock(pos, newState, 2);
+ 		level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
+-		return InteractionResult.sidedSuccess(level.isClientSide());
+ 	}
+ 
+ 	private BlockState getPickedBushState() {
+diff --git a/src/main/java/net/brnbrd/delightful/common/events/ForgeEvents.java b/src/main/java/net/brnbrd/delightful/common/events/ForgeEvents.java
+index c6535d2f..1ec3958e 100644
+--- a/src/main/java/net/brnbrd/delightful/common/events/ForgeEvents.java
++++ b/src/main/java/net/brnbrd/delightful/common/events/ForgeEvents.java
+@@ -18,6 +18,7 @@ import net.minecraft.world.entity.npc.VillagerTrades;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
++import net.minecraft.world.item.trading.ItemCost;
+ import net.minecraft.world.item.trading.MerchantOffer;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.Block;
+@@ -70,17 +71,17 @@ public class ForgeEvents {
+ 	void onWanderingTrader(WandererTradesEvent e) {
+ 		final List<VillagerTrades.ItemListing> trades = e.getGenericTrades();
+ 		if (Util.enabled(DelightfulItems.SALMONBERRIES) && Util.enabled(DelightfulItems.SALMONBERRY_PIPS)) {
+-			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 2), Util.getStack(DelightfulItems.SALMONBERRY_PIPS), 5, 1, 1));
++			trades.add((ent, r) -> new MerchantOffer(new ItemCost(Items.EMERALD, 2), Util.getStack(DelightfulItems.SALMONBERRY_PIPS), 5, 1, 1));
+ 		}
+ 		if (Util.enabled(DelightfulItems.CANTALOUPE) && Util.enabled(DelightfulItems.CANTALOUPE_SLICE)) {
+-			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 3), Util.getStack(DelightfulItems.CANTALOUPE_SLICE, 8), 5, 1, 1));
++			trades.add((ent, r) -> new MerchantOffer(new ItemCost(Items.EMERALD, 3), Util.getStack(DelightfulItems.CANTALOUPE_SLICE, 8), 5, 1, 1));
+ 		}
+ 		if (
+ 			Util.enabled(DelightfulItems.CANTALOUPE) &&
+ 			Util.enabled(DelightfulItems.STUFFED_CANTALOUPE_BLOCK) &&
+ 			Util.enabled(DelightfulItems.STUFFED_CANTALOUPE)
+ 		) {
+-			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 5), Util.getStack(DelightfulItems.STUFFED_CANTALOUPE_BLOCK, 1), 3, 1, 1));
++			trades.add((ent, r) -> new MerchantOffer(new ItemCost(Items.EMERALD, 5), Util.getStack(DelightfulItems.STUFFED_CANTALOUPE_BLOCK, 1), 3, 1, 1));
+ 		}
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/events/KnifeEvents.java b/src/main/java/net/brnbrd/delightful/common/events/KnifeEvents.java
+index 0e977aa9..ed83eaa9 100644
+--- a/src/main/java/net/brnbrd/delightful/common/events/KnifeEvents.java
++++ b/src/main/java/net/brnbrd/delightful/common/events/KnifeEvents.java
+@@ -16,7 +16,7 @@ public class KnifeEvents {
+ 			living.getMainHandItem().is(DelightfulItemTags.FIRE_KNIVES) &&
+ 			!e.getEntity().fireImmune()
+ 		) {
+-			e.getEntity().setSecondsOnFire(15);
++			e.getEntity().igniteForSeconds(15);
+ 		}
+ 	}
+ }
+diff --git a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+index 4fadec99..bbfe8d63 100644
+--- a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
++++ b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+@@ -95,7 +95,7 @@ public class ModEvents {
+ 	public void buildContents(BuildCreativeModeTabContentsEvent event) {
+ 		ResourceLocation TOAST_WITH_BLUEBERRIES = Util.rl(Modid.MOD, "toast_with_blueberries");
+ 		// Delightful Items
+-		if (event.getTabKey() == ModCreativeTabs.TAB_FARMERS_DELIGHT.getKey()) {
++		if (event.getTabKey().equals(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ModCreativeTabs.TAB_FARMERS_DELIGHT.get()).orElse(null))) {
+ 			DelightfulItems.ITEMS.getEntries().stream()
+ 				.filter(DeferredHolder::isBound)
+ 				.filter((object) -> !DelightfulItems.NO_GEN.contains(object.getId()))
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/DelightfulItems.java b/src/main/java/net/brnbrd/delightful/common/item/DelightfulItems.java
+index 35c393b7..199a2083 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/DelightfulItems.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/DelightfulItems.java
+@@ -305,7 +305,7 @@ public class DelightfulItems {
+ 		if (remainder.length > 0) {
+ 			if (remainder[0].equals(Items.BOWL)) {
+ 				return registerItem(name,
+-						() -> new BowlFoodItem((new Item.Properties()).food(food).craftRemainder(Items.BOWL)));
++						() -> new Item((new Item.Properties()).food(food).craftRemainder(Items.BOWL)));
+ 			} else {
+ 				return registerConsumable(name, food, remainder[0], false, false);
+ 			}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/FurnaceFuelItem.java b/src/main/java/net/brnbrd/delightful/common/item/FurnaceFuelItem.java
+index 7a95cb0e..97c5acb4 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/FurnaceFuelItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/FurnaceFuelItem.java
+@@ -70,7 +70,7 @@ public class FurnaceFuelItem extends DItem {
+ 	public @NotNull InteractionResult useOn(UseOnContext con) {
+ 		return useFuel(
+ 			con.getItemInHand(),
+-			con.getLevel().getExistingBlockEntity(con.getClickedPos()),
++			con.getLevel().getBlockEntity(con.getClickedPos()),
+ 			con.getPlayer()
+ 		);
+ 	}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java b/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
+index f433bf5d..e737f849 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
+@@ -89,8 +89,7 @@ public class Nutrition {
+ 		.nutrition(1).saturationModifier(0.1F).build();
+ 	public static final FoodProperties ANIMAL_FAT = (new FoodProperties.Builder())
+ 		.nutrition(1).saturationModifier(2F)
+-		.meat()
+-		.alwaysEat()
++		.alwaysEdible()
+ 		.fast().build();
+ 	public static final FoodProperties CHOPPED_CLOVER = (new FoodProperties.Builder())
+ 		.nutrition(1).saturationModifier(0.35F)
+@@ -121,18 +120,16 @@ public class Nutrition {
+ 		.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1F).build();
+ 	public static final FoodProperties VENISON_CHOPS = (new FoodProperties.Builder())
+ 		.nutrition(1).saturationModifier(0.3F)
+-		.meat()
+ 		.fast().build();
+ 	public static final FoodProperties COOKED_VENISON_CHOPS = (new FoodProperties.Builder())
+ 		.nutrition(3).saturationModifier(0.8F)
+-		.meat()
+ 		.fast().build();
+ 	public static final FoodProperties RAW_GOAT = (new FoodProperties.Builder())
+ 		.nutrition(2).saturationModifier(0.3F)
+-		.meat().build();
++		.build();
+ 	public static final FoodProperties COOKED_GOAT = (new FoodProperties.Builder())
+ 		.nutrition(6).saturationModifier(0.8F)
+-		.meat().build();
++		.build();
+ 	public static final FoodProperties CANTALOUPE_SLICE = (new FoodProperties.Builder())
+ 		.nutrition(4).saturationModifier(0.8F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 0), 1F).build();
+@@ -145,7 +142,7 @@ public class Nutrition {
+ 	public static final FoodProperties CANTALOUPE_POPSICLE = (new FoodProperties.Builder())
+ 		.nutrition(3).saturationModifier(0.2F)
+ 		.fast()
+-		.alwaysEat()
++		.alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 0), 1F).build();
+ 	public static final FoodProperties STUFFED_CANTALOUPE = (new FoodProperties.Builder())
+ 		.nutrition(14).saturationModifier(0.75F)
+@@ -169,25 +166,25 @@ public class Nutrition {
+ 	public static final FoodProperties LONG_PRICKLY_PEAR_JUICE = (new FoodProperties.Builder())
+ 		.effect(() -> new MobEffectInstance(MobEffects.SATURATION, 1200, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 1200, 0), 1F).build();
+-	public static final FoodProperties LAVENDER_TEA = (new FoodProperties.Builder()).alwaysEat()
++	public static final FoodProperties LAVENDER_TEA = (new FoodProperties.Builder()).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 600, 0), 1F).build();
+-	public static final FoodProperties AZALEA_TEA = (new FoodProperties.Builder()).alwaysEat()
++	public static final FoodProperties AZALEA_TEA = (new FoodProperties.Builder()).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 60, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 60, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getYellowTeaEffect(), 4800, 1), 1F).build();
+-	public static final FoodProperties MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
++	public static final FoodProperties MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEdible()
+ 		.nutrition(6).saturationModifier(0.5F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.HEAL, 1, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
+-	public static final FoodProperties BERRY_MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
++	public static final FoodProperties BERRY_MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEdible()
+ 		.nutrition(8).saturationModifier(0.65F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.HEAL, 1, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
+ 	public static final FoodProperties ENDER_NECTAR = (new FoodProperties.Builder())
+-		.nutrition(4).saturationModifier(0F).alwaysEat()
++		.nutrition(4).saturationModifier(0F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.HEAL, 1, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 2), 1F)
+ 		.effect(() -> new MobEffectInstance(ExquisitoCompat.getResonance(), 500, 0), 1F)
+@@ -199,14 +196,14 @@ public class Nutrition {
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 500, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 400, 0), 1F).build();
+ 	public static final FoodProperties 	MATCHA_MILKSHAKE = (new FoodProperties.Builder())
+-		.nutrition(2).saturationModifier(1.5F).alwaysEat()
++		.nutrition(2).saturationModifier(1.5F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 200, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 300, 0), 1F).build();
+ 	public static final FoodProperties SALMONBERRY_ICE_CREAM = (new FoodProperties.Builder())
+ 		.nutrition(6).saturationModifier(0.3F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 1200), 1F).build();
+ 	public static final FoodProperties SALMONBERRY_MILKSHAKE = (new FoodProperties.Builder())
+-		.nutrition(2).saturationModifier(1.5F).alwaysEat()
++		.nutrition(2).saturationModifier(1.5F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 600), 1F).build();
+ 	public static final FoodProperties SALMONBERRIES = (new FoodProperties.Builder())
+ 		.nutrition(2).saturationModifier(0.6F)
+@@ -223,13 +220,13 @@ public class Nutrition {
+ 		.fast()
+ 		.effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 600, 0, false, false), 1F).build();
+ 	public static final FoodProperties SALMONBERRY_GUMMY = (new FoodProperties.Builder())
+-		.nutrition(2).saturationModifier(0F).alwaysEat()
++		.nutrition(2).saturationModifier(0F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 900, 0), 1F).build();
+ 	public static final FoodProperties MATCHA_GUMMY = (new FoodProperties.Builder())
+-		.nutrition(2).saturationModifier(0F).alwaysEat()
++		.nutrition(2).saturationModifier(0F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 100, 2), 1F).build();
+ 	public static final FoodProperties CANTALOUPE_GUMMY = (new FoodProperties.Builder())
+-		.nutrition(2).saturationModifier(0F).alwaysEat()
++		.nutrition(2).saturationModifier(0F).alwaysEdible()
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 3), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 100, 0), 1F)
+ 		.build();
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/food/RockCandyItem.java b/src/main/java/net/brnbrd/delightful/common/item/food/RockCandyItem.java
+index 7079a13c..1bfa60be 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/food/RockCandyItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/food/RockCandyItem.java
+@@ -98,12 +98,12 @@ public class RockCandyItem extends DConsumableItem {
+ 			for (MobEffectInstance effectInstance : RockCandyItem.getFeedEffects()) {
+ 				MutableComponent effectDescription = Component.literal(" ");
+ 				effectDescription.append(Component.translatable(effectInstance.getDescriptionId()));
+-				MobEffect effect = effectInstance.getEffect();
++				MobEffect effect = effectInstance.getEffect().value();
+ 				if (effectInstance.getAmplifier() > 0) {
+ 					effectDescription.append(" ").append(Component.translatable("potion.potency." + effectInstance.getAmplifier()));
+ 				}
+ 				if (effectInstance.getDuration() > 20) {
+-					effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F)).append(")");
++					effectDescription.append(" (").append(MobEffectUtil.formatDuration(effectInstance, 1.0F, context.tickRate())).append(")");
+ 				}
+ 				comps.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()));
+ 			}
+@@ -111,7 +111,7 @@ public class RockCandyItem extends DConsumableItem {
+ 	}
+ 
+ 	@Override
+-	public int getUseDuration(@NotNull ItemStack stack) {
++	public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
+ 		return 48;
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/food/ShakeItem.java b/src/main/java/net/brnbrd/delightful/common/item/food/ShakeItem.java
+index dee14b8b..f187004e 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/food/ShakeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/food/ShakeItem.java
+@@ -2,6 +2,7 @@ package net.brnbrd.delightful.common.item.food;
+ 
+ import net.minecraft.sounds.SoundEvent;
+ import net.minecraft.sounds.SoundEvents;
++import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.item.ItemStack;
+ import org.jetbrains.annotations.NotNull;
+ 
+@@ -11,7 +12,7 @@ public class ShakeItem extends DrinkItem {
+ 	}
+ 
+ 	@Override
+-	public int getUseDuration(@NotNull ItemStack stack) {
++	public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
+ 		return 40;
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/DKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/DKnifeItem.java
+index 04a2ff09..3edea432 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/DKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/DKnifeItem.java
+@@ -29,19 +29,19 @@ public class DKnifeItem extends KnifeItem implements IConfigured {
+ 	@NotNull private final Modid[] modid;
+ 
+ 	public DKnifeItem(@Nullable TagKey<Item> tag, Tier tier, Properties properties) {
+-		super(tier, 0.5F, -2F, properties);
++		super(tier, properties);
+ 		this.tag = tag;
+ 		this.modid = Util.EMPTY;
+ 	}
+ 
+ 	public DKnifeItem(@Nullable TagKey<Item> tag, Tier tier, Properties properties, @NotNull Modid... modid) {
+-		super(tier, 0.5F, -2F, properties);
++		super(tier, properties);
+ 		this.tag = tag;
+ 		this.modid = modid;
+ 	}
+ 
+ 	public DKnifeItem(Tier tier, Properties properties) {
+-		super(tier, 0.5F, -2F, properties);
++		super(tier, properties);
+ 		this.tag = null;
+ 		this.modid = Util.EMPTY;
+ 	}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/ae2/FluixKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/ae2/FluixKnifeItem.java
+index 1ffc274b..3db4b39c 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/ae2/FluixKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/ae2/FluixKnifeItem.java
+@@ -4,6 +4,7 @@ import net.brnbrd.delightful.common.item.DelightfulTiers;
+ import net.brnbrd.delightful.common.item.knife.DKnifeItem;
+ import net.brnbrd.delightful.compat.Modid;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
++import net.minecraft.core.Holder;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.crafting.RecipeType;
+@@ -18,16 +19,16 @@ public class FluixKnifeItem extends DKnifeItem {
+ 	}
+ 
+ 	@Override
+-	public int getEnchantmentLevel(ItemStack stack, Enchantment enchantment) {
+-		if (enchantment.equals(Enchantments.MOB_LOOTING)) {
+-			return Math.max(1, super.getEnchantmentLevel(stack, Enchantments.MOB_LOOTING));
++	public int getEnchantmentLevel(ItemStack stack, Holder<Enchantment> enchantment) {
++		if (enchantment.is(Enchantments.LOOTING)) {
++			return Math.max(1, super.getEnchantmentLevel(stack, enchantment));
+ 		}
+ 		return super.getEnchantmentLevel(stack, enchantment);
+ 	}
+ 
+ 	@Override
+ 	public List<Component> getTools() {
+-		return List.of(Component.literal("Always has at least ").append(Enchantments.MOB_LOOTING.getFullname(1)));
++		return List.of(Component.literal("Always has at least ").append(Component.translatable("enchantment.minecraft.looting")).append(" I"));
+ 	}
+ 
+ 	@Override
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/allthemodium/AllthemodiumKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/allthemodium/AllthemodiumKnifeItem.java
+index e4210cf3..bfa31b16 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/allthemodium/AllthemodiumKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/allthemodium/AllthemodiumKnifeItem.java
+@@ -7,6 +7,7 @@ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.ChatFormatting;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.entity.LivingEntity;
++import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.crafting.Ingredient;
+ import org.jetbrains.annotations.NotNull;
+@@ -46,15 +47,10 @@ public class AllthemodiumKnifeItem extends DKnifeItem {
+ 	}
+ 
+ 	@Override
+-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
+ 		return 0;
+ 	}
+ 
+-	@Override
+-	public boolean canBeDepleted() {
+-		return false;
+-	}
+-
+ 	@Override
+ 	public boolean isEnchantable(@NotNull ItemStack stack) {
+ 		return true;
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/ManasteelKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/ManasteelKnifeItem.java
+index 8b7afcf5..f482ffe0 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/ManasteelKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/ManasteelKnifeItem.java
+@@ -29,7 +29,7 @@ public class ManasteelKnifeItem extends DKnifeItem {
+ 	}
+ 
+ 	@Override
+-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
+ 		return super.damageItem(stack, amount, entity, onBroken);
+ 	}
+ }
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/mythicbotany/AlfsteelTier.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/mythicbotany/AlfsteelTier.java
+index 2b58505e..b9093368 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/mythicbotany/AlfsteelTier.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/botania/mythicbotany/AlfsteelTier.java
+@@ -2,8 +2,11 @@ package net.brnbrd.delightful.common.item.knife.compat.botania.mythicbotany;
+ 
+ import net.brnbrd.delightful.common.item.DelightfulTiers;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
++import net.minecraft.tags.BlockTags;
++import net.minecraft.tags.TagKey;
+ import net.minecraft.world.item.Tier;
+ import net.minecraft.world.item.crafting.Ingredient;
++import net.minecraft.world.level.block.Block;
+ import org.jetbrains.annotations.NotNull;
+ 
+ // Botania is not a supported dependency in this pack, so this is always based on the plain
+@@ -28,11 +31,6 @@ public class AlfsteelTier implements Tier {
+ 		return terra().getAttackDamageBonus();
+ 	}
+ 
+-	@Override
+-	public int getLevel() {
+-		return terra().getLevel() + 1;
+-	}
+-
+ 	@Override
+ 	public int getEnchantmentValue() {
+ 		return terra().getEnchantmentValue();
+@@ -42,4 +40,9 @@ public class AlfsteelTier implements Tier {
+ 	public @NotNull Ingredient getRepairIngredient() {
+ 		return DelightfulItemTags.getIngot("alfsteel");
+ 	}
++
++	@Override
++	public @NotNull TagKey<Block> getIncorrectBlocksForDrops() {
++		return terra().getIncorrectBlocksForDrops();
++	}
+ }
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/create_sa/BlazingKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/create_sa/BlazingKnifeItem.java
+index 6e813caa..7aec4c53 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/create_sa/BlazingKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/create_sa/BlazingKnifeItem.java
+@@ -6,6 +6,7 @@ import net.brnbrd.delightful.compat.Modid;
+ import net.minecraft.ChatFormatting;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.entity.LivingEntity;
++import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.crafting.RecipeType;
+ import net.minecraft.world.level.Level;
+@@ -21,7 +22,7 @@ public class BlazingKnifeItem extends DKnifeItem {
+ 
+ 	// Tool takes no damage in Nether
+ 	@Override
+-	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
++	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
+ 		if (entity.level().dimension() == Level.NETHER) {
+ 			return 0;
+ 		}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/twilightforest/FieryKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/twilightforest/FieryKnifeItem.java
+index d43dd72d..551681c9 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/twilightforest/FieryKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/twilightforest/FieryKnifeItem.java
+@@ -5,12 +5,12 @@ import net.brnbrd.delightful.common.item.knife.DKnifeItem;
+ import net.brnbrd.delightful.compat.Modid;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.ChatFormatting;
++import net.minecraft.core.Holder;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.crafting.Ingredient;
+ import net.minecraft.world.item.enchantment.Enchantment;
+-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+ import net.minecraft.world.item.enchantment.Enchantments;
+ import java.util.List;
+ import org.jetbrains.annotations.NotNull;
+@@ -42,13 +42,15 @@ public class FieryKnifeItem extends DKnifeItem {
+ 		return Ingredient.of(Items.BLAZE_ROD);
+ 	}
+ 
++	// canApplyAtEnchantingTable(ItemStack, Enchantment) was removed; supportsEnchantment(ItemStack,
++	// Holder<Enchantment>) is the modern equivalent hook (see FD's own KnifeItem for the pattern).
+ 	@Override
+-	public boolean canApplyAtEnchantingTable(@NotNull ItemStack stack, @NotNull Enchantment enchantment) {
+-		return enchantment != Enchantments.FIRE_ASPECT && super.canApplyAtEnchantingTable(stack, enchantment);
++	public boolean supportsEnchantment(@NotNull ItemStack stack, @NotNull Holder<Enchantment> enchantment) {
++		return !enchantment.is(Enchantments.FIRE_ASPECT) && super.supportsEnchantment(stack, enchantment);
+ 	}
+ 
+ 	@Override
+ 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+-		return !EnchantmentHelper.getEnchantments(book).containsKey(Enchantments.FIRE_ASPECT) && super.isBookEnchantable(stack, book);
++		return book.getTagEnchantments().keySet().stream().noneMatch(h -> h.is(Enchantments.FIRE_ASPECT)) && super.isBookEnchantable(stack, book);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/undergarden/ForgottenKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/undergarden/ForgottenKnifeItem.java
+index 5032fe9a..f1eb1dbc 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/undergarden/ForgottenKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/undergarden/ForgottenKnifeItem.java
+@@ -55,7 +55,7 @@ public class ForgottenKnifeItem extends DKnifeItem {
+ 			e.getSource().getEntity() instanceof Player player &&
+ 			player.getMainHandItem().is(this) &&
+ 			BuiltInRegistries.ENTITY_TYPE.getKey(e.getEntity().getType()).getNamespace().equals(Modid.UG.get()) &&
+-			e.getEntity().canChangeDimensions()
++			e.getEntity().canChangeDimensions(e.getEntity().level(), e.getEntity().level())
+ 		) {
+ 			e.setAmount(e.getAmount() * 1.5F);
+ 		}
+diff --git a/src/main/java/net/brnbrd/delightful/common/loot/SmeltLootModifier.java b/src/main/java/net/brnbrd/delightful/common/loot/SmeltLootModifier.java
+index eba4027d..0cab8f26 100644
+--- a/src/main/java/net/brnbrd/delightful/common/loot/SmeltLootModifier.java
++++ b/src/main/java/net/brnbrd/delightful/common/loot/SmeltLootModifier.java
+@@ -12,7 +12,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+ import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+ import net.neoforged.neoforge.common.loot.LootModifier;
+-import net.neoforged.neoforge.items.ItemHandlerHelper;
+ import org.jetbrains.annotations.NotNull;
+ 
+ //Code adapted from https://github.com/MinecraftForge/MinecraftForge/blob/1.20.x/src/test/java/net/minecraftforge/debug/gameplay/loot/GlobalLootModifiersTest.java
+@@ -37,7 +36,7 @@ public class SmeltLootModifier extends LootModifier {
+ 					.getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), context.getLevel())
+ 					.map(recipe -> recipe.value().getResultItem(context.getLevel().registryAccess()))
+ 					.filter(itemStack -> !itemStack.isEmpty())
+-					.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack, stack.getCount() * itemStack.getCount()))
++					.map(itemStack -> itemStack.copyWithCount(stack.getCount() * itemStack.getCount()))
+ 					.orElse(stack);
+ 			if (smelted == stack) {
+ 				return stack;
+diff --git a/src/main/java/net/brnbrd/delightful/common/world/ConfigEnabledFilter.java b/src/main/java/net/brnbrd/delightful/common/world/ConfigEnabledFilter.java
+index 7aaebc37..9a2887c1 100644
+--- a/src/main/java/net/brnbrd/delightful/common/world/ConfigEnabledFilter.java
++++ b/src/main/java/net/brnbrd/delightful/common/world/ConfigEnabledFilter.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful.common.world;
+ 
+ import com.mojang.serialization.Codec;
++import com.mojang.serialization.MapCodec;
+ import com.mojang.serialization.codecs.RecordCodecBuilder;
+ import net.brnbrd.delightful.Util;
+ import net.minecraft.core.BlockPos;
+@@ -11,7 +12,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+ import org.jetbrains.annotations.NotNull;
+ 
+ public class ConfigEnabledFilter extends PlacementFilter {
+-	public static final Codec<ConfigEnabledFilter> CODEC = RecordCodecBuilder.create((builder) ->
++	public static final MapCodec<ConfigEnabledFilter> CODEC = RecordCodecBuilder.mapCodec((builder) ->
+ 		builder.group(
+ 			Codec.STRING.fieldOf("item").forGetter((instance) -> instance.item)
+ 		).apply(builder, ConfigEnabledFilter::new));
+diff --git a/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java b/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
+index 9bfe9a74..39b1e270 100644
+--- a/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
++++ b/src/main/java/net/brnbrd/delightful/common/world/DelightfulPlacementModifiers.java
+@@ -1,6 +1,6 @@
+ package net.brnbrd.delightful.common.world;
+ 
+-import com.mojang.serialization.Codec;
++import com.mojang.serialization.MapCodec;
+ import net.brnbrd.delightful.Delightful;
+ import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+@@ -14,7 +14,7 @@ public class DelightfulPlacementModifiers {
+ 
+ 	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<ConfigEnabledFilter>> ENABLED = PLACEMENT_MODIFIERS.register("enabled", () -> typeConvert(ConfigEnabledFilter.CODEC));
+ 
+-	private static <P extends PlacementModifier> PlacementModifierType<P> typeConvert(Codec<P> codec) {
++	private static <P extends PlacementModifier> PlacementModifierType<P> typeConvert(MapCodec<P> codec) {
+ 		return () -> codec;
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java b/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
+index 81562f24..e0cdb745 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
+@@ -26,10 +26,10 @@ public class ArsNouveauCompat {
+ 			.effect(() -> new MobEffectInstance(getManaRegen(), 1200, 0), 1F).build();
+ 
+ 	public static final FoodProperties SOURCE_BERRY_MILKSHAKE = (new FoodProperties.Builder())
+-			.nutrition(2).saturationModifier(1.5F).alwaysEat()
++			.nutrition(2).saturationModifier(1.5F).alwaysEdible()
+ 			.effect(() -> new MobEffectInstance(getManaRegen(), 600, 0), 1F).build();
+ 
+ 	public static final FoodProperties SOURCE_BERRY_GUMMY = (new FoodProperties.Builder())
+-			.nutrition(2).saturationModifier(0F).alwaysEat()
++			.nutrition(2).saturationModifier(0F).alwaysEdible()
+ 			.effect(() -> new MobEffectInstance(getManaRegen(), 80, 2), 1F).build();
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/AgedRoeItem.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/AgedRoeItem.java
+index 1ac00a3f..4a5b3a92 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/AgedRoeItem.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/AgedRoeItem.java
+@@ -7,9 +7,10 @@ import net.minecraft.sounds.SoundEvents;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.level.material.Fluid;
+ import org.jetbrains.annotations.NotNull;
++import java.util.function.Supplier;
+ 
+ public class AgedRoeItem extends DBoozeItem {
+-	public AgedRoeItem(Fluid fluid, Item.Properties properties) {
++	public AgedRoeItem(Supplier<Fluid> fluid, Item.Properties properties) {
+ 		super(fluid, properties);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCEnderNectarCompat.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCEnderNectarCompat.java
+index 8f92ec99..2e1aed6e 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCEnderNectarCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCEnderNectarCompat.java
+@@ -8,7 +8,7 @@ import java.util.function.Supplier;
+ 
+ public class BCEnderNectarCompat {
+ 	public static final Supplier<Item> ENDER_NECTAR = () ->
+-		new FermentedEnderNectarItem(DelightfulFluids.ENDER_NECTAR.get(),
++		new FermentedEnderNectarItem(DelightfulFluids.ENDER_NECTAR::get,
+ 			(new Item.Properties())
+ 				.food(Nutrition.ENDER_NECTAR)
+ 				.stacksTo(16)
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCLFLCompat.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCLFLCompat.java
+index ae025c34..59c2e05a 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCLFLCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BCLFLCompat.java
+@@ -8,14 +8,14 @@ import java.util.function.Supplier;
+ 
+ public class BCLFLCompat {
+ 	public static final Supplier<Item> AGED_ROE = () ->
+-		new AgedRoeItem(DelightfulFluids.AGED_ROE.get(),
++		new AgedRoeItem(DelightfulFluids.AGED_ROE::get,
+ 			(new Item.Properties())
+ 				.stacksTo(16)
+ 				.food(Nutrition.AGED_ROE)
+ 				.craftRemainder(Items.GLASS_BOTTLE)
+ 		);
+ 	public static final Supplier<Item> CAVIAR = () ->
+-		new CaviarItem(DelightfulFluids.CAVIAR.get(),
++		new CaviarItem(DelightfulFluids.CAVIAR::get,
+ 			(new Item.Properties())
+ 				.stacksTo(16)
+ 				.food(Nutrition.CAVIAR)
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/CaviarItem.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/CaviarItem.java
+index 06f7d3d5..0473a1b7 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/CaviarItem.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/CaviarItem.java
+@@ -6,9 +6,10 @@ import net.minecraft.tags.TagKey;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.level.material.Fluid;
+ import org.jetbrains.annotations.Nullable;
++import java.util.function.Supplier;
+ 
+ public class CaviarItem extends AgedRoeItem {
+-	public CaviarItem(Fluid fluid, Item.Properties properties) {
++	public CaviarItem(Supplier<Fluid> fluid, Item.Properties properties) {
+ 		super(fluid, properties);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/DBoozeItem.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/DBoozeItem.java
+index 20aa343f..dbf0aed4 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/DBoozeItem.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/DBoozeItem.java
+@@ -10,11 +10,12 @@ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.material.Fluid;
+ import umpaz.brewinandchewin.common.item.BoozeItem;
+ import java.util.List;
++import java.util.function.Supplier;
+ import org.jetbrains.annotations.NotNull;
+ import org.jetbrains.annotations.Nullable;
+ 
+ public class DBoozeItem extends BoozeItem implements IConfigured {
+-	public DBoozeItem(Fluid fluid, Item.Properties properties) {
++	public DBoozeItem(Supplier<Fluid> fluid, Item.Properties properties) {
+ 		super(fluid, properties);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/FermentedEnderNectarItem.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/FermentedEnderNectarItem.java
+index e471949d..842f9c7d 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/FermentedEnderNectarItem.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/FermentedEnderNectarItem.java
+@@ -13,11 +13,12 @@ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.material.Fluid;
+ import vectorwing.farmersdelight.common.Configuration;
+ import java.util.List;
++import java.util.function.Supplier;
+ import org.jetbrains.annotations.NotNull;
+ import org.jetbrains.annotations.Nullable;
+ 
+ public class FermentedEnderNectarItem extends DBoozeItem {
+-	public FermentedEnderNectarItem(Fluid fluid, Properties properties) {
++	public FermentedEnderNectarItem(Supplier<Fluid> fluid, Properties properties) {
+ 		super(fluid, properties);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/collectorsreap/GummyItem.java b/src/main/java/net/brnbrd/delightful/compat/collectorsreap/GummyItem.java
+index f56bab44..13792227 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/collectorsreap/GummyItem.java
++++ b/src/main/java/net/brnbrd/delightful/compat/collectorsreap/GummyItem.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful.compat.collectorsreap;
+ 
+ import net.brnbrd.delightful.common.item.food.DConsumableItem;
++import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.item.ItemStack;
+ import org.jetbrains.annotations.NotNull;
+ 
+@@ -10,7 +11,7 @@ public class GummyItem extends DConsumableItem {
+ 	}
+ 
+ 	@Override
+-	public int getUseDuration(@NotNull ItemStack stack) {
++	public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
+ 		return 14;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/compat/undergarden/SlicedGloomgourdBlock.java b/src/main/java/net/brnbrd/delightful/compat/undergarden/SlicedGloomgourdBlock.java
+index bd644311..c2f11dad 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/undergarden/SlicedGloomgourdBlock.java
++++ b/src/main/java/net/brnbrd/delightful/compat/undergarden/SlicedGloomgourdBlock.java
+@@ -3,12 +3,10 @@ package net.brnbrd.delightful.compat.undergarden;
+ import net.brnbrd.delightful.common.block.SlicedGourdBlock;
+ import net.brnbrd.delightful.compat.Modid;
+ import net.minecraft.core.BlockPos;
+-import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+-import net.minecraft.world.level.BlockGetter;
++import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.state.BlockState;
+-import net.minecraft.world.phys.HitResult;
+ 
+ public class SlicedGloomgourdBlock extends SlicedGourdBlock {
+ 	public SlicedGloomgourdBlock(Properties properties) {
+@@ -16,11 +14,11 @@ public class SlicedGloomgourdBlock extends SlicedGourdBlock {
+ 	}
+ 
+ 	@Override
+-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
++	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+ 		if (!Modid.UGD.loaded() && Modid.UG.loaded()) {
+ 			return Modid.UG.itemStack("gloomgourd");
+ 		} else {
+-			return super.getCloneItemStack(state, target, level, pos, player);
++			return super.getCloneItemStack(level, pos, state);
+ 		}
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
+index 460bbccc..fb045f39 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulBlockLoot.java
+@@ -187,7 +187,7 @@ public class DelightfulBlockLoot extends BlockLootSubProvider {
+ 				.filter(o -> !NO_GEN.contains(o.getId()))
+ 				.map(DeferredHolder::asOptional)
+ 				.filter(Optional::isPresent)
+-				.map(Optional::get)
++				.<Block>map(Optional::get)
+ 				::iterator;
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+index daa61789..f1f4990a 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulItemTagProvider.java
+@@ -45,7 +45,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(ItemTags.SMALL_FLOWERS)
+ 			.addTag(DelightfulItemTags.FLOWERS_AZALEA)
+ 			.add(DelightfulItems.WILD_SALMONBERRIES.get());
+-		this.tag(ItemTags.FOX_FOOD).addTag(CommonTags.Items.BERRIES);
++		this.tag(ItemTags.FOX_FOOD).addTag(Tags.Items.FOODS_BERRY);
+ 		this.tag(ItemTags.STAIRS)
+ 			.add(DelightfulItems.GLOW_JAM_COOKIE_TILE_STAIRS.get())
+ 			.add(DelightfulItems.SOURCE_BERRY_COOKIE_TILE_STAIRS.get());
+@@ -107,7 +107,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 
+ 		// Knives
+ 		var FDknives = this.tag(ModTags.Items.KNIVES);
+-		var toolsknives = this.tag(CommonTags.Items.TOOLS_KNIVES);
++		var toolsknives = this.tag(CommonTags.Items.TOOLS_KNIFE);
+ 		DelightfulItems.ITEMS.getEntries().stream()
+ 			.map(DeferredHolder::get).filter(i -> i instanceof KnifeItem).forEach(knife -> {
+ 				FDknives.add(knife);
+@@ -170,7 +170,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptionalTag(Modid.LOADER.rl("vegetables/ginger"))
+ 			.addOptional(Modid.SS.rl("ginger"))
+ 			.addOptional(Modid.WS.rl("ginger_root"));
+-		this.tag(CommonTags.Items.CROPS).replace(false)
++		this.tag(Tags.Items.CROPS).replace(false)
+ 			.addTag(DelightfulItemTags.CROPS_ACORN)
+ 			.addTag(DelightfulItemTags.CROPS_CACTUS)
+ 			.addTag(DelightfulItemTags.CROPS_CORN)
+@@ -178,7 +178,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 
+ 		// Salad Ingredients
+ 		this.tag(DelightfulItemTags.SALAD_INGREDIENTS_CLOVER).add(DelightfulItems.CHOPPED_CLOVER.get());
+-		this.tag(CommonTags.Items.SALAD_INGREDIENTS).addTag(DelightfulItemTags.SALAD_INGREDIENTS_CLOVER);
++		this.tag(DelightfulItemTags.SALAD_INGREDIENTS).addTag(DelightfulItemTags.SALAD_INGREDIENTS_CLOVER);
+ 
+ 		// Vegetables
+ 		this.tag(DelightfulItemTags.VEGETABLES_SPICY)
+@@ -189,7 +189,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptionalTag(Modid.CR.rl("hot_nether_fruits"))
+ 			.addOptional(Modid.MND.rl("bullet_pepper"));
+ 		this.tag(DelightfulItemTags.VEGETABLES_CUCUMBER).addOptional(Modid.CD.rl("cucumber"));
+-		this.tag(CommonTags.Items.VEGETABLES).replace(false)
++		this.tag(Tags.Items.FOODS_VEGETABLE).replace(false)
+ 			.addTag(DelightfulItemTags.VEGETABLES_CUCUMBER)
+ 			.addTag(DelightfulItemTags.VEGETABLES_SPICY);
+ 
+@@ -235,7 +235,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(DelightfulItemTags.FRUITS_BLOOD_ORANGE).addOptional(Modid.AT.rl("blood_orange"));
+ 		this.tag(DelightfulItemTags.FRUITS_DRAGON_FRUIT).addOptionalTag(Modid.LOADER.rl("fruits/pitaya"));
+ 		this.tag(DelightfulItemTags.FRUITS).replace(false)
+-			.addTag(CommonTags.Items.BERRIES)
++			.addTag(Tags.Items.FOODS_BERRY)
+ 			.addTag(DelightfulItemTags.FRUITS_CITRUS)
+ 			.addTag(DelightfulItemTags.FRUITS_CHORUS)
+ 			.addTag(DelightfulItemTags.FRUITS_GREEN_APPLE)
+@@ -250,7 +250,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Modid.EP.rl("oblifruit"))
+ 			.addOptional(Modid.UG.rl("droopvine_item"))
+ 			.addOptional(Util.rl("ars_elemental", "flashpine_pod"));
+-		this.tag(CommonTags.Items.BERRIES).replace(false)
++		this.tag(Tags.Items.FOODS_BERRY).replace(false)
+ 			.addTag(DelightfulItemTags.FRUITS_SWEET_BERRIES)
+ 			.addTag(DelightfulItemTags.FRUITS_GLOW_BERRIES)
+ 			.addTag(DelightfulItemTags.FRUITS_SALMONBERRIES)
+@@ -340,7 +340,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(Tags.Items.MUSHROOMS).addOptional(Modid.FORA.rl("blewit_mushroom"));
+ 		this.tag(Tags.Items.TOOLS_FISHING_ROD).addOptional(Modid.RA.rl("flux_fishing_rod"));
+ 		this.tag(DelightfulItemTags.TOOLS_WRENCH).addOptional(Modid.FOR.rl("wrench"));
+-		this.tag(ItemTags.TOOLS).addTag(DelightfulItemTags.TOOLS_WRENCH);
++		this.tag(Tags.Items.TOOLS).addTag(DelightfulItemTags.TOOLS_WRENCH);
+ 		this.tag(DelightfulItemTags.WRENCHES).addTag(DelightfulItemTags.TOOLS_WRENCH);
+ 		this.tag(DelightfulItemTags.ROE)
+ 			.add(DelightfulItems.STURGEON_ROE.get())
+@@ -358,7 +358,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Modid.LMFL.rl("pike_roe"))
+ 			.addOptional(Modid.CR.rl("tiger_prawn_roe"));
+ 		this.tag(DelightfulItemTags.WATER)
+-			.addTag(CommonTags.Items.BUCKETS_WATER)
++			.addTag(Tags.Items.BUCKETS_WATER)
+ 			.addOptional(Modid.MD.rl("water_cup"));
+ 		this.tag(DelightfulItemTags.FLOWERS_AZALEA)
+ 			.addOptional(Modid.ECO.rl("azalea_flower"))
+@@ -403,7 +403,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Modid.DA.rl("quail_egg"))
+ 			.addOptional(Util.rl("farmlife", "galliraptor_egg"))
+ 			.addOptional(Util.rl("etcetera", "eggple"));
+-		this.tag(CommonTags.Items.COOKED_EGGS)
++		this.tag(CommonTags.Items.FOODS_COOKED_EGG)
+ 			.addOptional(Modid.AA.rl("fried_egg"))
+ 			.addOptional(Modid.IN.rl("fried_egg"))
+ 			.addOptional(Modid.NA.rl("cooked_egg"));
+@@ -438,7 +438,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptionalTag(Modid.LOADER.rl("dusts/stellarium"));
+ 		this.tag(DelightfulItemTags.DOUGH_CORN).addOptional(Modid.CD.rl("corn_dough"));
+ 		this.tag(DelightfulItemTags.DOUGH_NUT).add(DelightfulItems.NUT_DOUGH.get());
+-		this.tag(CommonTags.Items.DOUGH)
++		this.tag(CommonTags.Items.FOODS_DOUGH)
+ 			.addTag(DelightfulItemTags.DOUGH_NUT)
+ 			.addTag(DelightfulItemTags.DOUGH_CORN);
+ 		this.tag(DelightfulItemTags.CORNBREAD)
+@@ -457,7 +457,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Modid.RUST.rl("cherry_blossom_pancake"))
+ 			.addOptional(Modid.RUST.rl("vegetable_pancake"))
+ 			.addOptional(Modid.RUST.rl("pumpkin_pancake"));
+-		this.tag(CommonTags.Items.BREAD)
++		this.tag(Tags.Items.FOODS_BREAD)
+ 			.addTag(DelightfulItemTags.CORNBREAD)
+ 			.addTag(DelightfulItemTags.BURGER_BUN);
+ 		this.tag(DelightfulItemTags.HOT_SPICES)
+@@ -548,7 +548,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.add(DelightfulItems.NUT_BUTTER_BOTTLE.get())
+ 			.addOptional(Modid.THI.rl("hazelbutter"))
+ 			.addOptional(Modid.VD.rl("nut_mash_bottle"));
+-		this.tag(CommonTags.Items.MILK_BUCKET)
++		this.tag(Tags.Items.BUCKETS_MILK)
+ 			.addOptional(Modid.AE.rl("skyroot_milk_bucket"))
+ 			.addOptional(Modid.BS.rl("ventium_milk_bucket"))
+ 			.addOptional(Modid.FA.rl("edelwood_milk_bucket"));
+@@ -593,7 +593,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(DelightfulItemTags.RAW_FISHES_SQUID)
+ 			.addTag(DelightfulItemTags.RAW_FISHES_SQUID_TENTACLES)
+ 			.addTag(DelightfulItemTags.RAW_SQUID);
+-		this.tag(CommonTags.Items.RAW_FISHES)
++		this.tag(Tags.Items.FOODS_RAW_FISH)
+ 			.addTag(DelightfulItemTags.RAW_FISHES_STURGEON)
+ 			.addTag(DelightfulItemTags.RAW_FISHES_SQUID)
+ 			.addOptional(Modid.SF.rl("goliath_grouper"))
+@@ -616,7 +616,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(DelightfulItemTags.COOKED_FISHES_SQUID)
+ 			.addOptional(Modid.CD.rl("cooked_squid"))
+ 			.addOptional(Modid.CD.rl("cooked_calamari"));
+-		this.tag(CommonTags.Items.COOKED_FISHES)
++		this.tag(Tags.Items.FOODS_COOKED_FISH)
+ 			.addTag(DelightfulItemTags.COOKED_FISHES_SQUID)
+ 			.addOptionalTag(Modid.TIDE.rl("cooked_fish"))
+ 			.addOptional(Modid.TIDE.rl("cooked_fish_slice"))
+@@ -662,11 +662,11 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(DelightfulItemTags.COOKED_DUCK).addOptional(Modid.NA.rl("cooked_duck"));
+ 		this.tag(DelightfulItemTags.FOODS_MEAT_RAW)
+ 			.addOptionalTag(Modid.LOADER.rl("raw_meat"))
+-			.addTag(CommonTags.Items.RAW_FISHES)
+-			.addTag(CommonTags.Items.RAW_CHICKEN)
+-			.addTag(CommonTags.Items.RAW_BEEF)
+-			.addTag(CommonTags.Items.RAW_PORK)
+-			.addTag(CommonTags.Items.RAW_MUTTON)
++			.addTag(Tags.Items.FOODS_RAW_FISH)
++			.addTag(CommonTags.Items.FOODS_RAW_CHICKEN)
++			.addTag(CommonTags.Items.FOODS_RAW_BEEF)
++			.addTag(CommonTags.Items.FOODS_RAW_PORK)
++			.addTag(CommonTags.Items.FOODS_RAW_MUTTON)
+ 			.addTag(DelightfulItemTags.RAW_RABBIT)
+ 			.addTag(DelightfulItemTags.RAW_VENISON)
+ 			.addTag(DelightfulItemTags.RAW_CRAB)
+@@ -686,11 +686,11 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 			.addOptional(Util.rl("frog_legs", "frog_legs"));
+ 		this.tag(DelightfulItemTags.FOODS_MEAT_COOKED)
+ 			.addOptionalTag(Modid.LOADER.rl("cooked_meat"))
+-			.addTag(CommonTags.Items.COOKED_FISHES)
+-			.addTag(CommonTags.Items.COOKED_CHICKEN)
+-			.addTag(CommonTags.Items.COOKED_BEEF)
+-			.addTag(CommonTags.Items.COOKED_PORK)
+-			.addTag(CommonTags.Items.COOKED_MUTTON)
++			.addTag(Tags.Items.FOODS_COOKED_FISH)
++			.addTag(CommonTags.Items.FOODS_COOKED_CHICKEN)
++			.addTag(CommonTags.Items.FOODS_COOKED_BEEF)
++			.addTag(CommonTags.Items.FOODS_COOKED_PORK)
++			.addTag(CommonTags.Items.FOODS_COOKED_MUTTON)
+ 			.addTag(DelightfulItemTags.COOKED_RABBIT)
+ 			.addTag(DelightfulItemTags.COOKED_VENISON)
+ 			.addTag(DelightfulItemTags.COOKED_CRAB)
+@@ -731,7 +731,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 		this.tag(DelightfulItemTags.CARAMEL).addOptional(Modid.HH.rl("caramel"));
+ 		this.tag(DelightfulItemTags.SEEDS_SALMONBERRY).add(DelightfulItems.SALMONBERRY_PIPS.get());
+ 		this.tag(DelightfulItemTags.SEEDS_CANTALOUPE).add(DelightfulItems.CANTALOUPE_SEEDS.get());
+-		this.tag(CommonTags.Items.SEEDS)
++		this.tag(Tags.Items.SEEDS)
+ 			.addTag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+ 			.addTag(DelightfulItemTags.SEEDS_SALMONBERRY)
+ 			.addTag(DelightfulItemTags.SEEDS_CANTALOUPE)
+@@ -906,7 +906,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 
+ 		// Salt
+ 		this.tag(Modid.S.it("can_be_salted"))
+-			.addTag(CommonTags.Items.COOKED_EGGS)
++			.addTag(CommonTags.Items.FOODS_COOKED_EGG)
+ 			.addTag(DelightfulItemTags.CHEESE)
+ 			.addTag(DelightfulItemTags.COOKED_CRAB)
+ 			.addTag(DelightfulItemTags.COOKED_GOAT)
+@@ -1053,7 +1053,7 @@ public class DelightfulItemTagProvider extends ItemTagsProvider {
+ 
+ 		// Sully's Mod
+ 		this.tag(Modid.SM.it("tortoise_food"))
+-			.addTag(CommonTags.Items.BERRIES)
++			.addTag(Tags.Items.FOODS_BERRY)
+ 			.addTag(DelightfulItemTags.CROPS_CACTUS)
+ 			.addTag(DelightfulItemTags.FRUITS_CANTALOUPE)
+ 			.add(Items.BAMBOO)
+diff --git a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+index eb3675a6..8285d311 100644
+--- a/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
++++ b/src/main/java/net/brnbrd/delightful/data/gen/DelightfulRecipeProvider.java
+@@ -73,7 +73,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 
+ 		// Foods
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.NUT_BUTTER_AND_JAM_SANDWICH.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(DelightfulItemTags.NUT_BUTTER)
+ 			.requires(DelightfulItemTags.JAMS)
+ 			.unlockedBy("has_nut_butter", has(DelightfulItems.NUT_BUTTER_BOTTLE.get())),
+@@ -93,21 +93,21 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"food/roe_blini", finished, enabled(DelightfulItems.ROE_BLINI), not(tagEmpty(DelightfulItemTags.PANCAKES)), not(tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM)), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.ROE_BLINI.get())
+ 			.requires(DelightfulItemTags.PANCAKES)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(Items.DRIED_KELP)
+ 			.unlockedBy("has_aged_roe", has(DelightfulItemTags.AGED_ROES)),
+ 			"food/roe_blini_from_milk", finished, enabled(DelightfulItems.ROE_BLINI), not(tagEmpty(DelightfulItemTags.PANCAKES)), tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.ROE_BLINI.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(DelightfulItemTags.CHEESE_MILD_CREAM)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(Items.DRIED_KELP)
+ 			.unlockedBy("has_aged_roe", has(DelightfulItemTags.AGED_ROES)),
+ 			"food/roe_blini_from_bread", finished, enabled(DelightfulItems.ROE_BLINI), tagEmpty(DelightfulItemTags.PANCAKES), not(tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM)), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.ROE_BLINI.get())
+-			.requires(CommonTags.Items.BREAD)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.FOODS_BREAD)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(Items.DRIED_KELP)
+ 			.unlockedBy("has_aged_roe", has(DelightfulItemTags.AGED_ROES)),
+@@ -122,14 +122,14 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"food/salmon_and_roe_blini", finished, enabled(DelightfulItems.SALMON_AND_ROE_BLINI), not(tagEmpty(DelightfulItemTags.PANCAKES)), not(tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM)), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMON_AND_ROE_BLINI.get())
+ 			.requires(DelightfulItemTags.PANCAKES)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(ModItems.SALMON_SLICE.get())
+ 			.requires(DelightfulItemTags.FRUITS_SALMONBERRIES)
+ 			.unlockedBy("has_aged_roe", has(DelightfulItemTags.AGED_ROES)),
+ 			"food/salmon_and_roe_blini_from_milk", finished, enabled(DelightfulItems.SALMON_AND_ROE_BLINI), not(tagEmpty(DelightfulItemTags.PANCAKES)), tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMON_AND_ROE_BLINI.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(DelightfulItemTags.CHEESE_MILD_CREAM)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(ModItems.SALMON_SLICE.get())
+@@ -137,8 +137,8 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_aged_roe", has(DelightfulItemTags.AGED_ROES)),
+ 			"food/salmon_and_roe_blini_from_bread", finished, enabled(DelightfulItems.SALMON_AND_ROE_BLINI), tagEmpty(DelightfulItemTags.PANCAKES), not(tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM)), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMON_AND_ROE_BLINI.get())
+-			.requires(CommonTags.Items.BREAD)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.FOODS_BREAD)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.AGED_ROES)
+ 			.requires(ModItems.SALMON_SLICE.get())
+ 			.requires(DelightfulItemTags.FRUITS_SALMONBERRIES)
+@@ -151,19 +151,19 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_roe_blini", has(DelightfulItems.ROE_BLINI.get())),
+ 			"food/salmon_and_roe_blini_from_roe_blini", finished, enabled(DelightfulItems.SALMON_AND_ROE_BLINI), enabled(DelightfulItems.ROE_BLINI), not(tagEmpty(DelightfulItemTags.ROE)), modLoaded(Modid.BC.get()), modLoaded(Modid.LFL.get()));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.CHEESEBURGER.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(ModItems.BEEF_PATTY.get())
+ 			.requires(DelightfulItemTags.CHEESE)
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_cheese", has(DelightfulItemTags.CHEESE)),
+ 			"food/cheeseburger", finished, enabled(DelightfulItems.CHEESEBURGER), tagEmpty(DelightfulItemTags.BURGER_BUN), not(tagEmpty(DelightfulItemTags.CHEESE)), not(modLoaded(Modid.VD.get())));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.CHEESEBURGER.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(ModItems.BEEF_PATTY.get())
+-			.requires(CommonTags.Items.MILK)
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(Tags.Items.BUCKETS_MILK)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_beef_patty", has(ModItems.BEEF_PATTY.get())),
+@@ -172,7 +172,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.requires(DelightfulItemTags.BURGER_BUN)
+ 			.requires(ModItems.BEEF_PATTY.get())
+ 			.requires(DelightfulItemTags.CHEESE)
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_beef_patty", has(ModItems.BEEF_PATTY.get())),
+@@ -183,25 +183,25 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_hamburger", has(ModItems.HAMBURGER.get())),
+ 			"food/cheeseburger_from_hamburger", finished, enabled(DelightfulItems.CHEESEBURGER), not(tagEmpty(DelightfulItemTags.CHEESE)));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.DELUXE_CHEESEBURGER.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(ModItems.BEEF_PATTY.get())
+ 			.requires(DelightfulItemTags.CHEESE)
+ 			.requires(ModItems.BEEF_PATTY.get())
+ 			.requires(DelightfulItemTags.CHEESE)
+ 			.requires(ModItems.COOKED_BACON.get())
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_bacon", has(ModItems.COOKED_BACON.get())),
+ 			"food/deluxe_cheeseburger", finished, enabled("deluxe_cheeseburger"), tagEmpty(DelightfulItemTags.BURGER_BUN), not(tagEmpty(DelightfulItemTags.CHEESE)));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.DELUXE_CHEESEBURGER.get())
+-			.requires(CommonTags.Items.BREAD)
++			.requires(Tags.Items.FOODS_BREAD)
+ 			.requires(ModItems.BEEF_PATTY.get())
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(ModItems.BEEF_PATTY.get())
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(ModItems.COOKED_BACON.get())
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_bacon", has(ModItems.COOKED_BACON.get())),
+@@ -213,7 +213,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.requires(ModItems.BEEF_PATTY.get())
+ 			.requires(DelightfulItemTags.CHEESE)
+ 			.requires(ModItems.COOKED_BACON.get())
+-			.requires(CommonTags.Items.SALAD_INGREDIENTS)
++			.requires(DelightfulItemTags.SALAD_INGREDIENTS)
+ 			.requires(CommonTags.Items.CROPS_TOMATO)
+ 			.requires(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_bacon", has(ModItems.COOKED_BACON.get())),
+@@ -237,7 +237,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SMORE.get())
+ 			.requires(ModItems.HONEY_COOKIE.get())
+ 			.requires(Items.COCOA_BEANS)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(Items.SUGAR)
+ 			.requires(DelightfulItemTags.ROASTED_MARSHMALLOWS)
+ 			.requires(ModItems.HONEY_COOKIE.get())
+@@ -252,7 +252,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"food/smore_from_chocolate", finished, enabled(DelightfulItems.SMORE), not(tagEmpty(DelightfulItemTags.CHOCOLATE)));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.GLOW_JAM_COOKIE.get(), 8)
+ 			.requires(DelightfulItemTags.JAMS_GLOW)
+-			.requires(Ingredient.of(CommonTags.Items.GRAIN_WHEAT), 2)
++			.requires(Ingredient.of(Tags.Items.CROPS_WHEAT), 2)
+ 			.unlockedBy("has_glow_jam", has(DelightfulItemTags.JAMS_GLOW)),
+ 			"food/glow_jam_cookie", finished, enabled(DelightfulItems.GLOW_JAM_COOKIE));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.HONEY_GLAZED_WALNUT.get(), 2)
+@@ -261,7 +261,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_walnut", has(DelightfulItemTags.NUTS_WALNUT)),
+ 			"food/honey_glazed_walnut", finished, enabled(DelightfulItems.HONEY_GLAZED_WALNUT), not(tagEmpty(DelightfulItemTags.NUTS_WALNUT)));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.MATCHA_LATTE.get(), 1, CookingRecipes.FAST_COOKING, 0.35F, Items.GLASS_BOTTLE)
+-			.addIngredient(CommonTags.Items.MILK)
++			.addIngredient(Tags.Items.BUCKETS_MILK)
+ 			.addIngredient(Items.HONEY_BOTTLE)
+ 			.addIngredient(DelightfulItemTags.MATCHA)
+ 			.unlockedBy("has_matcha", has(DelightfulItemTags.MATCHA)),
+@@ -276,20 +276,20 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.BERRY_MATCHA_LATTE.get(), 1)
+ 			.requires(Items.GLASS_BOTTLE)
+ 			.requires(DelightfulItems.MATCHA_LATTE.get())
+-			.requires(CommonTags.Items.BERRIES)
++			.requires(Tags.Items.FOODS_BERRY)
+ 			.requires(Items.ICE)
+ 			.unlockedBy("has_matcha_latte", has(DelightfulItems.MATCHA_LATTE.get())),
+ 			"food/berry_matcha_latte", finished, enabled(DelightfulItems.MATCHA_LATTE), enabled(DelightfulItems.BERRY_MATCHA_LATTE), tagEmpty(DelightfulItemTags.ICE_CUBES));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.BERRY_MATCHA_LATTE.get(), 1)
+ 			.requires(Items.GLASS_BOTTLE)
+ 			.requires(DelightfulItems.MATCHA_LATTE.get())
+-			.requires(CommonTags.Items.BERRIES)
++			.requires(Tags.Items.FOODS_BERRY)
+ 			.requires(DelightfulItemTags.ICE_CUBES)
+ 			.unlockedBy("has_matcha_latte", has(DelightfulItems.MATCHA_LATTE.get())),
+ 			"food/berry_matcha_latte_neapolitan", finished, enabled(DelightfulItems.MATCHA_LATTE), enabled(DelightfulItems.BERRY_MATCHA_LATTE), not(tagEmpty(DelightfulItemTags.ICE_CUBES)));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.FIELD_SALAD.get(), 1)
+ 			.requires(Items.BOWL)
+-			.requires(Ingredient.of(CommonTags.Items.SALAD_INGREDIENTS), 2)
++			.requires(Ingredient.of(DelightfulItemTags.SALAD_INGREDIENTS), 2)
+ 			.requires(DelightfulItems.CACTUS_STEAK.get())
+ 			.requires(Tags.Items.CROPS_CARROT)
+ 			.requires(DelightfulItemTags.FRUITS_SALMONBERRIES)
+@@ -312,7 +312,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMONBERRY_ICE_CREAM.get(), 1)
+ 			.requires(Items.BOWL)
+ 			.requires(DelightfulItemTags.FRUITS_SALMONBERRIES)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.ICE_CUBES)
+ 			.requires(Items.SUGAR)
+ 			.unlockedBy("has_ice_cubes", has(DelightfulItemTags.ICE_CUBES)),
+@@ -320,7 +320,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMONBERRY_ICE_CREAM.get(), 1)
+ 			.requires(Items.BOWL)
+ 			.requires(DelightfulItemTags.FRUITS_SALMONBERRIES)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(Items.ICE)
+ 			.requires(Items.SUGAR)
+ 			.unlockedBy("has_ice", has(Items.ICE)),
+@@ -328,13 +328,13 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.SALMONBERRY_MILKSHAKE.get(), 3)
+ 			.requires(Items.GLASS_BOTTLE, 3)
+ 			.requires(DelightfulItems.SALMONBERRY_ICE_CREAM.get())
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.unlockedBy("has_salmonberry_ice_cream", has(DelightfulItems.SALMONBERRY_ICE_CREAM.get())),
+ 			"food/salmonberry_milkshake", finished, enabled(DelightfulItems.SALMONBERRY_MILKSHAKE), enabled(DelightfulItems.SALMONBERRY_ICE_CREAM));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.MATCHA_ICE_CREAM.get(), 1)
+ 			.requires(Items.BOWL)
+ 			.requires(DelightfulItemTags.MATCHA)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(DelightfulItemTags.ICE_CUBES)
+ 			.requires(Items.SUGAR)
+ 			.unlockedBy("has_ice_cubes", has(DelightfulItemTags.ICE_CUBES)),
+@@ -342,7 +342,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.MATCHA_ICE_CREAM.get(), 1)
+ 			.requires(Items.BOWL)
+ 			.requires(DelightfulItemTags.MATCHA)
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.requires(Items.ICE)
+ 			.requires(Items.SUGAR)
+ 			.unlockedBy("has_ice", has(Items.ICE)),
+@@ -350,7 +350,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.MATCHA_MILKSHAKE.get(), 3)
+ 			.requires(Items.GLASS_BOTTLE, 3)
+ 			.requires(DelightfulItems.MATCHA_ICE_CREAM.get())
+-			.requires(CommonTags.Items.MILK)
++			.requires(Tags.Items.BUCKETS_MILK)
+ 			.unlockedBy("has_matcha_ice_cream", has(DelightfulItems.MATCHA_ICE_CREAM.get())),
+ 			"food/matcha_milkshake", finished, enabled(DelightfulItems.MATCHA_MILKSHAKE), enabled(DelightfulItems.MATCHA_ICE_CREAM));
+ 		wrap(ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, DelightfulItems.BAKLAVA.get(), 1)
+@@ -359,7 +359,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("sdg")
+ 			.define('h', Items.HONEY_BOTTLE)
+ 			.define('n', DelightfulItemTags.COOKED_NUTS)
+-			.define('d', CommonTags.Items.DOUGH)
++			.define('d', CommonTags.Items.FOODS_DOUGH)
+ 			.define('s', DelightfulItemTags.FRUITS_CITRUS)
+ 			.define('g', DelightfulItemTags.HOT_SPICES)
+ 			.unlockedBy("has_nuts", has(DelightfulItemTags.COOKED_NUTS)),
+@@ -370,7 +370,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("sdg")
+ 			.define('h', Items.HONEY_BOTTLE)
+ 			.define('n', DelightfulItemTags.COOKED_NUTS)
+-			.define('d', CommonTags.Items.DOUGH)
++			.define('d', CommonTags.Items.FOODS_DOUGH)
+ 			.define('s', Items.SUGAR)
+ 			.define('g', DelightfulItemTags.HOT_SPICES)
+ 			.unlockedBy("has_nuts", has(DelightfulItemTags.COOKED_NUTS)),
+@@ -383,7 +383,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("###")
+ 			.pattern("aaa")
+ 			.pattern("xOx")
+-			.define('#', CommonTags.Items.GRAIN_WHEAT)
++			.define('#', Tags.Items.CROPS_WHEAT)
+ 			.define('a', DelightfulItemTags.FRUITS_SALMONBERRIES)
+ 			.define('x', Items.SUGAR)
+ 			.define('O', ModItems.PIE_CRUST.get())
+@@ -414,20 +414,20 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_cantaloupe", has(DelightfulItemTags.FRUITS_CANTALOUPE)),
+ 			"cantaloupe_seeds", finished, enabled(DelightfulItems.CANTALOUPE), enabled(DelightfulItems.CANTALOUPE_SEEDS));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.STUFFED_CANTALOUPE_BLOCK.get(), 1, CookingRecipes.SLOW_COOKING, 0.35F, DelightfulItems.CANTALOUPE.get())
+-			.addIngredient(CommonTags.Items.GRAIN_RICE)
+-			.addIngredient(CommonTags.Items.COOKED_MUTTON)
++			.addIngredient(CommonTags.Items.CROPS_RICE)
++			.addIngredient(CommonTags.Items.FOODS_COOKED_MUTTON)
+ 			.addIngredient(CommonTags.Items.CROPS_ONION)
+-			.addIngredient(CommonTags.Items.BERRIES)
+-			.addIngredient(CommonTags.Items.SEEDS)
++			.addIngredient(Tags.Items.FOODS_BERRY)
++			.addIngredient(Tags.Items.SEEDS)
+ 			.unlockedBy("has_cantaloupe", has(DelightfulItems.CANTALOUPE.get())),
+ 			"food/cooking/stuffed_cantaloupe", finished, enabled(DelightfulItems.STUFFED_CANTALOUPE), enabled(DelightfulItems.CANTALOUPE));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.WRAPPED_CANTALOUPE.get(), 1)
+ 			.requires(DelightfulItemTags.FRUITS_CANTALOUPE)
+-			.requires(CommonTags.Items.COOKED_BACON)
++			.requires(CommonTags.Items.FOODS_COOKED_BACON)
+ 			.unlockedBy("has_cantaloupe_slice", has(DelightfulItemTags.FRUITS_CANTALOUPE)),
+ 			"food/wrapped_cantaloupe", finished, enabled(DelightfulItems.WRAPPED_CANTALOUPE), enabled(DelightfulItems.CANTALOUPE));
+ 		wrap(ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, DelightfulItems.CANTALOUPE_BREAD.get(), 1)
+-			.requires(CommonTags.Items.DOUGH)
++			.requires(CommonTags.Items.FOODS_DOUGH)
+ 			.requires(DelightfulItemTags.FRUITS_CANTALOUPE)
+ 			.requires(Items.SUGAR)
+ 			.unlockedBy("has_cantaloupe_slice", has(DelightfulItemTags.FRUITS_CANTALOUPE)),
+@@ -435,7 +435,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.ROCK_CANDY.get(), 1, CookingRecipes.NORMAL_COOKING, 0.35F, Items.STICK)
+ 			.addIngredient(DelightfulItemTags.GEMS_ROSE_QUARTZ)
+ 			.addIngredient(Items.SUGAR)
+-			.addIngredient(CommonTags.Items.BERRIES)
++			.addIngredient(Tags.Items.FOODS_BERRY)
+ 			.unlockedBy("has_rose_quartz", has(DelightfulItemTags.GEMS_ROSE_QUARTZ)),
+ 			"food/cooking/rock_candy", finished, enabled(DelightfulItems.ROCK_CANDY), not(tagEmpty(DelightfulItemTags.GEMS_ROSE_QUARTZ)), not(modLoaded(Modid.DUNG.get())));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.ANIMAL_OIL_BOTTLE.get(), 1, CookingRecipes.NORMAL_COOKING, 0.35F)
+@@ -466,7 +466,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.unlockedBy("has_nuts", has(DelightfulItemTags.NUTS)),
+ 			"food/cooking/nut_butter_bottle_from_salt", finished, enabled(DelightfulItems.NUT_BUTTER_BOTTLE), not(tagEmpty(DelightfulItemTags.NUTS)), not(tagEmpty(DelightfulItemTags.SALT)), not(modLoaded(Modid.VD.get())));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CACTUS_CHILI.get(), 1, CookingRecipes.NORMAL_COOKING, 1F, Items.BOWL)
+-			.addIngredient(CommonTags.Items.RAW_PORK)
++			.addIngredient(CommonTags.Items.FOODS_RAW_PORK)
+ 			.addIngredient(DelightfulItemTags.CROPS_CACTUS)
+ 			.addIngredient(ModItems.TOMATO_SAUCE.get())
+ 			.addIngredient(DelightfulItemTags.HOT_SPICES)
+@@ -475,17 +475,17 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.setRecipeBookTab(CookingPotRecipeBookTab.MEALS),
+ 			"food/cooking/cactus_chili_from_corn", finished, enabled(DelightfulItems.CACTUS_CHILI), not(tagEmpty(DelightfulItemTags.CROPS_CORN)));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CACTUS_CHILI.get(), 1, CookingRecipes.NORMAL_COOKING, 1F, Items.BOWL)
+-			.addIngredient(CommonTags.Items.RAW_PORK)
++			.addIngredient(CommonTags.Items.FOODS_RAW_PORK)
+ 			.addIngredient(DelightfulItemTags.CROPS_CACTUS)
+ 			.addIngredient(ModItems.TOMATO_SAUCE.get())
+ 			.addIngredient(DelightfulItemTags.HOT_SPICES)
+-			.addIngredient(CommonTags.Items.VEGETABLES)
++			.addIngredient(Tags.Items.FOODS_VEGETABLE)
+ 			.unlockedBy("has_cactus", has(DelightfulItemTags.CROPS_CACTUS))
+ 			.setRecipeBookTab(CookingPotRecipeBookTab.MEALS),
+ 			"food/cooking/cactus_chili", finished, enabled(DelightfulItems.CACTUS_CHILI), tagEmpty(DelightfulItemTags.CROPS_CORN));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CACTUS_SOUP.get(), 1, CookingRecipes.NORMAL_COOKING, 1F, Items.BOWL)
+ 			.addIngredient(DelightfulItemTags.CROPS_CACTUS)
+-			.addIngredient(CommonTags.Items.GRAIN_RICE)
++			.addIngredient(CommonTags.Items.CROPS_RICE)
+ 			.addIngredient(CommonTags.Items.CROPS_TOMATO)
+ 			.addIngredient(CommonTags.Items.CROPS_ONION)
+ 			.unlockedBy("has_cactus_chunk", has(DelightfulItemTags.CROPS_CACTUS))
+@@ -509,8 +509,8 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"food/cooking/venison_stew_no_animal_fat", finished, enabled(DelightfulItems.VENISON_STEW), not(tagEmpty(DelightfulItemTags.RAW_VENISON_COMPAT)), not(enabled(DelightfulItems.ANIMAL_FAT)));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.COCONUT_CURRY.get(), 1, CookingRecipes.NORMAL_COOKING, 1F, Items.BOWL)
+ 			.addIngredient(DelightfulItemTags.COCONUT)
+-			.addIngredient(CommonTags.Items.MILK)
+-			.addIngredient(CommonTags.Items.RAW_CHICKEN)
++			.addIngredient(Tags.Items.BUCKETS_MILK)
++			.addIngredient(CommonTags.Items.FOODS_RAW_CHICKEN)
+ 			.addIngredient(ModItems.TOMATO_SAUCE.get())
+ 			.addIngredient(CommonTags.Items.CROPS_ONION)
+ 			.addIngredient(DelightfulItemTags.TEA_LEAVES)
+@@ -519,8 +519,8 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			"food/cooking/coconut_curry_no_ginger", finished, enabled(DelightfulItems.COCONUT_CURRY), not(tagEmpty(DelightfulItemTags.COCONUT)), tagEmpty(DelightfulItemTags.CROPS_GINGER));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.COCONUT_CURRY.get(), 1, CookingRecipes.NORMAL_COOKING, 1F, Items.BOWL)
+ 			.addIngredient(DelightfulItemTags.COCONUT)
+-			.addIngredient(CommonTags.Items.MILK)
+-			.addIngredient(CommonTags.Items.RAW_CHICKEN)
++			.addIngredient(Tags.Items.BUCKETS_MILK)
++			.addIngredient(CommonTags.Items.FOODS_RAW_CHICKEN)
+ 			.addIngredient(ModItems.TOMATO_SAUCE.get())
+ 			.addIngredient(DelightfulItemTags.CROPS_GINGER)
+ 			.addIngredient(DelightfulItemTags.TEA_LEAVES)
+@@ -528,20 +528,20 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.setRecipeBookTab(CookingPotRecipeBookTab.MEALS),
+ 			"food/cooking/coconut_curry", finished, enabled(DelightfulItems.COCONUT_CURRY), not(tagEmpty(DelightfulItemTags.COCONUT)), not(tagEmpty(DelightfulItemTags.CROPS_GINGER)));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CRAB_RANGOON.get(), 1, CookingRecipes.NORMAL_COOKING, 0.35F)
+-			.addIngredient(CommonTags.Items.DOUGH)
++			.addIngredient(CommonTags.Items.FOODS_DOUGH)
+ 			.addIngredient(DelightfulItemTags.CHEESE)
+ 			.addIngredient(DelightfulItemTags.COOKED_CRAB_MEAT)
+ 			.unlockedBy("has_cooked_crab", has(DelightfulItemTags.COOKED_CRAB_MEAT)),
+ 			"food/cooking/crab_rangoon", finished, enabled(DelightfulItems.CRAB_RANGOON), not(tagEmpty(DelightfulItemTags.COOKED_CRAB_MEAT)), not(tagEmpty(DelightfulItemTags.CHEESE)), tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CRAB_RANGOON.get(), 1, CookingRecipes.NORMAL_COOKING, 0.35F)
+-			.addIngredient(CommonTags.Items.DOUGH)
++			.addIngredient(CommonTags.Items.FOODS_DOUGH)
+ 			.addIngredient(DelightfulItemTags.CHEESE_MILD_CREAM)
+ 			.addIngredient(DelightfulItemTags.COOKED_CRAB_MEAT)
+ 			.unlockedBy("has_cooked_crab", has(DelightfulItemTags.COOKED_CRAB_MEAT)),
+ 			"food/cooking/crab_rangoon_from_cream_cheese", finished, enabled(DelightfulItems.CRAB_RANGOON), not(tagEmpty(DelightfulItemTags.COOKED_CRAB_MEAT)), not(tagEmpty(DelightfulItemTags.CHEESE_MILD_CREAM)));
+ 		wrap(CookingPotRecipeBuilder.cookingPotRecipe(DelightfulItems.CRAB_RANGOON.get(), 1, CookingRecipes.NORMAL_COOKING, 0.35F)
+-			.addIngredient(CommonTags.Items.DOUGH)
+-			.addIngredient(CommonTags.Items.MILK)
++			.addIngredient(CommonTags.Items.FOODS_DOUGH)
++			.addIngredient(Tags.Items.BUCKETS_MILK)
+ 			.addIngredient(DelightfulItemTags.COOKED_CRAB_MEAT)
+ 			.unlockedBy("has_cooked_crab", has(DelightfulItemTags.COOKED_CRAB_MEAT)),
+ 			"food/cooking/crab_rangoon_from_milk", finished, enabled(DelightfulItems.CRAB_RANGOON), not(tagEmpty(DelightfulItemTags.COOKED_CRAB_MEAT)), tagEmpty(DelightfulItemTags.CHEESE));
+@@ -557,7 +557,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 		wrap(ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PIE_CRUST.get(), 1)
+ 			.pattern("fAf")
+ 			.pattern(" f ")
+-			.define('f', CommonTags.Items.GRAIN_WHEAT)
++			.define('f', Tags.Items.CROPS_WHEAT)
+ 			.define('A', DelightfulItems.ANIMAL_FAT.get())
+ 			.unlockedBy("has_fat", has(DelightfulItems.ANIMAL_FAT.get())),
+ 			"food/pie_crust_from_fat", finished, enabled(DelightfulItems.ANIMAL_FAT));
+@@ -565,7 +565,7 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("fMf")
+ 			.pattern(" f ")
+ 			.define('f', DelightfulItemTags.FLOUR)
+-			.define('M', CommonTags.Items.MILK)
++			.define('M', Tags.Items.BUCKETS_MILK)
+ 			.unlockedBy("has_flour", has(DelightfulItemTags.FLOUR)),
+ 			"food/pie_crust_from_flour", finished, not(tagEmpty(DelightfulItemTags.FLOUR)));
+ 		wrap(ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PIE_CRUST.get(), 1)
+@@ -752,11 +752,11 @@ public class DelightfulRecipeProvider extends RecipeProvider implements IConditi
+ 			.pattern("mmm")
+ 			.pattern("xOx")
+ 			.define('c', DelightfulItemTags.CHOCOLATE)
+-			.define('m', CommonTags.Items.MILK)
++			.define('m', Tags.Items.BUCKETS_MILK)
+ 			.define('x', Items.SUGAR)
+ 			.define('O', ModItems.PIE_CRUST.get())
+ 			.unlockedBy("has_pie_crust", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PIE_CRUST.get()))
+-			.save(finished.withConditions(not(tagEmpty(DelightfulItemTags.CHOCOLATE))), ModItems.CHOCOLATE_PIE.getId());
++			.save(finished.withConditions(not(tagEmpty(DelightfulItemTags.CHOCOLATE))), Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(ModItems.CHOCOLATE_PIE.get())));
+ 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(DelightfulItems.WILD_SALMONBERRIES.get()), CuttingRecipes.KNIVES, DelightfulItems.SALMONBERRIES.get(), 2)
+ 			.addResultWithChance(Items.ORANGE_DYE, 0.5F)
+ 			.save(finished, Util.delight("cutting/wild_salmonberries"));
+diff --git a/src/main/java/net/brnbrd/delightful/data/tags/DelightfulItemTags.java b/src/main/java/net/brnbrd/delightful/data/tags/DelightfulItemTags.java
+index c8b7db9b..017eb37c 100644
+--- a/src/main/java/net/brnbrd/delightful/data/tags/DelightfulItemTags.java
++++ b/src/main/java/net/brnbrd/delightful/data/tags/DelightfulItemTags.java
+@@ -79,6 +79,9 @@ public class DelightfulItemTags {
+ 	public static final TagKey<Item> CROPS_GINGER = forge("crops/ginger");
+ 
+ 	// Salad Ingredients
++	// FD's own CommonTags.Items.SALAD_INGREDIENTS was removed (FD trimmed CommonTags down to just
++	// its own unique tags); this is the same "c:salad_ingredients" umbrella tag, now maintained here.
++	public static final TagKey<Item> SALAD_INGREDIENTS = forge("salad_ingredients");
+ 	public static final TagKey<Item> SALAD_INGREDIENTS_CLOVER = forge("salad_ingredients/clover");
+ 
+ 	// Vegetables
+-- 
+2.39.0.windows.1
+

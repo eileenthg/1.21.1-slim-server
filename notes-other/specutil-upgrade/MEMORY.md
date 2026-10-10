@@ -1,0 +1,4 @@
+- [specutils source repo](specutils-source-repo.md) — the repo URL in the mod's own metadata is dead; real one is eehunter/Spectral-Utilities.
+- [Windows long paths](specutils-windows-longpaths.md) — specutils won't check out on Windows without core.longpaths.
+- [Gradle wrapper broken](specutils-gradle-wrapper-broken.md) — ./gradlew fails; run GradleWrapperMain via -classpath.
+- [Connector entrypoint timing](connector-entrypoint-timing.md) — Fabric entrypoints run before NeoForge mods construct; Deferred holders unbound, mod bus unavailable.

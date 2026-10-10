@@ -1,0 +1,22 @@
+diff --git a/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/baked_cave_carrot.json b/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/baked_cave_carrot.json
+index 03a537d8..cd991ade 100644
+--- a/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/baked_cave_carrot.json
++++ b/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/baked_cave_carrot.json
+@@ -1,4 +1,4 @@
+ {
+-	"item": "miners_delight:baked_cave_carrot",
++	"item": "minersdelight:baked_cave_carrot",
+ 	"models": "delightful:block/coaster/miners_delight/baked_cave_carrot"
+ }
+\ No newline at end of file
+diff --git a/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/cave_carrot.json b/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/cave_carrot.json
+index f4850a14..f42d88fd 100644
+--- a/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/cave_carrot.json
++++ b/src/main/resources/assets/delightful/brewinandchewin/coaster/miners_delight/cave_carrot.json
+@@ -1,4 +1,4 @@
+ {
+-	"item": "miners_delight:cave_carrot",
++	"item": "minersdelight:cave_carrot",
+ 	"models": "delightful:block/coaster/miners_delight/cave_carrot"
+ }
+\ No newline at end of file

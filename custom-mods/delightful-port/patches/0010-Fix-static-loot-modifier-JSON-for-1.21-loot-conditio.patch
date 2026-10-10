@@ -1,0 +1,254 @@
+From 4376290d1dd340353d2df57f4b2e17a196fbbf5e Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Fri, 4 Sep 2026 01:26:03 +0800
+Subject: [PATCH 10/12] Fix static loot modifier JSON for 1.21 loot condition
+ API changes
+
+These 6 hand-written loot_modifiers/*.json files (raw_goat, cooked_goat,
+scavenging_animal_fat, and the compat/ scavenging_ham/smoked_ham/acorn_block
+variants) were never touched by the earlier bulk condition-JSON migration
+pass, which only handled the forge:conditional recipe-wrapping format. They
+still used three now-invalid pieces of old-Forge-era loot condition syntax,
+causing "Could not decode GlobalLootModifier" warnings (and the modifiers
+silently not applying) on every server boot:
+
+- minecraft:random_chance_with_looting was removed; ported to the real
+  1.21 minecraft:random_chance_with_enchanted_bonus (unenchanted_chance +
+  a minecraft:linear enchanted_chance keyed to minecraft:looting), matching
+  the field layout used by FD's own real scavenging_ham_from_pig.json.
+- forge:loot_table_id -> neoforge:loot_table_id (same "loot_table_id" field).
+- entity_properties' EntityTarget enum serialized names changed:
+  "killer" -> "attacker", "killer_player" -> "attacking_player"; the
+  equipment item-predicate field also renamed "tag" -> "items" (confirmed
+  against FD's own shipped scavenging_ham_from_pig.json).
+
+Verified via ./gradlew runServer: the "Could not decode GlobalLootModifier"
+warnings for these 6 ids are gone and the server reaches "Done" cleanly.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ .../loot_modifiers/compat/acorn_block.json      | 13 +++++++++----
+ .../loot_modifiers/compat/scavenging_ham.json   | 17 +++++++++++------
+ .../compat/scavenging_smoked_ham.json           | 17 +++++++++++------
+ .../delightful/loot_modifiers/cooked_goat.json  | 15 ++++++++++-----
+ .../delightful/loot_modifiers/raw_goat.json     | 15 ++++++++++-----
+ .../loot_modifiers/scavenging_animal_fat.json   | 17 +++++++++++------
+ 6 files changed, 62 insertions(+), 32 deletions(-)
+
+diff --git a/src/main/resources/data/delightful/loot_modifiers/compat/acorn_block.json b/src/main/resources/data/delightful/loot_modifiers/compat/acorn_block.json
+index 46cc4341..6c920b77 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/compat/acorn_block.json
++++ b/src/main/resources/data/delightful/loot_modifiers/compat/acorn_block.json
+@@ -6,9 +6,14 @@
+       "item": "acorn"
+     },
+     {
+-      "chance": 0.4,
+-      "condition": "minecraft:random_chance_with_looting",
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 0.4,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 0.5,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     },
+     {
+       "condition": "delightful:is_tag",
+@@ -19,4 +24,4 @@
+   "maxAmount": 1,
+   "minAmount": 1,
+   "unique": true
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_ham.json b/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_ham.json
+index 48a72610..a2a17796 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_ham.json
++++ b/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_ham.json
+@@ -3,11 +3,11 @@
+   "conditions": [
+     {
+       "condition": "minecraft:entity_properties",
+-      "entity": "killer",
++      "entity": "attacker",
+       "predicate": {
+         "equipment": {
+           "mainhand": {
+-            "tag": "farmersdelight:tools/knives"
++            "items": "#farmersdelight:tools/knives"
+           }
+         }
+       }
+@@ -29,10 +29,15 @@
+       }
+     },
+     {
+-      "condition": "minecraft:random_chance_with_looting",
+-      "chance": 0.5,
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 0.5,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 0.6,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     }
+   ],
+   "item": "farmersdelight:ham"
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_smoked_ham.json b/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_smoked_ham.json
+index 7e2fe5a2..33b6feb8 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_smoked_ham.json
++++ b/src/main/resources/data/delightful/loot_modifiers/compat/scavenging_smoked_ham.json
+@@ -3,11 +3,11 @@
+   "conditions": [
+     {
+       "condition": "minecraft:entity_properties",
+-      "entity": "killer",
++      "entity": "attacker",
+       "predicate": {
+         "equipment": {
+           "mainhand": {
+-            "tag": "farmersdelight:tools/knives"
++            "items": "#farmersdelight:tools/knives"
+           }
+         }
+       }
+@@ -29,10 +29,15 @@
+       }
+     },
+     {
+-      "condition": "minecraft:random_chance_with_looting",
+-      "chance": 0.5,
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 0.5,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 0.6,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     }
+   ],
+   "item": "farmersdelight:smoked_ham"
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/resources/data/delightful/loot_modifiers/cooked_goat.json b/src/main/resources/data/delightful/loot_modifiers/cooked_goat.json
+index 86738900..2d566278 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/cooked_goat.json
++++ b/src/main/resources/data/delightful/loot_modifiers/cooked_goat.json
+@@ -6,13 +6,18 @@
+       "item": "cooked_goat"
+     },
+     {
+-      "condition": "forge:loot_table_id",
++      "condition": "neoforge:loot_table_id",
+       "loot_table_id": "minecraft:entities/goat"
+     },
+     {
+-      "chance": 1.0,
+-      "condition": "minecraft:random_chance_with_looting",
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 1.0,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 1.1,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     },
+     {
+       "condition": "minecraft:entity_properties",
+@@ -28,4 +33,4 @@
+   "maxAmount": 2,
+   "minAmount": 1,
+   "unique": true
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/resources/data/delightful/loot_modifiers/raw_goat.json b/src/main/resources/data/delightful/loot_modifiers/raw_goat.json
+index 014913c3..c98f0a54 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/raw_goat.json
++++ b/src/main/resources/data/delightful/loot_modifiers/raw_goat.json
+@@ -6,13 +6,18 @@
+       "item": "raw_goat"
+     },
+     {
+-      "condition": "forge:loot_table_id",
++      "condition": "neoforge:loot_table_id",
+       "loot_table_id": "minecraft:entities/goat"
+     },
+     {
+-      "chance": 1.0,
+-      "condition": "minecraft:random_chance_with_looting",
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 1.0,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 1.1,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     },
+     {
+       "condition": "minecraft:entity_properties",
+@@ -28,4 +33,4 @@
+   "maxAmount": 2,
+   "minAmount": 1,
+   "unique": true
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/resources/data/delightful/loot_modifiers/scavenging_animal_fat.json b/src/main/resources/data/delightful/loot_modifiers/scavenging_animal_fat.json
+index bc1e9ffa..3ab3a16c 100644
+--- a/src/main/resources/data/delightful/loot_modifiers/scavenging_animal_fat.json
++++ b/src/main/resources/data/delightful/loot_modifiers/scavenging_animal_fat.json
+@@ -6,17 +6,22 @@
+       "item": "animal_fat"
+     },
+     {
+-      "chance": 0.7,
+-      "condition": "minecraft:random_chance_with_looting",
+-      "looting_multiplier": 0.1
++      "condition": "minecraft:random_chance_with_enchanted_bonus",
++      "unenchanted_chance": 0.7,
++      "enchanted_chance": {
++        "type": "minecraft:linear",
++        "base": 0.8,
++        "per_level_above_first": 0.1
++      },
++      "enchantment": "minecraft:looting"
+     },
+     {
+       "condition": "minecraft:entity_properties",
+-      "entity": "killer_player",
++      "entity": "attacking_player",
+       "predicate": {
+         "equipment": {
+           "mainhand": {
+-            "tag": "forge:tools/knives"
++            "items": "#farmersdelight:tools/knives"
+           }
+         }
+       }
+@@ -33,4 +38,4 @@
+   "maxAmount": 3,
+   "minAmount": 1,
+   "unique": true
+-}
+\ No newline at end of file
++}
+-- 
+2.39.0.windows.1
+

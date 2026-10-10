@@ -44,3 +44,5 @@ cook times, vat stage timings) becomes caption lines. Titles reuse Extra Delight
   `extradelight.jei.*` lang keys.
 
 Related: [[test-instance-copy-resets-configs]], [[disable-stub-recipe-shapes]].
+
+- **Obsolete (10 Oct):** the pack is JEI-only since ~24 Sep; REI and edrei are not installed, and the source folder `Claude/extradelight-rei` no longer exists.

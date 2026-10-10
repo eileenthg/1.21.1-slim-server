@@ -1,0 +1,1092 @@
+From b44079bea7d3dd8cccfe19e6304464556bcc0f08 Mon Sep 17 00:00:00 2001
+From: eileenthg <40307498+eileenthg@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 23:59:09 +0800
+Subject: [PATCH 07/12] Fix Registry.getValue->get rename and redesign
+ MobEffect helpers around Holder<MobEffect>
+
+- Registry#getValue(ResourceLocation) was renamed to get(ResourceLocation) in 1.21
+  (getKey/containsKey unchanged); fixed every BuiltInRegistries.*.getValue( call across
+  Util.java, Modid.java, ModEvents.java. Registry#containsValue was removed outright;
+  Util.rl(ItemLike) now uses getResourceKey(T).isPresent() to check registration instead.
+- MobEffectInstance's constructors need Holder<MobEffect> now, and vanilla MobEffects.* backup
+  constants (MobEffects.REGENERATION, MobEffects.DIG_SPEED, etc.) are themselves already
+  Holder<MobEffect> - incompatible with the old MobEffect... vararg parameters throughout
+  Util.effect/Modid.effect/Modid.effectInstance/Util.addEffect. Redesigned that whole chain to
+  work in Holder<MobEffect> end to end instead of patching every call site individually, and
+  updated the ~9 small compat effect-getter classes that fed into it (TeaCompat,
+  ExquisitoCompat, CosmopolitanCompat, SOBCompat, NeapolitanCompat, BrewinChewinCompat,
+  AtmosphericCompat, UnusualEndCompat, ArsNouveauCompat, UndergardenCompat,
+  NecroniumKnifeItem) to return/consume Holder<MobEffect> to match.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+---
+ compile_output.txt                            | 434 ++++++++++++++++++
+ src/main/java/net/brnbrd/delightful/Util.java |  45 +-
+ .../delightful/common/events/ModEvents.java   |   2 +-
+ .../common/item/food/ChorusMuffinItem.java    |   8 +-
+ .../common/item/food/Nutrition.java           |  42 +-
+ .../nourished_nether/NecroniumKnifeItem.java  |   3 +-
+ .../delightful/compat/CosmopolitanCompat.java |   5 +-
+ .../delightful/compat/ExquisitoCompat.java    |   5 +-
+ .../net/brnbrd/delightful/compat/Modid.java   |  19 +-
+ .../brnbrd/delightful/compat/SOBCompat.java   |   7 +-
+ .../brnbrd/delightful/compat/TeaCompat.java   |   9 +-
+ .../delightful/compat/UnusualEndCompat.java   |   5 +-
+ .../compat/abnormals/AtmosphericCompat.java   |   3 +-
+ .../compat/abnormals/NeapolitanCompat.java    |   5 +-
+ .../compat/ars_nouveau/ArsNouveauCompat.java  |   3 +-
+ .../brewinandchewin/BrewinChewinCompat.java   |   3 +-
+ .../compat/undergarden/UndergardenCompat.java |   3 +-
+ 17 files changed, 527 insertions(+), 74 deletions(-)
+ create mode 100644 compile_output.txt
+
+diff --git a/compile_output.txt b/compile_output.txt
+new file mode 100644
+index 00000000..fe6ab7ca
+--- /dev/null
++++ b/compile_output.txt
+@@ -0,0 +1,434 @@
++﻿> Task :createArtifactManifest UP-TO-DATE
++> Task :createMinecraftArtifacts UP-TO-DATE
++
++> Task :compileJava
++.\gradlew.bat : C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:178: error: cannot find symbol
++At line:2 char:1
+++ .\gradlew.bat compileJava --console=plain 2>&1 | Out-String -Width 30 ...
+++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++    + CategoryInfo          : NotSpecified: (C:\Users\eteil....not find symbol:String) [], RemoteException
++    + FullyQualifiedErrorId : NativeCommandError
++ 
++		return BuiltInRegistries.ITEM.getValue(this.rl(name));
++		                             ^
++  symbol:   method getValue(ResourceLocation)
++  location: variable ITEM of type DefaultedRegistry<Item>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:192: error: cannot find symbol
++			Item returnItem = BuiltInRegistries.ITEM.getValue(this.rl(name));
++			                                        ^
++  symbol:   method getValue(ResourceLocation)
++  location: variable ITEM of type DefaultedRegistry<Item>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:204: error: cannot find symbol
++		return BuiltInRegistries.BLOCK.getValue(this.rl(name));
++		                              ^
++  symbol:   method getValue(ResourceLocation)
++  location: variable BLOCK of type DefaultedRegistry<Block>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:210: error: cannot find symbol
++			Block returnBlock = BuiltInRegistries.BLOCK.getValue(this.rl(name));
++			                                           ^
++  symbol:   method getValue(ResourceLocation)
++  location: variable BLOCK of type DefaultedRegistry<Block>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:229: error: incompatible types: @org.jetbrains.annotations.NotNull MobEffect cannot be converted to Holder<MobEffect>
++			new MobEffectInstance(backup, backupDur, backupAmp) :
++			                      ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\Modid.java:230: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++			new MobEffectInstance(effect, duration, amplifier);
++			                      ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupeBlock.java:24: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:39: error: CantaloupePlantBlock is not abstract and does not override abstract method isValidBonemealTarget(LevelReader,BlockPos,BlockState) in BonemealableBlock
++public class CantaloupePlantBlock extends BushBlock implements BonemealableBlock {
++       ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:61: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:126: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:139: error: cannot find symbol
++			return super.use(state, pLevel, pPos, pPlayer, pHand, pHit);
++			            ^
++  symbol: method use(@org.jetbrains.annotations.NotNull BlockState,@org.jetbrains.annotations.NotNull Level,@org.jetbrains.annotations.NotNull BlockPos,@org.jetbrains.annotations.NotNull Player,@org.jetbrains.annotations.NotNull InteractionHand,@org.jetbrains.annotations.NotNull BlockHitResult)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\CantaloupePlantBlock.java:148: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulBlocks.java:125: error: method newInteractionMap in interface CauldronInteraction cannot be applied to given types;
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		                                                              ^
++  required: String
++  found:    no arguments
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulBlocks.java:128: error: method newInteractionMap in interface CauldronInteraction cannot be applied to given types;
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		                                                              ^
++  required: String
++  found:    no arguments
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulBlocks.java:131: error: method newInteractionMap in interface CauldronInteraction cannot be applied to given types;
++		() -> new DelightfulMilkshakeCauldronBlock(CauldronInteraction.newInteractionMap())
++		                                                              ^
++  required: String
++  found:    no arguments
++  reason: actual and formal argument lists differ in length
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulBlocks.java:153: error: incompatible types: BlockState is not a functional interface
++			GLOW_JAM_COOKIE_TILES.get()::defaultBlockState,
++			^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulBlocks.java:164: error: incompatible types: BlockState is not a functional interface
++			SOURCE_BERRY_COOKIE_TILES.get()::defaultBlockState,
++			^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DPieBlock.java:45: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DPieBlock.java:48: error: incompatible types: BlockGetter cannot be converted to LevelReader
++		return !stack.isEmpty() ? stack : super.getCloneItemStack(state, target, level, pos, player);
++		                                                                         ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulMilkshakeCauldronBlock.java:22: error: incompatible types: Properties cannot be converted to Precipitation
++		super(Properties.ofFullCopy(Blocks.CAULDRON), FALSE, map);
++		                           ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\DelightfulMilkshakeCauldronBlock.java:25: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\MiniMelonBlock.java:24: error: MiniMelonBlock is not abstract and does not override abstract method isValidBonemealTarget(LevelReader,BlockPos,BlockState) in BonemealableBlock
++public class MiniMelonBlock extends MiniBlock implements BonemealableBlock {
++       ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\MiniMelonBlock.java:55: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\MiniMelonBlock.java:66: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SalmonberryBushBlock.java:36: error: SalmonberryBushBlock is not abstract and does not override abstract method isValidBonemealTarget(LevelReader,BlockPos,BlockState) in BonemealableBlock
++public class SalmonberryBushBlock extends BushBlock implements BonemealableBlock {
++       ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SalmonberryBushBlock.java:54: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SalmonberryBushBlock.java:98: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SalmonberryBushBlock.java:111: error: cannot find symbol
++			return super.use(state, level, pos, player, hand, hit);
++			            ^
++  symbol: method use(@org.jetbrains.annotations.NotNull BlockState,@org.jetbrains.annotations.NotNull Level,@org.jetbrains.annotations.NotNull BlockPos,@org.jetbrains.annotations.NotNull Player,@org.jetbrains.annotations.NotNull InteractionHand,@org.jetbrains.annotations.NotNull BlockHitResult)
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SalmonberryBushBlock.java:120: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedGourdBlock.java:43: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedGourdBlock.java:83: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedGourdBlock.java:156: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMelonBlock.java:48: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMelonBlock.java:99: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMelonBlock.java:195: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMiniMelonBlock.java:52: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMiniMelonBlock.java:101: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\SlicedMiniMelonBlock.java:194: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\block\WildSalmonberriesBlock.java:30: error: method does not override or implement a method from a supertype
++	@Override
++	^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ForgeEvents.java:73: error: incompatible types: ItemStack cannot be converted to ItemCost
++			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 2), Util.getStack(DelightfulItems.SALMONBERRY_PIPS), 5, 1, 1));
++			                                         ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ForgeEvents.java:76: error: incompatible types: ItemStack cannot be converted to ItemCost
++			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 3), Util.getStack(DelightfulItems.CANTALOUPE_SLICE, 8), 5, 1, 1));
++			                                         ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ForgeEvents.java:83: error: incompatible types: ItemStack cannot be converted to ItemCost
++			trades.add((ent, r) -> new MerchantOffer(new ItemStack(Items.EMERALD, 5), Util.getStack(DelightfulItems.STUFFED_CANTALOUPE_BLOCK, 1), 3, 1, 1));
++			                                         ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\KnifeEvents.java:19: error: cannot find symbol
++			e.getEntity().setSecondsOnFire(15);
++			             ^
++  symbol:   method setSecondsOnFire(int)
++  location: class LivingEntity
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ModEvents.java:98: error: cannot find symbol
++		if (event.getTabKey() == ModCreativeTabs.TAB_FARMERS_DELIGHT.getKey()) {
++		                                                            ^
++  symbol:   method getKey()
++  location: variable TAB_FARMERS_DELIGHT of type Supplier<CreativeModeTab>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\events\ModEvents.java:121: error: cannot find symbol
++				Item toast = BuiltInRegistries.ITEM.getValue(TOAST_WITH_BLUEBERRIES);
++				                                   ^
++  symbol:   method getValue(ResourceLocation)
++  location: variable ITEM of type DefaultedRegistry<Item>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\fluid\DFluidType.java:23: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
++	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
++	            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\DelightfulItems.java:308: error: cannot find symbol
++						() -> new BowlFoodItem((new Item.Properties()).food(food).craftRemainder(Items.BOWL)));
++						          ^
++  symbol:   class BowlFoodItem
++  location: class DelightfulItems
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:15: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:19: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:23: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 1), 0.7F).build();
++		                                                                 ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:26: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 300, 0), 1F).build();
++		                                                                 ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:29: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 0), 1F)
++		                                                                 ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:33: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:34: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 1), 1F)
++		                                                                 ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:41: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:46: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(CosmopolitanCompat.getTracer(), 1200, 0), 1F).build();
++		                                                                ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:51: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:52: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:56: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:59: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:64: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:67: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:68: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(SOBCompat.getToughness(), 1800, 0), 1F).build();
++		                                                          ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:71: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:75: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:92: error: cannot find symbol
++		.meat()
++		^
++  symbol:   method meat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:104: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:108: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:111: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:114: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:117: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:120: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:124: error: cannot find symbol
++		.meat()
++		^
++  symbol:   method meat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:128: error: cannot find symbol
++		.meat()
++		^
++  symbol:   method meat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:132: error: cannot find symbol
++		.meat().build();
++		^
++  symbol:   method meat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:135: error: cannot find symbol
++		.meat().build();
++		^
++  symbol:   method meat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:148: error: cannot find symbol
++		.alwaysEat()
++		^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:152: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:156: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:160: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:164: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:168: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 600, 0), 1F).build();
++		                                                      ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:171: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 1200, 0), 1F).build();
++		                                                      ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:172: error: cannot find symbol
++	public static final FoodProperties LAVENDER_TEA = (new FoodProperties.Builder()).alwaysEat()
++	                                                                                ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:173: error: cannot find symbol
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
++		                                                          ^
++  symbol:   method get()
++  location: variable NOURISHMENT of type Holder<MobEffect>
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:174: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 600, 0), 1F).build();
++		                                                            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:175: error: cannot find symbol
++	public static final FoodProperties AZALEA_TEA = (new FoodProperties.Builder()).alwaysEat()
++	                                                                              ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:178: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getYellowTeaEffect(), 4800, 1), 1F).build();
++		                                                                ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:179: error: cannot find symbol
++	public static final FoodProperties MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
++	                                                                                ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:182: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:183: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
++		                                                            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:184: error: cannot find symbol
++	public static final FoodProperties BERRY_MATCHA_LATTE = (new FoodProperties.Builder()).alwaysEat()
++	                                                                                      ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:187: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 400, 1), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:188: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 1), 1F).build();
++		                                                            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:190: error: cannot find symbol
++		.nutrition(4).saturationModifier(0F).alwaysEat()
++		                                    ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:192: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 3600, 2), 1F)
++		                                                            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:193: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(ExquisitoCompat.getResonance(), 500, 0), 1F)
++		                                                                ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:194: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 2400, 0), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:199: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getGreenTeaEffect(), 500, 1), 1F)
++		                                                               ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:200: error: incompatible types: MobEffect cannot be converted to Holder<MobEffect>
++		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 400, 0), 1F).build();
++		                                                            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\common\item\food\Nutrition.java:202: error: cannot find symbol
++		.nutrition(2).saturationModifier(1.5F).alwaysEat()
++		                                      ^
++  symbol:   method alwaysEat()
++  location: class Builder
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\brewinandchewin\AgedRoeFluidType.java:24: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
++	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
++	            ^
++C:\Users\eteil.000\Claude\delightful-port\src\main\java\net\brnbrd\delightful\compat\brewinandchewin\CaviarFluidType.java:24: warning: [removal] initializeClient(Consumer<IClientFluidTypeExtensions>) in FluidType has been deprecated and marked for removal
++	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
++	            ^
++Note: Some input files use or override a deprecated API.
++Note: Recompile with -Xlint:deprecation for details.
++Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
++100 errors
++3 warnings
++only showing the first 100 errors, of 265 total; use -Xmaxerrs if you would like to see more
++
++> Task :compileJava FAILED
++
++FAILURE: Build failed with an exception.
++
++* What went wrong:
++Execution failed for task ':compileJava'.
++> Compilation failed; see the compiler error output for details.
++
++* Try:
++> Run with --info option to get more log output.
++> Run with --scan to get full insights.
++
++BUILD FAILED in 5s
++3 actionable tasks: 1 executed, 2 up-to-date
++
+diff --git a/src/main/java/net/brnbrd/delightful/Util.java b/src/main/java/net/brnbrd/delightful/Util.java
+index fb53245b..00fed1ef 100644
+--- a/src/main/java/net/brnbrd/delightful/Util.java
++++ b/src/main/java/net/brnbrd/delightful/Util.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful;
+ 
+ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
++import net.minecraft.core.Holder;
+ import net.brnbrd.delightful.common.DelightfulConfig;
+ import net.brnbrd.delightful.common.item.DelightfulItems;
+ import net.brnbrd.delightful.common.item.IConfigured;
+@@ -66,9 +67,9 @@ public class Util {
+ 
+ 	public static ResourceLocation rl(ItemLike itemLike) {
+ 		if (itemLike instanceof Item item) {
+-			if (BuiltInRegistries.ITEM.containsValue(item)) return BuiltInRegistries.ITEM.getKey(item);
++			if (BuiltInRegistries.ITEM.getResourceKey(item).isPresent()) return BuiltInRegistries.ITEM.getKey(item);
+ 		} else if (itemLike instanceof Block block) {
+-			if (BuiltInRegistries.BLOCK.containsValue(block)) return BuiltInRegistries.BLOCK.getKey(block);
++			if (BuiltInRegistries.BLOCK.getResourceKey(block).isPresent()) return BuiltInRegistries.BLOCK.getKey(block);
+ 		}
+ 		return rl(MC, "air");
+ 	}
+@@ -151,7 +152,7 @@ public class Util {
+ 
+ 	@Nullable
+ 	public static Item item(ResourceLocation rl) {
+-		return BuiltInRegistries.ITEM.getValue(rl);
++		return BuiltInRegistries.ITEM.get(rl);
+ 	}
+ 
+ 	@Nullable
+@@ -207,15 +208,19 @@ public class Util {
+ 
+ 	@Nullable
+ 	public static Block block(ResourceLocation rl) {
+-		return BuiltInRegistries.BLOCK.getValue(rl);
++		return BuiltInRegistries.BLOCK.get(rl);
+ 	}
+ 
+ 	public static boolean effectExists(ResourceLocation effect) {
+ 		return Mods.stringLoaded(effect.getNamespace()) && BuiltInRegistries.MOB_EFFECT.containsKey(effect);
+ 	}
+ 
++	// MobEffect lookups return Holder<MobEffect> rather than raw MobEffect: MobEffectInstance's
++	// constructors (and the vanilla MobEffects.* constants used as backups everywhere) are
++	// Holder<MobEffect>-based in 1.21+, there's no raw-MobEffect overload left to fall back to.
+ 	@Nullable
+-	private static MobEffect getBackup(@Nullable MobEffect[] backup) {
++	@SafeVarargs
++	private static Holder<MobEffect> getBackup(@Nullable Holder<MobEffect>... backup) {
+ 		return (
+ 			(backup != null && backup.length > 0) ?
+ 			backup[0] :
+@@ -224,21 +229,24 @@ public class Util {
+ 	}
+ 
+ 	@Nullable
+-	public static MobEffect effect(ResourceLocation effLocation, MobEffect... backup) {
+-		return (
+-			effectExists(effLocation) ?
+-			BuiltInRegistries.MOB_EFFECT.getValue(effLocation) :
+-			getBackup(backup)
+-		);
++	@SafeVarargs
++	public static Holder<MobEffect> effect(ResourceLocation effLocation, Holder<MobEffect>... backup) {
++		if (effectExists(effLocation)) {
++			MobEffect me = BuiltInRegistries.MOB_EFFECT.get(effLocation);
++			if (me != null) return BuiltInRegistries.MOB_EFFECT.wrapAsHolder(me);
++		}
++		return getBackup(backup);
+ 	}
+ 
+ 	@Nullable
+-	public static MobEffect effect(String id, String name, MobEffect... backup) {
++	@SafeVarargs
++	public static Holder<MobEffect> effect(String id, String name, Holder<MobEffect>... backup) {
+ 		return effect(Util.rl(id, name), backup);
+ 	}
+ 
+ 	@Nullable
+-	public static MobEffect effect(Modid modid, String name, MobEffect... backup) {
++	@SafeVarargs
++	public static Holder<MobEffect> effect(Modid modid, String name, Holder<MobEffect>... backup) {
+ 		return (
+ 			modid.loaded() ?
+ 			effect(Util.rl(modid, name), backup) :
+@@ -247,12 +255,13 @@ public class Util {
+ 	}
+ 
+ 	// Will not add if effect is null
+-	public static void addEffect(LivingEntity entity, @Nullable MobEffect effect, int duration, int amp) {
+-		if (effect != null) entity.addEffect(new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect), duration, amp));
++	public static void addEffect(LivingEntity entity, @Nullable Holder<MobEffect> effect, int duration, int amp) {
++		if (effect != null) entity.addEffect(new MobEffectInstance(effect, duration, amp));
+ 	}
+ 
+-	public static void addEffect(LivingEntity entity, String modid, String name, int duration, int amp, MobEffect... backup) {
+-		MobEffect me = effect(modid, name, backup);
++	@SafeVarargs
++	public static void addEffect(LivingEntity entity, String modid, String name, int duration, int amp, Holder<MobEffect>... backup) {
++		Holder<MobEffect> me = effect(modid, name, backup);
+ 		if (me != null) addEffect(entity, me, duration, amp);
+ 	}
+ 
+@@ -275,7 +284,7 @@ public class Util {
+ 
+ 	@Nullable
+ 	public static EntityType<?> entity(ResourceLocation rl) {
+-		return BuiltInRegistries.ENTITY_TYPE.getValue(rl);
++		return BuiltInRegistries.ENTITY_TYPE.get(rl);
+ 	}
+ 
+ 	public static String nameSpace(ItemLike itemLike) {
+diff --git a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+index 8158e577..4fadec99 100644
+--- a/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
++++ b/src/main/java/net/brnbrd/delightful/common/events/ModEvents.java
+@@ -118,7 +118,7 @@ public class ModEvents {
+ 				BuiltInRegistries.ITEM.containsKey(TOAST_WITH_BLUEBERRIES) &&
+ 				BuiltInRegistries.ITEM.getTag(DelightfulItemTags.FRUITS_BLUEBERRIES).isPresent()
+ 			) {
+-				Item toast = BuiltInRegistries.ITEM.getValue(TOAST_WITH_BLUEBERRIES);
++				Item toast = BuiltInRegistries.ITEM.get(TOAST_WITH_BLUEBERRIES);
+ 				if (toast != null) event.accept(toast);
+ 			}
+ 		}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/food/ChorusMuffinItem.java b/src/main/java/net/brnbrd/delightful/common/item/food/ChorusMuffinItem.java
+index a7849b42..a1480ae0 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/food/ChorusMuffinItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/food/ChorusMuffinItem.java
+@@ -4,7 +4,6 @@ import net.brnbrd.delightful.compat.Modid;
+ import net.brnbrd.delightful.compat.UnusualEndCompat;
+ import net.minecraft.ChatFormatting;
+ import net.minecraft.core.Holder;
+-import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.entity.LivingEntity;
+@@ -34,10 +33,9 @@ public class ChorusMuffinItem extends CompatConsumableItem {
+ 	public void affectConsumer(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity consumer) {
+ 		super.affectConsumer(stack, level, consumer);
+ 		if (this.enabled()) {
+-			MobEffect infection = UnusualEndCompat.getEnderInfection();
+-			Holder<MobEffect> infectionHolder = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(infection);
+-			if (consumer.hasEffect(infectionHolder)) {
+-				consumer.removeEffect(infectionHolder);
++			Holder<MobEffect> infection = UnusualEndCompat.getEnderInfection();
++			if (consumer.hasEffect(infection)) {
++				consumer.removeEffect(infection);
+ 			}
+ 		}
+ 	}
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java b/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
+index 3d85f8f3..f433bf5d 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/food/Nutrition.java
+@@ -12,11 +12,11 @@ import vectorwing.farmersdelight.common.registry.ModEffects;
+ public class Nutrition {
+ 	public static final FoodProperties CHEESEBURGER = (new FoodProperties.Builder())
+ 		.nutrition(11).saturationModifier(0.85F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1200, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 400, 0), 1F).build();
+ 	public static final FoodProperties DELUXE_CHEESEBURGER = (new FoodProperties.Builder())
+ 		.nutrition(13).saturationModifier(1F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 4800, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0), 1F).build();
+ 	public static final FoodProperties ROCK_CANDY = (new FoodProperties.Builder())
+ 		.nutrition(4).saturationModifier(0.5F)
+@@ -30,7 +30,7 @@ public class Nutrition {
+ 		.effect(() -> new MobEffectInstance(MobEffects.SLOW_FALLING, 300, 0), 1F).build();
+ 	public static final FoodProperties SMORE = (new FoodProperties.Builder())
+ 		.nutrition(8).saturationModifier(0.4F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 2400, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(NeapolitanCompat.getSugarRush(), 600, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0), 1F).build();
+ 	public static final FoodProperties CRAB_RANGOON = (new FoodProperties.Builder())
+@@ -38,7 +38,7 @@ public class Nutrition {
+ 		.effect(() -> CRCompat.getCorrosionOrResistance(400, 1), 1F).build();
+ 	public static final FoodProperties CHUNKWICH = (new FoodProperties.Builder())
+ 		.nutrition(11).saturationModifier(0.4F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 0), 1F).build();
+ 	public static final FoodProperties JAM_JAR = (new FoodProperties.Builder())
+ 		.nutrition(5).saturationModifier(0.3F).build();
+ 	public static final FoodProperties GLOW_JAM_JAR = (new FoodProperties.Builder())
+@@ -48,12 +48,12 @@ public class Nutrition {
+ 		.nutrition(6).saturationModifier(0.6F).build();
+ 	public static final FoodProperties AGED_ROE = (new FoodProperties.Builder())
+ 		.nutrition(7).saturationModifier(0.7F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
+ 		.effect(() -> BrewinChewinCompat.getIntoxicationOrHalfBadLuck(200, 0), 1F).build();
+ 	public static final FoodProperties CAVIAR = (new FoodProperties.Builder())
+ 		.nutrition(8).saturationModifier(1F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 6000, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.GLOWING, 900), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 900), 1F)
+ 		.effect(() -> new MobEffectInstance(BrewinChewinCompat.getTipsy(), 300, 0), 1F)
+@@ -61,18 +61,18 @@ public class Nutrition {
+ 	public static final FoodProperties ROE_ROLL = (new FoodProperties.Builder())
+ 		.nutrition(8).saturationModifier(0.7F)
+ 		.fast()
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F).build();
+ 	public static final FoodProperties NUT_BUTTER_AND_JAM_SANDWICH = (new FoodProperties.Builder())
+ 		.nutrition(11).saturationModifier(0.7F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(SOBCompat.getToughness(), 1800, 0), 1F).build();
+ 	public static final FoodProperties ROE_BLINI = (new FoodProperties.Builder())
+ 		.nutrition(10).saturationModifier(0.7F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> CRCompat.getCorrosionOrResistance(400, 1), 1F).build();
+ 	public static final FoodProperties SALMON_AND_ROE_BLINI = (new FoodProperties.Builder())
+ 		.nutrition(11).saturationModifier(0.75F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 6000, 0), 1F)
+ 		.effect(() -> CRCompat.getCorrosionOrResistance(400, 1), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 1200), 1F).build();
+ 	public static final FoodProperties HONEY_GLAZED_WALNUT = (new FoodProperties.Builder())
+@@ -101,23 +101,23 @@ public class Nutrition {
+ 		.nutrition(4).saturationModifier(0.5F).build();
+ 	public static final FoodProperties CACTUS_CHILI = (new FoodProperties.Builder())
+ 		.nutrition(10).saturationModifier(0.7F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 400, 0), 1F).build();
+ 	public static final FoodProperties CACTUS_SOUP = (new FoodProperties.Builder())
+ 		.nutrition(12).saturationModifier(0.6F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F).build();
+ 	public static final FoodProperties CACTUS_SOUP_CUP = (new FoodProperties.Builder())
+ 		.nutrition(6).saturationModifier(0.3F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1800, 0), 1F).build();
+ 	public static final FoodProperties VENISON_STEW = (new FoodProperties.Builder())
+ 		.nutrition(12).saturationModifier(0.8F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F).build();
+ 	public static final FoodProperties VENISON_STEW_CUP = (new FoodProperties.Builder())
+ 		.nutrition(6).saturationModifier(0.4F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F).build();
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1800, 0), 1F).build();
+ 	public static final FoodProperties FIELD_SALAD = (new FoodProperties.Builder())
+ 		.nutrition(10).saturationModifier(0.6F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1F).build();
+ 	public static final FoodProperties VENISON_CHOPS = (new FoodProperties.Builder())
+ 		.nutrition(1).saturationModifier(0.3F)
+@@ -149,19 +149,19 @@ public class Nutrition {
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 0), 1F).build();
+ 	public static final FoodProperties STUFFED_CANTALOUPE = (new FoodProperties.Builder())
+ 		.nutrition(14).saturationModifier(0.75F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 4800, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 1), 1F).build();
+ 	public static final FoodProperties COCONUT_CURRY = (new FoodProperties.Builder())
+ 		.nutrition(15).saturationModifier(0.9F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0), 1F).build();
+ 	public static final FoodProperties SINIGANG = (new FoodProperties.Builder())
+ 		.nutrition(12).saturationModifier(0.7F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600, 0), 1F)
+ 		.effect(() -> CRCompat.getCorrosionOrFireResistance(600, 0), 1F).build();
+ 	public static final FoodProperties SINIGANG_CUP = (new FoodProperties.Builder())
+ 		.nutrition(6).saturationModifier(0.35F)
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1800, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1800, 0), 1F)
+ 		.effect(() -> CRCompat.getCorrosionOrFireResistance(300, 0), 1F).build();
+ 	public static final FoodProperties PRICKLY_PEAR_JUICE = (new FoodProperties.Builder())
+ 		.effect(() -> new MobEffectInstance(MobEffects.SATURATION, 600, 0), 1F)
+@@ -170,7 +170,7 @@ public class Nutrition {
+ 		.effect(() -> new MobEffectInstance(MobEffects.SATURATION, 1200, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(SOBCompat.getSpite(), 1200, 0), 1F).build();
+ 	public static final FoodProperties LAVENDER_TEA = (new FoodProperties.Builder()).alwaysEat()
+-		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 600, 0), 1F)
++		.effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 0), 1F)
+ 		.effect(() -> new MobEffectInstance(TeaCompat.getCaffeinated(), 600, 0), 1F).build();
+ 	public static final FoodProperties AZALEA_TEA = (new FoodProperties.Builder()).alwaysEat()
+ 		.effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 60, 0), 1F)
+diff --git a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/nourished_nether/NecroniumKnifeItem.java b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/nourished_nether/NecroniumKnifeItem.java
+index 63f0e54f..1ac647b5 100644
+--- a/src/main/java/net/brnbrd/delightful/common/item/knife/compat/nourished_nether/NecroniumKnifeItem.java
++++ b/src/main/java/net/brnbrd/delightful/common/item/knife/compat/nourished_nether/NecroniumKnifeItem.java
+@@ -7,6 +7,7 @@ import net.brnbrd.delightful.compat.Modid;
+ import net.brnbrd.delightful.data.tags.DelightfulItemTags;
+ import net.minecraft.ChatFormatting;
+ import net.minecraft.network.chat.Component;
++import net.minecraft.core.Holder;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffectInstance;
+@@ -34,7 +35,7 @@ public class NecroniumKnifeItem extends DKnifeItem {
+ 			Util.effectExists(stasisLoc) &&
+ 			target.getRandom().nextInt(0, 3) == 0
+ 		) {
+-			MobEffect stasis = Util.effect(stasisLoc);
++			Holder<MobEffect> stasis = Util.effect(stasisLoc);
+ 			if (stasis != null) target.addEffect(new MobEffectInstance(stasis, 40, 0));
+ 			return true;
+ 		}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/CosmopolitanCompat.java b/src/main/java/net/brnbrd/delightful/compat/CosmopolitanCompat.java
+index b40f049a..28fad156 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/CosmopolitanCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/CosmopolitanCompat.java
+@@ -1,10 +1,11 @@
+ package net.brnbrd.delightful.compat;
+ 
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffects;
+ 
+ public class CosmopolitanCompat {
+-	public static MobEffect getTracer() {
++	public static Holder<MobEffect> getTracer() {
+ 		return Modid.COS.effect("tracer", MobEffects.GLOWING);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/ExquisitoCompat.java b/src/main/java/net/brnbrd/delightful/compat/ExquisitoCompat.java
+index 7acfe723..fcc94422 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/ExquisitoCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/ExquisitoCompat.java
+@@ -1,10 +1,11 @@
+ package net.brnbrd.delightful.compat;
+ 
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffects;
+ 
+ public class ExquisitoCompat {
+-	public static MobEffect getResonance() {
++	public static Holder<MobEffect> getResonance() {
+ 		return Modid.EXQ.effect("resonance", MobEffects.DIG_SPEED);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/Modid.java b/src/main/java/net/brnbrd/delightful/compat/Modid.java
+index a40711b7..125f7caf 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/Modid.java
++++ b/src/main/java/net/brnbrd/delightful/compat/Modid.java
+@@ -2,6 +2,7 @@ package net.brnbrd.delightful.compat;
+ 
+ import net.brnbrd.delightful.Delightful;
+ import net.brnbrd.delightful.Util;
++import net.minecraft.core.Holder;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.tags.ItemTags;
+ import net.minecraft.tags.TagKey;
+@@ -175,7 +176,7 @@ public enum Modid {
+ 
+ 	@Nullable
+ 	public Item item(@NotNull String name) {
+-		return BuiltInRegistries.ITEM.getValue(this.rl(name));
++		return BuiltInRegistries.ITEM.get(this.rl(name));
+ 	}
+ 
+ 	public ItemStack itemStack(@NotNull String name) {
+@@ -189,7 +190,7 @@ public enum Modid {
+ 	@NotNull
+  	public Item item(String name, @NotNull Item backup) {
+ 		if (this.itemExists(name)) {
+-			Item returnItem = BuiltInRegistries.ITEM.getValue(this.rl(name));
++			Item returnItem = BuiltInRegistries.ITEM.get(this.rl(name));
+ 			if (returnItem != null) return returnItem;
+ 		}
+ 		return backup;
+@@ -201,13 +202,13 @@ public enum Modid {
+ 
+ 	@Nullable
+ 	public Block block(@NotNull String name) {
+-		return BuiltInRegistries.BLOCK.getValue(this.rl(name));
++		return BuiltInRegistries.BLOCK.get(this.rl(name));
+ 	}
+ 
+ 	@NotNull
+ 	public Block block(String name, @NotNull Block backup) {
+ 		if (this.blockExists(name)) {
+-			Block returnBlock = BuiltInRegistries.BLOCK.getValue(this.rl(name));
++			Block returnBlock = BuiltInRegistries.BLOCK.get(this.rl(name));
+ 			if (returnBlock != null) return returnBlock;
+ 		}
+ 		return backup;
+@@ -218,21 +219,21 @@ public enum Modid {
+ 	}
+ 
+ 	@Nullable
+-	public final MobEffect effect(@NotNull String name, MobEffect... backup) {
++	public final Holder<MobEffect> effect(@NotNull String name, Holder<MobEffect>... backup) {
+ 		return Util.effect(this.rl(name), backup);
+ 	}
+ 
+ 	@NotNull
+-	public final MobEffectInstance effectInstance(@NotNull final String name, int duration, int amplifier, @NotNull final MobEffect backup, int backupDur, int backupAmp) {
+-		final MobEffect effect = this.effect(name, backup);
+-		return (effect == null || effect == backup) ?
++	public final MobEffectInstance effectInstance(@NotNull final String name, int duration, int amplifier, @NotNull final Holder<MobEffect> backup, int backupDur, int backupAmp) {
++		final Holder<MobEffect> effect = this.effect(name, backup);
++		return (effect == null || effect.equals(backup)) ?
+ 			new MobEffectInstance(backup, backupDur, backupAmp) :
+ 			new MobEffectInstance(effect, duration, amplifier);
+ 	}
+ 
+ 	// Uses same duration and amplifier for backup
+ 	@NotNull
+-	public final MobEffectInstance effectInstance(@NotNull final String name, int duration, int amplifier, @NotNull final MobEffect backup) {
++	public final MobEffectInstance effectInstance(@NotNull final String name, int duration, int amplifier, @NotNull final Holder<MobEffect> backup) {
+ 		return this.effectInstance(name, duration, amplifier, backup, duration, amplifier);
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/brnbrd/delightful/compat/SOBCompat.java b/src/main/java/net/brnbrd/delightful/compat/SOBCompat.java
+index 54c6c159..b9a5e666 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/SOBCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/SOBCompat.java
+@@ -1,14 +1,15 @@
+ package net.brnbrd.delightful.compat;
+ 
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffects;
+ 
+ public class SOBCompat {
+-	public static MobEffect getToughness() {
++	public static Holder<MobEffect> getToughness() {
+ 		return Modid.SOB.effect("toughness", MobEffects.DAMAGE_RESISTANCE);
+ 	}
+ 
+-	public static MobEffect getSpite() {
++	public static Holder<MobEffect> getSpite() {
+ 		return Modid.SOB.effect("spite", MobEffects.FIRE_RESISTANCE);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/TeaCompat.java b/src/main/java/net/brnbrd/delightful/compat/TeaCompat.java
+index 1fa01945..f39ba5e8 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/TeaCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/TeaCompat.java
+@@ -1,19 +1,20 @@
+ package net.brnbrd.delightful.compat;
+ 
+ import net.brnbrd.delightful.Util;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffects;
+ 
+ public class TeaCompat {
+-	public static MobEffect getGreenTeaEffect() {
++	public static Holder<MobEffect> getGreenTeaEffect() {
+ 		return Modid.RESP.effect("vitality", Modid.YH.effect("tea_polyphenols", MobEffects.REGENERATION));
+ 	}
+ 
+-	public static MobEffect getYellowTeaEffect() {
++	public static Holder<MobEffect> getYellowTeaEffect() {
+ 		return MobEffects.DAMAGE_RESISTANCE;
+ 	}
+ 
+-	public static MobEffect getCaffeinated() {
++	public static Holder<MobEffect> getCaffeinated() {
+ 		return Util.effect(Modid.FR, "caffeinated", Util.effect(Modid.YH, "sober", MobEffects.DIG_SPEED));
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/UnusualEndCompat.java b/src/main/java/net/brnbrd/delightful/compat/UnusualEndCompat.java
+index fc4ee286..724207f0 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/UnusualEndCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/UnusualEndCompat.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful.compat;
+ 
+ import net.brnbrd.delightful.Util;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.effect.MobEffects;
+@@ -9,11 +10,11 @@ import net.minecraft.world.food.FoodProperties;
+ public class UnusualEndCompat {
+ 	public static final String chorus_pie = "chorus_pie";
+ 
+-	public static MobEffect getSwiftStrikes() {
++	public static Holder<MobEffect> getSwiftStrikes() {
+ 		return Util.effect(Modid.UE, "swift_strikes", MobEffects.DIG_SPEED);
+ 	}
+ 
+-	public static MobEffect getEnderInfection() {
++	public static Holder<MobEffect> getEnderInfection() {
+ 		return Util.effect(Modid.UE, "ender_infection", MobEffects.CONFUSION);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/abnormals/AtmosphericCompat.java b/src/main/java/net/brnbrd/delightful/compat/abnormals/AtmosphericCompat.java
+index 8a2e9292..56e92e86 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/abnormals/AtmosphericCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/abnormals/AtmosphericCompat.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful.compat.abnormals;
+ 
+ import net.brnbrd.delightful.compat.Modid;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.effect.MobEffects;
+@@ -10,7 +11,7 @@ public class AtmosphericCompat {
+ 	public static final String YUCCA = "yucca_fruit";
+ 	public static final String PASSION_FRUIT_TART = "passion_fruit_tart";
+ 
+-	public static MobEffect getSpitting() {
++	public static Holder<MobEffect> getSpitting() {
+ 		return Modid.AT.effect("spitting", MobEffects.MOVEMENT_SPEED);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/abnormals/NeapolitanCompat.java b/src/main/java/net/brnbrd/delightful/compat/abnormals/NeapolitanCompat.java
+index a0d42328..fec0f845 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/abnormals/NeapolitanCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/abnormals/NeapolitanCompat.java
+@@ -1,11 +1,12 @@
+ package net.brnbrd.delightful.compat.abnormals;
+ 
+ import net.brnbrd.delightful.compat.Modid;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffects;
+ 
+ public class NeapolitanCompat {
+-	public static MobEffect getSugarRush() {
++	public static Holder<MobEffect> getSugarRush() {
+ 		return Modid.N.effect("sugar_rush", MobEffects.MOVEMENT_SPEED);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java b/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
+index 4eb073e8..81562f24 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/ars_nouveau/ArsNouveauCompat.java
+@@ -2,13 +2,14 @@ package net.brnbrd.delightful.compat.ars_nouveau;
+ 
+ import net.brnbrd.delightful.Util;
+ import net.brnbrd.delightful.compat.Modid;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.effect.MobEffects;
+ import net.minecraft.world.food.FoodProperties;
+ 
+ public class ArsNouveauCompat {
+-	public static MobEffect getManaRegen() {
++	public static Holder<MobEffect> getManaRegen() {
+ 		return Util.effect(Modid.AN, "mana_regen", MobEffects.ABSORPTION);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BrewinChewinCompat.java b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BrewinChewinCompat.java
+index 114faff2..a7d62a08 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BrewinChewinCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/brewinandchewin/BrewinChewinCompat.java
+@@ -1,6 +1,7 @@
+ package net.brnbrd.delightful.compat.brewinandchewin;
+ 
+ import net.brnbrd.delightful.compat.Modid;
++import net.minecraft.core.Holder;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.tags.TagKey;
+ import net.minecraft.world.effect.MobEffect;
+@@ -13,7 +14,7 @@ public class BrewinChewinCompat {
+ 	public static final TagKey<Item> FERMENTED_DRINKS = Modid.BC.it("fermented_drinks");
+ 	public static final TagKey<Item> PIZZA_TOPPINGS = Modid.BC.it("pizza_toppings");
+ 
+-	public static MobEffect getTipsy() {
++	public static Holder<MobEffect> getTipsy() {
+ 		return Modid.BC.effect("tipsy", MobEffects.WEAKNESS);
+ 	}
+ 
+diff --git a/src/main/java/net/brnbrd/delightful/compat/undergarden/UndergardenCompat.java b/src/main/java/net/brnbrd/delightful/compat/undergarden/UndergardenCompat.java
+index baf604c0..6e2cbfb1 100644
+--- a/src/main/java/net/brnbrd/delightful/compat/undergarden/UndergardenCompat.java
++++ b/src/main/java/net/brnbrd/delightful/compat/undergarden/UndergardenCompat.java
+@@ -2,6 +2,7 @@ package net.brnbrd.delightful.compat.undergarden;
+ 
+ import net.brnbrd.delightful.Util;
+ import net.brnbrd.delightful.compat.Modid;
++import net.minecraft.core.Holder;
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.effect.MobEffectInstance;
+ import net.minecraft.world.effect.MobEffects;
+@@ -9,7 +10,7 @@ import net.minecraft.world.food.FoodProperties;
+ import java.util.function.Supplier;
+ 
+ public class UndergardenCompat {
+-	public static MobEffect getVirulentResistance() {
++	public static Holder<MobEffect> getVirulentResistance() {
+ 		return Util.effect(Modid.UG, "virulent_resistance", MobEffects.FIRE_RESISTANCE);
+ 	}
+ 
+-- 
+2.39.0.windows.1
+

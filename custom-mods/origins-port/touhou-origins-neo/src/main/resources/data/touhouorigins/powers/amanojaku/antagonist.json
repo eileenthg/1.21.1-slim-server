@@ -1,0 +1,10 @@
+{
+  "type": "apoli:multiple",
+  "hostile": {
+    "type": "touhouorigins:modify_behavior",
+    "behavior": "hostile"
+  },
+  "taming": {
+    "type": "touhouorigins:prevent_taming"
+  }
+}
