@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "blobfish",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 150,
+  "ingredient": {
+    "item": "butchery_alexs_mobs:raw_fish_fillet"
+  },
+  "result": {
+    "id": "butchery_alexs_mobs:cooked_fish_fillet"
+  }
+}

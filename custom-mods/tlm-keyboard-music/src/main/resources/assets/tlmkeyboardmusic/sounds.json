@@ -1,0 +1,42 @@
+{
+  "keyboard.gymnopedie_no1": {
+    "category": "record",
+    "subtitle": "subtitle.tlmkeyboardmusic.keyboard.gymnopedie_no1",
+    "sounds": [
+      {
+        "name": "tlmkeyboardmusic:keyboard/gymnopedie_no1",
+        "stream": true
+      }
+    ]
+  },
+  "keyboard.sweden": {
+    "category": "record",
+    "subtitle": "subtitle.tlmkeyboardmusic.keyboard.sweden",
+    "sounds": [
+      {
+        "name": "tlmkeyboardmusic:keyboard/sweden",
+        "stream": true
+      }
+    ]
+  },
+  "keyboard.wet_hands": {
+    "category": "record",
+    "subtitle": "subtitle.tlmkeyboardmusic.keyboard.wet_hands",
+    "sounds": [
+      {
+        "name": "tlmkeyboardmusic:keyboard/wet_hands",
+        "stream": true
+      }
+    ]
+  },
+  "keyboard.clark": {
+    "category": "record",
+    "subtitle": "subtitle.tlmkeyboardmusic.keyboard.clark",
+    "sounds": [
+      {
+        "name": "tlmkeyboardmusic:keyboard/clark",
+        "stream": true
+      }
+    ]
+  }
+}

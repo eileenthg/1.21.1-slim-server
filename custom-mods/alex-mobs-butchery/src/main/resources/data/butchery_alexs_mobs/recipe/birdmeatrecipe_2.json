@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "group": "bird",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 150,
+  "ingredient": {
+    "item": "butchery_alexs_mobs:raw_bird_meat"
+  },
+  "result": {
+    "id": "butchery_alexs_mobs:cooked_bird_meat"
+  }
+}

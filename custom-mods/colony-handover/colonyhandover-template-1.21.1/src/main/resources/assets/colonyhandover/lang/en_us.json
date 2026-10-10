@@ -1,0 +1,15 @@
+{
+  "itemGroup.colonyhandover": "Colony Handover",
+  "block.colonyhandover.example_block": "Example Block",
+  "item.colonyhandover.example_item": "Example Item",
+  "colonyhandover.configuration.title": "Colony Handover Configs",
+  "colonyhandover.configuration.section.colonyhandover.common.toml": "Colony Handover Configs",
+  "colonyhandover.configuration.section.colonyhandover.common.toml.title": "Colony Handover Configs",
+  "colonyhandover.configuration.items": "Item List",
+  "colonyhandover.configuration.logDirtBlock": "Log Dirt Block",
+  "colonyhandover.configuration.magicNumberIntroduction": "Magic Number Text",
+  "colonyhandover.configuration.magicNumber": "Magic Number",
+  "block.colonyhandover.coffer": "Colony Coffer",
+  "item.colonyhandover.checklist_scroll": "Conversion Checklist",
+  "item.colonyhandover.checklist_scroll.tooltip": "Sneak + use: bind to a building"
+}

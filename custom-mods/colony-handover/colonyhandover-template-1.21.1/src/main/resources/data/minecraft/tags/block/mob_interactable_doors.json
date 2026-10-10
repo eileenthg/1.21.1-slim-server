@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "minecolonies:gate_wood",
+      "required": false
+    }
+  ]
+}

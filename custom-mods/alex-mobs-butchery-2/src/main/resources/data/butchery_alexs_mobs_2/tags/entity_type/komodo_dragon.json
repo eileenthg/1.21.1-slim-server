@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:komodo_dragon",
+      "required": false
+    }
+  ]
+}

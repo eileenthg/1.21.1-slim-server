@@ -1,0 +1,12 @@
+{
+  "chesspvp.color.black": "black",
+  "chesspvp.color.white": "white",
+  "chesspvp.color.red": "red",
+  "message.chesspvp.sit": "You sit down and play %s. Crouch to stand up.",
+  "message.chesspvp.full": "Both seats at this board are taken.",
+  "message.chesspvp.waiting": "Waiting for an opponent to sit down.",
+  "message.chesspvp.not_your_turn": "It is not your turn.",
+  "message.chesspvp.win": "%s wins!",
+  "message.chesspvp.draw": "It's a draw.",
+  "message.chesspvp.stalemate": "Stalemate - it's a draw."
+}

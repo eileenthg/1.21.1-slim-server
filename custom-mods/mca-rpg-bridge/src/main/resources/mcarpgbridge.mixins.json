@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eteil.mcarpgbridge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "eteil.mcarpgbridge.mixin.BridgeMixinPlugin",
+  "mixins": [
+    "QuestsReputationVersionMixin",
+    "MebahelVillagerClickMixin",
+    "MebahelQuestRewardMixin",
+    "MebahelContractRewardMixin",
+    "MebahelAbandonMixin"
+  ],
+  "client": [
+    "ScreenAccessor",
+    "MebahelTrackerOffsetMixin",
+    "MebahelMcaScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

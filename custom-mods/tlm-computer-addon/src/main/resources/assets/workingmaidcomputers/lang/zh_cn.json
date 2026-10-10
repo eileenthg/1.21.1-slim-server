@@ -1,0 +1,6 @@
+{
+  "message.workingmaidcomputers.sign_in_first": "请先在电脑上登录你的 Anternet 账号。",
+  "message.workingmaidcomputers.empty_disk": "这张软盘没有数据。",
+  "message.workingmaidcomputers.disk_installed": "该软盘已安装到你的账号。",
+  "message.workingmaidcomputers.disk_added": "软盘已安装到你的 Anternet 账号。"
+}

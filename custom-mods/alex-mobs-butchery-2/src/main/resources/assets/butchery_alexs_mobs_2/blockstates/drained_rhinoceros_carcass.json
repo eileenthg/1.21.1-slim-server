@@ -1,0 +1,154 @@
+{
+  "variants": {
+    "blockstate=0,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_whole"
+    },
+    "blockstate=0,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_whole",
+      "y": 90
+    },
+    "blockstate=0,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_whole",
+      "y": 180
+    },
+    "blockstate=0,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_whole",
+      "y": 270
+    },
+    "blockstate=1,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_whole"
+    },
+    "blockstate=1,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_whole",
+      "y": 90
+    },
+    "blockstate=1,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_whole",
+      "y": 180
+    },
+    "blockstate=1,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_whole",
+      "y": 270
+    },
+    "blockstate=2,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_headless"
+    },
+    "blockstate=2,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_headless",
+      "y": 90
+    },
+    "blockstate=2,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_headless",
+      "y": 180
+    },
+    "blockstate=2,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_headless",
+      "y": 270
+    },
+    "blockstate=3,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_skinned"
+    },
+    "blockstate=3,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_skinned",
+      "y": 90
+    },
+    "blockstate=3,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_skinned",
+      "y": 180
+    },
+    "blockstate=3,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_skinned",
+      "y": 270
+    },
+    "blockstate=4,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut1"
+    },
+    "blockstate=4,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut1",
+      "y": 90
+    },
+    "blockstate=4,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut1",
+      "y": 180
+    },
+    "blockstate=4,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut1",
+      "y": 270
+    },
+    "blockstate=5,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut2"
+    },
+    "blockstate=5,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut2",
+      "y": 90
+    },
+    "blockstate=5,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut2",
+      "y": 180
+    },
+    "blockstate=5,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_hanging_cut2",
+      "y": 270
+    },
+    "blockstate=6,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_headless"
+    },
+    "blockstate=6,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_headless",
+      "y": 90
+    },
+    "blockstate=6,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_headless",
+      "y": 180
+    },
+    "blockstate=6,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_headless",
+      "y": 270
+    },
+    "blockstate=7,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_skinned"
+    },
+    "blockstate=7,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_skinned",
+      "y": 90
+    },
+    "blockstate=7,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_skinned",
+      "y": 180
+    },
+    "blockstate=7,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_skinned",
+      "y": 270
+    },
+    "blockstate=8,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut1"
+    },
+    "blockstate=8,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut1",
+      "y": 90
+    },
+    "blockstate=8,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut1",
+      "y": 180
+    },
+    "blockstate=8,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut1",
+      "y": 270
+    },
+    "blockstate=9,facing=north": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut2"
+    },
+    "blockstate=9,facing=east": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut2",
+      "y": 90
+    },
+    "blockstate=9,facing=south": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut2",
+      "y": 180
+    },
+    "blockstate=9,facing=west": {
+      "model": "butchery_alexs_mobs_2:block/rhinoceros_ground_cut2",
+      "y": 270
+    }
+  }
+}

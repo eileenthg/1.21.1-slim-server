@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eteil.seatrest.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "eteil.seatrest.mixin.SeatRestMixinPlugin",
+  "mixins": [
+    "PlayerExhaustionMixin",
+    "ThirstExhaustionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

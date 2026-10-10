@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "eteil.drinkfix.mixin.compat",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixingBowlRecipeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

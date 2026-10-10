@@ -1,0 +1,54 @@
+<window size="190 244" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/main/src/main/resources/assets/blockui/gui/block_ui.xsd">
+
+    <!-- Same parchment and ribbon as MineColonies' resource scroll, so this reads as a
+         sibling of the builder's list rather than another mod's screen. Every texture
+         is drawn at its native size: these are plain images, and stretching a button
+         texture is what produced the noise in the first version. -->
+    <image source="minecolonies:textures/gui/builderhut/builder_paper.png" size="100% 100%"/>
+
+    <text id="heading" size="100% 11" pos="0 11" color="black" textalign="MIDDLE"/>
+
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="24 22"/>
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_center.png" size="130 15" pos="30 22"/>
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_right.png" size="6 15" pos="160 22"/>
+    <text id="ribbon" size="130 11" pos="30 24" textalign="MIDDLE" color="blue"/>
+
+    <text id="summary" size="175 11" pos="8 40" color="black" textalign="MIDDLE"/>
+
+    <!-- Page one: every building with something outstanding. -->
+    <view id="listPage" size="100% 100%" pos="0 0">
+        <list id="buildings" size="164 152" pos="13 54">
+            <box size="100% 20" linewidth="1">
+                <text id="name" size="118 9" pos="4 6" color="black"/>
+                <button id="pick" size="29 16" pos="124 2" color="black"
+                        source="minecolonies:textures/gui/builderhut/builder_button_very_small.png"
+                        label="&gt;"/>
+            </box>
+        </list>
+        <!-- Three across the foot of the paper. Widths are the textures' native sizes
+             (64 and 44), since these are plain images that smear when stretched. -->
+        <button id="refresh" size="64 17" pos="11 214" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_small.png"
+                label="Re-survey"/>
+        <button id="marks" size="44 16" pos="83 214" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                label="Marks"/>
+        <button id="close" size="44 16" pos="135 214" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                label="Close"/>
+    </view>
+
+    <!-- Page two: the breakdown for one building. -->
+    <view id="detailPage" size="100% 100%" pos="0 0" visible="false">
+        <text id="detailPos" size="164 9" pos="13 54" color="black" textalign="MIDDLE"/>
+        <list id="detail" size="164 146" pos="13 66">
+            <box size="100% 11" linewidth="0">
+                <text id="line" size="160 9" pos="2 1" color="black"/>
+            </box>
+        </list>
+        <button id="back" size="71 17" pos="59 214" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_medium_small.png"
+                label="Back"/>
+    </view>
+
+</window>

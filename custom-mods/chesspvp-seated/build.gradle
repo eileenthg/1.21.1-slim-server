@@ -1,0 +1,90 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'net.neoforged.moddev' version '2.0.95'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Server-side GameTests live outside the shipped jar.
+sourceSets {
+    gametest {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_mappings_version
+    }
+
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('run/client')
+        }
+        server {
+            server()
+            gameDirectory = project.file('run/server')
+            programArgument '--nogui'
+        }
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = project.file('run/gameTestServer')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.gametest
+        }
+    }
+}
+
+neoForge.addModdingDependenciesTo(sourceSets.gametest)
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Touhou Little Maid is kept in ./libs (git-ignored) and is never bundled.
+    compileOnly files('libs/touhoulittlemaid.jar')
+    // Dev runs need it as a real mod. TLM bundles its audio libs in the -all jar.
+    runtimeOnly files('libs/touhoulittlemaid.jar')
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def expandProps = [
+            'mod_id'              : mod_id,
+            'mod_name'            : mod_name,
+            'mod_license'         : mod_license,
+            'mod_version'         : mod_version,
+            'mod_authors'         : mod_authors,
+            'minecraft_version'   : minecraft_version,
+            'neo_version_range'   : neo_version_range,
+            'loader_version_range': loader_version_range
+    ]
+    inputs.properties(expandProps)
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand expandProps
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

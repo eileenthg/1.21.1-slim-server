@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/bald_eagle_carcass_legless",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/eagle_bald_plucked",
+    "particle": "minecraft:block/nether_wart_block",
+    "2": "butchery_alexs_mobs:block/eagle_bald_plucked"
+  },
+  "render_type": "cutout_mipped"
+}

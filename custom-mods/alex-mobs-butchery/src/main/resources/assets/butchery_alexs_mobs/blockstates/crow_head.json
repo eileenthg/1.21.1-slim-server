@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "butchery_alexs_mobs:block/crow_head"
+    },
+    "facing=east": {
+      "model": "butchery_alexs_mobs:block/crow_head",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "butchery_alexs_mobs:block/crow_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "butchery_alexs_mobs:block/crow_head",
+      "y": 270
+    }
+  }
+}

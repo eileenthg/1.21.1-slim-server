@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "butchery_alexs_mobs:item/raw_capuchin_meat"
+  }
+}

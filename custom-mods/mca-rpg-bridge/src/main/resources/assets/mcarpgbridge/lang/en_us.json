@@ -1,0 +1,17 @@
+{
+  "gui.button.mcarpgbridge.request": "Request",
+  "gui.button.mcarpgbridge.rumor": "Rumor",
+  "message.mcarpgbridge.nothing_yet": "This villager has nothing to ask of you yet.",
+  "message.mcarpgbridge.too_far": "You are too far away from that villager.",
+  "mcarpgbridge.configuration.title": "MCA RPG Bridge",
+  "mcarpgbridge.configuration.questTracker": "Quest Tracker",
+  "mcarpgbridge.configuration.offsetX": "Horizontal Offset",
+  "mcarpgbridge.configuration.offsetY": "Vertical Offset",
+  "mcarpgbridge.configuration.mebahel": "Mebahel Quests",
+  "mcarpgbridge.configuration.mcaMenuButton": "Request/Rumor Button in MCA Menu",
+  "mcarpgbridge.configuration.standing": "Reputation Standing",
+  "mcarpgbridge.configuration.questCompleted": "Quest Completed",
+  "mcarpgbridge.configuration.contractCompleted": "Contract Completed",
+  "mcarpgbridge.configuration.questAbandoned": "Quest Abandoned",
+  "mcarpgbridge.configuration.villageSearchRadius": "Village Search Radius"
+}

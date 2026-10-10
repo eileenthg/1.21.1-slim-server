@@ -1,0 +1,319 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "alexsmobs:entity/roadrunner",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0.011,
+        1.618,
+        0.947
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.75,
+        -0.006
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.5,
+        -0.013
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.0,
+        -0.025
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.007,
+        2.798,
+        1.085
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.007,
+        2.798,
+        1.085
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        -0.007,
+        1.2,
+        -0.007
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0.007,
+        1.2,
+        0.007
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "neck",
+      "from": [
+        6.5,
+        0.0,
+        7.3088
+      ],
+      "to": [
+        9.5,
+        8.0,
+        10.3088
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            1.5,
+            0.75,
+            0.75,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "down": {
+          "uv": [
+            2.25,
+            0.0,
+            1.5,
+            0.75
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.75,
+            0.75,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            0.75,
+            0.75,
+            1.5,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            1.5,
+            0.75,
+            2.25,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "south": {
+          "uv": [
+            2.25,
+            0.75,
+            3.0,
+            2.75
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "neck",
+      "from": [
+        8.0,
+        6.0,
+        7.3088
+      ],
+      "to": [
+        8.0,
+        10.0,
+        12.3088
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            1.25,
+            4.75,
+            2.5,
+            5.75
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "beak",
+      "from": [
+        7.5,
+        6.7525,
+        3.7415
+      ],
+      "to": [
+        8.5,
+        7.7525,
+        7.7415
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            4.25,
+            4.5,
+            4.0,
+            3.5
+          ],
+          "texture": "#tex"
+        },
+        "down": {
+          "uv": [
+            4.5,
+            3.5,
+            4.25,
+            4.5
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            3.0,
+            4.5,
+            4.0,
+            4.75
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            4.0,
+            4.5,
+            4.25,
+            4.75
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            4.25,
+            4.5,
+            5.25,
+            4.75
+          ],
+          "texture": "#tex"
+        },
+        "south": {
+          "uv": [
+            5.25,
+            4.5,
+            5.5,
+            4.75
+          ],
+          "texture": "#tex"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8.0,
+          7.2525,
+          5.7415
+        ]
+      }
+    }
+  ]
+}

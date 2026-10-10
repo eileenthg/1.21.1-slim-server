@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "butchery_alexs_mobs:flying_fish_carcass"
+    }
+  ],
+  "result": {
+    "id": "alexsmobs:flying_fish"
+  }
+}

@@ -1,0 +1,505 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "compatdelight:allium_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:aloe_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:apple_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:arcane_crystal_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:arcane_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:armor_scrap_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:astral_fruit_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:azure_bud_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:azure_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bamboo_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bamboo_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:baobab_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bastion_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bastion_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:belladonna_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:blueberries_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bombegranate_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bone_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bouncy_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:bubble_coral_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:cactus_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:charged_apple_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:cherry_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:chocolate_heart_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:chorus_fruit_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:cobalt_crystalline_berries_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:coconut_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:coconut_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:coffee_berry_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:coffee_candy_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:colorful_berry_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:combinationalcaralyst_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:corruption_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:crescent_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:crystal_fruit_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:datura_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:demons_dream_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:effect_powder_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:elementium_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:elevibloom_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:emerald_apple_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:ender_dust_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:ennegel_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:eternal_candy_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:fiery_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:fire_ale_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:fire_coral_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:firecracker_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:flux_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:forbidden_fruit_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:frost_lily_punch",
+      "required": false
+    },
+    {
+      "id": "compatdelight:frostaya_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:frostaya_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:gaia_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:gem_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:gem_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:gold_leaf_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:gold_powder_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:grapefruit_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:green_apple_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:green_apple_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:hydrangea_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:ice_cream_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:ice_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:ichor_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:icicle_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:infused_breath_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:iron_apple_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:lemon_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:lightning_grenade_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:lightning_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:lime_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:lumisene_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:magic_punch",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mana_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mandrake_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mending_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mendosteen_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mendosteen_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:milk_in_honeycomb",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mint_crystalline_berries_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mugwort_leaves_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:mugwort_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:otherworld_essence_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:oxeye_daisy_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:oxeye_daisy_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:papaya_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:papaya_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:petal_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:pine_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:pineapple_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:pineapple_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:prickly_peach_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:prickly_pear_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:prickly_pear_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:pumpkin_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:resin_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:rose_crystalline_berries_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:rose_quartz_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:royal_jelly_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:salmonberry_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:scalefruit_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:sculk_cider",
+      "required": false
+    },
+    {
+      "id": "compatdelight:sea_pickle_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:silicon_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:smelter_prism_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:solnut_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:source_berry_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:source_berry_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:strange_elixir_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:strange_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:sugar_water_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:suns_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:sweet_berries_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:terrasteel_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:viridshroom_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:void_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:walnut_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:wax_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:wither_rose_juice",
+      "required": false
+    },
+    {
+      "id": "compatdelight:wither_rose_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:yellow_dock_flowers_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:yellow_dock_shake",
+      "required": false
+    },
+    {
+      "id": "compatdelight:yellow_dock_tea",
+      "required": false
+    },
+    {
+      "id": "compatdelight:yucca_juice",
+      "required": false
+    }
+  ]
+}

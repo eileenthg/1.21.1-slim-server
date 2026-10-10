@@ -1,0 +1,6 @@
+{
+  "message.workingmaidcomputers.sign_in_first": "Sign in to your Anternet account on the computer first.",
+  "message.workingmaidcomputers.empty_disk": "This floppy disk has no data.",
+  "message.workingmaidcomputers.disk_installed": "That disk is already installed on your account.",
+  "message.workingmaidcomputers.disk_added": "Disk installed to your Anternet account."
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "alexsmobs:mosquito_proboscis"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "butchery_alexs_mobs_2:blocks/crimson_mosquito_step_1_drop"
+}

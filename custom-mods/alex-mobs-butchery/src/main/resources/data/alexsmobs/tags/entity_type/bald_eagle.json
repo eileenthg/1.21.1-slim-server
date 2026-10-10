@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:bald_eagle",
+      "required": false
+    }
+  ]
+}

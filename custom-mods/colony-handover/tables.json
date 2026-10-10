@@ -1,0 +1,967 @@
+{
+ "rows": [
+  {
+   "hut": "townhall",
+   "kind": "GROUPED",
+   "mca": "town_center",
+   "blocks": [
+    [
+     "bell",
+     1
+    ]
+   ],
+   "pois": []
+  },
+  {
+   "hut": "graveyard",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "residence",
+   "kind": "ROOM",
+   "mca": "house",
+   "blocks": [
+    [
+     "white_bed",
+     1
+    ]
+   ],
+   "pois": []
+  },
+  {
+   "hut": "tavern",
+   "kind": "ROOM",
+   "mca": "inn",
+   "blocks": [
+    [
+     "jukebox",
+     1
+    ],
+    [
+     "smoker",
+     1
+    ],
+    [
+     "white_bed",
+     4
+    ]
+   ],
+   "pois": [
+    [
+     "smoker",
+     "BUTCHER"
+    ]
+   ]
+  },
+  {
+   "hut": "hospital",
+   "kind": "ROOM",
+   "mca": "infirmary",
+   "blocks": [
+    [
+     "brewing_stand",
+     1
+    ],
+    [
+     "cauldron",
+     1
+    ],
+    [
+     "flower_pot",
+     1
+    ],
+    [
+     "white_bed",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "brewing_stand",
+     "CLERIC"
+    ],
+    [
+     "cauldron",
+     "LEATHERWORKER"
+    ]
+   ]
+  },
+  {
+   "hut": "alchemist",
+   "kind": "ROOM",
+   "mca": "infirmary",
+   "blocks": [
+    [
+     "brewing_stand",
+     1
+    ],
+    [
+     "cauldron",
+     1
+    ],
+    [
+     "flower_pot",
+     1
+    ],
+    [
+     "white_bed",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "brewing_stand",
+     "CLERIC"
+    ],
+    [
+     "cauldron",
+     "LEATHERWORKER"
+    ]
+   ]
+  },
+  {
+   "hut": "library",
+   "kind": "ROOM",
+   "mca": "library",
+   "blocks": [
+    [
+     "bookshelf",
+     32
+    ],
+    [
+     "lectern",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "university",
+   "kind": "ROOM",
+   "mca": "library",
+   "blocks": [
+    [
+     "bookshelf",
+     32
+    ],
+    [
+     "lectern",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "warehouse",
+   "kind": "ROOM",
+   "mca": "storage",
+   "blocks": [
+    [
+     "lectern",
+     1
+    ],
+    [
+     "chest",
+     4
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "stash",
+   "kind": "ROOM",
+   "mca": "storage",
+   "blocks": [
+    [
+     "lectern",
+     1
+    ],
+    [
+     "chest",
+     4
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "deliveryman",
+   "kind": "ROOM",
+   "mca": "storage",
+   "blocks": [
+    [
+     "lectern",
+     1
+    ],
+    [
+     "chest",
+     4
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "blacksmith",
+   "kind": "ROOM",
+   "mca": "blacksmith",
+   "blocks": [
+    [
+     "grindstone",
+     1
+    ],
+    [
+     "blast_furnace",
+     2
+    ],
+    [
+     "anvil",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "grindstone",
+     "WEAPONSMITH"
+    ],
+    [
+     "blast_furnace",
+     "ARMORER"
+    ]
+   ]
+  },
+  {
+   "hut": "combatacademy",
+   "kind": "ROOM",
+   "mca": "armory",
+   "blocks": [
+    [
+     "smithing_table",
+     1
+    ],
+    [
+     "grindstone",
+     1
+    ],
+    [
+     "anvil",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smithing_table",
+     "TOOLSMITH"
+    ],
+    [
+     "grindstone",
+     "WEAPONSMITH"
+    ]
+   ]
+  },
+  {
+   "hut": "barracks",
+   "kind": "ROOM",
+   "mca": "armory",
+   "blocks": [
+    [
+     "smithing_table",
+     1
+    ],
+    [
+     "grindstone",
+     1
+    ],
+    [
+     "anvil",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smithing_table",
+     "TOOLSMITH"
+    ],
+    [
+     "grindstone",
+     "WEAPONSMITH"
+    ]
+   ]
+  },
+  {
+   "hut": "archery",
+   "kind": "ROOM",
+   "mca": "armory",
+   "blocks": [
+    [
+     "smithing_table",
+     1
+    ],
+    [
+     "grindstone",
+     1
+    ],
+    [
+     "anvil",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smithing_table",
+     "TOOLSMITH"
+    ],
+    [
+     "grindstone",
+     "WEAPONSMITH"
+    ]
+   ]
+  },
+  {
+   "hut": "baker",
+   "kind": "ROOM",
+   "mca": "bakery",
+   "blocks": [
+    [
+     "cake",
+     1
+    ],
+    [
+     "smoker",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smoker",
+     "BUTCHER"
+    ]
+   ]
+  },
+  {
+   "hut": "cook",
+   "kind": "ROOM",
+   "mca": "butcher",
+   "blocks": [
+    [
+     "smoker",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smoker",
+     "BUTCHER"
+    ]
+   ]
+  },
+  {
+   "hut": "kitchen",
+   "kind": "ROOM",
+   "mca": "butcher",
+   "blocks": [
+    [
+     "smoker",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smoker",
+     "BUTCHER"
+    ]
+   ]
+  },
+  {
+   "hut": "smeltery",
+   "kind": "ROOM",
+   "mca": "armorer",
+   "blocks": [
+    [
+     "blast_furnace",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "blast_furnace",
+     "ARMORER"
+    ]
+   ]
+  },
+  {
+   "hut": "stonesmeltery",
+   "kind": "ROOM",
+   "mca": "armorer",
+   "blocks": [
+    [
+     "blast_furnace",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "blast_furnace",
+     "ARMORER"
+    ]
+   ]
+  },
+  {
+   "hut": "fisherman",
+   "kind": "ROOM",
+   "mca": "fishermans_hut",
+   "blocks": [
+    [
+     "barrel",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "barrel",
+     "FISHERMAN"
+    ]
+   ]
+  },
+  {
+   "hut": "fletcher",
+   "kind": "ROOM",
+   "mca": "fletcher",
+   "blocks": [
+    [
+     "fletching_table",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "fletching_table",
+     "FLETCHER"
+    ]
+   ]
+  },
+  {
+   "hut": "school",
+   "kind": "ROOM",
+   "mca": "bookkeeper",
+   "blocks": [
+    [
+     "lectern",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "lectern",
+     "LIBRARIAN"
+    ]
+   ]
+  },
+  {
+   "hut": "stonemason",
+   "kind": "ROOM",
+   "mca": "mason",
+   "blocks": [
+    [
+     "stonecutter",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "stonecutter",
+     "MASON"
+    ]
+   ]
+  },
+  {
+   "hut": "mechanic",
+   "kind": "ROOM",
+   "mca": "toolsmith",
+   "blocks": [
+    [
+     "smithing_table",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "smithing_table",
+     "TOOLSMITH"
+    ]
+   ]
+  },
+  {
+   "hut": "dyer",
+   "kind": "ROOM",
+   "mca": "weaving_mill",
+   "blocks": [
+    [
+     "loom",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "loom",
+     "SHEPHERD"
+    ]
+   ]
+  },
+  {
+   "hut": "farmer",
+   "kind": "MARKER_SWAP",
+   "mca": null,
+   "blocks": [
+    [
+     "composter",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "composter",
+     "FARMER"
+    ]
+   ]
+  },
+  {
+   "hut": "plantation",
+   "kind": "MARKER_SWAP",
+   "mca": null,
+   "blocks": [
+    [
+     "composter",
+     1
+    ]
+   ],
+   "pois": [
+    [
+     "composter",
+     "FARMER"
+    ]
+   ]
+  },
+  {
+   "hut": "florist",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "composter",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "beekeeper",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "lumberjack",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "cowboy",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "shepherd",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "swineherder",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "chickenherder",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "rabbithutch",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "stable",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "miner",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "simplequarry",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "mediumquarry",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "largequarry",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "guardtower",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "barrackstower",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "gatehouse",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "enchanter",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "mysticalsite",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "glassblower",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "sawmill",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "crusher",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "sifter",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "concretemixer",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "netherworker",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "builder",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  },
+  {
+   "hut": "postbox",
+   "kind": "SKIP",
+   "mca": null,
+   "blocks": [],
+   "pois": []
+  }
+ ],
+ "jobs": [
+  [
+   "farmer",
+   "FARMER"
+  ],
+  [
+   "fisherman",
+   "FISHERMAN"
+  ],
+  [
+   "fletcher",
+   "FLETCHER"
+  ],
+  [
+   "shepherd",
+   "SHEPHERD"
+  ],
+  [
+   "stonemason",
+   "MASON"
+  ],
+  [
+   "baker",
+   "BUTCHER"
+  ],
+  [
+   "cook",
+   "BUTCHER"
+  ],
+  [
+   "chef",
+   "BUTCHER"
+  ],
+  [
+   "cookassistant",
+   "BUTCHER"
+  ],
+  [
+   "cowboy",
+   "BUTCHER"
+  ],
+  [
+   "swineherder",
+   "BUTCHER"
+  ],
+  [
+   "chickenherder",
+   "BUTCHER"
+  ],
+  [
+   "rabbitherder",
+   "BUTCHER"
+  ],
+  [
+   "miner",
+   "MASON"
+  ],
+  [
+   "quarrier",
+   "MASON"
+  ],
+  [
+   "crusher",
+   "MASON"
+  ],
+  [
+   "sifter",
+   "MASON"
+  ],
+  [
+   "concretemixer",
+   "MASON"
+  ],
+  [
+   "glassblower",
+   "MASON"
+  ],
+  [
+   "smelter",
+   "ARMORER"
+  ],
+  [
+   "stonesmeltery",
+   "ARMORER"
+  ],
+  [
+   "blacksmith",
+   "TOOLSMITH"
+  ],
+  [
+   "mechanic",
+   "TOOLSMITH"
+  ],
+  [
+   "dyer",
+   "SHEPHERD"
+  ],
+  [
+   "stablemaster",
+   "LEATHERWORKER"
+  ],
+  [
+   "planter",
+   "FARMER"
+  ],
+  [
+   "florist",
+   "FARMER"
+  ],
+  [
+   "composter",
+   "FARMER"
+  ],
+  [
+   "beekeeper",
+   "FARMER"
+  ],
+  [
+   "teacher",
+   "LIBRARIAN"
+  ],
+  [
+   "researcher",
+   "LIBRARIAN"
+  ],
+  [
+   "enchanter",
+   "CLERIC"
+  ],
+  [
+   "alchemist",
+   "CLERIC"
+  ],
+  [
+   "healer",
+   "CLERIC"
+  ],
+  [
+   "druid",
+   "CLERIC"
+  ],
+  [
+   "undertaker",
+   "CLERIC"
+  ],
+  [
+   "knight",
+   "GUARD"
+  ],
+  [
+   "huscarl",
+   "GUARD"
+  ],
+  [
+   "cavalry",
+   "GUARD"
+  ],
+  [
+   "combattraining",
+   "GUARD"
+  ],
+  [
+   "ranger",
+   "ARCHER"
+  ],
+  [
+   "marksman",
+   "ARCHER"
+  ],
+  [
+   "archertraining",
+   "ARCHER"
+  ],
+  [
+   "student",
+   "NONE"
+  ],
+  [
+   "pupil",
+   "NONE"
+  ],
+  [
+   "builder",
+   "NONE"
+  ],
+  [
+   "deliveryman",
+   "NONE"
+  ],
+  [
+   "lumberjack",
+   "NONE"
+  ],
+  [
+   "sawmill",
+   "NONE"
+  ],
+  [
+   "netherworker",
+   "NONE"
+  ],
+  [
+   "placeholder",
+   "NONE"
+  ]
+ ]
+}

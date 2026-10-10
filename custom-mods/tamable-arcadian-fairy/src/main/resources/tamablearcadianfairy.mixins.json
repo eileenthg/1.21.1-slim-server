@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.eileenthg.tamablearcadianfairy.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "tamablearcadianfairy.refmap.json",
+  "mixins": [
+    "BaseBulletEntityMixin",
+    "MobMixin",
+    "MonsterMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

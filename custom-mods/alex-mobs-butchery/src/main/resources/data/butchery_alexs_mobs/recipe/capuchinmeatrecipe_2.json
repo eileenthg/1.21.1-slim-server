@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "group": "capuchin",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 120,
+  "ingredient": {
+    "item": "butchery_alexs_mobs:raw_capuchin_meat"
+  },
+  "result": {
+    "id": "butchery_alexs_mobs:cooked_capuchin_meat"
+  }
+}

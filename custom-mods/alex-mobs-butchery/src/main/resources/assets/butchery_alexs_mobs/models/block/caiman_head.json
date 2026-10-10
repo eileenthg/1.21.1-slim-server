@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/caiman_head",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/caiman_original",
+    "particle": "minecraft:block/nether_wart_block",
+    "0": "butchery_alexs_mobs:block/caiman_original"
+  },
+  "render_type": "cutout"
+}

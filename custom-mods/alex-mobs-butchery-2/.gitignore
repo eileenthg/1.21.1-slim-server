@@ -1,0 +1,21 @@
+# Gradle / build output
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Test run directories
+run/
+run-client/
+
+# Port research: decompiled sources and third-party jars.
+# Not redistributable — kept locally as the reference for this port.
+_research/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.eclipse/
+run-gametest/
+run-worldgen/
+tools/__pycache__/

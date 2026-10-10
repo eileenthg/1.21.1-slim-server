@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eteil.spawnonboarding.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "eteil.spawnonboarding.mixin.OnboardingMixinPlugin",
+  "mixins": [
+    "DestinyMessageMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

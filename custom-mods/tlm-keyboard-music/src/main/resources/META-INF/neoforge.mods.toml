@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/eileenthg/maid-keyboard-music/issues"
+
+[[mods]]
+    modId = "${mod_id}"
+    version = "${mod_version}"
+    displayName = "${mod_name}"
+    authors = "${mod_authors}"
+    displayURL = "https://github.com/eileenthg/maid-keyboard-music"
+    description = '''
+    Plays piano music when a maid or a player sits at Touhou Little Maid's keyboard.
+    Tracks are a datapack registry, and specific maid models can have their own themes.
+    '''
+
+[[dependencies."${mod_id}"]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "${neo_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[${minecraft_version},1.21.2)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+    modId = "touhou_little_maid"
+    type = "required"
+    versionRange = "[1.0,)"
+    ordering = "AFTER"
+    side = "BOTH"

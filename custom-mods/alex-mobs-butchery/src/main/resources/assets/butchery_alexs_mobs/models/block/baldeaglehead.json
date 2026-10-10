@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/bald_eagle_head",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/eagle_bald",
+    "particle": "butchery_alexs_mobs:block/eagle_bald",
+    "2": "butchery_alexs_mobs:block/eagle_bald"
+  },
+  "render_type": "cutout_mipped"
+}

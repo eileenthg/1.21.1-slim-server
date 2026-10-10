@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/hanging_emu_carcass_plucked",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/emu_plucked",
+    "particle": "minecraft:block/nether_wart_block",
+    "2": "butchery_alexs_mobs:block/emu_plucked"
+  },
+  "render_type": "cutout_mipped"
+}

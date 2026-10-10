@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "alexsmobs:farseer_arm"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "butchery_alexs_mobs_2:blocks/farseer_step_2_drop"
+}

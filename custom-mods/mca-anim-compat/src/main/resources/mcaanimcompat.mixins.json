@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eteil.mcaanimcompat.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "eteil.mcaanimcompat.mixin.CompatMixinPlugin",
+  "client": [
+    "GameRendererPickMixin",
+    "LyingHeadMixin",
+    "McaBodyTransformScaleMixin",
+    "McaPlayerModelAnimMixin",
+    "PlayerModelCarryMixin",
+    "PlayerRendererCarryMixin",
+    "RomanticShiftMixin",
+    "SideLyingHeadTurnMixin",
+    "TakeASeatCameraScaleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "ServerTeleportMixin"
+  ]
+}

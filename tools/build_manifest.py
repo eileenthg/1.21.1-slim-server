@@ -1,7 +1,7 @@
 """Builds the mod reference data for the slim-server repo from the live Prism instance (read-only)."""
 import zipfile, os, json, hashlib, re, tomllib, sys
 INST = r'C:/Users/eteil.000/AppData/Roaming/PrismLauncher/instances/1.21.1 slim/minecraft'
-OUT = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.makedirs(f'{OUT}/mods', exist_ok=True)
 rows, names = [], []
 PFX = ('item.', 'block.', 'entity.', 'effect.', 'biome.', 'enchantment.', 'tag.', 'itemGroup.', 'death.attack.')

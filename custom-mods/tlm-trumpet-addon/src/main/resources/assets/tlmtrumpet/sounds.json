@@ -1,0 +1,122 @@
+{
+  "item.trumpet.flowering_night": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/flowering_night",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.true_hero_descending": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/true_hero_descending",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.true_hero_chromatic": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/true_hero_chromatic",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.minoriko_descending": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/minoriko_descending",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.minoriko_ascending": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/minoriko_ascending",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.history_of_the_moon": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/history_of_the_moon",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.bad_apple_arch": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/bad_apple_arch",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.bad_apple_scalar": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/bad_apple_scalar",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.gods_loved_arch": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/gods_loved_arch",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.gods_loved_ascending": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/gods_loved_ascending",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.gods_loved_descending": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/gods_loved_descending",
+        "stream": false
+      }
+    ]
+  },
+  "item.trumpet.gods_loved_low": {
+    "category": "voice",
+    "subtitle": "subtitle.tlmtrumpet.item.trumpet",
+    "sounds": [
+      {
+        "name": "tlmtrumpet:trumpet/gods_loved_low",
+        "stream": false
+      }
+    ]
+  }
+}

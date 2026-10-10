@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/capuchin_carcass_hanging_cut_2",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/skinned_capuchin",
+    "particle": "minecraft:block/nether_wart_block",
+    "0": "butchery_alexs_mobs:block/skinned_capuchin"
+  },
+  "render_type": "cutout"
+}

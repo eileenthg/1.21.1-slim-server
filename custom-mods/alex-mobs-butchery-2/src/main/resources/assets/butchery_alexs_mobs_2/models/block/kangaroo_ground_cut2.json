@@ -1,0 +1,515 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "butchery_alexs_mobs_2:block/kangaroo_skinned",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        -3.753,
+        0.405,
+        3.676
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        1.904,
+        3.875,
+        0.218
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        3.809,
+        1.751,
+        0.437
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        7.618,
+        3.501,
+        0.873
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        2.252,
+        4.567,
+        0.805
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        2.252,
+        4.567,
+        0.805
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        2.402,
+        1.401,
+        -1.908
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        -2.402,
+        1.401,
+        1.908
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        -1.4159,
+        0.7915,
+        3.0859
+      ],
+      "to": [
+        8.223,
+        8.206,
+        11.2418
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            1.625,
+            0.0,
+            2.875,
+            1.625
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            2.875,
+            1.625,
+            4.125,
+            0.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            1.625,
+            3.0,
+            0.0,
+            1.625
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            1.625,
+            1.625,
+            2.875,
+            3.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            2.875,
+            1.625,
+            4.5,
+            3.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            5.75,
+            3.0,
+            4.5,
+            1.625
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pouch",
+      "from": [
+        -1.49,
+        1.9778,
+        3.0117
+      ],
+      "to": [
+        4.2933,
+        7.0196,
+        6.5707
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            9.0,
+            0.75,
+            9.875,
+            1.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            9.875,
+            1.75,
+            10.75,
+            0.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            9.0,
+            2.375,
+            8.0,
+            1.75
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            9.0,
+            1.75,
+            9.875,
+            2.375
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            9.875,
+            1.75,
+            10.875,
+            2.375
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            11.75,
+            2.375,
+            10.875,
+            1.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        -1.49,
+        1.9778,
+        6.5707
+      ],
+      "to": [
+        4.2933,
+        7.0196,
+        6.5707
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            1.75,
+            9.875,
+            0.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        -1.49,
+        1.9778,
+        3.0117
+      ],
+      "to": [
+        4.2933,
+        7.0196,
+        3.0117
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            9.875,
+            0.75,
+            10.75,
+            1.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        -1.49,
+        7.0196,
+        3.0117
+      ],
+      "to": [
+        4.2933,
+        7.0196,
+        6.5707
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            9.0,
+            1.75,
+            8.0,
+            2.375
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        -1.49,
+        1.9778,
+        3.0117
+      ],
+      "to": [
+        -1.49,
+        7.0196,
+        6.5707
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            9.0,
+            2.375,
+            9.875,
+            1.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        -1.49,
+        1.9778,
+        3.0117
+      ],
+      "to": [
+        4.2933,
+        1.9778,
+        6.5707
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            9.875,
+            2.375,
+            10.875,
+            1.75
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "pouch_back",
+      "from": [
+        4.2933,
+        1.9778,
+        3.0117
+      ],
+      "to": [
+        4.2933,
+        7.0196,
+        6.5707
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            11.75,
+            1.75,
+            10.875,
+            2.375
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "chest",
+      "from": [
+        -7.459,
+        1.5329,
+        4.0402
+      ],
+      "to": [
+        -0.7859,
+        7.4645,
+        10.7132
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            1.125,
+            5.875,
+            2.125,
+            7.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            2.125,
+            7.0,
+            3.125,
+            5.875
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            1.125,
+            8.125,
+            0.0,
+            7.0
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            1.125,
+            7.0,
+            2.125,
+            8.125
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            2.125,
+            7.0,
+            3.25,
+            8.125
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            4.25,
+            8.125,
+            3.25,
+            7.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

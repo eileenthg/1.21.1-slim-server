@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "blobfish",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "butchery_alexs_mobs:blobfish_carcass"
+    }
+  ],
+  "result": {
+    "id": "alexsmobs:blobfish"
+  }
+}

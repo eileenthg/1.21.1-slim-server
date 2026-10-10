@@ -1,0 +1,221 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "butchery_alexs_mobs_2:block/seal_skinned",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        -2.212,
+        -4.367,
+        0.94
+      ],
+      "scale": [
+        0.5967,
+        0.5967,
+        0.5967
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        1.473,
+        1.675,
+        -0.222
+      ],
+      "scale": [
+        0.2387,
+        0.2387,
+        0.2387
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        2.947,
+        -2.649,
+        -0.444
+      ],
+      "scale": [
+        0.4774,
+        0.4774,
+        0.4774
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        5.893,
+        -5.299,
+        -0.889
+      ],
+      "scale": [
+        0.9547,
+        0.9547,
+        0.9547
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        1.327,
+        3.723,
+        -2.385
+      ],
+      "scale": [
+        0.358,
+        0.358,
+        0.358
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        1.327,
+        3.723,
+        -2.385
+      ],
+      "scale": [
+        0.358,
+        0.358,
+        0.358
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        1.415,
+        -2.119,
+        -1.918
+      ],
+      "scale": [
+        0.3819,
+        0.3819,
+        0.3819
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        -1.415,
+        -2.119,
+        1.918
+      ],
+      "scale": [
+        0.3819,
+        0.3819,
+        0.3819
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        -6.5518,
+        7.4982,
+        4.7414
+      ],
+      "to": [
+        10.2068,
+        19.6016,
+        13.1207
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            2.25,
+            0.0,
+            3.875,
+            2.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            3.875,
+            2.25,
+            5.5,
+            0.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            2.25,
+            3.375,
+            0.0,
+            2.25
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            2.25,
+            2.25,
+            3.875,
+            3.375
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            3.875,
+            2.25,
+            6.125,
+            3.375
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            7.75,
+            3.375,
+            6.125,
+            2.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

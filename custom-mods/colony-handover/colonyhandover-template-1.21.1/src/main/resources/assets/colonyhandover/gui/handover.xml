@@ -1,0 +1,50 @@
+<window size="190 244" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/ldtteam/BlockUI/version/main/src/main/resources/assets/blockui/gui/block_ui.xsd">
+
+    <!-- Same parchment and ribbon as the checklist and MineColonies' resource scroll.
+         Every button texture is drawn at its native size. -->
+    <image source="minecolonies:textures/gui/builderhut/builder_paper.png" size="100% 100%"/>
+
+    <text id="heading" size="100% 11" pos="0 11" color="black" textalign="MIDDLE"/>
+
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_left.png" size="6 15" pos="24 22"/>
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_center.png" size="130 15" pos="30 22"/>
+    <image source="minecolonies:textures/gui/builderhut/builder_sketch_right.png" size="6 15" pos="160 22"/>
+    <text id="ribbon" size="130 11" pos="30 24" textalign="MIDDLE" color="blue"/>
+
+    <!-- Page one: how ready the colony is. -->
+    <view id="mainPage" size="100% 100%" pos="0 0">
+        <list id="summary" size="164 128" pos="13 44">
+            <box size="100% 11" linewidth="0">
+                <text id="line" size="160 9" pos="2 1" color="black"/>
+            </box>
+        </list>
+        <button id="marks" size="44 16" pos="37 176" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                label="Marks"/>
+        <button id="checklist" size="64 17" pos="89 176" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_small.png"
+                label="Checklist"/>
+        <button id="grant" size="129 17" pos="30 197" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_medium_large.png"
+                label="Grant Independence"/>
+        <button id="close" size="44 16" pos="73 218" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                label="Close"/>
+    </view>
+
+    <!-- Page two: the confirmation. Nothing happens until Sign the Charter. -->
+    <view id="charterPage" size="100% 100%" pos="0 0" visible="false">
+        <list id="charter" size="164 144" pos="13 44">
+            <box size="100% 11" linewidth="0">
+                <text id="line" size="160 9" pos="2 1" color="black"/>
+            </box>
+        </list>
+        <button id="sign" size="129 17" pos="30 197" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_medium_large.png"
+                label="Sign the Charter"/>
+        <button id="cancel" size="44 16" pos="73 218" color="black"
+                source="minecolonies:textures/gui/builderhut/builder_button_quite_small.png"
+                label="Cancel"/>
+    </view>
+
+</window>

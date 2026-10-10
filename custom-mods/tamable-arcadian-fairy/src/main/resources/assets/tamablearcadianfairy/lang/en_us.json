@@ -1,0 +1,19 @@
+{
+  "gui.tamablearcadianfairy.title": "Fairy Settings",
+  "gui.tamablearcadianfairy.owner": "Owner: %s",
+  "gui.tamablearcadianfairy.attack_mode": "Attack Mode: %s",
+  "gui.tamablearcadianfairy.follow": "Follow Owner: %s",
+  "gui.tamablearcadianfairy.wander": "Wander: %s",
+  "gui.tamablearcadianfairy.follow_range": "Follow Range: %s",
+  "gui.tamablearcadianfairy.wander_range": "Wander Range: %s",
+  "gui.tamablearcadianfairy.done": "Done",
+  "mode.tamablearcadianfairy.active": "Active",
+  "mode.tamablearcadianfairy.passive": "Passive",
+  "mode.tamablearcadianfairy.disabled": "Disabled",
+  "state.tamablearcadianfairy.enabled": "Enabled",
+  "state.tamablearcadianfairy.disabled": "Disabled",
+  "message.tamablearcadianfairy.tamed": "%s is now your fairy",
+  "message.tamablearcadianfairy.death": "%s was killed by %s",
+  "message.tamablearcadianfairy.death_no_killer": "%s died",
+  "gamerule.allowOwnerHurtArcadianFairy": "Allow owners to hurt their fairies"
+}

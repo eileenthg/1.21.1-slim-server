@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:gelada_monkey",
+      "required": false
+    }
+  ]
+}

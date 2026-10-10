@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "butchery_alexs_mobs_2:item/insect_wing"
+  }
+}

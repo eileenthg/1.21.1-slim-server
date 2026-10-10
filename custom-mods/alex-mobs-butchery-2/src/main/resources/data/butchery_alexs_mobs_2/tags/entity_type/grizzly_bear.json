@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:grizzly_bear",
+      "required": false
+    }
+  ]
+}

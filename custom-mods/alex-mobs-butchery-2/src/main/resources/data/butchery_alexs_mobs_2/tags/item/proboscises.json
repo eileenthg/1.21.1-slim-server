@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:mosquito_proboscis",
+      "required": false
+    },
+    {
+      "id": "butchery_alexs_mobs_2:warped_mosco_proboscis",
+      "required": false
+    }
+  ]
+}

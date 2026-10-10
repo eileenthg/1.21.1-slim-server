@@ -1,0 +1,320 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/bison"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/moose"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/kangaroo"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/gazelle"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/tusklin"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/grizzly_bear"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/bunfungus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/catfish_small"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/catfish_medium"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/catfish_large"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/lobster_red"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/elephant/elephant"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/rhinoceros"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/gorilla"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/endergrade"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/mungus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/tiger/tiger"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/snow_leopard"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/sea_bear"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/maned_wolf"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/dropbear"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/tasmanian_devil"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/skunk"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/orca_ne"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/cachalot/cachalot_whale"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/hammerhead_shark"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/frilled_shark"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/giant_squid"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/mimic_octopus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/crocodile_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/komodo_dragon"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/rattlesnake"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/terrapin/terrapin_green"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/alligator_snapping_turtle"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/raccoon"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/anteater"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/platypus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/seal/seal_brown_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/gelada_monkey"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/sugar_glider"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/jerboa"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/devils_hole_pupfish"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/triops"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/blue_jay"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/roadrunner"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/shoebill"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/seagull"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/toucan/toucan_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/potoo"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/hummingbird_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/sunbird"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/banana_slug/banana_slug_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/cockroach"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/comb_jelly_blue"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/cosmaw"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/crimson_mosquito"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/farseer/farseer"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/flutter"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/fly"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/froststalker_nospikes"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/froststalker"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/laviathan"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/laviathan_obsidian"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/leafcutter_ant_queen"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/mimicube"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/murmur"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/rocky_roller"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/skelewag_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/soul_vulture/soul_vulture"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/straddler"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/tarantula_hawk"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/rain_frog_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/warped_toad"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/warped_mosco"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/cave_centipede"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/anaconda"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/bone_serpent_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/void_worm/void_worm_head"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "alexsmobs:entity/void_worm/void_worm_head"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:black_dye" }
+  ],
+  "result": { "id": "colonyhandover:checklist_scroll", "count": 1 }
+}

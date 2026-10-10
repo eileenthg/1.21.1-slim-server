@@ -1,0 +1,12 @@
+{
+  "chesspvp.color.black": "黑方",
+  "chesspvp.color.white": "白方",
+  "chesspvp.color.red": "红方",
+  "message.chesspvp.sit": "你坐下了，执%s。潜行即可起身。",
+  "message.chesspvp.full": "这张棋盘的两个座位都有人了。",
+  "message.chesspvp.waiting": "等待对手入座。",
+  "message.chesspvp.not_your_turn": "还没轮到你。",
+  "message.chesspvp.win": "%s获胜！",
+  "message.chesspvp.draw": "平局。",
+  "message.chesspvp.stalemate": "逼和，平局。"
+}

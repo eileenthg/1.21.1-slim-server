@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.eileen.chesspvp.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlockCChessPvpMixin",
+    "BlockGomokuPvpMixin",
+    "BlockJoyPvpMixin",
+    "BlockWChessPvpMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

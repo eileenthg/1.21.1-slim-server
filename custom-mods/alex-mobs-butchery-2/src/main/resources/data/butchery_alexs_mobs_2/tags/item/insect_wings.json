@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "butchery_alexs_mobs_2:insect_wing",
+      "required": false
+    },
+    {
+      "id": "butchery:bee_wings",
+      "required": false
+    }
+  ]
+}

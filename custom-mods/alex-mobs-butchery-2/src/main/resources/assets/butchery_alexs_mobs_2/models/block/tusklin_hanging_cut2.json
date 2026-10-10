@@ -1,0 +1,315 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "butchery_alexs_mobs_2:block/tusklin_skinned",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0.884,
+        1.886,
+        2.11
+      ],
+      "scale": [
+        0.3584,
+        0.3584,
+        0.3584
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        4.075,
+        -0.5
+      ],
+      "scale": [
+        0.1434,
+        0.1434,
+        0.1434
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        2.151,
+        -1.0
+      ],
+      "scale": [
+        0.2867,
+        0.2867,
+        0.2867
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        4.301,
+        -2.0
+      ],
+      "scale": [
+        0.5735,
+        0.5735,
+        0.5735
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.53,
+        3.43,
+        1.421
+      ],
+      "scale": [
+        0.2151,
+        0.2151,
+        0.2151
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.53,
+        3.43,
+        1.421
+      ],
+      "scale": [
+        0.2151,
+        0.2151,
+        0.2151
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        -0.566,
+        1.72,
+        -0.566
+      ],
+      "scale": [
+        0.2294,
+        0.2294,
+        0.2294
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0.566,
+        1.72,
+        0.566
+      ],
+      "scale": [
+        0.2294,
+        0.2294,
+        0.2294
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        1.8,
+        -13.45,
+        2.575
+      ],
+      "to": [
+        14.2,
+        -1.825,
+        14.2
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            10.375,
+            8.875,
+            8.375,
+            7.0
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            10.375,
+            8.875,
+            12.375,
+            7.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            8.375,
+            10.75,
+            6.5,
+            8.875
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            10.375,
+            10.75,
+            8.375,
+            8.875
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            10.375,
+            8.875,
+            12.25,
+            10.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            12.25,
+            8.875,
+            14.25,
+            10.75
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "torso",
+      "from": [
+        1.025,
+        -1.825,
+        1.8
+      ],
+      "to": [
+        14.975,
+        14.45,
+        17.3
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            4.875,
+            2.625,
+            2.625,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            4.875,
+            2.625,
+            7.125,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            2.625,
+            5.125,
+            0.0,
+            2.625
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            4.875,
+            5.125,
+            2.625,
+            2.625
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            4.875,
+            2.625,
+            7.5,
+            5.125
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            7.5,
+            2.625,
+            9.75,
+            5.125
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "torso",
+      "from": [
+        8.0,
+        6.7,
+        17.3
+      ],
+      "to": [
+        8.0,
+        14.45,
+        21.175
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            1.25,
+            1.875,
+            0.0,
+            1.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

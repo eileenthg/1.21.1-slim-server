@@ -3,7 +3,7 @@ INST = r'C:/Users/eteil.000/AppData/Roaming/PrismLauncher/instances/1.21.1 slim/
 PRISM = r'C:/Users/eteil.000/AppData/Roaming/PrismLauncher/instances/1.21.1 slim'
 AUDIT = r'C:/Users/eteil.000/Claude/modpack-audit'
 MEM = r'C:/Users/eteil.000/.claude/projects/C--Users-eteil-000-Claude-modpack-audit/memory'
-OUT = os.path.dirname(os.path.abspath(__file__)).replace(os.sep, '/')
+OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace(os.sep, '/')
 BS = chr(92)
 
 def fwd(p):
@@ -13,7 +13,7 @@ def clean(d):
     if os.path.isdir(d):
         shutil.rmtree(d)
 
-EXC_CFG = re.compile(r'(\.bak|\.backup\d*|\.log|\.dat|\.tmp|\.disabled)$|\.bak[-.]|\.BEFORE-|/QuantifiedAPI/|/spark/|/crash_assistant/|/chunky/|/fast_travel_waypoints/|/mca/presets/|\.rpo$|/\.', re.I)
+EXC_CFG = re.compile(r'(\.bak|\.backup\d*|\.log|\.dat|\.tmp|\.disabled)$|\.bak[-.]|\.BEFORE-|/QuantifiedAPI/|/spark/|/crash_assistant/|/chunky/|/fast_travel_waypoints/|/mca/presets/|/touhou_little_maid/file/|\.rpo$|/\.', re.I)
 
 n = 0
 clean(OUT + '/config')

@@ -1,0 +1,503 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "alexsmobs:entity/rattlesnake",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.992,
+        1.15
+      ],
+      "scale": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.92,
+        0.0
+      ],
+      "scale": [
+        0.1333,
+        0.1333,
+        0.1333
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.84,
+        0.0
+      ],
+      "scale": [
+        0.2667,
+        0.2667,
+        0.2667
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.68,
+        0.0
+      ],
+      "scale": [
+        0.5333,
+        0.5333,
+        0.5333
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0.0,
+        2.857,
+        1.333
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0.0,
+        2.857,
+        1.333
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.472,
+        0.0
+      ],
+      "scale": [
+        0.2133,
+        0.2133,
+        0.2133
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.472,
+        0.0
+      ],
+      "scale": [
+        0.2133,
+        0.2133,
+        0.2133
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        6.0,
+        -0.9,
+        6.5
+      ],
+      "to": [
+        10.0,
+        6.1,
+        9.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            2.75,
+            1.75,
+            1.75,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            2.75,
+            1.75,
+            3.75,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            1.75,
+            2.5,
+            0.0,
+            1.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            2.75,
+            2.5,
+            1.75,
+            1.75
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            2.75,
+            1.75,
+            4.5,
+            2.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            4.5,
+            1.75,
+            5.5,
+            2.5
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "tail1",
+      "from": [
+        6.5,
+        -7.9,
+        6.5
+      ],
+      "to": [
+        9.5,
+        -0.9,
+        9.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            2.5,
+            4.5,
+            1.75,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            2.5,
+            4.5,
+            3.25,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            1.75,
+            5.25,
+            0.0,
+            4.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            2.5,
+            5.25,
+            1.75,
+            4.5
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            2.5,
+            4.5,
+            4.25,
+            5.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            4.25,
+            4.5,
+            5.0,
+            5.25
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "tail2",
+      "from": [
+        7.0,
+        -13.9,
+        6.8
+      ],
+      "to": [
+        9.0,
+        -7.9,
+        8.8
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            5.75,
+            5.5,
+            5.25,
+            4.0
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            5.75,
+            5.5,
+            6.25,
+            4.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            5.25,
+            6.0,
+            3.75,
+            5.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            5.75,
+            6.0,
+            5.25,
+            5.5
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            5.75,
+            5.5,
+            7.25,
+            6.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            7.25,
+            5.5,
+            7.75,
+            6.0
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "neck1",
+      "from": [
+        6.5,
+        6.1,
+        6.5
+      ],
+      "to": [
+        9.5,
+        11.1,
+        9.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            6.5,
+            2.75,
+            5.75,
+            1.5
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            6.5,
+            2.75,
+            7.25,
+            1.5
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            5.75,
+            3.5,
+            4.5,
+            2.75
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            6.5,
+            3.5,
+            5.75,
+            2.75
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            2.75,
+            7.75,
+            3.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            7.75,
+            2.75,
+            8.5,
+            3.5
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "neck2",
+      "from": [
+        7.0,
+        11.1,
+        6.5
+      ],
+      "to": [
+        9.0,
+        16.1,
+        9.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            4.75,
+            7.5,
+            4.25,
+            6.25
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            4.75,
+            7.5,
+            5.25,
+            6.25
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            4.25,
+            8.25,
+            3.0,
+            7.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            4.75,
+            8.25,
+            4.25,
+            7.5
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            4.75,
+            7.5,
+            6.0,
+            8.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            6.0,
+            7.5,
+            6.5,
+            8.25
+          ],
+          "texture": "#tex"
+        }
+      }
+    }
+  ]
+}

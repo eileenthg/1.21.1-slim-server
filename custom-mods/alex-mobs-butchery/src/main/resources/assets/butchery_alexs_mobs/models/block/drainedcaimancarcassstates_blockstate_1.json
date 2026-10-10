@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/hanging_caiman_carcass_headless",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/caiman",
+    "particle": "minecraft:block/nether_wart_block",
+    "0": "butchery_alexs_mobs:block/caiman"
+  },
+  "render_type": "cutout"
+}

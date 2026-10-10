@@ -1,0 +1,95 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'net.neoforged.moddev' version '2.0.95'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Game tests live in their own source set so they never ship in the jar; only the gameTestServer run loads them.
+sourceSets {
+    gametest {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_mappings_version
+    }
+
+    addModdingDependenciesTo(sourceSets.gametest)
+    addModdingDependenciesTo(sourceSets.test)
+
+    runs {
+        client { client() }
+        server { server() }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.gametest
+        }
+    }
+}
+
+configurations {
+    // Dependencies that only dev runs need, never the published jar.
+    localRuntime
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Touhou Little Maid and Love & Loathe (callresponse) are compiled against as plain jars from libs/
+// (git-ignored). Copy them in before building: libs/touhoulittlemaid.jar and libs/callresponse.jar.
+def tlmJar = files('libs/touhoulittlemaid.jar')
+def loveLoatheJar = files('libs/callresponse.jar')
+
+dependencies {
+    compileOnly tlmJar
+    compileOnly loveLoatheJar
+    localRuntime tlmJar
+    localRuntime loveLoatheJar
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation tlmJar
+    testImplementation loveLoatheJar
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def expandProps = [
+            'version'             : version,
+            'mod_id'              : mod_id,
+            'mod_name'            : mod_name,
+            'mod_license'         : mod_license,
+            'mod_version'         : mod_version,
+            'mod_authors'         : mod_authors,
+            'minecraft_version'   : minecraft_version,
+            'neo_version_range'   : neo_version_range,
+            'loader_version_range': loader_version_range
+    ]
+    inputs.properties(expandProps)
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand expandProps
+    }
+}

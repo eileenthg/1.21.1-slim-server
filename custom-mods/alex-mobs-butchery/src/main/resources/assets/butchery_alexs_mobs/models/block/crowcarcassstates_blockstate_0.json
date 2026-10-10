@@ -1,0 +1,9 @@
+{
+  "parent": "butchery_alexs_mobs:custom/crow_carcass_headless",
+  "textures": {
+    "all": "butchery_alexs_mobs:block/crow",
+    "particle": "minecraft:block/nether_wart_block",
+    "0": "butchery_alexs_mobs:block/crow"
+  },
+  "render_type": "cutout_mipped"
+}

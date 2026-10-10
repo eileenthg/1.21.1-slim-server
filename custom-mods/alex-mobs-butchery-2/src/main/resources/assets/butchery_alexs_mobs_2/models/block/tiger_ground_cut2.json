@@ -1,0 +1,221 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "butchery_alexs_mobs_2:block/tiger_skinned",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        1.482,
+        0.902,
+        0.665
+      ],
+      "scale": [
+        0.4545,
+        0.4545,
+        0.4545
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        -0.384,
+        3.445,
+        -0.455
+      ],
+      "scale": [
+        0.1818,
+        0.1818,
+        0.1818
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        -0.768,
+        0.891,
+        -0.909
+      ],
+      "scale": [
+        0.3636,
+        0.3636,
+        0.3636
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        -1.536,
+        1.782,
+        -1.818
+      ],
+      "scale": [
+        0.7273,
+        0.7273,
+        0.7273
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.889,
+        2.745,
+        0.626
+      ],
+      "scale": [
+        0.2727,
+        0.2727,
+        0.2727
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -0.889,
+        2.745,
+        0.626
+      ],
+      "scale": [
+        0.2727,
+        0.2727,
+        0.2727
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        -0.949,
+        0.713,
+        -0.08
+      ],
+      "scale": [
+        0.2909,
+        0.2909,
+        0.2909
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0.949,
+        0.713,
+        0.08
+      ],
+      "scale": [
+        0.2909,
+        0.2909,
+        0.2909
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        -0.8885,
+        0.55,
+        5.0
+      ],
+      "to": [
+        21.1115,
+        10.55,
+        16.0
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            5.5,
+            0.0,
+            8.0,
+            5.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            8.0,
+            5.5,
+            10.5,
+            0.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            5.5,
+            8.25,
+            0.0,
+            5.5
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            5.5,
+            5.5,
+            8.0,
+            8.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            8.0,
+            5.5,
+            13.5,
+            8.25
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            16.0,
+            8.25,
+            13.5,
+            5.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

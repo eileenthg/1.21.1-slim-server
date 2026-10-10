@@ -1,0 +1,474 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "tex": "butchery_alexs_mobs_2:block/frilled_shark_skinned",
+    "particle": "minecraft:block/nether_wart_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        -0.141,
+        2.166,
+        1.088
+      ],
+      "scale": [
+        0.3226,
+        0.3226,
+        0.3226
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.968,
+        0.08
+      ],
+      "scale": [
+        0.129,
+        0.129,
+        0.129
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        1.935,
+        0.159
+      ],
+      "scale": [
+        0.2581,
+        0.2581,
+        0.2581
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0.0,
+        3.871,
+        0.319
+      ],
+      "scale": [
+        0.5161,
+        0.5161,
+        0.5161
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0.084,
+        2.794,
+        1.424
+      ],
+      "scale": [
+        0.1935,
+        0.1935,
+        0.1935
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0.084,
+        2.794,
+        1.424
+      ],
+      "scale": [
+        0.1935,
+        0.1935,
+        0.1935
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0.09,
+        1.548,
+        0.09
+      ],
+      "scale": [
+        0.2065,
+        0.2065,
+        0.2065
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        -0.09,
+        1.548,
+        -0.09
+      ],
+      "scale": [
+        0.2065,
+        0.2065,
+        0.2065
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [
+        6.102,
+        4.6122,
+        4.7447
+      ],
+      "to": [
+        9.898,
+        16.0,
+        8.5406
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            3.0,
+            2.25,
+            2.25,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            3.0,
+            2.25,
+            3.75,
+            0.0
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            2.25,
+            3.0,
+            0.0,
+            2.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            3.0,
+            3.0,
+            2.25,
+            2.25
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            3.0,
+            2.25,
+            5.25,
+            3.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            5.25,
+            2.25,
+            6.0,
+            3.0
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "pectoralfin_left",
+      "from": [
+        3.1175,
+        8.4082,
+        4.3939
+      ],
+      "to": [
+        6.2808,
+        12.8367,
+        4.3939
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            6.625,
+            6.125,
+            6.0,
+            5.25
+          ],
+          "texture": "#tex"
+        }
+      },
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          4.6991,
+          10.6224,
+          4.3939
+        ]
+      }
+    },
+    {
+      "name": "pectoralfin_right",
+      "from": [
+        9.7192,
+        8.4082,
+        4.3939
+      ],
+      "to": [
+        12.8825,
+        12.8367,
+        4.3939
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.625,
+            6.125,
+            6.0,
+            5.25
+          ],
+          "texture": "#tex"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "y",
+        "origin": [
+          11.3009,
+          10.6224,
+          4.3939
+        ]
+      }
+    },
+    {
+      "name": "tail1",
+      "from": [
+        6.7347,
+        -2.3469,
+        5.314
+      ],
+      "to": [
+        9.2653,
+        4.6122,
+        8.4773
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            4.5,
+            4.5,
+            4.0,
+            3.125
+          ],
+          "texture": "#tex"
+        },
+        "north": {
+          "uv": [
+            4.5,
+            4.5,
+            5.0,
+            3.125
+          ],
+          "texture": "#tex"
+        },
+        "east": {
+          "uv": [
+            4.0,
+            5.125,
+            2.625,
+            4.5
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            4.5,
+            5.125,
+            4.0,
+            4.5
+          ],
+          "texture": "#tex"
+        },
+        "west": {
+          "uv": [
+            4.5,
+            4.5,
+            5.875,
+            5.125
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            5.875,
+            4.5,
+            6.375,
+            5.125
+          ],
+          "texture": "#tex"
+        }
+      }
+    },
+    {
+      "name": "tail1",
+      "from": [
+        8.0,
+        -2.3469,
+        8.4773
+      ],
+      "to": [
+        8.0,
+        1.449,
+        10.3753
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            0.75,
+            3.875,
+            1.5,
+            4.25
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "pelvicfin_left",
+      "from": [
+        5.0084,
+        -1.0816,
+        4.7697
+      ],
+      "to": [
+        6.9063,
+        2.0816,
+        4.7697
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            3.25,
+            3.75,
+            3.875,
+            4.125
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      },
+      "rotation": {
+        "angle": -45.0,
+        "axis": "y",
+        "origin": [
+          5.9574,
+          0.5,
+          4.7697
+        ]
+      }
+    },
+    {
+      "name": "pelvicfin_right",
+      "from": [
+        10.0426,
+        -1.0816,
+        3.8207
+      ],
+      "to": [
+        10.0426,
+        2.0816,
+        5.7187
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            3.25,
+            3.75,
+            3.875,
+            4.125
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      },
+      "rotation": {
+        "angle": -45.0,
+        "axis": "y",
+        "origin": [
+          10.0426,
+          0.5,
+          4.7697
+        ]
+      }
+    },
+    {
+      "name": "tail2",
+      "from": [
+        8.0,
+        -15.0,
+        3.9855
+      ],
+      "to": [
+        8.0,
+        -2.3469,
+        10.9447
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            2.5,
+            5.625,
+            5.0,
+            7.0
+          ],
+          "texture": "#tex",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}
