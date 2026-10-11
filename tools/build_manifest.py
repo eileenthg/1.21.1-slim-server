@@ -68,3 +68,4 @@ with open(f'{OUT}/mods/registry-names.tsv', 'w', encoding='utf-8') as w:
         if (ns, k) in seen: continue
         seen.add((ns, k)); w.write(f'{ns}\t{k}\t{v}\n')
 print('jars', len(rows), 'mod entries', sum(len(r['mods']) for r in rows), 'name rows', len(seen))
+print(OUT)
