@@ -1908,6 +1908,7 @@ bettersparsestructures	block.bettersparsestructures.example_block	Example Block
 bettersparsestructures	item.bettersparsestructures.example_item	Example Item
 bettersparsestructures	itemGroup.bettersparsestructures	Example Mod Tab
 bettertridents	item.bettertridents.trident_fragment	Trident Fragment
+birdnest	item.birdnest.birds_nest	Bird's Nest
 blazinghot	block.blazinghot.black_modern_lamp	Black Modern Lamp
 blazinghot	block.blazinghot.black_modern_lamp_double_panel	Black Modern Lamp Double Panel
 blazinghot	block.blazinghot.black_modern_lamp_half_panel	Black Modern Lamp Half Panel
@@ -2152,6 +2153,10 @@ blockrunner	tag.block.blockrunner.slightly_slow_blocks	Slightly Slow Blocks
 blockrunner	tag.block.blockrunner.slow_blocks	Slow Blocks
 blockrunner	tag.block.blockrunner.very_quick_blocks	Very Quick Blocks
 blockrunner	tag.block.blockrunner.very_slow_blocks	Very Slow Blocks
+blueprint	biome.blueprint.original_source_marker	Original Source Marker
+blueprint	entity.blueprint.boat	Boat
+blueprint	entity.blueprint.chest_boat	Boat with Chest
+blueprint	entity.blueprint.falling_block	Falling Block
 bosses_of_mass_destruction	block.bosses_of_mass_destruction.chiseled_stone_altar	Chiseled Stone Altar
 bosses_of_mass_destruction	block.bosses_of_mass_destruction.gauntlet_blackstone	Ancient Carved Blackstone
 bosses_of_mass_destruction	block.bosses_of_mass_destruction.levitation_block	Table of Elevation
@@ -21029,6 +21034,19 @@ immersive_weathering	tag.immersive_weathering.wax	Wax
 immersive_weathering	tag.immersive_weathering.weathered_iron	Weathered Iron
 immersive_weathering	tag.immersive_weathering.weathered_iron_smelting	Weathered Iron for Smelting
 immersive_weathering	tag.trinkets.head.hat	Hat Trinkets
+incubation	block.incubation.chicken_egg_crate	Crate of Chicken Eggs
+incubation	block.incubation.hay_chicken_nest	Hay Chicken Nest
+incubation	block.incubation.hay_duck_nest	Hay Duck Nest
+incubation	block.incubation.hay_nest	Hay Nest
+incubation	block.incubation.hay_turkey_nest	Hay Turkey Nest
+incubation	block.incubation.turtle_egg_crate	Crate of Turtle Eggs
+incubation	block.incubation.twig_chicken_nest	Twig Chicken Nest
+incubation	block.incubation.twig_duck_nest	Twig Duck Nest
+incubation	block.incubation.twig_nest	Twig Nest
+incubation	block.incubation.twig_turkey_nest	Twig Turkey Nest
+incubation	item.incubation.chicken_egg	Chicken Egg
+incubation	item.incubation.fried_egg	Fried Egg
+incubation	item.incubation.scrambled_eggs	Scrambled Eggs
 integrated_stronghold	item.integrated_stronghold.disc_fragment_sight	Disc Fragment
 integrated_stronghold	item.integrated_stronghold.disc_fragment_sight.desc	Music Disc - sight
 integrated_stronghold	item.integrated_stronghold.music_disc_forlorn	Music Disc
@@ -25055,6 +25073,21 @@ mythicmetals	tag.item.mythicmetals.tools.steel	Steel Tools
 mythicmetals	tag.item.mythicmetals.tools.stormyx	Stormyx Tools
 mythicmetals	tag.item.mythicmetals.tools.tidesinger	Tidesinger Tools
 mythicmetals	tag.item.mythicmetals.unobtainium	Unobtainium
+nest_egg	block.nest_egg.be_emu_egg_crate	Emu Egg Crate
+nest_egg	block.nest_egg.duck_egg_crate	Duck Egg Crate
+nest_egg	block.nest_egg.emu_egg_crate	Emu Egg Crate
+nest_egg	block.nest_egg.ge_duck_egg_crate	Duck Egg Crate
+nest_egg	block.nest_egg.hay_be_emu_nest	Hay Emu Nest
+nest_egg	block.nest_egg.hay_duck_nest	Hay Duck Nest
+nest_egg	block.nest_egg.hay_emu_nest	Hay Emu Nest
+nest_egg	block.nest_egg.hay_ge_duck_nest	Hay Duck Nest
+nest_egg	block.nest_egg.hay_pheasant_nest	Hay Pheasant Nest
+nest_egg	block.nest_egg.pheasant_egg_crate	Pheasant Egg Crate
+nest_egg	block.nest_egg.twig_be_emu_nest	Twig Emu Nest
+nest_egg	block.nest_egg.twig_duck_nest	Twig Duck Nest
+nest_egg	block.nest_egg.twig_emu_nest	Twig Emu Nest
+nest_egg	block.nest_egg.twig_ge_duck_nest	Twig Duck Nest
+nest_egg	block.nest_egg.twig_pheasant_nest	Twig Pheasant Nest
 netherdepthsupgrade	block.netherdepthsupgrade.crimson_kelp	Crimson Kelp
 netherdepthsupgrade	block.netherdepthsupgrade.crimson_kelp_block	Crimson Kelp Block
 netherdepthsupgrade	block.netherdepthsupgrade.crimson_kelp_carpet_block	Crimson Kelp Carpet
@@ -32671,6 +32704,12 @@ variantsandventures	item.variantsandventures.gelid_spawn_egg	Gelid Spawn Egg
 variantsandventures	item.variantsandventures.murk_spawn_egg	Murk Spawn Egg
 variantsandventures	item.variantsandventures.thicket_spawn_egg	Thicket Spawn Egg
 variantsandventures	item.variantsandventures.verdant_spawn_egg	Verdant Spawn Egg
+vbincubationcompat	block.vbincubationcompat.blue_egg_crate	Crate of Blue Chicken Eggs
+vbincubationcompat	block.vbincubationcompat.brown_egg_crate	Crate of Brown Chicken Eggs
+vbincubationcompat	block.vbincubationcompat.hay_blue_nest	Hay Cold Chicken Nest
+vbincubationcompat	block.vbincubationcompat.hay_brown_nest	Hay Warm Chicken Nest
+vbincubationcompat	block.vbincubationcompat.twig_blue_nest	Twig Cold Chicken Nest
+vbincubationcompat	block.vbincubationcompat.twig_brown_nest	Twig Warm Chicken Nest
 veinmining	enchantment.veinmining.vein_mining	Vein Mining
 veinmining	enchantment.veinmining.vein_mining.desc	Breaks matching connected blocks when mining.
 via_romana	effect.via_romana.travellers_fatigue	Travel Fatigue

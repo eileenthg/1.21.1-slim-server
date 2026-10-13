@@ -1790,6 +1790,31 @@
   ]
  },
  {
+  "file": "better-advanced-tooltips-2101.1.0-build.5.jar",
+  "sizeBytes": 37653,
+  "sha1": "5b73537b908764f2d3fd593a0f56a8b1b034bc50",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "betteradvancedtooltips",
+    "name": "Better Advanced Tooltips",
+    "version": "2101.1.0-build.5",
+    "authors": "latvian.dev",
+    "description": "Adds tag, component and other tooltips to items in F3+H mode",
+    "url": null,
+    "license": "MIT",
+    "deps": [
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1.199,)",
+      "side": "CLIENT"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "file": "better_lib-neoforge-1.21.1-1.0.111.jar",
   "sizeBytes": 291938,
   "sha1": "45fbd2ba2476af3d13090ac60f5e6fec4360fabf",
@@ -2116,6 +2141,49 @@
   ]
  },
  {
+  "file": "birdnest-neoforge-1.2.0+mc1.21.1.jar",
+  "sizeBytes": 16563,
+  "sha1": "3799a4829290cf775c32c38b4ba3c0fb3467131b",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "birdnest",
+    "name": "Bird Nests!",
+    "version": "1.2.0+mc1.21.1",
+    "authors": "Daniking,Slainlight,DerpDerpling,Soumeh",
+    "description": "Catching nests from trees can be rewarding...",
+    "url": null,
+    "license": "GPLv3",
+    "deps": [
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21,1.21.1]",
+      "side": "BOTH"
+     },
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[0,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "architectury",
+      "type": "required",
+      "range": "[0,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "cryonicconfig",
+      "type": "required",
+      "range": "[0,)",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "file": "bits-and-bobs-1.21.1-1.0.6.jar",
   "sizeBytes": 5335624,
   "sha1": "70aaedff71ee435c1837e513c1a8930e6c53f6cb",
@@ -2245,6 +2313,37 @@
       "id": "minecraft",
       "type": "required",
       "range": "[1.21.1, 1.22)",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "file": "blueprint-1.21.1-8.2.0.jar",
+  "sizeBytes": 1214507,
+  "sha1": "b947d5faef872a3f4c856a814c994d70f2065666",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "blueprint",
+    "name": "Blueprint",
+    "version": "8.2.0",
+    "authors": "Team Abnormals",
+    "description": "The library mod used by all Abnormals mods. Adds support for various types of blocks, helps with registering, and adds tons of misc. utils.\n    Also comes with Endimator, an animation library that supports data-driven and coded animations.",
+    "url": "https://www.teamabnormals.com/mods/blueprint",
+    "license": "https://github.com/team-abnormals/blueprint/blob/main/LICENSE.txt",
+    "deps": [
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21.1]",
+      "side": "BOTH"
+     },
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1.160,)",
       "side": "BOTH"
      }
     ]
@@ -3284,15 +3383,15 @@
   ]
  },
  {
-  "file": "codxlib-1.5.1-neoforge+1.21.1.jar",
-  "sizeBytes": 191680,
-  "sha1": "e90286c837574280980e9f9265832f3ef9c56fc6",
+  "file": "codxlib-1.6.1-neoforge+1.21.1.jar",
+  "sizeBytes": 193045,
+  "sha1": "d11c51c10d86420c4ba9a18ce42b5b7bbc1fd3ca",
   "loader": "neoforge",
   "mods": [
    {
     "modId": "codxlib",
     "name": "CodxLib",
-    "version": "1.5.1",
+    "version": "1.6.1",
     "authors": "codx",
     "description": "Shared library for codx mods (Fabric, Forge, NeoForge)",
     "url": "https://modrinth.com/mod/codxlib",
@@ -4727,6 +4826,37 @@
       "id": "minecraft",
       "type": "required",
       "range": "[1.21,1.21.1]",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "file": "cryonicconfig-neoforge-1.0.0+mc1.21.11.jar",
+  "sizeBytes": 133851,
+  "sha1": "45b7240ad5cd561511ae3f80eea4cbfc110dae70",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "cryonicconfig",
+    "name": "Cryonic Config",
+    "version": "1.0.0+mc1.21.11",
+    "authors": "Slainlight",
+    "description": "Chill Minimal Config API",
+    "url": null,
+    "license": "MIT",
+    "deps": [
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "",
+      "side": "BOTH"
+     },
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21,1.21.11]",
       "side": "BOTH"
      }
     ]
@@ -9082,6 +9212,43 @@
   ]
  },
  {
+  "file": "incubation-1.21.1-5.0.2.jar",
+  "sizeBytes": 485596,
+  "sha1": "4d4adc77a6403831a27da10e97d1e283faef6870",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "incubation",
+    "name": "Incubation",
+    "version": "5.0.2",
+    "authors": "Team Abnormals",
+    "description": "Lays down a dozen of egg-related features, including fried eggs, scrambled eggs, bird nests, and more!",
+    "url": "https://www.teamabnormals.com/mods/incubation",
+    "license": "https://github.com/team-abnormals/incubation/blob/main/LICENSE.txt",
+    "deps": [
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21.1]",
+      "side": "BOTH"
+     },
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1.160,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "blueprint",
+      "type": "required",
+      "range": "[8.0.7,)",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "file": "integrated_api-neoforge-1.21.1-1.8.0.jar",
   "sizeBytes": 470460,
   "sha1": "d224f01f8a575a4eecac4de088d18eb5f8e7c5af",
@@ -11552,15 +11719,15 @@
   ]
  },
  {
-  "file": "mcaromanticexpansion-1.1.4-1.21.1.jar",
-  "sizeBytes": 999410,
-  "sha1": "c45ce4d197c4139b3767d5e3043fc9c7370f9dc2",
+  "file": "mcaromanticexpansion-1.1.5-1.21.1.jar",
+  "sizeBytes": 1004187,
+  "sha1": "c987deed35cd3198afbc617722e1a739aca1adbf",
   "loader": "neoforge",
   "mods": [
    {
     "modId": "mcaromanticexpansion",
     "name": "MCA: Romantic Expansion",
-    "version": "1.1.4-1.21.1",
+    "version": "1.1.5-1.21.1",
     "authors": "xiaoshi2022",
     "description": "MCA Romantic Expansion adds romantic interactions to MCA mod.\nFeatures:\n- Flower Bouquet: Right-click players to open romance GUI\n- Engagement Ring: Propose marriage to opposite gender players\n- Wedding Ring: Complete marriage ceremony\n- Relationship tracking and special interactions",
     "url": "https://space.bilibili.com/1410016591",
@@ -12943,6 +13110,67 @@
       "id": "configurable",
       "type": "required",
       "range": "[3.5.1,)",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "file": "nest_egg-1.21.1-2.0.3.jar",
+  "sizeBytes": 531412,
+  "sha1": "3df38616e625a8b2d5ad2cf036f4157e061b1f8b",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "nest_egg",
+    "name": "Nest Egg",
+    "version": "2.0.3",
+    "authors": "DavigJ",
+    "description": "An Incubation add-on that adds some egg-related behaviors.",
+    "url": "https://modrinth.com/mod/nest-egg",
+    "license": "MIT License",
+    "deps": [
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21.1]",
+      "side": "BOTH"
+     },
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1.234,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "incubation",
+      "type": "required",
+      "range": "[5.0.2,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "autumnity",
+      "type": "optional",
+      "range": "[6.0.1,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "environmental",
+      "type": "optional",
+      "range": "[5.0.1,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "naturalist",
+      "type": "optional",
+      "range": "[1.0.2,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "alexsmobs",
+      "type": "optional",
+      "range": "[1.22.17,)",
       "side": "BOTH"
      }
     ]
@@ -17634,43 +17862,6 @@
   ]
  },
  {
-  "file": "time_on_display-merged-1.21-2.0.0.jar",
-  "sizeBytes": 86367,
-  "sha1": "8d77892c5a990533366119f03be9b8cf15c7febe",
-  "loader": "neoforge+fabric",
-  "mods": [
-   {
-    "modId": "time_on_display",
-    "name": "Time On Display",
-    "version": "2.0.0",
-    "authors": "Lupin, Jason13",
-    "description": "A simple display for an in-game system clock!",
-    "url": null,
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[2,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21, 1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "monolib",
-      "type": "required",
-      "range": "[1.3.0,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "timelinesync-1.21.1-1.0.0.jar",
   "sizeBytes": 6408,
   "sha1": "2c3839920ded8cad7cd18d9585114d7de1c0b3bf",
@@ -18832,6 +19023,43 @@
     "url": "https://modrinth.com/datapack/vb-compat",
     "license": "MIT",
     "deps": []
+   }
+  ]
+ },
+ {
+  "file": "vbincubationcompat-1.4.jar",
+  "sizeBytes": 49423,
+  "sha1": "a6673644514b145617d709f7da246abeeab469dc",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "vbincubationcompat",
+    "name": "VbIncubation",
+    "version": "1.4",
+    "authors": null,
+    "description": "",
+    "url": null,
+    "license": "MIT",
+    "deps": [
+     {
+      "id": "incubation",
+      "type": "required",
+      "range": "[5.0.0,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "blueprint",
+      "type": "required",
+      "range": "[8.0.0,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "vanillabackport",
+      "type": "required",
+      "range": "[1.1.0,)",
+      "side": "BOTH"
+     }
+    ]
    }
   ]
  },

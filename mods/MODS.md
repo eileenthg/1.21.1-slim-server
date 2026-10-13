@@ -48,6 +48,7 @@
 | bc_particle-0.0.2-1.21.1.jar | malfu-mods | Better Combat Particle Addition | 0.0.2-1.21.1 | fabric(Connector) | Particle addition for better combat attack animation |
 | beautify+1.21.1-1.9.0.jar | beautify | BeautifyReFoxed | 1.9.0 | neoforge | Beautify adds lots of vanilla-styled ways to spice up your builds with custom models that'll fit right in to your houses etc. |
 | beekeeperhut-neoforge-3.0.3+mc1.21.1.jar | beekeeperhut | Friends&Foes - Beekeeper Hut | 3.0.3 | neoforge | An addon for the Friends&Foes mod, adding a beekeeper hut structure. |
+| better-advanced-tooltips-2101.1.0-build.5.jar | betteradvancedtooltips | Better Advanced Tooltips | 2101.1.0-build.5 | neoforge | Adds tag, component and other tooltips to items in F3+H mode |
 | better_lib-neoforge-1.21.1-1.0.111.jar | better_lib | Better lib | 1.0.111 | neoforge | Core Library for Better Mods and Config |
 | better_mob_combat_reimagined-1.1.16.jar | better_mob_combat_reimagined | Better Mob Combat: Reimagined | 1.1.16 | neoforge | Upgrades humanoid mob combat with Better Combat melee combos plus enhanced unarmed, bow, crossbow, and thrown-weapon animations. |
 | bettercombat-neoforge-2.4.0+1.21.1.jar | bettercombat | Better Combat | 2.4.0+1.21.1 | neoforge | Easy, spectacular and fun melee combat system from Minecraft Dungeons. |
@@ -57,10 +58,12 @@
 | betterspawnercontrol-1.21.1-4.7.jar | betterspawnercontrol | Better Spawner Control | 4.7 | neoforge+fabric | Mob spawners will be disabled and not spawn any entities when surrounded by 5 torches. |
 | BetterThirdPerson-neoforge-1.9.0.jar | betterthirdperson | Better Third Person | 1.9.0 | neoforge | Adds independent camera rotation for third-person view. |
 | BetterTridents-v21.1.0-1.21.1-NeoForge.jar | bettertridents | Better Tridents | 21.1.0 | neoforge | You did not know your trident could do that! |
+| birdnest-neoforge-1.2.0+mc1.21.1.jar | birdnest | Bird Nests! | 1.2.0+mc1.21.1 | neoforge | Catching nests from trees can be rewarding... |
 | bits-and-bobs-1.21.1-1.0.6.jar | bitsandbobs | bitsandbobs | 0.1.1 | neoforge | A decoration pack for minecolonies |
 | BlockDetective-1.21-(v.2.1.0-NEO).jar | block_detective | Block Detective | 2.1.0 | neoforge | This mod shows you the properties of all blocks! |
 | BlockRunner-v21.1.2-1.21.1-NeoForge.jar | blockrunner | Block Runner | 21.1.2 | neoforge | Encourages path building by making you run faster on certain blocks such as path blocks. |
 | blockui-1.0.211-1.21.1-snapshot.jar | blockui | UI Library Mod | 1.0.211-1.21.1-snapshot | neoforge | UI Library mod, use ctrl+alt+shift+x to open a test-ui |
+| blueprint-1.21.1-8.2.0.jar | blueprint | Blueprint | 8.2.0 | neoforge | The library mod used by all Abnormals mods. Adds support for various types of blocks, helps with registering, and adds tons of misc. utils. Also comes with Endi |
 | BOMD-NeoForge-1.21-1.3.3.jar | bosses_of_mass_destruction | Bosses of Mass Destruction | 1.3.3 | neoforge | Adds high threat mobs for players to take on. |
 | Boss Music Mod 1.21.x v1.2.1.jar | boss_music_mod | §dBoss Music Mod | 1.2.1 | neoforge+fabric | §5Adds boss music that will play when a Wither or Ender Dragon is active. |
 | bossenchantcleaner-1.21.1-1.0.0.jar | bossenchantcleaner | Boss Enchant Cleaner | 1.0.0 | neoforge | Removes Dungeons & Taverns boss-only marker enchantments (boss_behaviour, shulker_boss, shulker_miniboss) from player items and NPC trade offers, swapping book  |
@@ -89,7 +92,7 @@
 | cloth-config-15.0.140-neoforge.jar | cloth_config | Cloth Config v15 API | 15.0.140 | neoforge | An API for config screens. |
 | Clumps-neoforge-1.21.1-19.0.0.1.jar | clumps | Clumps | 19.0.0.1 | neoforge | Clumps xp orbs together. |
 | Cocktails-Delight-1.21.1-NeoForge-1.1.10.jar | cocktailsdelight | Cocktails Delight | 1.1.10 | neoforge | Adds Cocktails to Minecraft |
-| codxlib-1.5.1-neoforge+1.21.1.jar | codxlib | CodxLib | 1.5.1 | neoforge | Shared library for codx mods (Fabric, Forge, NeoForge) |
+| codxlib-1.6.1-neoforge+1.21.1.jar | codxlib | CodxLib | 1.6.1 | neoforge | Shared library for codx mods (Fabric, Forge, NeoForge) |
 | ColdSweat-2.4.3.1.jar | cold_sweat | Cold Sweat | 2.4.3.1 | neoforge | Cold Sweat is a highly-extensible temperature mod for Minecraft. See the documentation here: https://mikul.gitbook.io/cold-sweat/ |
 | coldsweat_altitude-0.7.0.jar | coldsweat_altitude | Cold Sweat: Altitude | 0.7.0 | neoforge | Cold Sweat: Altitude is a generic Cold Sweat addon for NeoForge 1.21.1. It adds configurable altitude bands for pack-defined temperature progression on top of C |
 | collective-1.21.1-8.39.jar | collective | Collective | 8.39 | neoforge+fabric | Collective is a shared library with common code for all of Serilum's mods. |
@@ -129,6 +132,7 @@
 | createtreadmill-1.13.jar | createtreadmill | CreateTreadmill | 1.13 | neoforge |  |
 | CreativeCore_NEOFORGE_v2.13.44_mc1.21.1.jar | creativecore | CreativeCore | 2.13.44 | neoforge | A simple but powerful coremod. |
 | cryingportals-1.21.1-2.8.jar | cryingportals | Crying Portals | 2.8 | neoforge+fabric | Extends the blocks allowed for nether portal creation to use normal and crying obsidian. |
+| cryonicconfig-neoforge-1.0.0+mc1.21.11.jar | cryonicconfig | Cryonic Config | 1.0.0+mc1.21.11 | neoforge | Chill Minimal Config API |
 | csextras-1.2.0.jar | csextras | Cold Sweat Extras | 1.1.0 | neoforge | Rainwear, umbrellas and sun hats for Cold Sweat and Origins; shivering, sweating, campfire stoking, overheating heartbeat; a working pitchfork. |
 | culturaldelights-0.17.8.jar | culturaldelights | Cultural Delights | 0.17.8 | neoforge | A Farmer's Delight addon that adds food systems from around the world. |
 | cupboard-1.21.1-4.1.jar | cupboard | Cupboard mod | 4.1 | neoforge | Cupboard library for utilities and configs |
@@ -238,6 +242,7 @@
 | immersive_pillagers-neoforge-0.1.4+1.21.1.jar | immersive_pillagers | Immersive Pillagers | 0.1.4+1.21.1 | neoforge | Let the pillagers attack more creatively! |
 | immersive_snow_reloaded-neoforge-1.2.6+1.21.1.jar | immersive_snow_reloaded | Immersive Snow (Reloaded) | 1.2.6+1.21.1 | neoforge | Small tweaks that add to Minecraft's Winter theme. |
 | immersivelanterns-1.0.7.jar | immersivelanterns | Immersive Lanterns (Unofficial Fix) | 1.0.7 | neoforge | Unofficial NeoForge 1.21.1 build of Immersive Lanterns with optional Curios, Accessories, LambDynamicLights, and Sodium Dynamic Lights support. |
+| incubation-1.21.1-5.0.2.jar | incubation | Incubation | 5.0.2 | neoforge | Lays down a dozen of egg-related features, including fried eggs, scrambled eggs, bird nests, and more! |
 | integrated_api-neoforge-1.21.1-1.8.0.jar | integrated_api | Integrated API | 1.8.0 | neoforge | Library mod for the Integrated Structures series |
 | integrated_stronghold-1.1.4+1.21.1-neoforge.jar | integrated_stronghold | Integrated Stronghold | 1.1.4+1.21.1-neoforge | neoforge | Adds integrated and drastically improves the Stronghold structure! |
 | integrated_villages-1.3.3+1.21.1-neoforge.jar | integrated_villages | Integrated Villages | 1.3.3+1.21.1-neoforge | neoforge | Adds integration and drastically improves Minecraft Villages! |
@@ -305,7 +310,7 @@
 | mcamobcompat-neoforge-2.0+1.21.1.jar | mcamobcompat | MCA: Mob Compatibility | 2.0+1.21.1 | neoforge | Semantic mob classification, animal chore protection, and a persistent MCA identity bridge for Guard Villagers. |
 | mcaquests-1.6.5.jar | mcaquests | MCA: Quests | 1.6.5 | neoforge | An RPG-style, datapack-driven quest system for Minecraft Comes Alive: Reborn villagers. |
 | mcareputation-0.5.0.jar | mcareputation | MCA: Reputation | 0.5.0 | neoforge | Public standing with MCA villages: your deeds become stories, and those stories shape how the village treats you. |
-| mcaromanticexpansion-1.1.4-1.21.1.jar | mcaromanticexpansion | MCA: Romantic Expansion | 1.1.4-1.21.1 | neoforge | MCA Romantic Expansion adds romantic interactions to MCA mod. Features: - Flower Bouquet: Right-click players to open romance GUI - Engagement Ring: Propose mar |
+| mcaromanticexpansion-1.1.5-1.21.1.jar | mcaromanticexpansion | MCA: Romantic Expansion | 1.1.5-1.21.1 | neoforge | MCA Romantic Expansion adds romantic interactions to MCA mod. Features: - Flower Bouquet: Right-click players to open romance GUI - Engagement Ring: Propose mar |
 | mcarpgbridge-1.21.1-1.2.0.jar | mcarpgbridge | MCA RPG Bridge | 1.2.0 | neoforge | Joins MCA: Quests, MCA: Reputation and Mebahel's RPG Villager Quests. Lets MCA: Quests use Reputation's NeoForge API v2, moves Mebahel's villager quests and rum |
 | mcjadecrops-1.1.1300.jar | mcjadecrops | MineColonies: Jade crops | 1.1.1300 | neoforge | A lightweight Jade addon for MineColonies. Track the growth of MineColonies crops directly in your tooltip: • Growth percentage • Mature crop detection • Vanill |
 | mctradepost-1.06.011-1.21.1.jar | mctradepost | Trade Post for MineColonies | 1.06.011-1.21.1 | neoforge | Extends MineColonies. Economics research that opens up a marketplace, a resort, a recycling center and more! |
@@ -343,6 +348,7 @@
 | NeoForge-ColorfulSeasons-1.1.0.jar | colorful_seasons | Colorful Seasons | 1.1.0 | neoforge | A mod that Makes Serene Seasons More Colorful |
 | NeoForge-Version-Serene Seasons Plus-1.21.1-5.1.1.jar | sereneseasonsplus | Serene Seasons Plus | 5.1.1 | neoforge | Some additions to Serene Seasons. :). |
 | neruina-3.3.3+1.21.1-neoforge.jar | neruina | Neruina | 3.3.3 | neoforge | This is a mod that prevents ticking entity and ticking block entity / tile entity crashes from bricking worlds. |
+| nest_egg-1.21.1-2.0.3.jar | nest_egg | Nest Egg | 2.0.3 | neoforge | An Incubation add-on that adds some egg-related behaviors. |
 | netherdepthsupgrade-3.2-1.21.1-NeoForge.jar | netherdepthsupgrade | Nether Depths Upgrade | 3.2 | neoforge | This is a mod that gives the lava depths in the nether a little upgrade, credits for the fortress grouper and textures go to Crydigo, credits for animations go  |
 | netherportalfix-neoforge-1.21.1-21.1.1.jar | netherportalfix | NetherPortalFix | 21.1.1 | neoforge | Ensures correct destinations when travelling back and forth through Nether Portals in Multiplayer. |
 | netherportalspread-1.21.1-8.4.jar | netherportalspread | Nether Portal Spread | 8.4 | neoforge+fabric | Nether portals spread (custom) nether blocks to the overworld around the portal in a configurable radius. |
@@ -477,7 +483,6 @@
 | TerraBlender-neoforge-1.21.1-4.1.0.8.jar | terrablender | TerraBlender | ${file.jarVersion} | neoforge | A library mod for adding biomes in a simple and compatible manner with Minecraft's new biome/terrain system. |
 | the_bumblezone-7.16.1+1.21.1-neoforge.jar | the_bumblezone | The Bumblezone | 7.16.1+1.21.1-neoforge | neoforge | A wonderful bee dimension mod with lots of new exploration and adventuring to do! Check out the advancements for how to play the mod! |
 | ThirstWasTaken-1.21.1-2.1.5.jar | thirst | Thirst Was Taken | 1.21.1-2.1.5 | neoforge | Modern take on the thirst-bar mechanic, compatible with a lot of contemporary mods |
-| time_on_display-merged-1.21-2.0.0.jar | time_on_display | Time On Display | 2.0.0 | neoforge+fabric | A simple display for an in-game system clock! |
 | timelinesync-1.21.1-1.0.0.jar | timelinesync | Townstead Timeline Sync | 1.0.0 | neoforge | Keeps RPG Timeline's calendar on the same date as Townstead's. Townstead is the source of truth (it follows Serene Seasons); this mod keeps Timeline's day offse |
 | timm-1.1-neoforge-1.21.jar | timm | The Immersive Music Mod | 1.1 | neoforge | Example mod description. Newline characters can be used and will be replaced properly. |
 | tlib-neoforge-1.5.0-1.21.1.jar | tlib | TLib | 1.5.0-1.21.1 | neoforge | Library for Take's Mods |
@@ -510,6 +515,7 @@
 | VanillaBackport-neoforge-1.21.1-1.1.7.10.jar | vanillabackport | VanillaBackport | 1.1.7.10 | neoforge | Backporting Minecraft Features to previous versions! |
 | variantsandventures-neoforge-1.0.26+mc1.21.1.jar | variantsandventures | Variants&Ventures | 1.0.26 | neoforge | Adds multiple new mob variants seamlessly integrated into your Minecraft world. |
 | vb-compat-2.2-1.21.1.jar | mr_vb_compat | Vanilla Backport Compat | 2.2 | neoforge+fabric | Adds Vanilla Backport features to modded biomes! |
+| vbincubationcompat-1.4.jar | vbincubationcompat | VbIncubation | 1.4 | neoforge |  |
 | VehicleUpgrade-v21.1.0-mc1.21.1-NeoForge.jar | vehicleupgrade | Vehicle Upgrade | 21.1.0 | neoforge | Bring tons of quality-of-life improvements to your rides. Enjoy more reliable, and more capable mounts. |
 | veinmining-neoforge-5.0.0-beta.2+1.21.jar | veinmining | Vein Mining | 5.0.0-beta.2+1.21 | neoforge | A lightweight, highly configurable Vein Mining enchantment for tools. |
 | via_romana-2.2.3+1.21.1-neoforge.jar | via_romana | Via Romana | 2.2.3+1.21.1-neoforge | neoforge | Via Romana allows fast travel only after a road connecting the destinations has been made, incentivizing players to build and see the world. |
