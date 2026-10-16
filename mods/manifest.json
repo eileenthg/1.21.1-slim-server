@@ -3507,6 +3507,85 @@
   ]
  },
  {
+  "file": "colonialdelight-1.21.1-1.1.0.jar",
+  "sizeBytes": 664707,
+  "sha1": "cb1aa4ecde96b1b39f184ce94383905e40820dd1",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "colonialdelight",
+    "name": "Colonial Delight (NeoForge port)",
+    "version": "1.1.0",
+    "authors": "Ailewic (original), eileenthg (port)",
+    "description": "NeoForge port and rework of Colonial Delight for the 1.21.1 slim pack: merged into Extra Delight, Expanded Delight, Youkai's Homecoming and Brewin' and Chewin'.",
+    "url": null,
+    "license": "MIT",
+    "deps": [
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21.1,1.22)",
+      "side": "BOTH"
+     },
+     {
+      "id": "farmersdelight",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "extradelight",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "expandeddelight",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "youkaishomecoming",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "brewinandchewin",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "rusticdelight",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "cocktailsdelight",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     },
+     {
+      "id": "hauntedharvest",
+      "type": "required",
+      "range": "*",
+      "side": "BOTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "file": "colony_expeditions-0.1.0.jar",
   "sizeBytes": 437807,
   "sha1": "8b1622450cc5788da902ff361eec6f4796165504",
@@ -4865,14 +4944,14 @@
  },
  {
   "file": "csextras-1.2.0.jar",
-  "sizeBytes": 97281,
-  "sha1": "828338abf4929da979d14aef47f08a7e11d25db0",
+  "sizeBytes": 111301,
+  "sha1": "154113d896a6d6ffb22aba98067e92b4d617dfc3",
   "loader": "neoforge",
   "mods": [
    {
     "modId": "csextras",
     "name": "Cold Sweat Extras",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "authors": null,
     "description": "Rainwear, umbrellas and sun hats for Cold Sweat and Origins; shivering, sweating, campfire stoking, overheating heartbeat; a working pitchfork.",
     "url": null,
@@ -18892,6 +18971,49 @@
       "type": "required",
       "range": "[1.21,1.21.1]",
       "side": "SERVER"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "file": "untitledduckmod-1.7.0-neoforge-1.21.1.jar",
+  "sizeBytes": 330692,
+  "sha1": "69e0d6383242526d75a994eaccae05f64ddefb95",
+  "loader": "neoforge",
+  "mods": [
+   {
+    "modId": "untitledduckmod",
+    "name": "Untitled Duck Mod",
+    "version": "1.7.0",
+    "authors": "Suel_ki, Okabintaro, ArtistMonster24",
+    "description": "Ducks and Geese for Forge and Fabric! Powered by geckolib and architectury.",
+    "url": null,
+    "license": "MIT",
+    "deps": [
+     {
+      "id": "neoforge",
+      "type": "required",
+      "range": "[21.1.190,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "minecraft",
+      "type": "required",
+      "range": "[1.21,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "geckolib",
+      "type": "required",
+      "range": "[4.7,)",
+      "side": "BOTH"
+     },
+     {
+      "id": "incubation",
+      "type": "optional",
+      "range": "",
+      "side": "BOTH"
      }
     ]
    }

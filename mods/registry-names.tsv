@@ -3664,6 +3664,175 @@ collective	item.voidvanguards.orbital_transponder.leaveStation	You leave the sta
 collective	item.voidvanguards.orbital_transponder.lore	A beacon that locks onto the Vanguard Station.
 collective	item.voidvanguards.orbital_transponder.useSuccess	You successfully beam on to the Vanguard Station.
 collective	item.voidvanguards.orbital_transponder.useUnable	You are unable to get a signal.
+colonialdelight	block.colonialdelight.baked_beans	Baked Beans
+colonialdelight	block.colonialdelight.baked_beans.tooltip	A dish of baked beans - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.beef_pot_pie	Beef Pot Pie
+colonialdelight	block.colonialdelight.beef_pot_pie.tooltip	A beef pot pie - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.bread_pudding	Bread Pudding
+colonialdelight	block.colonialdelight.bread_pudding.tooltip	A bread pudding - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.butter_churn	Butter Churn
+colonialdelight	block.colonialdelight.butter_churn.tooltip	Milk in, work the dasher, butter out - and buttermilk to drink.
+colonialdelight	block.colonialdelight.buttermilk_pie	Buttermilk Pie
+colonialdelight	block.colonialdelight.buttermilk_pie.tooltip	A buttermilk pie - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.chicken_pot_pie	Chicken Pot Pie
+colonialdelight	block.colonialdelight.chicken_pot_pie.tooltip	A chicken pot pie - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.copper_still	Copper Still
+colonialdelight	block.colonialdelight.copper_still.tooltip	A copper pot over its own firebox, turning the tub's brews into rum, brandy and whiskey.
+colonialdelight	block.colonialdelight.fish_trap	Fish Trap
+colonialdelight	block.colonialdelight.fish_trap.already_baited	The trap is already baited.
+colonialdelight	block.colonialdelight.fish_trap.needs_bait	Bait it with a seed to start fishing.
+colonialdelight	block.colonialdelight.fish_trap.tooltip	Set it in water, even along a shore, and bait it with a seed. It catches a few fish by itself. Click it to take them out.
+colonialdelight	block.colonialdelight.fish_trap.waiting	Baited. No fish yet.
+colonialdelight	block.colonialdelight.roast_joint	Roast Joint
+colonialdelight	block.colonialdelight.roast_joint.tooltip	A roast joint on its platter - eat from it by hand, or serve it into bowls.
+colonialdelight	block.colonialdelight.rye	Rye
+colonialdelight	block.colonialdelight.rye_bale	Rye Bale
+colonialdelight	block.colonialdelight.rye_bale.tooltip	Nine sheaves of rye, bound into a bale.
+colonialdelight	block.colonialdelight.saw_bench	Saw Bench
+colonialdelight	block.colonialdelight.saw_bench.tooltip	A frame saw on a trestle - more planks from a log, and any cut from a plank.
+colonialdelight	block.colonialdelight.smoke_closet	Smoking Cabinet
+colonialdelight	block.colonialdelight.smoke_closet.tooltip	Set it on a lit campfire or furnace, hang meat on its poles with the door open, then shut the door and let it smoke. Sneak-click to take food out.
+colonialdelight	block.colonialdelight.smoking_rack	Smoking Rack
+colonialdelight	block.colonialdelight.smoking_rack.tooltip	A rack of green sticks. Hang food on its poles over a campfire to smoke it.
+colonialdelight	block.colonialdelight.squash	Squash
+colonialdelight	block.colonialdelight.squash_crate	Squash Crate
+colonialdelight	block.colonialdelight.squash_crate.tooltip	Nine squashes, crated for the cellar.
+colonialdelight	block.colonialdelight.sweet_potato_pie	Sweet Potato Pie
+colonialdelight	block.colonialdelight.sweet_potato_pie.tooltip	A sweet potato pie - eat from it by hand, or serve it into bowls.
+colonialdelight	item.colonialdelight.apple_brandy	Apple Brandy
+colonialdelight	item.colonialdelight.apple_brandy.tooltip	A golden spirit distilled from hard cider.
+colonialdelight	item.colonialdelight.apple_butter	Apple Butter
+colonialdelight	item.colonialdelight.apple_butter.tooltip	Apples baked down into a thick, dark spread.
+colonialdelight	item.colonialdelight.baked_beans_serving	Bowl of Baked Beans
+colonialdelight	item.colonialdelight.baked_beans_serving.tooltip	A bowl of beans baked with molasses and bacon.
+colonialdelight	item.colonialdelight.baked_squash	Baked Squash
+colonialdelight	item.colonialdelight.baked_squash.tooltip	A halved squash, baked soft with butter and molasses.
+colonialdelight	item.colonialdelight.bean_porridge	Bean Porridge
+colonialdelight	item.colonialdelight.bean_porridge.tooltip	Beans simmered thick in bone broth with onion.
+colonialdelight	item.colonialdelight.bean_stew	Bean Stew
+colonialdelight	item.colonialdelight.bean_stew.tooltip	A thick stew of beans, cabbage, onion and bacon.
+colonialdelight	item.colonialdelight.beef_pot_pie_serving	Bowl of Beef Pot Pie
+colonialdelight	item.colonialdelight.beef_pot_pie_serving.tooltip	A bowl of beef pot pie.
+colonialdelight	item.colonialdelight.birch_beer	Birch Beer
+colonialdelight	item.colonialdelight.birch_beer.tooltip	Molasses beer brewed with birch, with a wintergreen bite.
+colonialdelight	item.colonialdelight.bread_pudding_serving	Bowl of Bread Pudding
+colonialdelight	item.colonialdelight.bread_pudding_serving.tooltip	A bowl of sweet bread pudding with apple.
+colonialdelight	item.colonialdelight.buttermilk	Buttermilk
+colonialdelight	item.colonialdelight.buttermilk.tooltip	The thin, tart milk left in the churn. Drink it, or use it in baking.
+colonialdelight	item.colonialdelight.buttermilk_biscuit	Buttermilk Biscuit
+colonialdelight	item.colonialdelight.buttermilk_biscuit.tooltip	A soft, flaky buttermilk biscuit.
+colonialdelight	item.colonialdelight.buttermilk_pie_serving	Bowl of Buttermilk Pie
+colonialdelight	item.colonialdelight.buttermilk_pie_serving.tooltip	A bowl of buttermilk pie.
+colonialdelight	item.colonialdelight.cane_juice	Cane Juice
+colonialdelight	item.colonialdelight.cane_juice.tooltip	Sweet juice pressed from sugar cane - boil it into molasses in a cooking pot.
+colonialdelight	item.colonialdelight.chicken_fricassee	Chicken Fricassee
+colonialdelight	item.colonialdelight.chicken_fricassee.tooltip	Chicken simmered in buttermilk with butter and onion.
+colonialdelight	item.colonialdelight.chicken_pot_pie_serving	Bowl of Chicken Pot Pie
+colonialdelight	item.colonialdelight.chicken_pot_pie_serving.tooltip	A bowl of chicken pot pie.
+colonialdelight	item.colonialdelight.corn_beer	Corn Beer
+colonialdelight	item.colonialdelight.corn_beer.tooltip	A pale beer fermented from cornmeal - the Copper Still turns it into corn whiskey.
+colonialdelight	item.colonialdelight.corn_whiskey	Corn Whiskey
+colonialdelight	item.colonialdelight.corn_whiskey.tooltip	A pale spirit distilled from corn beer.
+colonialdelight	item.colonialdelight.dried_pumpkin	Dried Pumpkin
+colonialdelight	item.colonialdelight.dried_pumpkin.tooltip	Rings of pumpkin, dried chewy and sweet.
+colonialdelight	item.colonialdelight.hasty_pudding	Hasty Pudding
+colonialdelight	item.colonialdelight.hasty_pudding.tooltip	Cornmeal boiled in milk and sweetened with molasses.
+colonialdelight	item.colonialdelight.hodgepodge	Hodgepodge
+colonialdelight	item.colonialdelight.hodgepodge.tooltip	Mutton stewed with cabbage, carrot and onion.
+colonialdelight	item.colonialdelight.johnnycake	Johnnycake
+colonialdelight	item.colonialdelight.johnnycake.tooltip	A flat cornmeal cake, crisp at the edge.
+colonialdelight	item.colonialdelight.molasses	Molasses
+colonialdelight	item.colonialdelight.molasses.tooltip	A thick, dark syrup boiled from cane juice, used to sweeten baking and beans. Stir it into water in the Fermentation Vat to brew beer.
+colonialdelight	item.colonialdelight.molasses_beer	Molasses Beer
+colonialdelight	item.colonialdelight.molasses_beer.tooltip	A dark beer brewed from molasses - the Copper Still turns it into rum.
+colonialdelight	item.colonialdelight.molasses_bread	Molasses Bread
+colonialdelight	item.colonialdelight.molasses_bread.tooltip	A dense loaf of wheat and cornmeal, sweetened with molasses.
+colonialdelight	item.colonialdelight.molasses_cookie	Molasses Cookie
+colonialdelight	item.colonialdelight.molasses_cookie.tooltip	A chewy molasses cookie.
+colonialdelight	item.colonialdelight.pemmican	Pemmican
+colonialdelight	item.colonialdelight.pemmican.tooltip	Dried meat pounded with fat and berries into a dense cake.
+colonialdelight	item.colonialdelight.pepper_pot	Pepper Pot
+colonialdelight	item.colonialdelight.pepper_pot.tooltip	Beef stewed with cabbage, onion and potato.
+colonialdelight	item.colonialdelight.pot_water	Water
+colonialdelight	item.colonialdelight.pumpkin_bread	Pumpkin Bread
+colonialdelight	item.colonialdelight.pumpkin_bread.tooltip	A moist loaf of pumpkin and cornmeal.
+colonialdelight	item.colonialdelight.pumpkin_butter	Pumpkin Butter
+colonialdelight	item.colonialdelight.pumpkin_butter.tooltip	Pumpkin baked down into a thick, sweet spread.
+colonialdelight	item.colonialdelight.roast_joint_serving	Serving of Roast Joint
+colonialdelight	item.colonialdelight.roast_joint_serving.tooltip	Sliced roast beef with potatoes and carrot.
+colonialdelight	item.colonialdelight.rum	Rum
+colonialdelight	item.colonialdelight.rum.tooltip	A dark spirit distilled from molasses beer.
+colonialdelight	item.colonialdelight.rye	Rye
+colonialdelight	item.colonialdelight.rye.tooltip	A hardy grain. Bake it into rye bread, or stir it into water in the Fermentation Vat to brew rye beer.
+colonialdelight	item.colonialdelight.rye_beer	Rye Beer
+colonialdelight	item.colonialdelight.rye_beer.tooltip	A sharp, malty beer fermented from rye - the Copper Still turns it into rye whiskey.
+colonialdelight	item.colonialdelight.rye_bread	Rye Bread
+colonialdelight	item.colonialdelight.rye_bread.tooltip	A dark, dense loaf of rye.
+colonialdelight	item.colonialdelight.rye_seeds	Rye Seeds
+colonialdelight	item.colonialdelight.rye_seeds.tooltip	Seeds for planting rye.
+colonialdelight	item.colonialdelight.rye_whiskey	Rye Whiskey
+colonialdelight	item.colonialdelight.rye_whiskey.tooltip	A spicy spirit distilled from rye beer.
+colonialdelight	item.colonialdelight.smoked_bacon	Smoked Bacon
+colonialdelight	item.colonialdelight.smoked_bacon.tooltip	Strips of pork belly, smoked dark and firm.
+colonialdelight	item.colonialdelight.smoked_cod	Smoked Cod
+colonialdelight	item.colonialdelight.smoked_cod.tooltip	A split cod, smoked golden and firm.
+colonialdelight	item.colonialdelight.smoked_duck	Smoked Duck
+colonialdelight	item.colonialdelight.smoked_duck.tooltip	A whole duck, smoked a deep amber.
+colonialdelight	item.colonialdelight.smoked_goose	Smoked Goose
+colonialdelight	item.colonialdelight.smoked_goose.tooltip	A whole goose, smoked dark.
+colonialdelight	item.colonialdelight.smoked_mutton	Smoked Mutton
+colonialdelight	item.colonialdelight.smoked_mutton.tooltip	Mutton, smoked dark and dry.
+colonialdelight	item.colonialdelight.smoked_pork	Smoked Pork
+colonialdelight	item.colonialdelight.smoked_pork.tooltip	A pork chop, smoked dark and dry.
+colonialdelight	item.colonialdelight.smoked_salmon	Smoked Salmon
+colonialdelight	item.colonialdelight.smoked_salmon.tooltip	A salmon, smoked a deep red-bronze.
+colonialdelight	item.colonialdelight.smoked_sausage	Smoked Sausage
+colonialdelight	item.colonialdelight.smoked_sausage.tooltip	Pork sausage links, smoked dark and firm.
+colonialdelight	item.colonialdelight.spruce_beer	Spruce Beer
+colonialdelight	item.colonialdelight.spruce_beer.tooltip	Molasses beer brewed with spruce tips.
+colonialdelight	item.colonialdelight.squash	Squash
+colonialdelight	item.colonialdelight.squash.tooltip	A hard-skinned winter squash, for baking and stews.
+colonialdelight	item.colonialdelight.squash_seeds	Squash Seeds
+colonialdelight	item.colonialdelight.squash_seeds.tooltip	Seeds for a winter squash vine.
+colonialdelight	item.colonialdelight.stewed_pumpkin	Stewed Pumpkin
+colonialdelight	item.colonialdelight.stewed_pumpkin.tooltip	Pumpkin or squash stewed soft with butter and molasses.
+colonialdelight	item.colonialdelight.sweet_potato_pie_serving	Bowl of Sweet Potato Pie
+colonialdelight	item.colonialdelight.sweet_potato_pie_serving.tooltip	A bowl of sweet potato pie.
+colonialdelight	item.colonialdelight.three_sisters_stew	Three Sisters Stew
+colonialdelight	item.colonialdelight.three_sisters_stew.tooltip	A stew of squash, corn, beans and onion.
+colonialdelight	item.colonialdelight.unbaked_apple_butter	Unbaked Apple Butter
+colonialdelight	item.colonialdelight.unbaked_apple_butter.tooltip	Apples, apple juice and molasses in a crock, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_beans	Unbaked Beans
+colonialdelight	item.colonialdelight.unbaked_beans.tooltip	Beans, molasses, bacon and onion in a baking dish, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_beef_pot_pie	Unbaked Beef Pot Pie
+colonialdelight	item.colonialdelight.unbaked_beef_pot_pie.tooltip	Minced beef, onion and potato under a pie crust, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_bread_pudding	Unbaked Bread Pudding
+colonialdelight	item.colonialdelight.unbaked_bread_pudding.tooltip	Bread in egg, milk and sugar with dried apple, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_buttermilk_biscuits	Unbaked Buttermilk Biscuits
+colonialdelight	item.colonialdelight.unbaked_buttermilk_biscuits.tooltip	Biscuit dough made with buttermilk and butter, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_buttermilk_pie	Unbaked Buttermilk Pie
+colonialdelight	item.colonialdelight.unbaked_buttermilk_pie.tooltip	Buttermilk, egg, sugar and butter in a crust, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_chicken_pot_pie	Unbaked Chicken Pot Pie
+colonialdelight	item.colonialdelight.unbaked_chicken_pot_pie.tooltip	Chicken, carrot and potato under a pie crust, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_johnnycake	Unbaked Johnnycake
+colonialdelight	item.colonialdelight.unbaked_johnnycake.tooltip	Cornmeal and butter worked into cakes, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_molasses_bread	Unbaked Molasses Bread
+colonialdelight	item.colonialdelight.unbaked_molasses_bread.tooltip	Wheat and cornmeal dough with molasses, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_molasses_cookies	Unbaked Molasses Cookies
+colonialdelight	item.colonialdelight.unbaked_molasses_cookies.tooltip	Cookie dough with molasses, sugar and butter, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_pumpkin_bread	Unbaked Pumpkin Bread
+colonialdelight	item.colonialdelight.unbaked_pumpkin_bread.tooltip	Pumpkin, cornmeal and molasses batter, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_pumpkin_butter	Unbaked Pumpkin Butter
+colonialdelight	item.colonialdelight.unbaked_pumpkin_butter.tooltip	Pumpkin, sugar and molasses in a crock, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_roast_joint	Unbaked Roast Joint
+colonialdelight	item.colonialdelight.unbaked_roast_joint.tooltip	A raw beef joint with potatoes, carrot and onion, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_rye_bread	Unbaked Rye Bread
+colonialdelight	item.colonialdelight.unbaked_rye_bread.tooltip	A loaf of rye dough, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_squash	Unbaked Squash
+colonialdelight	item.colonialdelight.unbaked_squash.tooltip	A halved squash with butter and molasses, ready to bake in an oven.
+colonialdelight	item.colonialdelight.unbaked_sweet_potato_pie	Unbaked Sweet Potato Pie
+colonialdelight	item.colonialdelight.unbaked_sweet_potato_pie.tooltip	Sweet potato, egg, sugar and butter in a pie crust, ready to bake in an oven.
+colonialdelight	itemGroup.colonialdelight	Colonial Delight
 colony_expeditions	block.colony_expeditions.blockhutexpedition_bumblezone	Bumblezone Expedition Post
 colony_expeditions	block.colony_expeditions.blockhutexpedition_bumblezone.name	Bumblezone Expedition Post
 colony_expeditions	block.colony_expeditions.blockhutexpedition_comets	Comets Expedition Post
@@ -32564,6 +32733,36 @@ travelerstitles	biome.the_afterdark.dying_drylands	Dying Drylands
 travelerstitles	biome.the_afterdark.lush_gardens	Lush Gardens
 travelerstitles	biome.the_afterdark.prismarine_peaks	Prismarine Peaks
 travelerstitles	biome.the_afterdark.prismarine_ponds	Prismarine Ponds
+untitledduckmod	block.untitledduckmod.hay_duck_nest	Hay Duck Nest
+untitledduckmod	block.untitledduckmod.hay_goose_nest	Hay Goose Nest
+untitledduckmod	block.untitledduckmod.twig_duck_nest	Twig Duck Nest
+untitledduckmod	block.untitledduckmod.twig_goose_nest	Twig Goose Nest
+untitledduckmod	effect.untitledduckmod.intimidation	Intimidation
+untitledduckmod	entity.untitledduckmod.duck	Duck
+untitledduckmod	entity.untitledduckmod.goose	Goose
+untitledduckmod	item.minecraft.lingering_potion.effect.intimidation	Lingering Potion of Intimidation
+untitledduckmod	item.minecraft.potion.effect.intimidation	Potion of Intimidation
+untitledduckmod	item.minecraft.splash_potion.effect.intimidation	Splash Potion of Intimidation
+untitledduckmod	item.minecraft.tipped_arrow.effect.intimidation	Arrow of Intimidation
+untitledduckmod	item.untitledduckmod.cooked_duck	Cooked Duck
+untitledduckmod	item.untitledduckmod.cooked_goose	Cooked Goose
+untitledduckmod	item.untitledduckmod.duck_egg	Duck Egg
+untitledduckmod	item.untitledduckmod.duck_feather	Duck Feather
+untitledduckmod	item.untitledduckmod.duck_sack	Duck Sack
+untitledduckmod	item.untitledduckmod.duck_sack.named	Duck Sack with %s
+untitledduckmod	item.untitledduckmod.duck_spawn_egg	Duck Spawn Egg
+untitledduckmod	item.untitledduckmod.empty_duck_sack	Empty Duck Sack
+untitledduckmod	item.untitledduckmod.goose_egg	Goose Egg
+untitledduckmod	item.untitledduckmod.goose_foot	Goose Foot
+untitledduckmod	item.untitledduckmod.goose_spawn_egg	Goose Spawn Egg
+untitledduckmod	item.untitledduckmod.raw_duck	Raw Duck
+untitledduckmod	item.untitledduckmod.raw_goose	Raw Goose
+untitledduckmod	tag.item.untitledduckmod.duck_breeding_food	Duck Breeding Food
+untitledduckmod	tag.item.untitledduckmod.duck_food	Duck Food
+untitledduckmod	tag.item.untitledduckmod.duck_taming_food	Duck Taming Food
+untitledduckmod	tag.item.untitledduckmod.goose_breeding_food	Goose Breeding Food
+untitledduckmod	tag.item.untitledduckmod.goose_food	Goose Food
+untitledduckmod	tag.item.untitledduckmod.goose_taming_food	Goose Taming Food
 vanillabackport	biome.minecraft.pale_garden	Pale Garden
 vanillabackport	biome.minecraft.sulfur_caves	Sulfur Caves
 vanillabackport	block.minecraft.bush	Bush

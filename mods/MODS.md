@@ -96,6 +96,7 @@
 | ColdSweat-2.4.3.1.jar | cold_sweat | Cold Sweat | 2.4.3.1 | neoforge | Cold Sweat is a highly-extensible temperature mod for Minecraft. See the documentation here: https://mikul.gitbook.io/cold-sweat/ |
 | coldsweat_altitude-0.7.0.jar | coldsweat_altitude | Cold Sweat: Altitude | 0.7.0 | neoforge | Cold Sweat: Altitude is a generic Cold Sweat addon for NeoForge 1.21.1. It adds configurable altitude bands for pack-defined temperature progression on top of C |
 | collective-1.21.1-8.39.jar | collective | Collective | 8.39 | neoforge+fabric | Collective is a shared library with common code for all of Serilum's mods. |
+| colonialdelight-1.21.1-1.1.0.jar | colonialdelight | Colonial Delight (NeoForge port) | 1.1.0 | neoforge | NeoForge port and rework of Colonial Delight for the 1.21.1 slim pack: merged into Extra Delight, Expanded Delight, Youkai's Homecoming and Brewin' and Chewin'. |
 | colony_expeditions-0.1.0.jar | colony_expeditions | Colony Expeditions | 0.1.0 | neoforge | MineColonies expedition huts for the End, the Otherside, the Deeper Down, the Bumblezone and the Eternal Tales dimensions. Also makes the Netherworker open port |
 | colonyhandover-1.0.0.jar | colonyhandover | Colony Handover | 1.0.0 | neoforge | Converts a Minecolonies colony into a regular village in MCA Reborn, granting them independence. |
 | colonylifts-1.1.1.jar | colonylifts | Colony Lifts | 1.1.1 | neoforge | MineColonies + Create elevator pathfinding compatibility. Citizens route through Create Elevator Contacts, queue for lifts, share rides, use Contraption Control |
@@ -133,7 +134,7 @@
 | CreativeCore_NEOFORGE_v2.13.44_mc1.21.1.jar | creativecore | CreativeCore | 2.13.44 | neoforge | A simple but powerful coremod. |
 | cryingportals-1.21.1-2.8.jar | cryingportals | Crying Portals | 2.8 | neoforge+fabric | Extends the blocks allowed for nether portal creation to use normal and crying obsidian. |
 | cryonicconfig-neoforge-1.0.0+mc1.21.11.jar | cryonicconfig | Cryonic Config | 1.0.0+mc1.21.11 | neoforge | Chill Minimal Config API |
-| csextras-1.2.0.jar | csextras | Cold Sweat Extras | 1.1.0 | neoforge | Rainwear, umbrellas and sun hats for Cold Sweat and Origins; shivering, sweating, campfire stoking, overheating heartbeat; a working pitchfork. |
+| csextras-1.2.0.jar | csextras | Cold Sweat Extras | 1.2.0 | neoforge | Rainwear, umbrellas and sun hats for Cold Sweat and Origins; shivering, sweating, campfire stoking, overheating heartbeat; a working pitchfork. |
 | culturaldelights-0.17.8.jar | culturaldelights | Cultural Delights | 0.17.8 | neoforge | A Farmer's Delight addon that adds food systems from around the world. |
 | cupboard-1.21.1-4.1.jar | cupboard | Cupboard mod | 4.1 | neoforge | Cupboard library for utilities and configs |
 | curios-neoforge-9.5.1+1.21.1.jar | curios | Curios API | 9.5.1+1.21.1 | neoforge | A flexible and expandable accessory/equipment API for users and developers. |
@@ -511,6 +512,7 @@
 | UniversalEnchantmentInfo-1.21.1-neoforge-1.3.0.jar | uei | Universal Enchantment Info | 1.3.0 | neoforge | A JEI/REI/EMI plugin that displays detailed enchantment information |
 | UniversalEnchants-v21.1.7-1.21.1-NeoForge.jar | universalenchants | Universal Enchants | 21.1.7 | neoforge | Better enchantments! Use them on all tools and weapons. Infinity crossbow, or looting trident anyone? |
 | unloadedactivity-0.7.3+mc1.21-1.21.1.jar | unloadedactivity | Unloaded Activity | 0.7.3 | neoforge+fabric | Simulates blocks and entities to catch up after being unloaded for a period of time. |
+| untitledduckmod-1.7.0-neoforge-1.21.1.jar | untitledduckmod | Untitled Duck Mod | 1.7.0 | neoforge | Ducks and Geese for Forge and Fabric! Powered by geckolib and architectury. |
 | Upcycle-1.21-(v.2.0.0).jar | upcycle | Upcycle | 2.0.0 | neoforge | This mod allows you to upcycle trash like rotten flesh and spider eyes in the composter to bone meal! |
 | VanillaBackport-neoforge-1.21.1-1.1.7.10.jar | vanillabackport | VanillaBackport | 1.1.7.10 | neoforge | Backporting Minecraft Features to previous versions! |
 | variantsandventures-neoforge-1.0.26+mc1.21.1.jar | variantsandventures | Variants&Ventures | 1.0.26 | neoforge | Adds multiple new mob variants seamlessly integrated into your Minecraft world. |
