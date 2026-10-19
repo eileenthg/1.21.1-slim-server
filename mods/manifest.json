@@ -2184,37 +2184,6 @@
   ]
  },
  {
-  "file": "bits-and-bobs-1.21.1-1.0.6.jar",
-  "sizeBytes": 5335624,
-  "sha1": "70aaedff71ee435c1837e513c1a8930e6c53f6cb",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "bitsandbobs",
-    "name": "bitsandbobs",
-    "version": "0.1.1",
-    "authors": "hogbits",
-    "description": "A decoration pack for minecolonies",
-    "url": "https://curseforge.com/minecraft/mc-mods/bitsandbobs",
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.921,)",
-      "side": "SERVER"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "BlockDetective-1.21-(v.2.1.0-NEO).jar",
   "sizeBytes": 178124,
   "sha1": "514e946dd70c41671ec18bb2bfc032c9d1520925",
@@ -2282,37 +2251,6 @@
       "id": "neoforgedatapackextensions",
       "type": "required",
       "range": "*",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "blockui-1.0.211-1.21.1-snapshot.jar",
-  "sizeBytes": 468147,
-  "sha1": "0ab4e0342b9f1e595d9a891f84747e4e5389c552",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "blockui",
-    "name": "UI Library Mod",
-    "version": "1.0.211-1.21.1-snapshot",
-    "authors": "LDT Team",
-    "description": "UI Library mod, use ctrl+alt+shift+x to open a test-ui",
-    "url": null,
-    "license": "GPL3",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1, 1.22)",
       "side": "BOTH"
      }
     ]
@@ -2776,58 +2714,6 @@
   ]
  },
  {
-  "file": "caravan-1.0.1.jar",
-  "sizeBytes": 319001,
-  "sha1": "50bcd2488b7becfaf93c2a5a581735425aba48db",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "caravan",
-    "name": "Minecolonies Caravans",
-    "version": "1.0.1",
-    "authors": [
-     "Deepseek-V4-Flash",
-     "Derunation"
-    ],
-    "description": "A MineColonies addon that adds the Caravan Hut, the Caravan Leader/Member/Guard professions and a full caravan trading system:\nrecord villager trades with the Caravan Marker, prepare goods through the request system, simulate long-distance trips with camping and night travel,\nfulfill colony requests via on-demand trades, and show the caravan on JourneyMap while travelling.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.235,22.0.0)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1285-1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "structurize",
-      "type": "required",
-      "range": "[1.0.810-1.21.1-snapshot,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "domum_ornamentum",
-      "type": "required",
-      "range": "[1.0.223-snapshot,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "blockui",
-      "type": "required",
-      "range": "[1.0.199-1.21.1-snapshot,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "cardinal-components-api-6.1.3.jar",
   "sizeBytes": 229645,
   "sha1": "e762f5205c0fd0f9bed1c04432bf9b51ec832882",
@@ -3086,37 +2972,6 @@
       "id": "minecraft",
       "type": "required",
       "range": "[1.21,1.22)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "civilis_minecolonies-1.0.5-universal-1.21.1.jar",
-  "sizeBytes": 74497,
-  "sha1": "1b13a70d5475da979ae6ae24b2b41c9a7ddf68fe",
-  "loader": "neoforge+fabric",
-  "mods": [
-   {
-    "modId": "civilis_minecolonies",
-    "name": "Civilis Minecolonies Compat",
-    "version": "1.0.5",
-    "authors": "Made by Mitemi",
-    "description": "Adds compatibility between Civilis and Minecolonies.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "civil",
-      "type": "required",
-      "range": "[1.0.0,)",
       "side": "BOTH"
      }
     ]
@@ -3508,8 +3363,8 @@
  },
  {
   "file": "colonialdelight-1.21.1-1.1.0.jar",
-  "sizeBytes": 664707,
-  "sha1": "cb1aa4ecde96b1b39f184ce94383905e40820dd1",
+  "sizeBytes": 643913,
+  "sha1": "1d2192ce63ce380513245efe1eca6ed871c312ef",
   "loader": "neoforge",
   "mods": [
    {
@@ -3579,123 +3434,6 @@
       "id": "hauntedharvest",
       "type": "required",
       "range": "*",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "colony_expeditions-0.1.0.jar",
-  "sizeBytes": 437807,
-  "sha1": "8b1622450cc5788da902ff361eec6f4796165504",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "colony_expeditions",
-    "name": "Colony Expeditions",
-    "version": "0.1.0",
-    "authors": "eileenthg",
-    "description": "MineColonies expedition huts for the End, the Otherside, the Deeper Down, the Bumblezone and the Eternal Tales dimensions.\nAlso makes the Netherworker open portals with Dimensional Tears.",
-    "url": null,
-    "license": "GPL-3.0-or-later",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.249,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1375,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "colonyhandover-1.0.0.jar",
-  "sizeBytes": 249968,
-  "sha1": "9a5b43e4e564619c4e85e990f2e4e2bcd7c7a9e7",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "colonyhandover",
-    "name": "Colony Handover",
-    "version": "1.0.0",
-    "authors": "eileenthg",
-    "description": "Converts a Minecolonies colony into a regular village in MCA Reborn, granting them independence.",
-    "url": null,
-    "license": "GPL-3.0-only",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.249,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1375-1.21.1-snapshot,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "mca",
-      "type": "required",
-      "range": "[7.7,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "colonylifts-1.1.1.jar",
-  "sizeBytes": 59898,
-  "sha1": "25733c18beeb39a0dbfd5d40e8abad64f3d37863",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "colonylifts",
-    "name": "Colony Lifts",
-    "version": "1.1.1",
-    "authors": null,
-    "description": "MineColonies + Create elevator pathfinding compatibility.\nCitizens route through Create Elevator Contacts, queue for lifts, share rides,\nuse Contraption Controls, transfer between multiple elevators, recover from\nbroken/changed elevators, and continue their MineColonies route.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.228,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,1.21.2)",
-      "side": "BOTH"
-     },
-     {
-      "id": "create",
-      "type": "required",
-      "range": "[6.0.10,6.0.11)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[0,)",
       "side": "BOTH"
      }
     ]
@@ -4726,37 +4464,6 @@
       "id": "curios",
       "type": "required",
       "range": "[9.2,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "createfillthecolonies-1.21.1-neoforge-1.0.1.jar",
-  "sizeBytes": 78667,
-  "sha1": "40d46dd253add8fffbd2cde72b594951572e5f51",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "createfillthecolonies",
-    "name": "Create: Fill the Colonies",
-    "version": "1.0.1",
-    "authors": "Sokeriaaa",
-    "description": "A simple mod allows filling/emptying large bottles in MineColonies with Spouts/Item Drains in Create.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
       "side": "BOTH"
      }
     ]
@@ -11284,49 +10991,6 @@
   ]
  },
  {
-  "file": "MCA-Colony-Integration-0.1.0-beta.jar",
-  "sizeBytes": 18809,
-  "sha1": "cfb17a7e47667726b2ac5260f58cf66345c0f6c9",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "mca_colony_compat",
-    "name": "MCA Colony Integration",
-    "version": "0.1.0-beta",
-    "authors": "Jaden",
-    "description": "Bridge MCA Reborn and MineColonies by manually converting colonists into MCA residents and hiring MCA villagers as real MineColonies workers while preserving names and identity data.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1374,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "mca",
-      "type": "required",
-      "range": "[7.7.36-beta.3,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "mca-neoforge-7.7.36-beta.3+1.21.1.jar",
   "sizeBytes": 12141510,
   "sha1": "837241e4da732733c307b7385e14d9ec8e93182f",
@@ -11884,86 +11548,6 @@
   ]
  },
  {
-  "file": "mcjadecrops-1.1.1300.jar",
-  "sizeBytes": 38205,
-  "sha1": "5afb193b78d8cae863e74c61ce057c08410e67cb",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "mcjadecrops",
-    "name": "MineColonies: Jade crops",
-    "version": "1.1.1300",
-    "authors": "alexkond12",
-    "description": "A lightweight Jade addon for MineColonies.\n\nTrack the growth of MineColonies crops directly in your tooltip:\n• Growth percentage\n• Mature crop detection\n• Vanilla-style Jade integration\n\nDesigned to feel like a natural extension of Jade itself.\n\nFast. Simple. Clean.",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.227,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "jade",
-      "type": "optional",
-      "range": "[15.10.5,)",
-      "side": "CLIENT"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "mctradepost-1.06.011-1.21.1.jar",
-  "sizeBytes": 5914498,
-  "sha1": "6515247fc986484d893b27a11ddf55a42fdf971d",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "mctradepost",
-    "name": "Trade Post for MineColonies",
-    "version": "1.06.011-1.21.1",
-    "authors": "Ayar, Alysar",
-    "description": "Extends MineColonies.\nEconomics research that opens up a marketplace, a resort, a recycling center and more!",
-    "url": "https://www.curseforge.com/minecraft/mc-mods/mc-trade-post",
-    "license": "GPLv3   ",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.168,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21,1.21.1)",
-      "side": "BOTH"
-     },
-     {
-      "id": "jei",
-      "type": "optional",
-      "range": "[19,20)",
-      "side": "CLIENT"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1300,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "mebahelrpgrquest-3.2.0-fabric-1.21.1.jar",
   "sizeBytes": 1752421,
   "sha1": "b49f0e2e0da2a661dc4d25692b1498ef71e9a2c1",
@@ -12142,301 +11726,6 @@
       "id": "minecraft",
       "type": "required",
       "range": "[1.21, 1.21.1]",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "minecolonies-1.1.1375-1.21.1-snapshot.jar",
-  "sizeBytes": 78070754,
-  "sha1": "3026a345e03120c470a6ff52db969fb57232d184",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies",
-    "name": "MineColonies",
-    "version": "1.1.1375-1.21.1-snapshot",
-    "authors": "LDT Team",
-    "description": "MineColonies is a colony simulator within Minecraft! There are numerous types of workers, and each worker has its own type of hut, letting you build a busy and vibrant village/town/city/colony. There is no coded limit to the number of NPC's at your disposal, so you can create a small, efficient village dedicated to a particular type of worker or a sprawling metropolis with hundreds of workers. It's entirely up to you!",
-    "url": "https://minecolonies.com",
-    "license": "GPL3",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.0, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21, 1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "structurize",
-      "type": "required",
-      "range": "[1.0.832-1.21.1-snapshot, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "blockui",
-      "type": "required",
-      "range": "[1.0.199-1.21.1-snapshot, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "jei",
-      "type": "optional",
-      "range": "[19.19.6.235,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "domum_ornamentum",
-      "type": "required",
-      "range": "[1.0.223-snapshot, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "journeymap",
-      "type": "optional",
-      "range": "[1.21.1-6.0.0-beta.29,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "dynamictrees",
-      "type": "optional",
-      "range": "[1.5.0-BETA07,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "MineColonies_Compatibility-1.21.1-3.56.jar",
-  "sizeBytes": 1509940,
-  "sha1": "fcb622f7b3921426c0b3fb80a3b3e418df165cab",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies_compatibility",
-    "name": "Compatibility addon for MineColonies",
-    "version": "3.56",
-    "authors": "gisellevonbingen, supernova0102",
-    "description": "",
-    "url": "https://legacy.curseforge.com/minecraft/mc-mods/minecolonies-compatibility",
-    "license": "GPL 3.0",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.194,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1368-1.21.1-snapshot,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies_tweaks",
-      "type": "required",
-      "range": "[3.33,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "immersiveengineering",
-      "type": "optional",
-      "range": "[0,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "minecolonies_pillager_patrol_fix-1.0.0 - Kopie.jar",
-  "sizeBytes": 8411,
-  "sha1": "3a43950b86d8ba6bf36ade43cfe93429f6038693",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies_pillager_patrol_fix",
-    "name": "MineColonies Pillager Patrol Fix",
-    "version": "1.0.0",
-    "authors": null,
-    "description": "Example mod description.",
-    "url": null,
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.233,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "minecolonies_raid_fix-1.0.0.jar",
-  "sizeBytes": 21603,
-  "sha1": "f479a461d3b5db5d0e6f63c82eaed737466a936a",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies_raid_fix",
-    "name": "MineColonies Raid Fix",
-    "version": "1.0.0",
-    "authors": null,
-    "description": "Keeps your Raid out of your Colony Border",
-    "url": null,
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[1.21,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "MineColonies_SoLCarrot-1.21.1-1.3.jar",
-  "sizeBytes": 78881,
-  "sha1": "9b65d5fb06d660618a41e38f3e988ccecb83fd55",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies_solcarrot",
-    "name": "Spice of MineColonies Life: Carrot Flavor",
-    "version": "1.3",
-    "authors": "gisellevonbingen",
-    "description": "Spice of Life for MineColonies citizen.",
-    "url": "https://legacy.curseforge.com/minecraft/mc-mods/minecolonies-sol-carrot",
-    "license": "GPL 3.0",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     },
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.194,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1232-1.21.1-snapshot,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies_tweaks",
-      "type": "optional",
-      "range": "[3.17,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "MineColonies_Tweaks-1.21.1-3.33.jar",
-  "sizeBytes": 793271,
-  "sha1": "1b65bef2848d6f13e8d785f34a76e4113284d08e",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecolonies_tweaks",
-    "name": "Tweaks addon for MineColonies",
-    "version": "3.33",
-    "authors": "gisellevonbingen",
-    "description": "Tweak your minecolonies experience. Custom Tools for citizen, more configuration etc...",
-    "url": "https://legacy.curseforge.com/minecraft/mc-mods/minecolonies-tweaks",
-    "license": "GPL 3.0",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.194,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1368-1.21.1-snapshot,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "minecoloniesmulticolony-1.0.0.jar",
-  "sizeBytes": 15055,
-  "sha1": "08d6c9a295f1ab69ed464a5d149c2fc64bffab23",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "minecoloniesmulticolony",
-    "name": "MineColonies Multi-Colony Patch",
-    "version": "1.0.0",
-    "authors": "Multi-Colony Patch",
-    "description": "A lightweight engine patch for MineColonies that enables full ownership of\nmultiple colonies per player, with a configurable colony cap and spatially-aware\ntool context resolution.",
-    "url": "https://www.curseforge.com/minecraft/mc-mods/minecolonies",
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.235,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.1374-1.21.1-snapshot,)",
       "side": "BOTH"
      }
     ]
@@ -12755,49 +12044,6 @@
     "url": "https://minecraft.curseforge.com/projects/mouse-tweaks",
     "license": "BSD-3-Clause",
     "deps": []
-   }
-  ]
- },
- {
-  "file": "multipiston-1.2.58-1.21.1.jar",
-  "sizeBytes": 34139,
-  "sha1": "2b63be739da24247328e4052ec91c928230d0390",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "multipiston",
-    "name": "Multi-Piston",
-    "version": "1.2.58-1.21.1",
-    "authors": "Let's Dev Together Team",
-    "description": "Piston unlimited adds the multipiston block which allows you to move any block with a handy GUI into any direction!",
-    "url": null,
-    "license": "GPL3",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.0.143,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21, 1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "blockui",
-      "type": "required",
-      "range": "[1.0.188-1.21.1-snapshot, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "structurize",
-      "type": "required",
-      "range": "[1.0.751-1.21.1-snapshot, )",
-      "side": "BOTH"
-     }
-    ]
    }
   ]
  },
@@ -15886,37 +15132,6 @@
   ]
  },
  {
-  "file": "smallcoloniesme 1.21.1 v1.9.jar",
-  "sizeBytes": 4290061,
-  "sha1": "28de82aefd7d3444a5e83347a82447504d56afa2",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "smallcoloniesme",
-    "name": "SmallColonies_ME",
-    "version": "1.9",
-    "authors": "Thaylar",
-    "description": "A relaxed Minecolonies experience.",
-    "url": "https://curseforge.com/minecraft/mc-mods/smallcoloniesme",
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecolonies",
-      "type": "required",
-      "range": "[1.1.921,)",
-      "side": "SERVER"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "smarterfarmers-1.21-2.2.4-neoforge.jar",
   "sizeBytes": 65924,
   "sha1": "49e58b648cfe1e5d6623b1b2c3ce5aca0b8c08df",
@@ -17300,49 +16515,6 @@
   ]
  },
  {
-  "file": "structurize-1.0.832-1.21.1.jar",
-  "sizeBytes": 1063849,
-  "sha1": "be15d6924bcca76bf5ac107e2ce5ac4d948d82e2",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "structurize",
-    "name": "Structurize",
-    "version": "1.0.832-1.21.1",
-    "authors": "LDT Team",
-    "description": "An astonishing way to copy & paste structures!\n\nAllows you to:\n - save structures of your choice into a file of small size\n - load them back and place them anywhere anytime\n - create various shapes using math formulas\n - and many other nice things a great builder would love to have!",
-    "url": "https://minecolonies.com/",
-    "license": "GPL 3.0",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.0.143,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21, 1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "blockui",
-      "type": "required",
-      "range": "[1.0.191-1.21.1-snapshot, )",
-      "side": "BOTH"
-     },
-     {
-      "id": "domum_ornamentum",
-      "type": "required",
-      "range": "[1.0.203-1.21.1-snapshot, )",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
   "file": "StylishEffects-v21.1.3-1.21.1-NeoForge.jar",
   "sizeBytes": 119312,
   "sha1": "83f764d776e2093d4e822fe784d4b17bc76c1815",
@@ -17522,8 +16694,8 @@
  },
  {
   "file": "tabfolders-1.21.1-1.0.0.jar",
-  "sizeBytes": 46416,
-  "sha1": "7a3210992713c022e7898fdfd7be58b84a1d6d24",
+  "sizeBytes": 53217,
+  "sha1": "dc49440a5e6c64d7557371844b01a2c26e6658a1",
   "loader": "neoforge",
   "mods": [
    {
@@ -18557,123 +17729,6 @@
       "type": "optional",
       "range": "[2.4.12,)",
       "side": "CLIENT"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "townsteadfactions-0.1.2.jar",
-  "sizeBytes": 202308,
-  "sha1": "30281d29b8f2d2dd7fa9ea1c0bb095408a8365c0",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "townsteadfactions",
-    "name": "Townstead Factions",
-    "version": "0.1.2",
-    "authors": "DrUltraLux",
-    "description": "\"Factions System built on top of Townstead and Minecrfat Comes Alive Reborn\"",
-    "url": null,
-    "license": "MIT",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1,1.22)",
-      "side": "BOTH"
-     },
-     {
-      "id": "marieslib",
-      "type": "required",
-      "range": "[0.1.1-beta.4,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "townstead",
-      "type": "required",
-      "range": "[0.7.5+1.21.1,)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "towntalk-1.2.0.jar",
-  "sizeBytes": 52301863,
-  "sha1": "6866d898938bdde1a17fadee16983c0c6071eac6",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "towntalk",
-    "name": "Towntalk",
-    "version": "1.2.0",
-    "authors": "LDTTeam",
-    "description": "Minecolonies VoicePacks",
-    "url": null,
-    "license": "All Rights Reserved",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.0.40-beta,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21,1.21z)",
-      "side": "BOTH"
-     }
-    ]
-   }
-  ]
- },
- {
-  "file": "tradepostapo-1.00.004.jar",
-  "sizeBytes": 8133,
-  "sha1": "0e832f2a675792336d4a34fe9b596297a61a211e",
-  "loader": "neoforge",
-  "mods": [
-   {
-    "modId": "tradepostapo",
-    "name": "Trade Post + Apotheosis Compat",
-    "version": "1.00.004",
-    "authors": "Ayar",
-    "description": "Allows the Trade Post for MineColonies recycler building to handle Apotheosis salvage and socketed gems.",
-    "url": null,
-    "license": "GPLv3",
-    "deps": [
-     {
-      "id": "neoforge",
-      "type": "required",
-      "range": "[21.1.218,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "minecraft",
-      "type": "required",
-      "range": "[1.21.1]",
-      "side": "BOTH"
-     },
-     {
-      "id": "mctradepost",
-      "type": "required",
-      "range": "[1.05.021,)",
-      "side": "BOTH"
-     },
-     {
-      "id": "apotheosis",
-      "type": "required",
-      "range": "[8.7.0]",
-      "side": "BOTH"
      }
     ]
    }

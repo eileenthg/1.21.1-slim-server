@@ -59,10 +59,8 @@
 | BetterThirdPerson-neoforge-1.9.0.jar | betterthirdperson | Better Third Person | 1.9.0 | neoforge | Adds independent camera rotation for third-person view. |
 | BetterTridents-v21.1.0-1.21.1-NeoForge.jar | bettertridents | Better Tridents | 21.1.0 | neoforge | You did not know your trident could do that! |
 | birdnest-neoforge-1.2.0+mc1.21.1.jar | birdnest | Bird Nests! | 1.2.0+mc1.21.1 | neoforge | Catching nests from trees can be rewarding... |
-| bits-and-bobs-1.21.1-1.0.6.jar | bitsandbobs | bitsandbobs | 0.1.1 | neoforge | A decoration pack for minecolonies |
 | BlockDetective-1.21-(v.2.1.0-NEO).jar | block_detective | Block Detective | 2.1.0 | neoforge | This mod shows you the properties of all blocks! |
 | BlockRunner-v21.1.2-1.21.1-NeoForge.jar | blockrunner | Block Runner | 21.1.2 | neoforge | Encourages path building by making you run faster on certain blocks such as path blocks. |
-| blockui-1.0.211-1.21.1-snapshot.jar | blockui | UI Library Mod | 1.0.211-1.21.1-snapshot | neoforge | UI Library mod, use ctrl+alt+shift+x to open a test-ui |
 | blueprint-1.21.1-8.2.0.jar | blueprint | Blueprint | 8.2.0 | neoforge | The library mod used by all Abnormals mods. Adds support for various types of blocks, helps with registering, and adds tons of misc. utils. Also comes with Endi |
 | BOMD-NeoForge-1.21-1.3.3.jar | bosses_of_mass_destruction | Bosses of Mass Destruction | 1.3.3 | neoforge | Adds high threat mobs for players to take on. |
 | Boss Music Mod 1.21.x v1.2.1.jar | boss_music_mod | §dBoss Music Mod | 1.2.1 | neoforge+fabric | §5Adds boss music that will play when a Wither or Ender Dragon is active. |
@@ -75,7 +73,6 @@
 | butchery_alexs_mobs_2-1.21.1-neoforge-1.0.0.jar | butchery_alexs_mobs_2 | Butchery: Alex's Mobs Part 2 | 1.0.0 | neoforge | Butchery carcasses for the Alex's Mobs creatures Part 1 does not cover, built from Alex's Mobs' own models, with Alex's Delight drops. |
 | c2me-neoforge-mc1.21.1-0.4.0-alpha.0.122.jar | c2me | Concurrent Chunk Management Engine | 0.4.0-alpha.0.122+1.21.1 | neoforge | A NeoForge mod designed to improve the chunk performance of Minecraft. |
 | caelus-neoforge-7.0.1+1.21.1.jar | caelus | Caelus API | 7.0.1+1.21.1 | neoforge | An API to provide developers access to the elytra's fall flying mechanics through an entity attribute. |
-| caravan-1.0.1.jar | caravan | Minecolonies Caravans | 1.0.1 | neoforge | A MineColonies addon that adds the Caravan Hut, the Caravan Leader/Member/Guard professions and a full caravan trading system: record villager trades with the C |
 | cardinal-components-api-6.1.3.jar | cardinal-components | Cardinal Components API | 6.1.3 | fabric(Connector) | Attaching more data to various game objects |
 | CerbonsAPI-NeoForge-1.21-1.3.0.jar | cerbons_api | Cerbons API | 1.3.0 | neoforge | API Library for CERBONS's minecraft mods. |
 | charmofundying-neoforge-9.1.0+1.21.1.jar | charmofundying | Charm of Undying | 9.1.0+1.21.1 | neoforge | Adds accessory support for the Totem of Undying, so you don't have to be holding it. |
@@ -84,7 +81,6 @@
 | chesspvp-1.3.0.jar | chesspvp | Chess PVP (Seated) | 1.3.0 | neoforge | Player-versus-player Gomoku, Chinese chess and chess for Touhou Little Maid boards. Right-click a side of the board to sit down as that player, crouch to stand  |
 | chunksfadein-neoforge-3.0.26-1.21.jar | chunksfadein | Chunks Fade In | 3.0.26-1.21 | neoforge | Adds fade-in and motion animations for chunks! |
 | Chunky-NeoForge-1.4.23.jar | chunky | Chunky | 1.4.23 | neoforge | Pre-generates chunks, quickly, efficiently, and safely |
-| civilis_minecolonies-1.0.5-universal-1.21.1.jar | civilis_minecolonies | Civilis Minecolonies Compat | 1.0.5 | neoforge+fabric | Adds compatibility between Civilis and Minecolonies. |
 | civillis-neoforge-2.0.1-release+mc1.21.1.jar | civil | Civillis | 2.0.1-release | neoforge | Prevent hostile mobs from spawning in civilized areas. |
 | clifftree-3.3-neoforge-1.21.1-backport.jar | clifftree | CliffTree | 3.3.0 | neoforge | A vanilla-styled worldgen overhaul, with new biomes and touches to existing ones |
 | ClimateRivers-v21.1.3-1.21.1-NeoForge.jar | climaterivers | Climate Rivers | 21.1.3 | neoforge | Make your rivers stop looking like mistakes-and start flowing with style. |
@@ -97,9 +93,6 @@
 | coldsweat_altitude-0.7.0.jar | coldsweat_altitude | Cold Sweat: Altitude | 0.7.0 | neoforge | Cold Sweat: Altitude is a generic Cold Sweat addon for NeoForge 1.21.1. It adds configurable altitude bands for pack-defined temperature progression on top of C |
 | collective-1.21.1-8.39.jar | collective | Collective | 8.39 | neoforge+fabric | Collective is a shared library with common code for all of Serilum's mods. |
 | colonialdelight-1.21.1-1.1.0.jar | colonialdelight | Colonial Delight (NeoForge port) | 1.1.0 | neoforge | NeoForge port and rework of Colonial Delight for the 1.21.1 slim pack: merged into Extra Delight, Expanded Delight, Youkai's Homecoming and Brewin' and Chewin'. |
-| colony_expeditions-0.1.0.jar | colony_expeditions | Colony Expeditions | 0.1.0 | neoforge | MineColonies expedition huts for the End, the Otherside, the Deeper Down, the Bumblezone and the Eternal Tales dimensions. Also makes the Netherworker open port |
-| colonyhandover-1.0.0.jar | colonyhandover | Colony Handover | 1.0.0 | neoforge | Converts a Minecolonies colony into a regular village in MCA Reborn, granting them independence. |
-| colonylifts-1.1.1.jar | colonylifts | Colony Lifts | 1.1.1 | neoforge | MineColonies + Create elevator pathfinding compatibility. Citizens route through Create Elevator Contacts, queue for lifts, share rides, use Contraption Control |
 | comforts-neoforge-9.0.5+1.21.1.jar | comforts | Comforts | 9.0.5+1.21.1 | neoforge | Adds sleeping bags and hammocks for, respectively, portability and turning day to night, without setting new spawns. Comes in 16 different colors! |
 | compatapi-1.0.3.jar | compatapi | Compat API | 1.0.3 | neoforge | Example mod description. Newline characters can be used and will be replaced properly. |
 | compatdelight-1.0.1.1-substitutes.jar | compatdelight | Compat Delight | 1.0.1.1 | neoforge | Adds compatibility between popular mods and Farmer's Delight. |
@@ -128,7 +121,6 @@
 | create_power_loader-2.0.5-mc1.21.1.jar | create_power_loader | Create: Power Loader | 2.0.5-mc1.21.1 | neoforge | Mechanical chunk loaders for Create. |
 | create_waystones_recipes-3.0.1.b.jar | create_waystones_recipes | Create: Waystones Recipes | 3.0.1.b | neoforge | Create: Waystones Recipes is Just A simple mod That Change the recipes of Waystones mod |
 | createcuriosfirecompat-1.21.1-1.0.0.jar | createcuriosfirecompat | Create Curios Fire Compat | 1.0.0 | neoforge | 修复 Create 模组的下界合金潜水套装与 Curios 饰品栏的兼容问题。 当玩家将下界合金背罐放入 Curios 背槽时，满套火免效果仍然正常工作。 Fix Create Netherite Diving Suit fire immunity when backtank is in Curios back slo |
-| createfillthecolonies-1.21.1-neoforge-1.0.1.jar | createfillthecolonies | Create: Fill the Colonies | 1.0.1 | neoforge | A simple mod allows filling/emptying large bottles in MineColonies with Spouts/Item Drains in Create. |
 | createjeicompat-1.0.3.jar | createjeicompat | Create JEI Compat | 1.0.3 | neoforge | Pagination for Create sequenced-assembly recipes in JEI (EMI optional via JEmi) |
 | createtreadmill-1.13.jar | createtreadmill | CreateTreadmill | 1.13 | neoforge |  |
 | CreativeCore_NEOFORGE_v2.13.44_mc1.21.1.jar | creativecore | CreativeCore | 2.13.44 | neoforge | A simple but powerful coremod. |
@@ -301,7 +293,6 @@
 | make-a-dye-out-of-it-1.4.7.jar | mr_make_adyeoutofit | Make a Dye Out Of It | 1.4.7 | neoforge+fabric | Changes how Minecraft's dye crafting mechanic works a little bit and adds several new recipes for making dyes. |
 | marieslib-0.1.1-beta.4.jar | marieslib | Marieslib | 0.1.1-beta.4 | neoforge | A shared library for Marie's mods. |
 | matmos_tct-7.7-neoforge-1.21.1.jar | matmos_tct | Matmos | 7.7 | neoforge | +160 sound It adds a sound engine that detects if you are in which biome, outside, in a house, in a cave or on top of a cliff to adapt the sound environment bir |
-| MCA-Colony-Integration-0.1.0-beta.jar | mca_colony_compat | MCA Colony Integration | 0.1.0-beta | neoforge | Bridge MCA Reborn and MineColonies by manually converting colonists into MCA residents and hiring MCA villagers as real MineColonies workers while preserving na |
 | mca-neoforge-7.7.36-beta.3+1.21.1.jar | mca | Minecraft Comes Alive | 7.7.36-beta.3+1.21.1 | neoforge | No more squidward-villagers! Interact with male and female human villagers and online library. |
 | mca-se-NeoForge-1.21.1-v0.8.jar | mcasocial | MCA Social Expansion | 0.8 | neoforge | Expands MCA Reborn with deeper social interactions, relationships, reputation, gifts, discovery, and multiple communication interfaces. |
 | mca_hat_layer_fix-1.0.0.jar | mca_hat_layer_fix | MCA Hat Fix | 1.0.0 | neoforge | Suppresses the villager hat skin layer when a helmet occupies the head equipment slot, eliminating z-fighting / texture flickering on MCA Reborn villagers that  |
@@ -313,21 +304,12 @@
 | mcareputation-0.5.0.jar | mcareputation | MCA: Reputation | 0.5.0 | neoforge | Public standing with MCA villages: your deeds become stories, and those stories shape how the village treats you. |
 | mcaromanticexpansion-1.1.5-1.21.1.jar | mcaromanticexpansion | MCA: Romantic Expansion | 1.1.5-1.21.1 | neoforge | MCA Romantic Expansion adds romantic interactions to MCA mod. Features: - Flower Bouquet: Right-click players to open romance GUI - Engagement Ring: Propose mar |
 | mcarpgbridge-1.21.1-1.2.0.jar | mcarpgbridge | MCA RPG Bridge | 1.2.0 | neoforge | Joins MCA: Quests, MCA: Reputation and Mebahel's RPG Villager Quests. Lets MCA: Quests use Reputation's NeoForge API v2, moves Mebahel's villager quests and rum |
-| mcjadecrops-1.1.1300.jar | mcjadecrops | MineColonies: Jade crops | 1.1.1300 | neoforge | A lightweight Jade addon for MineColonies. Track the growth of MineColonies crops directly in your tooltip: • Growth percentage • Mature crop detection • Vanill |
-| mctradepost-1.06.011-1.21.1.jar | mctradepost | Trade Post for MineColonies | 1.06.011-1.21.1 | neoforge | Extends MineColonies. Economics research that opens up a marketplace, a resort, a recycling center and more! |
 | mebahelrpgrquest-3.2.0-fabric-1.21.1.jar | mebahelrpgrquest | Mebahel's RPG: Villager Quests & Companions | 3.2.0-fabric-1.21.1 | fabric(Connector) | Adds story-driven villager quests, branching choices, dynamic quest boards, ambient village dialogue, rumors, companions, and RPG quest tracking. |
 | meed-1.21.1-8.0.6.jar | meed | Moderately Enough Effect Descriptions | 8.0.5 | neoforge | Adds over 500 effect descriptions from 100+ mods to Minecraft! |
 | memguard-1.0.4.jar | memguard | MemGuard | 1.0.4 | neoforge | Adds lightweight heap usage monitoring logs for large modpacks and servers. |
 | menageriesaturation-1.0.jar | menageriesaturation | MenagerieSaturation | 1.0 | neoforge | Appleskin Alternative for the Menagerie Server |
 | mezz_config-1.21.1-neoforge-0.6.3.jar | mezz_config | MezzConfig | 0.6.3 | neoforge | Lightweight client and server-authoritative config support for Minecraft mods. |
 | midnightlib-neoforge-1.9.3+1.21.1.jar | midnightlib | MidnightLib | 1.9.3 | neoforge | Lightweight config library with config screens and commands. |
-| minecolonies-1.1.1375-1.21.1-snapshot.jar | minecolonies | MineColonies | 1.1.1375-1.21.1-snapshot | neoforge | MineColonies is a colony simulator within Minecraft! There are numerous types of workers, and each worker has its own type of hut, letting you build a busy and  |
-| MineColonies_Compatibility-1.21.1-3.56.jar | minecolonies_compatibility | Compatibility addon for MineColonies | 3.56 | neoforge |  |
-| minecolonies_pillager_patrol_fix-1.0.0 - Kopie.jar | minecolonies_pillager_patrol_fix | MineColonies Pillager Patrol Fix | 1.0.0 | neoforge | Example mod description. |
-| minecolonies_raid_fix-1.0.0.jar | minecolonies_raid_fix | MineColonies Raid Fix | 1.0.0 | neoforge | Keeps your Raid out of your Colony Border |
-| MineColonies_SoLCarrot-1.21.1-1.3.jar | minecolonies_solcarrot | Spice of MineColonies Life: Carrot Flavor | 1.3 | neoforge | Spice of Life for MineColonies citizen. |
-| MineColonies_Tweaks-1.21.1-3.33.jar | minecolonies_tweaks | Tweaks addon for MineColonies | 3.33 | neoforge | Tweak your minecolonies experience. Custom Tools for citizen, more configuration etc... |
-| minecoloniesmulticolony-1.0.0.jar | minecoloniesmulticolony | MineColonies Multi-Colony Patch | 1.0.0 | neoforge | A lightweight engine patch for MineColonies that enables full ownership of multiple colonies per player, with a configurable colony cap and spatially-aware tool |
 | minersdelight-1.21.1-1.4.5.jar | minersdelight | Miners Delight | 1.4.5 | neoforge | A cozy cavern focused cooking expansion for Farmer's Delight! |
 | modernfix-neoforge-5.27.24+mc1.21.1.jar | modernfix | ModernFix | 5.27.24+mc1.21.1 | neoforge | Egregious, yet effective performance improvements for modern Minecraft |
 | modonomicon-1.21.1-neoforge-1.120.4.jar | modonomicon | Modonomicon | 1.120.4 | neoforge | Data-driven minecraft in-game documentation with progress visualization. |
@@ -338,7 +320,6 @@
 | mooshroomtweaks-1.21.1-3.6.jar | mooshroomtweaks | Mooshroom Tweaks | 3.6 | neoforge+fabric | A minimalistic mod that tweaks the spawning behaviour of mooshrooms, allowing both red and brown to spawn naturally. |
 | MoreVillagers-Re-1.21.1-neoforge-1.25.12.4.jar | morevillagers | MoreVillagers | 1.25.12.4 | neoforge | Adds new villager jobs, trades, and workstations! |
 | MouseTweaks-neoforge-mc1.21-2.26.1.jar | mousetweaks | Mouse Tweaks | 2.26.1 | neoforge | A mod that enhances the inventory management by adding various additional functions to the usual mouse buttons. |
-| multipiston-1.2.58-1.21.1.jar | multipiston | Multi-Piston | 1.2.58-1.21.1 | neoforge | Piston unlimited adds the multipiston block which allows you to move any block with a handy GUI into any direction! |
 | MutantMonsters-v21.1.1-1.21.1-NeoForge.jar | mutantmonsters | Mutant Monsters | 21.1.1 | neoforge | Mutant creatures and beasts to face off against. Will you triumph, or will you perish? |
 | MyNethersDelight-1.21.1-1.10.4.jar | mynethersdelight | My Nether's Delight | 1.10.4 | neoforge | A new Nether expansion for Farmer's Delight!! |
 | mysterious_mountain_lib-1.2.15-1.21.1.jar | mysterious_mountain_lib | Mysterious Mountain Lib | 1.2.15-1.21.1 | neoforge | This is the library for Syameimaru Zheng's most of mods. |
@@ -431,7 +412,6 @@
 | SkeletonAIFix-v21.1.1-1.21.1-NeoForge.jar | skeletonaifix | Skeleton AI Fix | 21.1.1 | neoforge | Eliminates awkward strafing-Skeletons now stay focused and shoot faster the closer you get. |
 | skeletonhorsespawn-1.21.1-4.1.jar | skeletonhorsespawn | Skeleton Horse Spawn | 4.1 | neoforge+fabric | Allows the skeleton horse to spawn naturally with a skeleton riding it and other tweaks. |
 | skillcloaks-1.2.7.jar | skillcloaks | Skillcloaks | 1.2.7 | neoforge |  |
-| smallcoloniesme 1.21.1 v1.9.jar | smallcoloniesme | SmallColonies_ME | 1.9 | neoforge | A relaxed Minecolonies experience. |
 | smarterfarmers-1.21-2.2.4-neoforge.jar | smarterfarmers | Smarter Farmers | 1.21-2.2.4 | neoforge | Makes Farmer Villagers smarter! |
 | smithingtemplateviewer-1.0.4.jar | smithingtemplateviewer | SmithingTemplateViewer | 1.0.4 | neoforge | View how your smithing templates will look in your armor |
 | smoothchunk-1.21-4.1.jar | smoothchunk | Smoothchunk mod | 4.1 | neoforge | Spreads chunk saves over time smoothly |
@@ -467,7 +447,6 @@
 | stayput-1.1.0.jar | stayput | Stay Put! | 1.1.0 | neoforge | A simple mod which allows you to wax doors, trapdoors and fence gates. |
 | Stellar.View-1.21.1-0.5.3-NeoForge.jar | stellarview | Stellar View | 0.5.3 | neoforge | Enjoy a Stellar View of the Sky. |
 | StonecuttingUpgrade-v21.1.0-mc1.21.1-NeoForge.jar | stonecuttingupgrade | Stonecutting Upgrade | 21.1.0 | neoforge | Bigger stonecutter menus, remembered recipes, and quick refills for speedy crafting. |
-| structurize-1.0.832-1.21.1.jar | structurize | Structurize | 1.0.832-1.21.1 | neoforge | An astonishing way to copy & paste structures! Allows you to: - save structures of your choice into a file of small size - load them back and place them anywher |
 | StylishEffects-v21.1.3-1.21.1-NeoForge.jar | stylisheffects | Stylish Effects | 21.1.3 | neoforge | Status effect display overhaul: Display them in any menu! And way more compact. |
 | SubtleEffects-neoforge-1.21.1-1.14.3.jar | subtle_effects | Subtle Effects | 1.14.3 | neoforge | Adding many new subtle details through particles and a few sounds |
 | supplementaries-1.21.1-3.9.6-neoforge.jar | supplementaries | Supplementaries | 1.21.1-3.9.6 | neoforge | Many functional and useful Vanilla+ blocks |
@@ -500,9 +479,6 @@
 | touhoulittlemaid1.5.3neoforgemc1.21.1all.jar | touhou_little_maid | Touhou Little Maid | 1.5.3-neoforge+mc1.21.1 | neoforge | A new version of the minecraft mod inspired by the LittleMaidReengaged mod. |
 | touhouorigins-2.0.2.jar | touhouorigins | Touhou Origins | 2.0.2 | neoforge | Touhou-themed origins for the Origins mod. Ported to NeoForge 1.21.1 against Overgrown's Origins/Apoli. |
 | townstead-0.7.6+1.21.1.jar | townstead | Townstead | 0.7.6+1.21.1 | neoforge | An unofficial expansion for MCA Reborn with additional villager needs, buildings, jobs, and mod integrations. |
-| townsteadfactions-0.1.2.jar | townsteadfactions | Townstead Factions | 0.1.2 | neoforge | "Factions System built on top of Townstead and Minecrfat Comes Alive Reborn" |
-| towntalk-1.2.0.jar | towntalk | Towntalk | 1.2.0 | neoforge | Minecolonies VoicePacks |
-| tradepostapo-1.00.004.jar | tradepostapo | Trade Post + Apotheosis Compat | 1.00.004 | neoforge | Allows the Trade Post for MineColonies recycler building to handle Apotheosis salvage and socketed gems. |
 | TravelersTitles-1.21.1-NeoForge-5.1.3.jar | travelerstitles | Traveler's Titles | 1.21.1-NeoForge-5.1.3 | neoforge | Epic, RPG-like titles when entering biomes & dimensions |
 | trimmed-neo-1.21-3.0.0.jar | trimmed | Trimmed | 3.0.0 | neoforge | Better item overrides! Better trim support! Override it all! |
 | tt20-0.8.4+mc1.21.1-neoforge.jar | tt20 | TT20 | 0.8.4 | neoforge | TT20 helps reduce lag by optimizing how ticks work when the server's TPS is low. |
